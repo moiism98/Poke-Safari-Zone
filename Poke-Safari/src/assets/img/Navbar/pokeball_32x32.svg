@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 444 444" width="32" height="32">
+	<title>pokeball</title>
+	<defs>
+		<image  width="444" height="444" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbwAAAG8BAMAAABXng3sAAAAAXNSR0IB2cksfwAAAA9QTFRFAAAAAAAA9EM2////np6eF+jG4QAAAAV0Uk5TAP////8c0CZSAAACfUlEQVR4nO3dwU0DMRRFUdIBIBoAKgAqQNB/TbBEsr/kDM/zszh3nfj5TLZRcncX6yFW7k7B8PDwesLDw+sJDw+vJzw8vJ7w8PB6wsPD6wkPD68nPDy8nvDw8Hpu/hLr7GeAh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eH96fLwZt/DL3nxCvP4B4PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw/vLN7riFkKDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8P77Z446seD+6Nlq3fjBh7Hi14q+HtDQ+vCm9veHhVeHvDw6vC2xseXhXe3vDwqvD2hodXhbc3PLwqvL3h4VXh7Q3vH7ylvZPn8KJ7eMk5vOgeXnIOL7qHl5zDi+7hJefwont4yTm86B5ecg4vuoeXnMOL7uEl5/Cie3jJObzoHl5yDi+6h5ecw4vu4SXnJrxJS6ePb5v8ysH30GdsbhIeHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7e1bzJpZaOGnsaMUu8pZZOwsMrwsMrwsPDK8PDK8LDwyvDwyvCw8Mrw8MrwsPDK8PDK8LDwyvDwyvC++WNXcZXjX+1sNRb7BlMGk+afC54eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4Cd54+NdB8UELHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4e3mm8SeNRk3befNJRCx4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHt6eli51kzdfCg8Pryc8PLye8PDwesLDw+sJDw+vJzw8vJ7w8PB6wsPD6wkPD++KfgDv6ZO9+R0HSwAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="0" y="0"/>
+</svg>

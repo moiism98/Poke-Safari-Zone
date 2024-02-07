@@ -1,3 +1,23 @@
+@font-face {
+  font-family: pkmndp;
+  src: local('pkmndp'), url(assets/fonts/pkmndp.woff), format('woff');
+}
+
+@font-face {
+  font-family: pkmnem;
+  src: local('pkmnem'), url(assets/fonts/pkmnem.woff), format('woff');
+}
+
+@font-face {
+  font-family: pkmnfl;
+  src: local('pkmnfl'), url(assets/fonts/pkmnfl.woff), format('woff');
+}
+
+@font-face {
+  font-family: pkmnrs;
+  src: local('pkmnrs'), url(assets/fonts/pkmnrs.woff), format('woff');
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -10,7 +30,7 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale;  
 }
 
 a {
@@ -21,11 +41,13 @@ a {
 a:hover {
   color: #535bf2;
 }
-
+html{
+  width: 100%;
+  height: 100%;
+}
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }

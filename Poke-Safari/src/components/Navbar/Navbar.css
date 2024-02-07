@@ -1,0 +1,8 @@
+#gameMenu{
+    width: 100%;
+    padding-left: 1em;
+}
+
+#gameMenu nav{
+    display: flex;
+}
