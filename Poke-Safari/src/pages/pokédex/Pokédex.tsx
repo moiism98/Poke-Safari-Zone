@@ -1,4 +1,4 @@
-import '../../components/styles/GameScreen.css'
+import 'src/components/styles/GameScreen.css'
 
 const Pokedex = () =>{
     return(

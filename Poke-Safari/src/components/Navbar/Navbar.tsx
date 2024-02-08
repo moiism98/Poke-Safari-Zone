@@ -1,6 +1,6 @@
 import { Image, Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import  pokeball from '../../assets/img/Navbar/pokeball_32x32.svg';
+import  pokeball from 'src/assets/img/Navbar/pokeball_32x32.svg';
 import'./NavBar.css'
 
 function NavBar() {

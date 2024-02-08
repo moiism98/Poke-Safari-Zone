@@ -1,28 +1,38 @@
-import { useState } from 'react';
-import { Button } from 'react-bootstrap';
-import '../../components/styles/GameScreen.css'
+import 'src/components/styles/GameScreen.css'
+import { useEffect, useState } from 'react';
+import { useQuery } from '@apollo/client';
+import { Pokemon } from 'src/interfaces/interfaces';
+import { GET_POKEMON } from 'src/query/queries';
+import Loading from 'src/components/Spinners/Loading/Loading';
+import { Image } from 'react-bootstrap';
+import getAllPokes from 'src/utils/getAllPokes';
+import background from 'src/assets/img/Zones/forest.svg'
 
 const Index = () =>
 {
-    const [count, setCount] = useState(0)
+    const { randomPokemon } = getAllPokes();
+
+    const [pokemon, setPokemon] = useState<Pokemon>();
+
+    const { data, loading, error }  = useQuery(GET_POKEMON, { variables: { "name": randomPokemon ? randomPokemon : 'pikachu'}});
+    
+    useEffect( () =>
+    {
+        if(data) setPokemon(data.pokemon)
+        
+    }, [data])
 
     return (
-        <>
-          <div className='container' id='gameScreen'>
-            <h1 style={{fontFamily: 'pkmnfl'}}>Vite + React</h1>
-            <div className="card">
-              <Button variant='secondary' onClick={() => setCount((count) => count + 1)}>
-                count is {count}
-              </Button>
-              <p>
-                Edit <code>src/App.tsx</code> and save to test HMR
-              </p>
-            </div>
-            <p className="read-the-docs">
-              Click on the Vite and React logos to learn more
-            </p>
+        <div className='index' id='gameScreen' style={{ backgroundImage: `url(${background})` }}>
+            {
+                error ? <h1 style={{color: 'red'}}>{error.message}</h1> :
+                loading ? <Loading/> :    
+                <div className='randomPokemon'>
+                    <h1>{pokemon?.name.toUpperCase()}</h1>
+                    <Image src={pokemon?.sprites.front_default}/>
+                </div>
+            }
         </div>
-        </>
     )
 };
 
