@@ -9,7 +9,7 @@ const GetAllPokes = () =>
     
     const { data } = useQuery( GET_ALL_POKEMON, { variables: { "limit": 386 , "offset": 0}} ) // limit = 1350 get all pokes
     
-    const [randomPokemon, setRandomPokemon] = useState<string>();
+    const [ randomPokemon, setRandomPokemon ] = useState<string>();
 
     const GetAllPokes = useCallback(() =>
     {
@@ -24,18 +24,27 @@ const GetAllPokes = () =>
         
     },[ pokemons ])
 
+    const ReloadPokemon = () => {
+      
+        GetAllPokes();
+    }
+
     useEffect(() =>
     {
-        if(data) setPokemons(data.pokemons.results)
+        if(data) 
+        {
+            setPokemons(data.pokemons.results);
 
-        GetAllPokes();
+            GetAllPokes();
+        }
 
     },[ data, GetAllPokes ])
 
     
 
     return {
-        randomPokemon
+        randomPokemon,
+        ReloadPokemon
     }
 }
 

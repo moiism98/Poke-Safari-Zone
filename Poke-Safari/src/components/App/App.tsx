@@ -6,9 +6,15 @@ import Pokedex from 'src/pages/pokédex/Pokédex';
 import Index from 'src/pages/index/Index';
 import appUtils from 'src/utils/appUtils';
 import Date from 'src/components/Date/Date';
+import '@ionic/react/css/core.css';
+import { setupIonicReact } from '@ionic/react';
+
+
 
 function App() {
 
+  setupIonicReact();
+  
   const { GetBackground, SetFont } = appUtils();
 
   SetFont('pkmndp'); // sets the selected font family.

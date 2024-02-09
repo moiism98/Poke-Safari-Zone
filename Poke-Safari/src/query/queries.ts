@@ -14,34 +14,41 @@ query pokemons($limit: Int, $offset: Int) {
 
 export const GET_POKEMON = gql`
 query pokemon($name: String!) {
-    pokemon(name: $name) {
-      id
-      name
-      weight
-      height
-      sprites {
-        front_default
-        front_shiny
-      }
-      moves {
-        move {
-          name
-        }
-      }
-      types {
-        type {
-          name
-        }
-      }
-      abilities{
-        ability{
-          name
-        }
-      }
-      held_items{
-        item{
-          name
-        }
+  pokemon(name: $name) {
+    id
+    name
+    weight
+    height
+    sprites {
+      front_default
+      front_shiny
+    }
+    moves {
+      move {
+        name
       }
     }
-  }`
+    types {
+      type {
+        name
+      }
+    }
+    abilities{
+      ability{
+        name
+      }
+    }
+    held_items{
+      item{
+        name
+      }
+    }
+    stats {
+      stat{
+        name
+      }
+      base_stat
+      effort
+    }
+  }
+}`

@@ -30,12 +30,16 @@ interface Moves
 
 interface Types
 {
-    type: string
+    type: {
+        name: string
+    }
 }
 
 interface Abilities
 {
-    ability: string
+    ability: {
+        name: string
+    }
 }
 
 interface Held_Items

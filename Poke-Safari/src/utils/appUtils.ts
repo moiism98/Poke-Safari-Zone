@@ -16,7 +16,7 @@ const appUtils = () => {
 
         const customDate: string = `${weekDay} ${+monthDay < 10 ? '0' + monthDay : monthDay}/${+month < 10 ? '0' + month : month}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`
         
-        console.log(customDate);
+        // console.log(customDate);
 
         return customDate;
     }
