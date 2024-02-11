@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import appUtils from 'src/utils/appUtils';
+import appUtils from 'src/utils/App/appUtils';
 import './Date.css';
 
 const Date = () => {

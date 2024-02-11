@@ -17,8 +17,7 @@ import rock from 'src/assets/img/poke-types/rock.svg';
 import steel from 'src/assets/img/poke-types/steel.svg';
 import water from 'src/assets/img/poke-types/water.svg';
 
-
-export default [
+const typesImages: string[] = [
     bug,
     dark,
     dragon,
@@ -36,5 +35,20 @@ export default [
     psychic,
     rock,
     steel,
-    water
+    water,
 ]
+const pokeTypes = () => {
+
+        const GetTypeIcon = (pokeType: string) => 
+        {
+                
+            return typesImages.find(type => type.includes(pokeType))
+        }
+        
+        
+        return {
+            GetTypeIcon
+        }
+}
+
+export default pokeTypes;

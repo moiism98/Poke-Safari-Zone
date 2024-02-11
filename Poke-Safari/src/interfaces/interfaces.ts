@@ -1,3 +1,10 @@
+export interface IContext{
+    pokemons: PokemonList[] | undefined, 
+    setPokemons: React.Dispatch<React.SetStateAction<PokemonList[] | undefined>>,
+    randomPokemon: string | undefined,
+    ReloadPokemon: () => void | undefined
+}
+
 export interface PokemonList
 {
     id: number,
@@ -23,9 +30,11 @@ interface Sprites
     front_shiny: string
 }
 
-interface Moves
+export interface Moves
 {
-    move: string
+    move: {
+        name: string
+    }
 }
 
 interface Types
@@ -44,5 +53,7 @@ interface Abilities
 
 interface Held_Items
 {
-    held_item: string
+    held_item: {
+        name: string
+    }
 }

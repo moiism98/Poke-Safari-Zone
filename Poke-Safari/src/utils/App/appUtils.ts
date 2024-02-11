@@ -10,9 +10,9 @@ const appUtils = () => {
 
         const weekDay: string = date.toDateString().substring(0, 3);
 
-        const monthDay: string = date.toLocaleDateString().substring(0, 1);
+        const monthDay: string = date.toLocaleDateString().split('/')[0];
 
-        const month: string = date.toLocaleDateString().substring(2, 3);
+        const month: string = date.toLocaleDateString().split('/')[1];
 
         const customDate: string = `${weekDay} ${+monthDay < 10 ? '0' + monthDay : monthDay}/${+month < 10 ? '0' + month : month}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`
         
