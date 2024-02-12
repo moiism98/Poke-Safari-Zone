@@ -1,8 +1,14 @@
 export interface IContext{
     pokemons: PokemonList[] | undefined, 
     setPokemons: React.Dispatch<React.SetStateAction<PokemonList[] | undefined>>,
+    appFont: string,
+    setAppFont: React.Dispatch<React.SetStateAction<string>>,
+    frame: Frame,
+    setFrame: React.Dispatch<React.SetStateAction<Frame>>,
+    frame_styles: Frame[]
     randomPokemon: string | undefined,
     ReloadPokemon: () => void | undefined
+    Pokedex: (offset: number) => void | undefined
 }
 
 export interface PokemonList
@@ -55,5 +61,13 @@ interface Held_Items
 {
     held_item: {
         name: string
+    }
+}
+
+export interface Frame{
+    name: string,
+    styles: {
+        border: string,
+        borderRadius?: string
     }
 }

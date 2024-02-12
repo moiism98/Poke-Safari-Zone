@@ -18,7 +18,7 @@ const Index = () =>
 
     const navigate = useNavigate();
 
-    const { randomPokemon, ReloadPokemon } = useContext(Context);
+    const { randomPokemon, ReloadPokemon, frame } = useContext(Context);
 
     const [ pokemon, setPokemon ] = useState<Pokemon>();
 
@@ -32,7 +32,7 @@ const Index = () =>
     }, [ data ])
 
     return (
-        <div className='default-frame' id='gameScreen' style={{ backgroundImage: `url(${background})` }}>
+        <div id='gameScreen' style={{ backgroundImage: `url(${background})`, border: frame.styles?.border, borderRadius: frame.styles?.borderRadius }}>
             <div className='container' id='indexContainer'>
                 <div>
                     <Button onClick={() => ReloadPokemon()} className='d-flex' variant='link'><IonIcon color='dark' size='large' icon={reloadOutline} aria-label="Reload random pokémon"/></Button>

@@ -35,15 +35,10 @@ const appUtils = () => {
         document.body.style.setProperty('background-image', `url(${background})`);
         
     }
-
-    const SetFont = (font: string) =>
-    {
-        document.body.style.setProperty('font-family', font);
-    }
+ 
 
     return{
         GetBackground,
-        SetFont,
         GetCustomDate
     }
 }

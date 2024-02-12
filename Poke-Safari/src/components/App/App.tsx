@@ -13,15 +13,13 @@ import { setupIonicReact } from '@ionic/react';
 
 function App() {
 
-  setupIonicReact();
+  const { GetBackground } = appUtils();
   
-  const { GetBackground, SetFont } = appUtils();
-
-  SetFont('pkmndp'); // sets the selected font family.
-
   GetBackground(); // when app loads displays correspondant background...
-
+  
   setInterval(() => GetBackground(), 1000); // ...and then checks the hour every second to see if it has to change the background.
+  
+  setupIonicReact();
 
   return (
     <>

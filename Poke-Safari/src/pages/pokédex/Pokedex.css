@@ -1,7 +1,21 @@
 #pokedex{
     width: 100%;
     height: 100%;
+    
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
     flex-wrap: wrap;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.pokedexTitle{
+    width: 100%;
+}
+.pagination{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

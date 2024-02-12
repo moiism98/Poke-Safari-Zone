@@ -22,34 +22,6 @@
   background-position: center;
 }
 
-.default-frame{
-
-  border: 10px solid #52506e;
-  border-radius: 5px;
-}
-
-.fireRed-frame{
-  border: 10px solid #d04028;
-  border-radius: 5px;
-}
-
-.leafGreen-frame
-{
-  border: 10px solid #38ae40;
-  border-radius: 5px;
-}
-
-.purple-frame
-{
-  border: 18px ridge #92ABEF;
-}
-
-.double-frame
-{
-  border: 10px double #000000;
-  border-radius: 5px;
-}
-
 .card {
   padding: 2em;
 }

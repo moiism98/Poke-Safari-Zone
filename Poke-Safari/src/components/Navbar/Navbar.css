@@ -6,3 +6,13 @@
 #gameMenu nav{
     display: flex;
 }
+
+#optionsFont, #optionsFrame{
+    margin-left: 1em;
+}
+
+.navbar-expand .navbar-nav .dropdown-menu{
+    position: absolute;
+    left: 100%;
+
+}
