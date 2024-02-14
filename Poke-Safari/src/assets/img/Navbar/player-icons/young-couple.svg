@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+	<title>Pareja_joven_RZE</title>
+	<defs>
+		<image  width="64" height="64" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAABYR2ztAAAAAXNSR0IB2cksfwAAAC1QTFRFcMCgIDBIAAAAUHigOFBo+NjI6LCQwIhokKCoYEA4wEBAWKCAeMCY+GBYaGiI81M/DAAAAA90Uk5TAP//////////////////5Y2epgAAAqNJREFUeJztlDFP20AUxy8n1ChLhUloVXUxrhtCUC2557USsQ9Ki8SAeEawNQ0XeaO0iZWxsHiKaCSCzNABtUi1xCcwU+dMHZGyRB2Y/Bl6tjolz/0E/Q9e3s//93+nu0fIf+WooChqfkl+yoxZ83i94jCblC3mMBMFyszkfImVHemBWRSktctt8/3HCnPWEGDu9NSEFrdarRarNNAObB12G6874Dt5wCK49sahK95xHLDWYc/2DsFrcSykHK4N7sB9DlXBVXQIcwg73j7AvthAAWdxB1wPXAAxPMOA8iLAntcJL6/bNhJhTgIHP4ZfLrzo+oODtChb5uODyFP4RTTwFrApTVMZXijKkzBsYxGIYzaUutsLfSG8Q6RDCix8BwBXiOMVFGjYzWsJiJ4WV1GAPxIroe+HT+P4JVInFV5tCyF8P84D9Axo9+KYoUCB0m5voGnhEo+xCFJUq0fR1Wq8lQv4EtBW49tRDkCqKbB1O/qZUyf05i7S4lE+8GI8vvsXQM3xeKyzfEA3rVfj1ZgxtoYDz+TbtPSt0ShnCsrSd230Oee4A21Ic0vfDoIAdzjfdRhzjMkmBtCQkA40HebU+jUMqHcHJYCj4ic7CCRwMgNc+mIZQJUvKwgWEIDyZb8L++QcmhnQn+5B3175MoKM8TXoT2rB/QzwzV7pgipjGMn9ycMkmEwD0RVZPiYl2DNkABoEybSFphKqkiLsFNKEm/1kMjup1BCa8u/PxEiSZLpJqpLontF+kMxTCcw0kSoKoZLttKQlyW8EeJACcgxZ0vg2sgGKwpO3JslOydARoCSacuLMgVAF2UKlrpoCmQPlCED9tKTzbEINCUnDrDt6BJn0KAU0Q8sD6vxNenUtbElmqt38StNhe/pvhiyYltsB1x+R9+bsuAYArQAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="0" y="0"/>
+</svg>

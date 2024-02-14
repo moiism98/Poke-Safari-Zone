@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+	<title>Exorcista_RFVH</title>
+	<defs>
+		<image  width="64" height="64" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAABYR2ztAAAAAXNSR0IB2cksfwAAAC1QTFRFAAAJ2Mjo+Pj4sKjIAAAAwEBQaEhIkCAwMFBIYIB4wIho+NjI6LCQKDhYcHCQkfjjTAAAAA90Uk5TAP//////////////////5Y2epgAAAsRJREFUeJy9lU9LG0EYxlfcQy+VTtZeShtwTBGEgMkb8OSSNGNcDclB1A9QpAXjpdQ2p5y6lMk9h+yth1CKegwenBylh7qHih4badylhWLnM/SdSMHuP2+d05Lnl+d53hl2VtP+70qRuwBKHtwBUDqT5DKZR4IWEogJQGC5mEQQgOXKQhJAyOLGbIIFSdHMxvNYiwlVcvbNs0RgNrdcjk/IU1Al4oFJLAmZRMDIY4liPKGjvpCwVbr1DgrFldgM3eK4bD0WGOucs72YDP1G7641+jFAd5zA34vjmASnrQysqjiNzrDaTrvrcATEh5iOFgZwyxYiuoRu2QjYdizAbMoYzdgV0Y/swDt8bn5/LtOpil6UzB2b0/l9dGiIkME9lJ2u3RFCDE5wG0LAqoM6Z52Do4bbq4q+xS8C/VeVbneq/S23IsQJ8b8ETBhTm8z8w62LX4NBiTxyPwUs8Aw5r0vJSOPYLZPHbnAQxla5TSRNZU8PT+DV9WA7VMLp1tN0Zv3adXvwuiHq/5ZQY9ilK5pa/+ZulwFCgM7anJXUi3X4uQ6w2OjLwBi6xdgVpU+zL+oKOA0B6MGoAqRvAitU+9IP7qZ1pRIupQ8/jqofy2FgrGelLIO/vXfAzCAwpfT1S3kBUHm5ubtWC3aYIgpQurmzsvl2N6hr2hkSWR8Afu7UWmcspGv6iDz0cUTZKuhkOqwrYnqlyVjr3NdYOGC8Suaw2To3836MPjUysCLgvNlowMP7B6Sp5v0apcs0IQZ4S3inz0QAwyExJCFp8HIIPAnpDM6MHBlhxjngdyMdGhFM1InhLQ3rJt6Fv4NAGZ3xd0zxa2aOpIMddIARGS+m3YeR4YUBqf6eI7569tLwPQhIvKNJbnwE6JaG0HeJYYRBSPEG8MKAxkwPiK/9BSJOm+G6eaoBa0YAt9nm5l4igG7FZODW+gMXrRGCmphr6wAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="0" y="0"/>
+</svg>

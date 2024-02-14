@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Frame } from "src/interfaces/interfaces";
 
 const SetFrame = () => {
@@ -40,45 +40,7 @@ const SetFrame = () => {
         }
     ]
 
-    const GetGameScreenFrame = () => {
-        
-        let frame: Frame = JSON.parse(localStorage.getItem('frame'));
-
-        if(!frame)
-        {
-            const defaultStyle: Frame = {
-                name: 'default',
-                styles: {
-                    border: '10px solid #52506e',
-                    borderRadius: '5px'
-                }
-            }
-
-            localStorage.setItem('frame', JSON.stringify(defaultStyle));
-
-            frame = defaultStyle;
-        }
-
-        return frame;
-    }
-
-    const SetGameScreenFrame = (frame: Frame) => {
-        
-        localStorage.setItem('frame', JSON.stringify(frame));
-
-        return frame;
-    }
-
-    const [ frame, setFrame ] = useState<Frame>(GetGameScreenFrame());
-
-    useEffect(() => {
-
-        if(frame)
-        {
-            SetGameScreenFrame(frame);
-        }
-
-    }, [ frame ])
+    const [ frame, setFrame ] = useState<Frame>();
 
     return{
         frame,

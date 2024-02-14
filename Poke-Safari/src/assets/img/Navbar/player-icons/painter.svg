@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+	<title>Pintora_RFVH</title>
+	<defs>
+		<image  width="32" height="56" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAA4BAMAAABu0ecxAAAAAXNSR0IB2cksfwAAACpQTFRFAAAAMDhQWGCQoKjAAAAAwEBA+GBY+NjIyJBweFhQ6LCQ2ODo+Pj4aMBYwoIuowAAAA50Uk5TAP////////////////9XStsUAAAB30lEQVR4nG3SP2/TQBQA8BfLVHEnHPoBuEsWVCFRXxbkDg51UA0MDHGkMKMMzC1HMkdqkilDoMSsoCbeWjMgnhcES+mNXfkunOM/57Q9WSe9n967d747gPUwTdgYNcaI5qi4wuRolBIq9URKGff8+mZKt9+pM4sW8db7Y96hlBY1W90TPpiXwOiFfPqtRdSqve989bM3zyLp25f86O+bj2lcHcgazvkwh8o1gH52xsPg0+sMZgDB8buV28tazCdyerFs+920y+lwMQZqLTzfA5DJ8Hm84FTse00A7dGRhJMPCx4K/BE5mh2tZFV1GoShiMQVtTEOZIqx9OYHKOEcMb5MduvKbzdCPI8iIZ4+SXsf2IgEUQgxS0FDjF6ivR+LPxnYeDHC6Oq3yK9jFy+8L3Ec/3IUHE5iIXagADwcvxKP8wq5Bu6NdOtfXqHJM2844F7nFQ8Ys0h6nOmQF2epW0iB3YLafRUnz2GPNjahUbsBrdtAFGiMNU2z1Ebuq9m6AQ/LUCHMclqm2ohOKEmgOAz5rwR00yzgGZV7uAN2ikX15AEay0nR1RiP5BSuNgGmCqrD2V0QKNgeJHPwtYDTBHS/k7c1/M4a+m8zed5PANq+n0F7nSHfkZtv1FUnA/AfPc6bh9w/LLwAAAAASUVORK5CYII="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="17" y="7"/>
+</svg>

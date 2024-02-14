@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 51 54" width="51" height="54">
+	<title>Pescador_OPC</title>
+	<defs>
+		<image  width="51" height="54" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAA2BAMAAACYQryqAAAAAXNSR0IB2cksfwAAAA9QTFRF////AAAAOGB4+Pj48IhoDB4AlAAAAAV0Uk5TAP////8c0CZSAAAB70lEQVR4nHWU0ZmEIAyEwW8LMEABAjYAsYBjN/3XdAO4qKfHI79DJmNAqfsimh92GwnBPzOQf5gmLLAHZCNEZMKDzGRmiMwd6RgqCv5+os45tEUPKt9sPPjQyYm8YePuQ/sVZPUPSDkjkaUQkDbLta9NCq9vB/cL0jxD66SEtQhsYBvNDzJxkLrepSEV0mCatws6s4i2ZBWZd3RiHhK3Sg1j+X689zG5el6L6bXv2K9PDVa4fjgNa7vOprBaTieEck1HNon8QconqpNhSSj7VuxndBsNaTbRFfac58NiTwKFQrLBMvsLokAxmIqctGIDaaZMnEyynvlT7b8GIhtxUiLjibeKhkXLNprIGLZN7AVpzjYmZka2UrZyQTGh1heZs3vD+CHIgcAshYHCgilhR8TUVp/DpcU11Ssns6n7+Tuir44hk4K2TfA5gKs94IYUzToYdJ39rtpRc1oRDjyhSR0IzQ0EyUCwwpHNH9TbQ88RrX3fh59RCpFwDRFr3lUDIfltw5Vl6WiqPbUTqugjVPmBTPYdbRvpQ6UCTLdriE0ps474Y+NSat8fEQuEKT9U9Xan9oO01PDsRcXU7CIN1LSF3HHL+yjDaI1Bm/Nj080r924lzcM75Pp7QeaGNKf2C52/v7H7jv7wf8+vqi38AnpmV+XQ/PSeAAAAAElFTkSuQmCC"/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="0" y="0"/>
+</svg>

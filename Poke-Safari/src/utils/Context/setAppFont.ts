@@ -1,44 +1,13 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 
 const SetAppFont = () => {
 
-    const GetAppFont = () => {
-        
-        let savedFont: string | null = localStorage.getItem('font');
+    const [ appFont, setAppFont ] = useState<string>();
 
-        if(!savedFont)
-        {
-            localStorage.setItem('font', 'pkmndp')
-            
-            savedFont = 'pkmndp';
-        }
+    return {
 
-        return savedFont
-
-    }
-
-    const SetAppFont = (font: string) =>
-    {
-        document.body.style.setProperty('font-family', font);
-
-        localStorage.setItem('font', font);
-    }
-
-
-    const [ appFont, setAppFont ] = useState<string>(GetAppFont());
-
-    useEffect(() => {
-
-        if(appFont)
-        {
-            SetAppFont(appFont);
-        }
-        
-    }, [ appFont ])
-
-    return{
         appFont,
-        setAppFont,
+        setAppFont
     }
 }
 

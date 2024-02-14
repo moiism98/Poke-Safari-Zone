@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+	<title>Dama_parasol_RZE</title>
+	<defs>
+		<image  width="64" height="64" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAABYR2ztAAAAAXNSR0IB2cksfwAAADBQTFRFcMCggEhAwEBAAAAA+Jho+GBYKEBgQFiIWIC46LCQ+NjIwIho+Pj4eFBA0KhI+MhoZcQJTQAAABB0Uk5TAP///////////////////8BQi0MAAAJFSURBVHicvdXBa9NQHAfw1wbpQQJa7R/Q2B68hQU3hK2HLv0D1vXd9dLhTiK4FN15y1WEYSqeBCGvCIPBREMPu+jBMAtDRLu8HnLOy1/Qxl+W7OLLe735g5x+H37vm/fyCEL/tUrVO/J+A2NdBhrYNGWg3DFNcxMpq33RgF4KlDXb7j8SDjDNNWtgDw6KwN1eDvq2dVgEmmYG9iz7yeAp3y9lK5ibO9ahMygIUe7lwBocuG/2BBE6mnbPsnfdTwWgBv12E+Ntq09GRzxII7TNDsbdh86XD185ULGeQ/8KOOvD99+5kPv+Wdu8BsR9x61Q2T9r5OAFIZ+P+IyVZ70MbFu7t50dPqTaxDlYde6f2o/rHKhjGIEB+MH4V1DCt3gAIgWG/+2le3yDAxo0e/DogbE+JKMyD2rQhZ3UKQsNMtL+BagKoAtjNhiLo+AVFxJVmynQrsCcXfAbUd3CWIPDVBmbJTTkwc9uDiiAqACUca2bg2gRRTxQ8Rb0NV2NWMQYLbhAtW4VBiAK7RZjBeCBVr8GYSEoaSB0ROmCha2CkAitgIAIcbIIlcI7rKzUDaTOEijBHVcMhGgiAWkFS8BvGkuBSj4yJp0QeNN0kYmwj5DnTb2xCKj+BMAf97VowKU/n0xlYLZIosAbCoHqnzPmecQ9FgIGYEwc0Vtenoc0kgNd0TfG5K0oY3pYsNtE+BJZLQfibcjq5jKgLgPUO5GDWcKEp52BH+LPIQdzaV9NkqUgMaSAxUks/XtetOJYnlIxpEtw9ReyRSu3h6XuhwAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="0" y="0"/>
+</svg>

@@ -8,7 +8,7 @@ import { Frame } from 'src/interfaces/interfaces';
 
 function NavBar() {
 
-    const { appFont, setAppFont, frame, setFrame, frame_styles } = useContext(Context)
+    const { options } = useContext(Context)
 
     const isItemActive = (fontId: string, frameId: string) => {
         
@@ -16,12 +16,12 @@ function NavBar() {
 
         if(fontId != '')
         {
-            if(fontId == appFont)
+            if(fontId == options.appFont)
                 active = true;
         }
         else if(frameId != '')
         {
-            if(frameId == frame.name)
+            if(frameId == options.frame?.name)
                 active = true;
         }
         else
@@ -42,25 +42,25 @@ function NavBar() {
                     <NavDropdown title="Select font" id="optionsFont">
 
                         <NavDropdown.Item id="pkmndp" 
-                            onClick={(item) => { setAppFont(item.currentTarget.id)}} 
+                            onClick={(item) => { options.setAppFont(item.currentTarget.id)}} 
                             active={isItemActive('pkmndp', '')}>
                                 Diamond/Pearl
                         </NavDropdown.Item>
 
                         <NavDropdown.Item id="pkmnem" 
-                            onClick={(item) => { setAppFont(item.currentTarget.id)}} 
+                            onClick={(item) => { options.setAppFont(item.currentTarget.id)}} 
                             active={isItemActive('pkmnem', '')}>
                                 Emerald
                         </NavDropdown.Item>
 
                         <NavDropdown.Item id="pkmnrs" 
-                            onClick={(item) => { setAppFont(item.currentTarget.id)}} 
+                            onClick={(item) => { options.setAppFont(item.currentTarget.id)}} 
                             active={isItemActive('pkmnrs', '')}>
                                 Ruby/Sapphire
                         </NavDropdown.Item>
 
                         <NavDropdown.Item id="pkmnfl" 
-                            onClick={(item) => { setAppFont(item.currentTarget.id)}} 
+                            onClick={(item) => { options.setAppFont(item.currentTarget.id)}} 
                             active={isItemActive('pkmnfl', '')}>
                                 Leaf Green/Fire Red
                         </NavDropdown.Item>
@@ -71,10 +71,10 @@ function NavBar() {
                         <NavDropdown.Item id="default" 
                             onClick={(item) => { 
 
-                                const frame: Frame | undefined = frame_styles.find(style => style.name == item.currentTarget.id)
+                                const frame: Frame | undefined = options.frame_styles.find(style => style.name == item.currentTarget.id)
 
                                 if(frame)
-                                    setFrame(frame)
+                                    options.setFrame(frame)
                             }}
                             active={isItemActive('', 'default')}>
                                 Ruby/Sapphire Default
@@ -83,10 +83,10 @@ function NavBar() {
                         <NavDropdown.Item id="purple" 
                             onClick={(item) => { 
 
-                                const frame: Frame | undefined = frame_styles.find(style => style.name == item.currentTarget.id)
+                                const frame: Frame | undefined = options.frame_styles.find(style => style.name == item.currentTarget.id)
 
                                 if(frame)
-                                    setFrame(frame)
+                                    options.setFrame(frame)
                             }}
                             active={isItemActive('', 'purple')}>
                                 Fancy Purple
@@ -95,10 +95,10 @@ function NavBar() {
                         <NavDropdown.Item id="fireRed" 
                             onClick={(item) => { 
 
-                                const frame: Frame | undefined = frame_styles.find(style => style.name == item.currentTarget.id)
+                                const frame: Frame | undefined = options.frame_styles.find(style => style.name == item.currentTarget.id)
 
                                 if(frame)
-                                    setFrame(frame)
+                                    options.setFrame(frame)
                             }}
                             active={isItemActive('', 'fireRed')}>
                                 FireRed
@@ -107,10 +107,10 @@ function NavBar() {
                         <NavDropdown.Item id="leafGreen" 
                             onClick={(item) => { 
 
-                                const frame: Frame | undefined = frame_styles.find(style => style.name == item.currentTarget.id)
+                                const frame: Frame | undefined = options.frame_styles.find(style => style.name == item.currentTarget.id)
 
                                 if(frame)
-                                    setFrame(frame)
+                                    options.setFrame(frame)
                             }}
                             active={isItemActive('', 'leafGreen')}>
                                 LeafGreen
@@ -119,10 +119,10 @@ function NavBar() {
                         <NavDropdown.Item id="classic" 
                             onClick={(item) => { 
 
-                                const frame: Frame | undefined = frame_styles.find(style => style.name == item.currentTarget.id)
+                                const frame: Frame | undefined = options.frame_styles.find(style => style.name == item.currentTarget.id)
 
                                 if(frame)
-                                    setFrame(frame)
+                                    options.setFrame(frame)
                             }}
                             active={isItemActive('', 'classic')}>
                                 Classic GBC

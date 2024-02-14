@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 39 54" width="39" height="54">
+	<title>Profesora_OPC</title>
+	<defs>
+		<image  width="39" height="54" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAA2BAMAAAC2B504AAAAAXNSR0IB2cksfwAAAA9QTFRF////QFg4AAAA+Pj4+KCA4j6ArAAAAAV0Uk5TAP////8c0CZSAAABhklEQVR4nHWTUZrrIAiFDd8sYOR2AXLiBpJ0A3HY/5oGsEljbsc+VH8B4UBS8jUB6b5Ycr5TMpZzGWGwzKNhsGWEnNlC3vxlEV5W8AH9SeI8uylKJ7TZRpDFfozmFoq6+h0YuQG1w6bhIaii7flwmKq2+CdAFUs/TFr3Dn/s/tHCjZp2f8xVVXvy1Hb9jl3d9XVvL8WDsdtrk9BJ6noUIaoV2dKnjIPZ+1Crnouc0JDU3QXEKbYzXv6JqYVD1klyEd5WE9Da8tLKwlimm3m7Lq/E7JI6hBwRpwUFAa3NR0uF4RltgkvvTU2PMK+Ww9klM7NwPG/ApXUBLUXIG1IuduTmOZ6Gnm6EEH7HFFeAvL6Le+RLbRwnclhvMKrAffA8ZLnDbzf+f0Sn8gHiwzBTMf2i1Hftye5pUxs7vQhSAhbSNyQPVJ8t0fM1RLbm4vOnDttQUHjOF5j+gg/zTrOOsPr5S/cb9LQuaUbI/rWMsH6Awg6lXSEtIY8MylGXZ4Spjzmdn0D6BXplQz0w532WAAAAAElFTkSuQmCC"/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="0" y="0"/>
+</svg>

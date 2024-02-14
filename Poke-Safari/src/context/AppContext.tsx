@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { createContext, useState, useEffect, useCallback } from 'react';
-import { IContext, PokemonList } from 'src/interfaces/interfaces';
+import { IContext, PokemonList, SaveFile } from 'src/interfaces/interfaces';
 import { GET_ALL_POKEMON } from 'src/query/queries';
 import useContextUtils from './hook/useContextUtils';
 
@@ -8,7 +8,9 @@ export const Context = createContext({} as IContext);
 
 export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
-    const { appFont, setAppFont, frame, setFrame, frame_styles } = useContextUtils();
+    const { options, GetSaveFile } = useContextUtils();
+
+    const [ saveFile, setSaveFile ] = useState<SaveFile>(GetSaveFile());
 
     const [ pokemons, setPokemons ] = useState<PokemonList[]>();
 
@@ -49,8 +51,51 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
     },[ data, GetAllPokes ])
 
+    useEffect(() => {
+        
+        if(options.appFont)
+        {
+            document.body.style.setProperty('font-family', options.appFont);
+
+            const saveFileCopy: SaveFile = saveFile;
+
+            saveFileCopy.options.font = options.appFont;
+
+            setSaveFile(saveFileCopy);
+
+            localStorage.setItem('saveFile', JSON.stringify(saveFile));
+
+        }
+
+        if(options.frame)
+        {
+            const saveFileCopy: SaveFile = saveFile;
+
+            saveFileCopy.options.frame = options.frame;
+
+            setSaveFile(saveFileCopy);
+
+            localStorage.setItem('saveFile', JSON.stringify(saveFile));
+        }
+
+    }, [ saveFile, options.appFont, options.frame ])
+
+    useEffect(() => {
+        
+        if(saveFile)
+        {
+            document.body.style.setProperty('font-family', saveFile.options.font);
+
+            options.setAppFont(saveFile.options.font)
+
+            options.setFrame(saveFile.options.frame);
+        }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     return (
-      <Context.Provider value={{ pokemons, setPokemons, appFont, setAppFont, frame, setFrame, frame_styles, randomPokemon, ReloadPokemon, Pokedex }}>
+      <Context.Provider value={{ saveFile, setSaveFile, pokemons, setPokemons, options, randomPokemon, ReloadPokemon, Pokedex }}>
           {children}
       </Context.Provider>
   )

@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+	<title>M%C3%A9dium_%28mujer%29_RZE</title>
+	<defs>
+		<image  width="64" height="64" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAABYR2ztAAAAAXNSR0IB2cksfwAAADBQTFRFcMCgmHCwcFCQ0ID4AAAA8MiYyJhw+ODI+ADwcFBAwFhIKDhYYHiwIGCA+Pj48IhY2vukpQAAABB0Uk5TAP///////////////////8BQi0MAAAIcSURBVHic1ZQxb9NAFMevkVXZyoITxNxrBFJH4y/g4YJAFUuEW5m5ceQP0FjZOjCcRYYMTeowwMTQSkgM3a7ZK+R2yubeB0BC8BV4PkeJA7zzzIsU++79/N7//X0yIf9h2HVAp1UD7Lh7NUT7uT6/bzuPdHnquq5OBXVt17VxFTuuAxWcx7hAtw15x/ZqAIoCtAA6NkV7NFq9tk1bNg48GdCn+xQHyLPhMPR7CjB5ZX+9sF7FI9Zz9uCWp2cbYL04OI5P/Y4DU5jJaFNivWjYg+EpLbw2+cUw3QCzOC0JOn37WUng87hfAaaDUdmkcdD3z8HIZuIfRRUNSegH77+WxPmEkeZNEvlbFfpBNL4TcCtEKIRYZIk/96tAMA3GWZYLkV2GX6SUGZ/DrzJFmqQAFPHtCvLy4ZYzXvXh3UsOuyUic7aQknnbHrPXUi4ZkwDkHjEYY9t5tQXPsIfs7ppooill7ukAGFOggFJ9KNAOfF64rQGSX5dawPw0v0qJgWsw7z9+KAGkhHn/HYBDHCDjnz/OigJoD57d6oHCB5XHBwWji8OS6wAgpKwFligA52SpfZ+1gFgoQKKAFQpW6ECB3fgEzp44QUVeAECs4xitMI0n8D/AgZnvKeANqjH0FIaJsMKouBghDpSZWYQCE3V9ESIqrVXCwoGyhbGq9Fd0YzUm2cVUdrszBShD/xVG+VGwgiPMqVWwP78u+vgN7UDwQbWQDEwAAAAASUVORK5CYII="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="0" y="0"/>
+</svg>

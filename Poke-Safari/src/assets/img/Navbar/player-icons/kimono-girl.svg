@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43 56" width="43" height="56">
+	<title>Chica_Kimono_OPC</title>
+	<defs>
+		<image  width="43" height="56" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAA4BAMAAACWMRzGAAAAAXNSR0IB2cksfwAAAA9QTFRF////AAAA0Egw+Pj46Jh4lceRZwAAAAV0Uk5TAP////8c0CZSAAAB0UlEQVR4nGWU4ZWEIAyEYSswgQI20QYQCjiB/mu6iYqnXn74dr8XJhMSdc45z86Ruld8WJlzlhcmVsmI7zOZSENeiejBPUAWohcHCWmnxHdpYGMJzyc2uD+mO+ZEp8oNe1KlEXeDOQP0Xom2u7gZ6YiN0st4rAvwdNN2zEQFyZUf2cxxKzX2Pm3bQ2TtZSumMT1wXnY8/l5WejbtU3OeLivA9cj2SnLJtC59On+nq1cf+zKOppC+Qz1uVwp6Pu1TBh6zgbEwnVUSCsnOhVroJ9aQkqgyYE59dMCsgQSLgTtusdejOrGwJORxQcSDYjrYH6ZQUmqt92NyH6QyxhZwPEeb0ZEMRVXZ9uNxWZYDoxJw3HA8dq6ws2ObN35XHI+iS64DW/ZiQbxgce9Yq9bKPAOv19z1CDjqOqcTi2kbFq3QHtdnvk+c57ye2KND5VZe2AGjx1wMQ2TsCqywvVNVuFWd5Y5V8yo0l55//rCXVuYiZO1MfxjTRDVYarnesc+oNov5vLCSk7Zq45Towh/DpOBBxF2vz4FRS5HtrjDsxdoJYfqHS8UNvrFGXMl8f7mBsVe2Ew8M7gCJ1/T+AFkuLml6YW8L/vhujFZ7oXfyzh+5v6HpXXvVao7AAAAAAElFTkSuQmCC"/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="0" y="0"/>
+</svg>

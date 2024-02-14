@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31 53" width="31" height="53">
+	<title>Dominguera_OPC</title>
+	<defs>
+		<image  width="31" height="53" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAA1BAMAAABLty1aAAAAAXNSR0IB2cksfwAAAA9QTFRF////AAAAUKAQ+JhA+Pj4uY3MrwAAAAV0Uk5TAP////8c0CZSAAABSUlEQVR4nHWTbZaFIAiGtRUIuYDgugEvbcBi/2sazFKbOdOPTjzy8iU51x4AH9z0ADPkt00Cw/aszOu+dYCJDwP4G5ShqBKSHQZgAhBR7IDQ8squdy1o5wBGtIVZAFaB1d67bg3QnvL3JHO5NH7NGiVXIC9gwtaPN1eRj5jDA0At6He9FTVLPFHokD6BhczGIn1GgADIhR7gGSkzJpiAeWB6WnHIZlp/z0AWJEZk5K44LkAjppJJuDs4SoVNQH3G8VsICMIEAh6xdI/lzC1xj3lmHxW4J0kSvMXgHjVKsJwjDUkNUUErxNvcvB4VtN5WYQNGQEu4JxwcmhWPO4uH1g3LtGRe5bmkf0CyYl8g/gFSwTZC2KmXaXHjRzaegFVOLo6RuqTWRdRphHXXJuCrwwwgFfcGUFc6jqvH67Ph1n66APafgaDxJvkBhuk7m4i1FwEAAAAASUVORK5CYII="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="0" y="0"/>
+</svg>

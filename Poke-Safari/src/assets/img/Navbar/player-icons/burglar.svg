@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37 45" width="37" height="45">
+	<title>burglar</title>
+	<defs>
+		<image  width="37" height="45" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAtBAMAAADb479dAAAAAXNSR0IB2cksfwAAAA9QTFRF////YCC4AAAA+Pj44IBISuV9CwAAAAV0Uk5TAP////8c0CZSAAABY0lEQVR4nGWS65HDIAyEEyq4lV3ASdAA6BowQ/813Qo7fkyY/OHzspJWeb328xazn9fjvLO7y++DZcfi9QGTV+oc8mQBgUtoyvuTGTRIsI9jGmJRVUF2OBbkqWqEsr9OW/dqYdlAkyksK8z4zHjkYLrRzyCmgWfptK6Q3Iw/WOeHYNsGZBuZorLZfLx3YGu30svKVo3MK8TrmKd3iQ4zFjIfY7MxiunULajIbDC30cewmE4rmZTNvRiVapMtUaXQ66+XkaNuWioCmnnUYBZkvM9+kMkYWo3HiKGoK2QC+GRwoYFKVAWWGI4NNnA/2Sj7BMOmwUS5S1iyPVTwsuTFp/G1Iwo9LPXcHBNSysLtWnuSSJ/qO4vtxJpxWztbsDmP6MkS3zE7FW8Xa7EyVW7/ZHmGE7NoO9mRF8+DyRweDxZGiandGtwbu4abbI6fPiHsG7j/wY9B7Islu4Y6mX/JmOEl+wfylkYWV2FH3wAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="0" y="0"/>
+</svg>

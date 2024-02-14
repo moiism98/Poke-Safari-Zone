@@ -1,17 +1,16 @@
 import 'src/pages/pokédex/Pokedex.css'
 import background from 'src/assets/img/Index/safari-zone-cover.svg';
 import unknown from 'src/assets/img/Pokedex/pokedex-unknown.svg';
+import pokedexTitle from 'src/assets/img/Pokedex/pokedex-title.svg';
+import Loading from 'src/components/Spinners/Loading/Loading';
 import { useContext, useEffect, useState } from 'react';
 import { Button, Image } from 'react-bootstrap';
 import { useQuery } from '@apollo/client';
-import { PokemonList } from 'src/interfaces/interfaces';
 import { GET_ALL_POKEMON } from 'src/query/queries';
 import { Link } from 'react-router-dom';
-import { IonIcon } from '@ionic/react';
-import { arrowBackCircleSharp, arrowForwardCircleSharp } from 'ionicons/icons';
-import pokedexTitle from 'src/assets/img/Pokedex/pokedex-title.svg';
-import Loading from 'src/components/Spinners/Loading/Loading';
 import { Context } from 'src/context/AppContext';
+import { PokemonList } from 'src/interfaces/interfaces';
+import { LeftCircleFilled, RightCircleFilled } from '@ant-design/icons';
 
 interface MyPokemon {
 
@@ -137,7 +136,7 @@ const Pokedex = () =>{
 
     const limit = 32;
 
-    const { frame } = useContext(Context)
+    const { options } = useContext(Context)
 
     const [ offset, setOffset ] = useState<number>(0)
 
@@ -156,7 +155,7 @@ const Pokedex = () =>{
 
     return(
         
-        <div id="gameScreen" style={{ backgroundImage: `url(${background})`, border: frame.styles?.border, borderRadius: frame.styles?.borderRadius}}>
+        <div id="gameScreen" style={{ backgroundImage: `url(${background})`, border: options.frame?.styles?.border, borderRadius: options.frame?.styles?.borderRadius}}>
             <div className='pokedexTitle'><Image src={ pokedexTitle }/></div>
             <div className='container' id='pokedex'>
             {
@@ -166,12 +165,8 @@ const Pokedex = () =>{
             }
             </div>
             <div className='pagination'>
-                <Button onClick={() => setOffset(offset => offset -= limit)} variant='link'>
-                    <IonIcon color='dark' size='large' title='Previous page' icon={ arrowBackCircleSharp }/>
-                </Button>
-                <Button onClick={() => setOffset(offset => offset += limit)} variant='link'>
-                    <IonIcon color='dark' size='large' title='Next page' icon={ arrowForwardCircleSharp }/>
-                </Button>
+                <Button onClick={() => setOffset(offset => offset -= limit)} variant='link'><LeftCircleFilled /></Button>
+                <Button onClick={() => setOffset(offset => offset += limit)} variant='link'><RightCircleFilled/></Button>
             </div>
         </div>   
     )
