@@ -1,13 +1,14 @@
 import Modal from 'antd/es/modal';
 import useNewPlayer from './hook/useNewPlayer';
 import { Input, Button, Form, Select } from 'antd';
-import { Player } from 'src/interfaces/interfaces';
+import { SaveFile, icon } from 'src/interfaces/interfaces';
 import { useContext, useEffect, useState } from 'react';
 import { Context } from 'src/context/AppContext';
 import { Image } from 'react-bootstrap';
-const NewPlayer = () => {
 
-    const { saveFile, setSaveFile } = useContext(Context);
+const NewGame = () => {
+
+    const { setSaveFile, options } = useContext(Context);
 
     const { icons } = useNewPlayer()
 
@@ -19,28 +20,31 @@ const NewPlayer = () => {
 
     const onFinish = (data: { playerName: string, playerIcon: string }) => {
 
-        const saveFileCopy = saveFile;
+        let newSaveFile: SaveFile | null = null;
 
-        const newPlayer: Player = {
-            name: data.playerName,
-            experience: 0,
-            level: 1
-        }
-
-        saveFileCopy.player = newPlayer;
-
-        const icon: {
-            id: number;
-            name: string;
-            icon: string;
-        } | undefined = icons.find(icon => icon.name == data.playerIcon)
+        const icon: icon | undefined = icons.find(icon => icon.name == data.playerIcon)
 
         if(icon)
         {
-            saveFileCopy.options.icon = icon.icon
+            newSaveFile = {
+                seenPokemons: [],
+                myPokemons: [],
+                safariZones: [],
+                options: {
+                    font: 'pkmndp',
+                    frame: options.frame_styles[0],
+                    icon: icon
+                },
+                bag: [],
+                player: {
+                    name: data.playerName,
+                    experience: 0,
+                    level: 1
+                }
+            };
         }
 
-        localStorage.setItem('saveFile', JSON.stringify(saveFileCopy))
+        localStorage.setItem('saveFile', JSON.stringify(newSaveFile))
 
         setOpenModal(false);
     }
@@ -49,7 +53,14 @@ const NewPlayer = () => {
 
     useEffect(() => {
     
-        setSaveFile(JSON.parse(localStorage.getItem('saveFile')))
+        console.log('New game created successfully!');
+
+        const saveFile: string | null = localStorage.getItem('saveFile')
+
+        if(saveFile)
+        {
+            setSaveFile(JSON.parse(saveFile))
+        }
 
     }, [ openModal, setSaveFile ])
 
@@ -58,6 +69,7 @@ const NewPlayer = () => {
             open = { openModal }
             footer =  { <></> }
             closeIcon = { false }
+            title='Create a new game!'
         >
             <Form 
                 onFinish={onFinish}
@@ -98,7 +110,7 @@ const NewPlayer = () => {
                 </Form.Item>
 
                 <Form.Item style={{display:'flex', justifyContent: 'flex-end', paddingTop: '2em', margin: 0}}>
-                    <Button type='primary' htmlType='submit'> Save </Button>
+                    <Button type='primary' htmlType='submit'> BEGIN ! </Button>
                 </Form.Item>
 
             </Form>
@@ -106,4 +118,4 @@ const NewPlayer = () => {
     )
 }
 
-export default NewPlayer
+export default NewGame

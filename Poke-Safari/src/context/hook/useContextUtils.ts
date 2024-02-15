@@ -10,30 +10,23 @@ const useContextUtils = () => {
 
     const GetSaveFile = () => {
 
-        let saveFile: SaveFile = JSON.parse(localStorage.getItem('saveFile'));
+        const save: string | null = localStorage.getItem('saveFile');
 
-        if(!saveFile)
+        let saveFile: SaveFile | null = null;
+
+        if(save)
         {
-            const newSaveFile: SaveFile = {
-                seenPokemons: [],
-                myPokemons: [],
-                safariZones: [],
-                options: {
-                    font: 'pkmndp',
-                    frame: frame_styles[0],
-                    icon: ''
-                },
-                bag: [],
-                player: null
-            };
-
-            localStorage.setItem('saveFile', JSON.stringify(newSaveFile));
-
-            saveFile = newSaveFile;
+            saveFile = JSON.parse(save);
+    
+            if(!saveFile)
+            {
+                localStorage.setItem('saveFile', JSON.stringify(null));
+    
+                saveFile = null;
+            }
         }
 
         return saveFile;
-
     }
 
     return {

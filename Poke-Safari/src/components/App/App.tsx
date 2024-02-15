@@ -6,10 +6,17 @@ import Pokedex from 'src/pages/pokédex/Pokédex';
 import Index from 'src/pages/index/Index';
 import appUtils from 'src/utils/App/appUtils';
 import Date from 'src/components/Date/Date';
+import { useEffect } from 'react';
 
 function App() {
 
   const { GetBackground } = appUtils();
+
+  useEffect(() => {
+
+    document.body.style.setProperty('font-family', 'pkmndp');
+    
+  }, [])
   
   GetBackground(); // when app loads displays correspondant background...
   

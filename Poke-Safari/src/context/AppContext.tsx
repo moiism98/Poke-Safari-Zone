@@ -10,7 +10,7 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
     const { options, GetSaveFile } = useContextUtils();
 
-    const [ saveFile, setSaveFile ] = useState<SaveFile>(GetSaveFile());
+    const [ saveFile, setSaveFile ] = useState<SaveFile | null>(GetSaveFile());
 
     const [ pokemons, setPokemons ] = useState<PokemonList[]>();
 
@@ -44,9 +44,9 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
     {
         if(data)
         {
-          setPokemons(data.pokemons.results);
+            setPokemons(data.pokemons.results);
 
-          GetAllPokes()
+            GetAllPokes()
         }
 
     },[ data, GetAllPokes ])
@@ -57,25 +57,33 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
         {
             document.body.style.setProperty('font-family', options.appFont);
 
-            const saveFileCopy: SaveFile = saveFile;
+            const saveFileCopy: SaveFile | null = saveFile;
 
-            saveFileCopy.options.font = options.appFont;
+            if(saveFileCopy)
+            {
+                saveFileCopy.options.font = options.appFont;
+    
+                setSaveFile(saveFileCopy);
+    
+                localStorage.setItem('saveFile', JSON.stringify(saveFile));
+            }
 
-            setSaveFile(saveFileCopy);
-
-            localStorage.setItem('saveFile', JSON.stringify(saveFile));
 
         }
 
         if(options.frame)
         {
-            const saveFileCopy: SaveFile = saveFile;
+            const saveFileCopy: SaveFile | null = saveFile;
 
-            saveFileCopy.options.frame = options.frame;
+            if(saveFileCopy)
+            {
+                saveFileCopy.options.frame = options.frame;
+    
+                setSaveFile(saveFileCopy);
+    
+                localStorage.setItem('saveFile', JSON.stringify(saveFile));
+            }
 
-            setSaveFile(saveFileCopy);
-
-            localStorage.setItem('saveFile', JSON.stringify(saveFile));
         }
 
     }, [ saveFile, options.appFont, options.frame ])
@@ -86,13 +94,12 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
         {
             document.body.style.setProperty('font-family', saveFile.options.font);
 
-            options.setAppFont(saveFile.options.font)
+            options.setAppFont(saveFile.options.font);
 
             options.setFrame(saveFile.options.frame);
         }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [ saveFile, options ])
 
     return (
       <Context.Provider value={{ saveFile, setSaveFile, pokemons, setPokemons, options, randomPokemon, ReloadPokemon, Pokedex }}>

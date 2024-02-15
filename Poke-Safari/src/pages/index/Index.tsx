@@ -11,7 +11,7 @@ import { Button } from 'antd';
 import Loading from 'src/components/Spinners/Loading/Loading';
 import background from 'src/assets/img/Index/safari-zone-cover.svg';
 import gameTitle from 'src/assets/img/Index/game-title.svg';
-import NewPlayer from 'src/components/NewPlayer/NewPlayer';
+import NewPlayer from 'src/components/NewPlayer/NewGame';
 
 const Index = () =>
 {
@@ -23,26 +23,32 @@ const Index = () =>
 
     const [ pokemon, setPokemon ] = useState<Pokemon>();
 
-    const { data, loading, error }  = useQuery(GET_POKEMON, { variables: { "name": randomPokemon ? randomPokemon : 'pikachu'}});
+    const { data, loading, error, refetch }  = useQuery(GET_POKEMON, { variables: { "name": randomPokemon ? randomPokemon : 'pikachu'}});
     
 
     useEffect( () =>
     {
-        if(data) 
+        if(error)
+        {
+            refetch();
+        }
+        else if(data) 
+        {
             setPokemon(data.pokemon); 
+        }
 
-    }, [ data ])
+    }, [ data, error, refetch ])
 
     return (
-        saveFile.player != null ?
+        saveFile != null ?
         <div id='gameScreen' style={{ backgroundImage: `url(${background})`, border: options.frame?.styles.border, borderRadius: options.frame?.styles.borderRadius }}>
             <div className='container' id='indexContainer'>
                 <div>
-                    <Button onClick={() => ReloadPokemon()} className='d-flex' type='link'><ReloadOutlined aria-label='Reload pokémon'/></Button>
+                    <ReloadOutlined className='d-flex' onClick={() => ReloadPokemon()} aria-label='Reload pokémon'/>
                     <Image style={{width:'50%'}} src={ gameTitle }/>
                 </div>
                 {
-                    error ? <h1 style={{color: 'red'}}>{error.message}</h1> :
+                    error ? <Loading/> :
                     loading ? <Loading/> : 
                     <>
                         
@@ -57,9 +63,9 @@ const Index = () =>
                     </>
                 }
             </div>   
-            <div><Button className='play' onClick={ () => { navigate("/pokedex") }}>PLAY</Button></div>
+            <div><Button style={{fontFamily: options.appFont}} className='play' onClick={ () => { navigate("/pokedex") }}>PLAY</Button></div>
         </div> 
-        : 
+        :
         <NewPlayer/>
     )
 };

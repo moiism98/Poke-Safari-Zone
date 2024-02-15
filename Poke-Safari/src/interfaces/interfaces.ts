@@ -1,6 +1,6 @@
 export interface IContext{
-    saveFile: SaveFile
-    setSaveFile: React.Dispatch<React.SetStateAction<SaveFile>>
+    saveFile: SaveFile | null
+    setSaveFile: React.Dispatch<React.SetStateAction<SaveFile | null>>
     pokemons: PokemonList[] | undefined, 
     setPokemons: React.Dispatch<React.SetStateAction<PokemonList[] | undefined>>,
     options: {
@@ -62,7 +62,14 @@ interface Options {
 
     font: string
     frame: Frame
-    icon: string
+    icon: icon | null
+}
+
+export interface icon {
+
+    id: number;
+    name: string;
+    icon: string;
 }
 
 interface Bag {
@@ -100,6 +107,19 @@ export interface Pokemon
     types: Types[]
     abilities: Abilities[],
     held_items: Held_Items[]
+}
+
+export interface MyPokemon {
+
+    id: number, 
+    name: string, 
+    sprites: {
+        front_default: string, 
+        front_shiny: string
+    }, 
+    seen: boolean, 
+    catched: boolean 
+
 }
 
 interface Sprites
