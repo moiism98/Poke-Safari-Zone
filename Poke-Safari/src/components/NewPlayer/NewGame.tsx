@@ -1,22 +1,23 @@
-import Modal from 'antd/es/modal';
-import useNewPlayer from './hook/useNewPlayer';
 import { Input, Button, Form, Select } from 'antd';
 import { SaveFile, icon } from 'src/interfaces/interfaces';
 import { useContext, useEffect, useState } from 'react';
 import { Context } from 'src/context/AppContext';
 import { Image } from 'react-bootstrap';
+import Modal from 'antd/es/modal';
+import frameStyles from 'src/utils/App/frameStyles';
+import playerIcons from 'src/utils/NewPlayer/playerIcons';
 
 const NewGame = () => {
 
-    const { setSaveFile, options } = useContext(Context);
+    const { setSaveFile } = useContext(Context);
 
-    const { icons } = useNewPlayer()
+    const { frame_styles } = frameStyles();
+
+    const { icons } = playerIcons()
 
     const { Option } = Select;
 
     const [ openModal, setOpenModal ] = useState<boolean>(true);
-
-    const [ playerIcons ] = useState(icons)
 
     const onFinish = (data: { playerName: string, playerIcon: string }) => {
 
@@ -32,7 +33,7 @@ const NewGame = () => {
                 safariZones: [],
                 options: {
                     font: 'pkmndp',
-                    frame: options.frame_styles[0],
+                    frame: frame_styles[0],
                     icon: icon
                 },
                 bag: [],
@@ -72,7 +73,7 @@ const NewGame = () => {
             title='Create a new game!'
         >
             <Form 
-                onFinish={onFinish}
+                onFinish={ onFinish }
             >
 
                 <Form.Item<string>
@@ -93,7 +94,7 @@ const NewGame = () => {
                         allowClear
                     >
                         {
-                            playerIcons.map(icon => (
+                            icons.map(icon => (
                                     
                                 <Option key={icon.id} value={icon.name}>
                 

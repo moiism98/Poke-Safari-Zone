@@ -41,7 +41,6 @@ const pokeTypes = () => {
 
         const GetTypeIcon = (pokeType: string) => 
         {
-                
             return typesImages.find(type => type.includes(pokeType))
         }
         

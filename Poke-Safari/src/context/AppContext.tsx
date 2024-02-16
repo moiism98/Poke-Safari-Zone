@@ -1,22 +1,33 @@
 import { useQuery } from '@apollo/client';
 import { createContext, useState, useEffect, useCallback } from 'react';
-import { IContext, PokemonList, SaveFile } from 'src/interfaces/interfaces';
+import { ContextOptions, Frame, IContext, PokemonList, SaveFile } from 'src/interfaces/interfaces';
 import { GET_ALL_POKEMON } from 'src/query/queries';
-import useContextUtils from './hook/useContextUtils';
+import useContext from './hook/useContext';
 
 export const Context = createContext({} as IContext);
 
 export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
-    const { options, GetSaveFile } = useContextUtils();
+    const { GetSaveFile } = useContext();
 
     const [ saveFile, setSaveFile ] = useState<SaveFile | null>(GetSaveFile());
 
     const [ pokemons, setPokemons ] = useState<PokemonList[]>();
 
+    const [ appFont, setAppFont ] = useState<string>();
+
+    const [ frame, setFrame ] = useState<Frame>();
+
+    const options: ContextOptions = {
+        appFont: appFont,
+        setAppFont: setAppFont,
+        frame: frame,
+        setFrame: setFrame
+    }
+
     const [ randomPokemon, setRandomPokemon ] = useState<string>();
 
-    const { data, refetch } = useQuery( GET_ALL_POKEMON, { variables: { "limit": 386 , "offset": 0}} ) // limit = 1350 get all pokes
+    const { data } = useQuery( GET_ALL_POKEMON, { variables: { "limit": 386 , "offset": 0}} ) // limit = 1350 get all pokes
 
     const GetAllPokes = useCallback(() =>
     {
@@ -36,10 +47,6 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
         GetAllPokes();
     }
 
-    const Pokedex = (offset: number) => {
-        refetch({"limit": '30', "offset": offset});
-    }
-
     useEffect(() =>
     {
         if(data)
@@ -53,15 +60,15 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
     useEffect(() => {
         
-        if(options.appFont)
+        if(appFont)
         {
-            document.body.style.setProperty('font-family', options.appFont);
+            document.body.style.setProperty('font-family', appFont);
 
             const saveFileCopy: SaveFile | null = saveFile;
 
             if(saveFileCopy)
             {
-                saveFileCopy.options.font = options.appFont;
+                saveFileCopy.options.font = appFont;
     
                 setSaveFile(saveFileCopy);
     
@@ -71,13 +78,13 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
         }
 
-        if(options.frame)
+        if(frame)
         {
             const saveFileCopy: SaveFile | null = saveFile;
 
             if(saveFileCopy)
             {
-                saveFileCopy.options.frame = options.frame;
+                saveFileCopy.options.frame = frame;
     
                 setSaveFile(saveFileCopy);
     
@@ -86,7 +93,7 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
         }
 
-    }, [ saveFile, options.appFont, options.frame ])
+    }, [ saveFile, appFont, frame ])
 
     useEffect(() => {
         
@@ -94,15 +101,15 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
         {
             document.body.style.setProperty('font-family', saveFile.options.font);
 
-            options.setAppFont(saveFile.options.font);
+            setAppFont(saveFile.options.font);
 
-            options.setFrame(saveFile.options.frame);
+            setFrame(saveFile.options.frame);
         }
 
-    }, [ saveFile, options ])
+    }, [ saveFile ])
 
     return (
-      <Context.Provider value={{ saveFile, setSaveFile, pokemons, setPokemons, options, randomPokemon, ReloadPokemon, Pokedex }}>
+      <Context.Provider value={{ saveFile, setSaveFile, pokemons, setPokemons, options, randomPokemon, ReloadPokemon }}>
           {children}
       </Context.Provider>
   )

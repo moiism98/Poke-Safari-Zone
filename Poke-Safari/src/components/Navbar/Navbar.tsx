@@ -1,6 +1,7 @@
 import'./NavBar.css';
 import  pokeball from 'src/assets/img/Navbar/pokeball_32x32.svg';
-import useNewPlayer from '../NewPlayer/hook/useNewPlayer';
+import frameStyles from 'src/utils/App/frameStyles';
+import playerIcons from 'src/utils/NewPlayer/playerIcons';
 import { Image, Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
@@ -13,9 +14,11 @@ function NavBar() {
 
     const { options, saveFile, setSaveFile } = useContext(Context);
 
+    const { frame_styles } = frameStyles();
+
     const navigate = useNavigate();
 
-    const { icons } = useNewPlayer();
+    const { icons } = playerIcons();
 
     const [openPopover, setOpenPopover] = useState<boolean>(false);
 
@@ -123,7 +126,7 @@ function NavBar() {
                             <NavDropdown title="Select font" id="optionsFont">
 
                                 <NavDropdown.Item id="pkmndp" 
-                                    onClick={(item) => { options.setAppFont(item.currentTarget.id)}} 
+                                    onClick={(item) => { options.setAppFont(item.currentTarget.id) }} 
                                     active={isItemActive('pkmndp', '')}>
                                         Diamond/Pearl
                                 </NavDropdown.Item>
@@ -152,7 +155,7 @@ function NavBar() {
                                 <NavDropdown.Item id="default" 
                                     onClick={(item) => { 
 
-                                        const frame: Frame | undefined = options.frame_styles.find(style => style.name == item.currentTarget.id)
+                                        const frame: Frame | undefined = frame_styles.find(style => style.name == item.currentTarget.id)
 
                                         if(frame)
                                             options.setFrame(frame)
@@ -164,7 +167,7 @@ function NavBar() {
                                 <NavDropdown.Item id="purple" 
                                     onClick={(item) => { 
 
-                                        const frame: Frame | undefined = options.frame_styles.find(style => style.name == item.currentTarget.id)
+                                        const frame: Frame | undefined = frame_styles.find(style => style.name == item.currentTarget.id)
 
                                         if(frame)
                                             options.setFrame(frame)
@@ -176,7 +179,7 @@ function NavBar() {
                                 <NavDropdown.Item id="fireRed" 
                                     onClick={(item) => { 
 
-                                        const frame: Frame | undefined = options.frame_styles.find(style => style.name == item.currentTarget.id)
+                                        const frame: Frame | undefined = frame_styles.find(style => style.name == item.currentTarget.id)
 
                                         if(frame)
                                             options.setFrame(frame)
@@ -188,7 +191,7 @@ function NavBar() {
                                 <NavDropdown.Item id="leafGreen" 
                                     onClick={(item) => { 
 
-                                        const frame: Frame | undefined = options.frame_styles.find(style => style.name == item.currentTarget.id)
+                                        const frame: Frame | undefined = frame_styles.find(style => style.name == item.currentTarget.id)
 
                                         if(frame)
                                             options.setFrame(frame)
@@ -200,7 +203,7 @@ function NavBar() {
                                 <NavDropdown.Item id="classic" 
                                     onClick={(item) => { 
 
-                                        const frame: Frame | undefined = options.frame_styles.find(style => style.name == item.currentTarget.id)
+                                        const frame: Frame | undefined = frame_styles.find(style => style.name == item.currentTarget.id)
 
                                         if(frame)
                                             options.setFrame(frame)
@@ -222,10 +225,10 @@ function NavBar() {
                             <span style={{ marginRight: '.5em' }}>Have a nice hunting time, <strong style={{color: 'red'}}>{saveFile?.player?.name}</strong> !</span>
                             <Popover 
                                 trigger='click' 
-                                open={openPopover}
+                                open={ openPopover }
                                 onOpenChange={() => setOpenPopover(true)}
-                                title={title} 
-                                content={content} 
+                                title={ title } 
+                                content={ content } 
                                 className='d-flex m-1'
                             >
                                 <Image title={saveFile?.options.icon?.name} src={saveFile?.options.icon?.icon}/>
@@ -237,8 +240,8 @@ function NavBar() {
 
             <Modal
                 title='Are you sure you want to delete the game?'
-                closeIcon={false}
-                open={openModal}
+                closeIcon={ false }
+                open={ openModal }
                 onOk={ deleteGame }
                 onCancel={() => setOpenModal(false)}
             />

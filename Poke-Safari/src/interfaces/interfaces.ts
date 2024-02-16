@@ -3,16 +3,16 @@ export interface IContext{
     setSaveFile: React.Dispatch<React.SetStateAction<SaveFile | null>>
     pokemons: PokemonList[] | undefined, 
     setPokemons: React.Dispatch<React.SetStateAction<PokemonList[] | undefined>>,
-    options: {
-        appFont: string | undefined,
-        setAppFont: React.Dispatch<React.SetStateAction<string | undefined>>,
-        frame: Frame | undefined,
-        setFrame: React.Dispatch<React.SetStateAction<Frame | undefined>>,
-        frame_styles: Frame[]
-    }
+    options: ContextOptions,
     randomPokemon: string | undefined,
     ReloadPokemon: () => void | undefined
-    Pokedex: (offset: number) => void | undefined
+}
+
+export interface ContextOptions {
+    appFont: string | undefined,
+    setAppFont: React.Dispatch<React.SetStateAction<string | undefined>>,
+    frame: Frame | undefined,
+    setFrame: React.Dispatch<React.SetStateAction<Frame | undefined>>
 }
 
 export interface SaveFile{

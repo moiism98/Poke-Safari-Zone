@@ -1,22 +1,30 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { Context } from 'src/context/AppContext';
 import NavBar from 'src/components/Navbar/Navbar';
 import Pokedex from 'src/pages/pokédex/Pokédex';
 import Index from 'src/pages/index/Index';
-import appUtils from 'src/utils/App/appUtils';
 import Date from 'src/components/Date/Date';
-import { useEffect } from 'react';
+import useApp from './hook/useApp';
 
 function App() {
 
-  const { GetBackground } = appUtils();
+  const { GetBackground } = useApp();
+  
+  const { saveFile } = useContext(Context)
+
+  // when no save file created, set a default font using a useEffect.
 
   useEffect(() => {
 
-    document.body.style.setProperty('font-family', 'pkmndp');
+    if(!saveFile)
+    {
+      document.body.style.setProperty('font-family', 'pkmndp');
+    }
     
-  }, [])
+  }, [ saveFile ])
   
   GetBackground(); // when app loads displays correspondant background...
   

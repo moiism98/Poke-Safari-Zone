@@ -1,18 +1,19 @@
-import 'src/pages/pokédex/Pokedex.css'
-import background from 'src/assets/img/Index/safari-zone-cover.svg';
+import 'src/pages/pokédex/Pokedex.css';
 import unknown from 'src/assets/img/Pokedex/pokedex-unknown.svg';
 import pokedexTitle from 'src/assets/img/Pokedex/pokedex-title.svg';
 import Loading from 'src/components/Spinners/Loading/Loading';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Image } from 'react-bootstrap';
 import { useQuery } from '@apollo/client';
 import { GET_ALL_POKEMON } from 'src/query/queries';
 import { Link } from 'react-router-dom';
-import { Context } from 'src/context/AppContext';
 import { MyPokemon, PokemonList } from 'src/interfaces/interfaces';
 import { LeftCircleFilled, RightCircleFilled } from '@ant-design/icons';
+import GameScreen from 'src/components/GameScreen/GameScreen';
 
 
+const limit = 32;
+const totalPokemon: number = 386; // 386 deaoxys id, the limit is 3rd gen.
 
 const Pokedex = () =>{
 
@@ -123,12 +124,6 @@ const Pokedex = () =>{
         return icon;
     }
 
-    const limit = 32;
-
-    const totalPokemon: number = 386; // 386 deaoxys id, the limit is 3rd gen.
-
-    const { options } = useContext(Context)
-
     const [ offset, setOffset ] = useState<number>(0)
 
     const [ pokedex, setPokedex ] = useState<PokemonList[]>()
@@ -146,7 +141,7 @@ const Pokedex = () =>{
 
     return(
         
-        <div id="gameScreen" style={{ backgroundImage: `url(${background})`, border: options.frame?.styles?.border, borderRadius: options.frame?.styles?.borderRadius}}>
+        <GameScreen>
             <div className='pokedexTitle'><Image src={ pokedexTitle }/></div>
             <div className='container' id='pokedex'>
             {
@@ -173,7 +168,7 @@ const Pokedex = () =>{
                     offset + limit <= totalPokemon ? <RightCircleFilled onClick={() => setOffset(offset => offset += limit)}/> : null 
                 }
             </div>
-        </div>   
+        </GameScreen>   
     )
 }
 

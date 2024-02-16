@@ -1,7 +1,6 @@
-import { useState } from "react"
 import { Frame } from "src/interfaces/interfaces";
 
-const SetFrame = () => {
+const frameStyles = () => {
 
     const frame_styles: Frame[] = [
         {
@@ -40,13 +39,9 @@ const SetFrame = () => {
         }
     ]
 
-    const [ frame, setFrame ] = useState<Frame>();
-
     return{
-        frame,
-        setFrame,
         frame_styles
     }
 }
 
-export default SetFrame
+export default frameStyles
