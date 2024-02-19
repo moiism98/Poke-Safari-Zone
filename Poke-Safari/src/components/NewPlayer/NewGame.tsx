@@ -1,5 +1,5 @@
 import { Input, Button, Form, Select } from 'antd';
-import { SaveFile, icon } from 'src/interfaces/interfaces';
+import { PokemonList, SafariZone, SaveFile, StaticZone, ZonePokemon, icon } from 'src/interfaces/interfaces';
 import { useContext, useEffect, useState } from 'react';
 import { Context } from 'src/context/AppContext';
 import { Image } from 'react-bootstrap';
@@ -7,9 +7,84 @@ import Modal from 'antd/es/modal';
 import frameStyles from 'src/utils/App/frameStyles';
 import playerIcons from 'src/utils/NewPlayer/playerIcons';
 
+import forest from 'src/assets/img/Zones/forest.svg';
+import volcano from 'src/assets/img/Zones/crater.svg';
+
+
+const zones: StaticZone[] = [
+    {
+        name: 'forest', 
+        pokemon: [
+            {
+                name: 'bulbasaur',
+                unlocked: null
+            },
+            {
+                name: 'chikorita',
+                unlocked: null
+            },
+            {
+                name: 'treecko',
+                unlocked: null
+            },
+            {
+                name: 'caterpie',
+                unlocked: null
+            },
+            {
+                name: 'spinarak',
+                unlocked: null
+            },
+            {
+                name: 'shroomish',
+                unlocked: null
+            },
+            {
+                name: 'cacnea',
+                unlocked: {
+                    id: 1,
+                    unlock: 'Catch 15 caterpies',
+                    unlocked: false
+                }
+            }
+        ]
+    },
+    {
+        name: 'volcano', 
+        pokemon: [
+            {
+                name: 'charmander',
+                unlocked: null
+            },
+            {
+                name: 'cyndaquil',
+                unlocked: null
+            },
+            {
+                name: 'torchic',
+                unlocked: null
+            },
+            {
+                name: 'ponyta',
+                unlocked: null
+            },
+            {
+                name: 'skarmory',
+                unlocked: null
+            },
+            {
+                name: 'torkoal',
+                unlocked: null
+            }
+        ]
+    }
+];
+
+
+
 const NewGame = () => {
 
-    const { setSaveFile } = useContext(Context);
+    const { setSaveFile, allPokemons } = useContext(Context);
 
     const { frame_styles } = frameStyles();
 
@@ -18,6 +93,81 @@ const NewGame = () => {
     const { Option } = Select;
 
     const [ openModal, setOpenModal ] = useState<boolean>(true);
+
+    const GenerateZonesPokemon = ( toCreateZone: string ) => {
+
+        const pokemon: ZonePokemon[] = []
+
+        if(allPokemons)
+        {
+            let zonePokemon = 0;
+
+            const staticZone: StaticZone | undefined  = zones.find(zone => zone.name == toCreateZone);
+
+            if(staticZone)
+            {
+                while(zonePokemon < staticZone.pokemon.length)
+                {
+                    const poke: PokemonList | undefined = allPokemons.find(pkmn => pkmn.name == staticZone.pokemon[zonePokemon].name)
+
+                    const unlocked = staticZone.pokemon[zonePokemon].unlocked;
+
+                    if(poke)
+                    {
+                        fetch(`https://pokeapi.co/api/v2/pokemon-species/${poke.id}/`)
+                        .then(response => response.ok ? response.json() : console.warn("Problems have been found, it's not possible to connect!"))
+                        .then(data => { 
+                            pokemon.push(
+                            {
+                                id: poke.id,
+                                name: poke.name,
+                                encounter_rate: data.pal_park_encounters[0].rate,
+                                catch_rate: data.capture_rate,
+                                unlocked: unlocked
+                            }
+                        )})
+                    }
+
+                    zonePokemon++
+                }
+            }
+        }
+
+        return pokemon;
+    }
+
+    const safariZones: SafariZone[] = [
+        {
+            id: 1,
+            name: 'Forest',
+            portrait: forest,
+            pokemon: GenerateZonesPokemon('forest'),
+            reward: [
+                {
+                    id: 1,
+                    name: '',
+                    icon: '',
+                    cuantity: 10,
+                }
+            ],
+            unlock: null
+        },
+        {
+            id: 2,
+            name: 'Volcano',
+            portrait: volcano,
+            pokemon: GenerateZonesPokemon('volcano'),
+            reward: [
+                {
+                    id: 1,
+                    name: '',
+                    icon: '',
+                    cuantity: 10,
+                }
+            ],
+            unlock: null
+        }
+    ]
 
     const onFinish = (data: { playerName: string, playerIcon: string }) => {
 
@@ -30,7 +180,7 @@ const NewGame = () => {
             newSaveFile = {
                 seenPokemons: [],
                 myPokemons: [],
-                safariZones: [],
+                safariZones: safariZones,
                 options: {
                     font: 'pkmndp',
                     frame: frame_styles[0],
@@ -49,6 +199,8 @@ const NewGame = () => {
 
         setOpenModal(false);
     }
+
+    
 
     // when we close the modal, we update the saveFile state (with the localStorage value) to reload the index component!
 

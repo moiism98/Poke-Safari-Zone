@@ -2,109 +2,29 @@ import 'src/pages/pokédex/Pokedex.css';
 import unknown from 'src/assets/img/Pokedex/pokedex-unknown.svg';
 import pokedexTitle from 'src/assets/img/Pokedex/pokedex-title.svg';
 import Loading from 'src/components/Spinners/Loading/Loading';
-import { useEffect, useState } from 'react';
+import GameScreen from 'src/components/GameScreen/GameScreen';
+import { useContext, useEffect, useState } from 'react';
 import { Image } from 'react-bootstrap';
 import { useQuery } from '@apollo/client';
 import { GET_ALL_POKEMON } from 'src/query/queries';
 import { Link } from 'react-router-dom';
-import { MyPokemon, PokemonList } from 'src/interfaces/interfaces';
+import { PlayerPokemon, PokemonList } from 'src/interfaces/interfaces';
 import { LeftCircleFilled, RightCircleFilled } from '@ant-design/icons';
-import GameScreen from 'src/components/GameScreen/GameScreen';
+import { Context } from 'src/context/AppContext';
+import usePokedex from 'src/components/Pokedex/hook/usePokedex';
 
 
 const limit = 32;
-const totalPokemon: number = 386; // 386 deaoxys id, the limit is 3rd gen.
 
 const Pokedex = () =>{
 
-    const myPokemons: MyPokemon[] = [
-        {
-            id: 1,
-            name: 'bulbasaur',
-            sprites: {
-                front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-                front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png"
-            },
-            seen: true,
-            catched: false
-        },
-        {
-            id: 10,
-            name: 'caterpie',
-            sprites: {
-                front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png",
-                front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/10.png"
-            },
-            seen: true,
-            catched: true
-        },
-        {
-            id: 19,
-            name: 'rattata',
-            sprites: {
-                front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/19.png",
-                front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/19.png"
-            },
-            seen: true,
-            catched: false
-        },
-        {
-            id: 29,
-            name: 'nidoran-f',
-            sprites: {
-                front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/29.png",
-                front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/29.png"
-            },
-            seen: true,
-            catched: false
-        },
-        {
-            id: 45,
-            name: 'vileplume',
-            sprites: {
-                "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/45.png",
-                "front_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/45.png"
-            },
-            seen: true,
-            catched: false
-        },
-        {
-            id: 35,
-            name: 'clefairy',
-            sprites:{
-                "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/35.png",
-                "front_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/35.png"
-            },
-            seen: true,
-            catched: false
-        },
-        {
-            id: 59,
-            name: 'arcanine',
-            sprites:{
-                "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/59.png",
-                "front_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/59.png"
-            },
-            seen: true,
-            catched: false
-        },
-        {
-            id: 64,
-            name: 'kadabra',
-            sprites:{
-                "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/64.png",
-                "front_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/64.png"
-            },
-            seen: true,
-            catched: false
-        }
-    ];
+    const { myPokemons } = usePokedex();
 
-    const PokedexIcon = (myPokemons: MyPokemon[], pokemonId: number) => {
+    const PokedexIcon = (myPokemons: PlayerPokemon[], pokemonId: number) => {
 
         let icon = '';
         
-        const myPokemon: MyPokemon | undefined = myPokemons.find(pkmn => pkmn.id == pokemonId);
+        const myPokemon: PlayerPokemon | undefined = myPokemons.find(pkmn => pkmn.id == pokemonId);
         
         if(myPokemon)
         {
@@ -123,6 +43,8 @@ const Pokedex = () =>{
 
         return icon;
     }
+
+    const { totalPokemon } = useContext(Context)
 
     const [ offset, setOffset ] = useState<number>(0)
 

@@ -12,7 +12,9 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
     const [ saveFile, setSaveFile ] = useState<SaveFile | null>(GetSaveFile());
 
-    const [ pokemons, setPokemons ] = useState<PokemonList[]>();
+    const [ totalPokemon ] = useState(386);
+
+    const [ allPokemons, setAllPokemons ] = useState<PokemonList[]>();
 
     const [ appFont, setAppFont ] = useState<string>();
 
@@ -27,20 +29,20 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
     const [ randomPokemon, setRandomPokemon ] = useState<string>();
 
-    const { data } = useQuery( GET_ALL_POKEMON, { variables: { "limit": 386 , "offset": 0}} ) // limit = 1350 get all pokes
+    const { data } = useQuery( GET_ALL_POKEMON, { variables: { "limit": totalPokemon , "offset": 0}} ) // limit = 1350 get all pokes
 
     const GetAllPokes = useCallback(() =>
     {
-        if(pokemons)
+        if(allPokemons)
         {
-            const pokemon: number = Math.floor(Math.random() * pokemons.length);
+            const pokemon: number = Math.floor(Math.random() * allPokemons.length);
             
-            const randomPokemonName: string = pokemons[pokemon].name;
+            const randomPokemonName: string = allPokemons[pokemon].name;
 
             setRandomPokemon(randomPokemonName);
         }
         
-    },[ pokemons ])
+    },[ allPokemons ])
 
     const ReloadPokemon = () => {
       
@@ -51,7 +53,7 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
     {
         if(data)
         {
-            setPokemons(data.pokemons.results);
+            setAllPokemons(data.pokemons.results);
 
             GetAllPokes()
         }
@@ -109,7 +111,7 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
     }, [ saveFile ])
 
     return (
-      <Context.Provider value={{ saveFile, setSaveFile, pokemons, setPokemons, options, randomPokemon, ReloadPokemon }}>
+      <Context.Provider value={{ saveFile, setSaveFile, totalPokemon, allPokemons, setAllPokemons, options, randomPokemon, ReloadPokemon }}>
           {children}
       </Context.Provider>
   )

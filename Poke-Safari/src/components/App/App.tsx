@@ -8,6 +8,8 @@ import Pokedex from 'src/pages/pokédex/Pokédex';
 import Index from 'src/pages/index/Index';
 import Date from 'src/components/Date/Date';
 import useApp from './hook/useApp';
+import Zones from 'src/pages/zones/Zones';
+import Zone from 'src/components/Zones/Zone';
 
 function App() {
 
@@ -37,6 +39,8 @@ function App() {
           <Routes>
               <Route path="/" Component={ Index }/>
               <Route path="pokedex" Component={ Pokedex }/>
+              <Route path="safari-zones" Component={ Zones }/>
+              <Route path="safari-zones/:name" Component={ Zone }/>
           </Routes>
         <Date/>
       </Router>
