@@ -4,6 +4,7 @@ import day from 'src/assets/img/Backgrounds/day.svg';
 import afternoon from 'src/assets/img/Backgrounds/afternoon.svg';
 import night from 'src/assets/img/Backgrounds/night.svg';
 import background from 'src/assets/img/Index/safari-zone-cover.svg';
+import { format } from '@formkit/tempo';
 
 const useApp = () => {
 
@@ -17,19 +18,11 @@ const useApp = () => {
 
     const GetCustomDate = () => {
 
-        const date = new Date();
+        // visit Tempo's library for more info <3 https://tempo.formkit.com/
 
-        const weekDay: string = date.toDateString().substring(0, 3);
+        const dateFormat: string = "ddd DD/MM/YYYY HH:mm:ss";
 
-        const monthDay: string = date.toLocaleDateString().split('/')[0];
-
-        const month: string = date.toLocaleDateString().split('/')[1];
-
-        const customDate: string = `${weekDay} ${+monthDay < 10 ? '0' + monthDay : monthDay}/${+month < 10 ? '0' + month : month}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`
-        
-        // console.log(customDate);
-
-        return customDate;
+        return format({ date: new Date(), format: dateFormat, locale: "en"});
     }
 
     const GetBackground = () => {

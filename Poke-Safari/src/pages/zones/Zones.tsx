@@ -1,42 +1,10 @@
-import 'src/pages/zones/Zones.css'
 import GameScreen from "src/components/GameScreen/GameScreen"
-import { useContext } from "react"
-import { Button } from "antd"
-import { Context } from "src/context/AppContext"
-import { useNavigate } from "react-router-dom"
-import { EyeOutlined } from '@ant-design/icons';
+import ZonesContent from 'src/components/Zones/ZonesContent'
+import './Zones.css'
 
 const Zones = () => {
 
-    const { saveFile, options } = useContext(Context)
-    const navigate = useNavigate()
-
-    // console.log(saveFile)
-
-    return(
-        <GameScreen>
-            <div id="zones">
-                {
-                    saveFile ?
-                        saveFile.safariZones.map(zone => (
-                            <div key={zone.id} id='zone' style = {
-                                { 
-                                    backgroundImage: `url(${zone.portrait})`, 
-                                    border: options.frame?.styles.border, 
-                                    borderRadius: options.frame?.styles.borderRadius
-                                }
-                            }>
-                                <div id='zone-content'>
-                                    <h1>{zone.name}</h1>
-                                    <Button style={{ fontFamily: options.appFont}} icon={ <EyeOutlined /> } onClick={ () => navigate(`${ zone.name.toLowerCase() }`)}>View zone details</Button>
-                                </div>
-                            </div>
-                        ))
-                    : null
-                } 
-            </div>
-        </GameScreen>    
-    )
+    return <GameScreen><ZonesContent/></GameScreen>
 }
 
 export default Zones

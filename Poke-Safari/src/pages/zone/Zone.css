@@ -1,0 +1,50 @@
+.zoneContainer{
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    padding: 1em;
+}
+
+.content{
+    height: 100%;
+    color: white;
+}
+
+.backArrow{
+    height: 5%;
+    margin-left: .5em;
+}
+
+.zoneName{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 25%;
+}
+
+.encounterContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 70%;
+    overflow-y: scroll;
+}
+
+.encounterContent{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.popOver{
+    display: flex;
+    flex-direction: column;
+}
+
+.encounterTypes{
+    height: 1.5em;
+    margin: .3em
+}

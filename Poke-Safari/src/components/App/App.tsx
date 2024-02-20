@@ -9,7 +9,7 @@ import Index from 'src/pages/index/Index';
 import Date from 'src/components/Date/Date';
 import useApp from './hook/useApp';
 import Zones from 'src/pages/zones/Zones';
-import Zone from 'src/components/Zones/Zone';
+import Zone from 'src/pages/zone/Zone';
 
 function App() {
 

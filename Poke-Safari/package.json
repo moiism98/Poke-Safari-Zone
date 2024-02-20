@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.9.2",
+    "@formkit/tempo": "^0.0.9",
     "antd": "^5.14.1",
     "bootstrap": "^5.3.2",
     "graphql": "^16.8.1",
