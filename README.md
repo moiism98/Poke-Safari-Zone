@@ -10,6 +10,13 @@ Little videogame made with React. It will be used TypeScript as programming lang
 
 The main goal is emulate original game's 'Safari Zone' mixing concepts and mechanics from the other franchise games like 'Pokemon Pinball' catching zones.
 
+## Librerías utilizadas / Libraries in use
+
+[Ant Design](https://ant.design/)
+[React Boostrap](https://react-bootstrap.netlify.app/)
+[Apollo GraphQL](https://www.apollographql.com/)
+[Tempo](https://tempo.formkit.com/)
+
 ## Preparando el terreno / Environment Prepare
 
 Install `node_modules`:
