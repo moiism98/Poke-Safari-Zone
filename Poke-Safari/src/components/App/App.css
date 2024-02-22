@@ -5,9 +5,12 @@
   align-items: center;
   width: 100%;
   text-align: center;
+  min-width: 500px;
 }
 
 #gameScreen{
+
+  min-width: 500px;
 
   height: 75%;
   width: 50%;
@@ -21,6 +24,12 @@
 
   background-size: cover;
   background-position: center;
+
+  box-sizing: border-box;
+}
+
+#gameScreen *{
+  box-sizing: border-box;
 }
 
 .card {

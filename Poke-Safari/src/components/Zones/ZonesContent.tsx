@@ -1,8 +1,8 @@
 import { useContext } from "react"
 import { Button } from "antd"
 import { Context } from "src/context/AppContext"
-import { useNavigate } from "react-router-dom"
-import { EyeOutlined } from '@ant-design/icons';
+import { useLocation, useNavigate } from "react-router-dom"
+import { EyeFilled, PlayCircleFilled } from '@ant-design/icons';
 
 const ZonesContent = () => {
 
@@ -10,14 +10,14 @@ const ZonesContent = () => {
 
     const navigate = useNavigate()
 
-    // console.log(saveFile)
+    const { pathname } = useLocation();
 
     return(
         <div id="zones">
                 {
                     saveFile ?
                         saveFile.safariZones.map(zone => (
-                            <div key={zone.id} id='zone' style = {
+                            <div key={ zone.id } id='zone' style = {
                                 { 
                                     backgroundImage: `url(${zone.portrait})`, 
                                     border: options.frame?.styles.border, 
@@ -26,7 +26,13 @@ const ZonesContent = () => {
                             }>
                                 <div id='zone-content'>
                                     <h1>{zone.name}</h1>
-                                    <Button style={{ fontFamily: options.appFont}} icon={ <EyeOutlined /> } onClick={ () => navigate(`${ zone.name.toLowerCase() }`)}>View zone details</Button>
+                                    {
+                                        pathname == '/play' ? 
+                                        <Button style={{ fontFamily: options.appFont }} icon={ <PlayCircleFilled /> } onClick={ () => navigate(`${ zone.name.toLowerCase() }`)}>Select zone</Button>
+
+                                        :
+                                        <Button style={{ fontFamily: options.appFont }} icon={ <EyeFilled /> } onClick={ () => navigate(`${ zone.name.toLowerCase() }`)}>View zone details</Button>
+                                    }
                                 </div>
                             </div>
                         ))

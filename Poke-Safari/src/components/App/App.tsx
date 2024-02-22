@@ -10,6 +10,7 @@ import Date from 'src/components/Date/Date';
 import useApp from './hook/useApp';
 import Zones from 'src/pages/zones/Zones';
 import Zone from 'src/pages/zone/Zone';
+import Playground from 'src/pages/playground/Playground';
 
 function App() {
 
@@ -39,8 +40,10 @@ function App() {
           <Routes>
               <Route path="/" Component={ Index }/>
               <Route path="pokedex" Component={ Pokedex }/>
-              <Route path="safari-zones" Component={ Zones }/>
-              <Route path="safari-zones/:name" Component={ Zone }/>
+              <Route path="zones" Component={ Zones }/>
+              <Route path="zones/:name" Component={ Zone }/>
+              <Route path="play" Component={ Zones }/>
+              <Route path="play/:zoneName" Component={ Playground }/>
           </Routes>
         <Date/>
       </Router>

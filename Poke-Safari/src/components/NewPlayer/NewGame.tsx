@@ -250,7 +250,7 @@ const NewGame = () => {
                                     
                                 <Option key={icon.id} value={icon.name}>
                 
-                                    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                         <span>{icon.name}</span>
                                         <Image src={icon.icon}/>
                                     </div>

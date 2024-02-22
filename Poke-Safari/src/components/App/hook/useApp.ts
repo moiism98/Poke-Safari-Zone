@@ -10,15 +10,27 @@ const useApp = () => {
 
     const { options } = useContext(Context)
 
-    const gameScreen = {
+    const appConsts = {
+        shinyProbability: 5,
+        maxCatchRate: 255,
+        rateModdifier: 5,
+        maxModRateValue: 60,
+        defaultRateValue: 20,
+        minFleeRate: 25
+    }
+
+    const gameScreen: React.CSSProperties = {
         backgroundImage: `url(${ background })`,
         border: options.frame?.styles.border,
         borderRadius: options.frame?.styles.borderRadius
     }
 
-    const GetCustomDate = () => {
+    const FirstLetterToUpper = (string: string) => {
+        
+        return string.charAt(0).toUpperCase() + string.substring(1, string.length)
+    }
 
-        // visit Tempo's library for more info <3 https://tempo.formkit.com/
+    const GetCustomDate = () => {
 
         const dateFormat: string = "ddd DD/MM/YYYY HH:mm:ss";
 
@@ -48,6 +60,8 @@ const useApp = () => {
 
     return {
         gameScreen,
+        appConsts,
+        FirstLetterToUpper,
         GetBackground,
         GetCustomDate
     }  

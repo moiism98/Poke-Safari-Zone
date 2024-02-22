@@ -4,9 +4,12 @@ import useZone from "../../components/Zones/hook/useZone";
 import { Container, Image } from "react-bootstrap";
 import { Popover } from "antd";
 import { ArrowLeftOutlined  } from '@ant-design/icons';
+import useApp from '../App/hook/useApp';
 const ZoneContent = () => {
 
-    const { styles, zone, pokemonZone, loaded, options, navigate, GetTypeIcon, FirstLetterToUpper } = useZone()
+    const { styles, zone, pokemonZone, loaded, options, navigate, GetTypeIcon } = useZone()
+
+    const { FirstLetterToUpper } = useApp();
 
     return(
         

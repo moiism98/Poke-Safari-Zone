@@ -111,7 +111,7 @@ export interface APIPokemon
     sprites: Sprites,
     moves: Moves[],
     types: Types[]
-    abilities: Abilities[],
+    abilities: Ability[],
     held_items: Held_Items[]
 }
 
@@ -124,6 +124,8 @@ export interface PlayerPokemon {
     seen_count: number
     catched: boolean
     catched_count: number
+    ability?: Ability,
+    shiny?: boolean
 }
 
 export interface ZonePokemon {
@@ -154,7 +156,7 @@ interface Types
     }
 }
 
-interface Abilities
+export interface Ability
 {
     ability: {
         name: string

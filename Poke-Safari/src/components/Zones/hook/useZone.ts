@@ -9,10 +9,7 @@ import pokeTypes from "src/utils/Index/pokeTypes";
 
 const useZone = () => {
 
-    const FirstLetterToUpper = (string: string) => {
-        
-        return string.charAt(0).toUpperCase() + string.substring(1, string.length)
-    }
+    
 
     const GenerateEncounterPokemon = () => {
 
@@ -42,7 +39,8 @@ const useZone = () => {
                         seen: myPokemon?.seen ? true : false,
                         seen_count: myPokemon?.seen_count ? myPokemon?.seen_count : 0,
                         catched: myPokemon?.catched ? true : false,
-                        catched_count: myPokemon?.catched_count ? myPokemon?.catched_count : 0
+                        catched_count: myPokemon?.catched_count ? myPokemon?.catched_count : 0,
+                        shiny: false
                     };
 
                     const pokemonZoneCopy = pokemonZone?.map(pkmn => pkmn)
@@ -51,7 +49,7 @@ const useZone = () => {
 
                     setPokemonZone(pokemonZoneCopy);
 
-                    console.log(wildPokemon)
+                    // console.log(wildPokemon)
         
                     setPosition(oldPosition => oldPosition + 1);      
                 }
@@ -131,8 +129,7 @@ const useZone = () => {
         loaded,
         options,
         navigate,
-        GetTypeIcon,
-        FirstLetterToUpper
+        GetTypeIcon
     }
 
 }

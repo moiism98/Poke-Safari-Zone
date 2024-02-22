@@ -120,8 +120,9 @@ function NavBar() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="/pokedex">Pokédex</Nav.Link>
-                        <Nav.Link href="/safari-zones">Safari Zones</Nav.Link>
+                        <Nav.Link onClick={() => navigate('/play')}>PLAY</Nav.Link>
+                        <Nav.Link onClick={() => navigate('/pokedex')}>Pokédex</Nav.Link>
+                        <Nav.Link onClick={() => navigate('/zones')}>Safari Zones</Nav.Link>
                         <NavDropdown title="Options" id="basic-nav-dropdown">
                             <NavDropdown title="Select font" id="optionsFont">
 

@@ -1,12 +1,10 @@
 import { useQuery } from "@apollo/client";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Context } from "src/context/AppContext";
 import { APIPokemon } from "src/interfaces/interfaces";
 import { GET_POKEMON } from "src/query/queries";
 import { Image } from 'react-bootstrap';
 import { ReloadOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
 import Loading from "../Spinners/Loading/Loading";
 import gameTitle from 'src/assets/img/Index/game-title.svg';
 
@@ -14,9 +12,7 @@ const IndexContainer = () => {
 
     // create an index custom hook for all of this
 
-    const navigate = useNavigate();
-
-    const { randomPokemon, ReloadPokemon, saveFile } = useContext(Context);
+    const { randomPokemon, ReloadPokemon } = useContext(Context);
 
     const [ pokemon, setPokemon ] = useState<APIPokemon>();
 
@@ -60,7 +56,6 @@ const IndexContainer = () => {
                         </>
                     }
             </div>   
-            <div><Button style={{fontFamily: saveFile?.options.font}} className='play' onClick={ () => { navigate("/pokedex") }}>PLAY</Button></div>    
         </>
     )
 }
