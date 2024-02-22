@@ -28,5 +28,9 @@ npm install
 ### Iniciar el proyecto / Start project
 
 ```bash
+cd Poke-Safari/
+```
+
+```bash
 npm run dev
 ```
