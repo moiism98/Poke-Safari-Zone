@@ -3,7 +3,7 @@ import { Button, message } from "antd";
 import { StarFilled } from '@ant-design/icons';
 import { useContext, useEffect, useState } from "react";
 import { Image } from "react-bootstrap";
-import { WildPokemon, ZonePokemon } from "src/interfaces/interfaces";
+import { SeenPokemon, WildPokemon, ZonePokemon } from "src/interfaces/interfaces";
 import { GET_POKEMON } from "src/query/queries";
 import { Context } from "src/context/AppContext";
 import useApp from "src/components/App/hook/useApp";
@@ -14,7 +14,7 @@ import useZone from "src/components/Zones/hook/useZone";
 
 const Playground = () => {
 
-    const { options, saveFile } = useContext(Context);
+    const { options, saveFile, setSaveFile } = useContext(Context);
     
     const { appConsts } = useApp();
 
@@ -87,7 +87,7 @@ const Playground = () => {
         
         if(wildPokemon)
         {
-            // console.log(`Pokemon catch rate: ${wildPokemon.catch_rate}`)
+            // console.log(`Pokemon BASE catch rate: ${wildPokemon.catch_rate}`)
 
             // Pokemon catch rate (over 100%) + extra bait/rock combat catch rate.
 
@@ -95,11 +95,23 @@ const Playground = () => {
 
             const catchProbability = RandomProbability(appConsts.maxCatchRate);
 
-            console.log(`Total pokemon catch rate: ${totalCatchRate}; Catch probability: ${catchProbability}`);
+            // console.log(`Total pokemon catch rate: ${totalCatchRate}; Catch probability: ${catchProbability}`);
             
             if(totalCatchRate >= catchProbability)
             {
-                message.success("The pokemon has been catched!");
+                message.success(`Gotcha! ${wildPokemon.name.toUpperCase()} was caught!`);
+
+                const saveFileCopy = saveFile;
+
+                wildPokemon.catched++;
+
+                saveFileCopy?.myPokemons.push(wildPokemon)
+
+                setSaveFile(saveFileCopy);
+
+                localStorage.setItem('saveFile', JSON.stringify(saveFile))
+
+                SpawnWildPokemon();
             }
             else
             {
@@ -165,15 +177,35 @@ const Playground = () => {
                     sprites: data.pokemon.sprites,
                     abilities: data.pokemon.abilities,
                     ability: ability,
-                    seen: true,
                     catch_rate: zonePokemon.catch_rate,
                     encounter_rate: zonePokemon.encounter_rate,
                     unlocked:zonePokemon.unlocked,
-                    catched: false,
                     shiny: RandomProbability(100) <= appConsts.shinyProbability ? true : false,
-                    catched_count: 0,
-                    seen_count: 0
+                    catched: 0,
+                    seen: 0,
                 }
+
+                const seenPokemon: SeenPokemon | undefined = saveFile?.seenPokemons.find(pokemon => pokemon.id == wildPokemon.id)
+
+                if(!seenPokemon)
+                {
+                    saveFile?.seenPokemons.push({id: wildPokemon.id, name: wildPokemon.name})
+                }
+
+                const safariZone = saveFile?.safariZones.find(savedZone => savedZone.name == zone?.name);
+
+                const savedPokemon = safariZone?.pokemon?.find(poke => poke.id == wildPokemon.id);
+
+                if(savedPokemon)
+                {
+                    savedPokemon.seen++;
+                }
+
+                const saveFileCopy = saveFile;
+                
+                setSaveFile(saveFileCopy);
+                
+                localStorage.setItem('saveFile', JSON.stringify(saveFile));
 
                 setWildPokemon(wildPokemon);
             }
@@ -181,8 +213,6 @@ const Playground = () => {
             {
                 console.warn("Unable to create the wild pokemon!");
             }
-
-
         }
 
         setCatchRate(appConsts.defaultRateValue);
@@ -219,10 +249,10 @@ const Playground = () => {
                             </div>
                             <div style={{ display:'flex', flexDirection:'column', justifyContent:'center', width:'40%', height: '100%', margin: '1em', boxSizing: 'border-box', overflow: 'auto'}}>
                                 <div style={{ display:'flex', flexWrap:'wrap', alignItems:'center', justifyContent: 'space-around'}}>
-                                    <Button style={ buttonStyles } onClick={ () => { setCatching(true); setTimeout(() => CatchPokemon(), 3000)} }>Catch pokémon!</Button>
-                                    <Button style={ buttonStyles } onClick={ () => ThrowBait() }>Throw bait</Button>
-                                    <Button style={ buttonStyles } onClick={ () => SpawnWildPokemon() }>Run away!</Button>
-                                    <Button style={ buttonStyles } onClick={ () => ThrowRock() }>Throw rock</Button>
+                                    <Button style={ buttonStyles } onClick={ () => { setCatching(true); setTimeout(() => CatchPokemon(), 3000); }}>Catch pokémon!</Button>
+                                    <Button style={ buttonStyles } onClick={ () => !catching ? ThrowBait() : null }>Throw bait</Button>
+                                    <Button style={ buttonStyles } onClick={ () => !catching ? SpawnWildPokemon() : null }>Run away!</Button>
+                                    <Button style={ buttonStyles } onClick={ () => !catching ? ThrowRock() : null }>Throw rock</Button>
                                 </div>
                             </div>
                         </div>

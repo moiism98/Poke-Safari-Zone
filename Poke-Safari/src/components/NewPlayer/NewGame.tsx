@@ -9,6 +9,7 @@ import playerIcons from 'src/utils/NewPlayer/playerIcons';
 
 import forest from 'src/assets/img/Zones/forest.svg';
 import volcano from 'src/assets/img/Zones/crater.svg';
+import useApp from '../App/hook/useApp';
 
 
 const zones: StaticZone[] = [
@@ -43,7 +44,7 @@ const zones: StaticZone[] = [
                 name: 'cacnea',
                 unlocked: {
                     id: 1,
-                    unlock: 'Catch 15 caterpies',
+                    unlock: 'Catch 15 caterpies to unlock this wild pokemon!',
                     unlocked: false
                 }
             }
@@ -86,6 +87,8 @@ const NewGame = () => {
 
     const { setSaveFile, allPokemons } = useContext(Context);
 
+    const { appConsts } = useApp();
+
     const { frame_styles } = frameStyles();
 
     const { icons } = playerIcons()
@@ -123,7 +126,9 @@ const NewGame = () => {
                                 name: poke.name,
                                 encounter_rate: data.pal_park_encounters[0].rate,
                                 catch_rate: data.capture_rate,
-                                unlocked: unlocked
+                                unlocked: unlocked,
+                                catched: 0,
+                                seen: 0
                             }
                         )})
                     }
@@ -184,13 +189,15 @@ const NewGame = () => {
                 options: {
                     font: 'pkmndp',
                     frame: frame_styles[0],
-                    icon: icon
+                    icon: icon,
+                    createDate: new Date()
                 },
                 bag: [],
                 player: {
                     name: data.playerName,
                     experience: 0,
-                    level: 1
+                    level: 1,
+                    nextLevelExperience: appConsts.nextLevelExperience
                 }
             };
         }

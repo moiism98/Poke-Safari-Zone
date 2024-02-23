@@ -11,6 +11,7 @@ import useApp from './hook/useApp';
 import Zones from 'src/pages/zones/Zones';
 import Zone from 'src/pages/zone/Zone';
 import Playground from 'src/pages/playground/Playground';
+import Player from 'src/pages/player/Player';
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
         <NavBar/>
           <Routes>
               <Route path="/" Component={ Index }/>
+              <Route path="/player" Component={ Player }/>
               <Route path="pokedex" Component={ Pokedex }/>
               <Route path="zones" Component={ Zones }/>
               <Route path="zones/:name" Component={ Zone }/>

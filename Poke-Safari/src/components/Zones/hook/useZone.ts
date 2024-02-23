@@ -2,14 +2,12 @@ import { useLazyQuery } from "@apollo/client";
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Context } from "src/context/AppContext";
-import { PlayerPokemon, SafariZone, WildPokemon, ZonePokemon } from "src/interfaces/interfaces";
+import { /*PlayerPokemon,*/ SafariZone, WildPokemon, ZonePokemon } from "src/interfaces/interfaces";
 import { GET_POKEMON } from "src/query/queries";
-import usePokedex from "src/components/Pokedex/hook/usePokedex";
+//import usePokedex from "src/components/Pokedex/hook/usePokedex";
 import pokeTypes from "src/utils/Index/pokeTypes";
 
 const useZone = () => {
-
-    
 
     const GenerateEncounterPokemon = () => {
 
@@ -21,37 +19,47 @@ const useZone = () => {
 
                 if(zonePoke)
                 {
-                    const myPokemon: PlayerPokemon | undefined = myPokemons.find(pokemon => pokemon.id == zonePoke.id);
+                    //const myPokemon: PlayerPokemon | undefined = myPokemons.find(pokemon => pokemon.id == zonePoke.id);
 
-                    const wildPokemon: WildPokemon = {
-                        id: zonePoke.id,
-                        name: zonePoke.name,
-                        catch_rate: zonePoke.catch_rate,
-                        encounter_rate: zonePoke.encounter_rate,
-                        unlocked: zonePoke.unlocked,
-                        abilities: data.pokemon.abilities,
-                        height: data.pokemon.height,
-                        held_items: data.pokemon.held_items,
-                        moves: data.pokemon.moves,
-                        sprites: data.pokemon.sprites,
-                        types: data.pokemon.types,
-                        weight: data.pokemon.weight,
-                        seen: myPokemon?.seen ? true : false,
-                        seen_count: myPokemon?.seen_count ? myPokemon?.seen_count : 0,
-                        catched: myPokemon?.catched ? true : false,
-                        catched_count: myPokemon?.catched_count ? myPokemon?.catched_count : 0,
-                        shiny: false
-                    };
+                    const savedZone = saveFile?.safariZones.find(zn => zn.name == zone.name)
 
-                    const pokemonZoneCopy = pokemonZone?.map(pkmn => pkmn)
-                    
-                    pokemonZoneCopy?.push(wildPokemon);
-
-                    setPokemonZone(pokemonZoneCopy);
-
-                    // console.log(wildPokemon)
+                    if(savedZone)
+                    {
+                        const myPokemon: ZonePokemon | undefined = savedZone.pokemon?.find(pokemon => pokemon.id == zonePoke.id);
+    
+                        if(myPokemon)
+                        {
+                            const wildPokemon: WildPokemon = {
+                                id: zonePoke.id,
+                                name: zonePoke.name,
+                                encounter_rate: zonePoke.encounter_rate,
+                                catch_rate: zonePoke.catch_rate,
+                                unlocked: zonePoke.unlocked,
+                                abilities: data.pokemon.abilities,
+                                height: data.pokemon.height,
+                                held_items: data.pokemon.held_items,
+                                moves: data.pokemon.moves,
+                                sprites: data.pokemon.sprites,
+                                types: data.pokemon.types,
+                                weight: data.pokemon.weight,
+                                seen: myPokemon.seen,
+                                catched: myPokemon.catched,
+                                shiny: false
+                            };
         
-                    setPosition(oldPosition => oldPosition + 1);      
+                            const pokemonZoneCopy = pokemonZone?.map(pkmn => pkmn)
+                            
+                            pokemonZoneCopy?.push(wildPokemon);
+        
+                            setPokemonZone(pokemonZoneCopy);
+        
+                            // console.log(wildPokemon)
+                
+                            setPosition(oldPosition => oldPosition + 1);      
+                        }
+
+                    }
+
                 }
             }
         }
@@ -77,7 +85,7 @@ const useZone = () => {
 
     const [ getPokemon, { data } ] = useLazyQuery(GET_POKEMON);
 
-    const { myPokemons } = usePokedex();
+    //const { myPokemons } = usePokedex();
 
     
 

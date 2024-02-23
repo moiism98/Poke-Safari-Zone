@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { createContext, useState, useEffect, useCallback } from 'react';
-import { ContextOptions, Frame, IContext, PokemonList, SaveFile } from 'src/interfaces/interfaces';
+import { ContextOptions, ContextPlayer, Frame, IContext, PokemonList, SaveFile } from 'src/interfaces/interfaces';
 import { GET_ALL_POKEMON } from 'src/query/queries';
 import useContext from './hook/useContext';
 
@@ -20,11 +20,27 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
     const [ frame, setFrame ] = useState<Frame>();
 
+    const [ level, setLevel ] = useState<number>(0);
+
+    const [ experience, setExperience ] = useState<number>(0)
+
+    const [ nextLevelExperience, setNextLevelExperience ] = useState<number>(0)
+
+
     const options: ContextOptions = {
         appFont: appFont,
         setAppFont: setAppFont,
         frame: frame,
         setFrame: setFrame
+    }
+
+    const player: ContextPlayer = {
+        level: level,
+        setLevel: setLevel,
+        experience: experience,
+        setExperience: setExperience,
+        nextLevelExperience: nextLevelExperience,
+        setNextLevelExperience: setNextLevelExperience
     }
 
     const [ randomPokemon, setRandomPokemon ] = useState<string>();
@@ -79,8 +95,7 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
 
         }
-
-        if(frame)
+        else if(frame)
         {
             const saveFileCopy: SaveFile | null = saveFile;
 
@@ -94,8 +109,12 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
             }
 
         }
+        else if(level)
+        {
+           console.log(`Rise to level ${ level }`)
+        }
 
-    }, [ saveFile, appFont, frame ])
+    }, [ saveFile, appFont, frame, level ])
 
     useEffect(() => {
         
@@ -106,12 +125,21 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
             setAppFont(saveFile.options.font);
 
             setFrame(saveFile.options.frame);
+
+            if(saveFile.player)
+            {
+                setLevel(saveFile.player.level)
+
+                setExperience(saveFile.player.experience)
+
+                setNextLevelExperience(saveFile.player.nextLevelExperience)
+            }
         }
 
     }, [ saveFile ])
 
     return (
-      <Context.Provider value={{ saveFile, setSaveFile, totalPokemon, allPokemons, setAllPokemons, options, randomPokemon, ReloadPokemon }}>
+      <Context.Provider value={{ saveFile, player, options, setSaveFile, totalPokemon, allPokemons, setAllPokemons, randomPokemon, ReloadPokemon }}>
           {children}
       </Context.Provider>
   )

@@ -1,0 +1,42 @@
+.player {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.playerTitle, .playerStats  {
+    width: 100%;
+    height: 50%;
+    margin: 1em;
+
+    display: flex;
+    align-items: center;
+}
+
+.playerTitle{
+    flex-direction: column;
+    justify-content: center;
+}
+
+.playerTitle *{
+    margin: .7em;
+}
+
+.playerTitle img{
+    width: 100px;
+    height: 100px;
+}
+
+.playerTitle strong{
+    color: red
+}
+
+.playerLevel{
+    width: 50%;
+    justify-content: space-around;
+}
+
+.playerNumbers{
+    width: 50%;
+}

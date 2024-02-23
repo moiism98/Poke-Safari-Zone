@@ -4,10 +4,11 @@ export type WildPokemon = APIPokemon & PlayerPokemon & ZonePokemon
 export interface IContext {
     saveFile: SaveFile | null
     setSaveFile: React.Dispatch<React.SetStateAction<SaveFile | null>>
+    player: ContextPlayer,
+    options: ContextOptions,
     totalPokemon: number,
     allPokemons: PokemonList[] | undefined, 
     setAllPokemons: React.Dispatch<React.SetStateAction<PokemonList[] | undefined>>,
-    options: ContextOptions,
     randomPokemon: string | undefined,
     ReloadPokemon: () => void | undefined
 }
@@ -17,6 +18,16 @@ export interface ContextOptions {
     setAppFont: React.Dispatch<React.SetStateAction<string | undefined>>,
     frame: Frame | undefined,
     setFrame: React.Dispatch<React.SetStateAction<Frame | undefined>>
+}
+
+export interface ContextPlayer {
+
+    level: number
+    setLevel: React.Dispatch<React.SetStateAction<number>>
+    experience: number
+    setExperience: React.Dispatch<React.SetStateAction<number>>
+    nextLevelExperience: number
+    setNextLevelExperience: React.Dispatch<React.SetStateAction<number>>
 }
 
 export interface SaveFile {
@@ -29,8 +40,8 @@ export interface SaveFile {
     player: Player | null
 }
 
-interface SeenPokemon {
-
+export interface SeenPokemon {
+    id: number
     name: string
 }
 
@@ -69,6 +80,7 @@ interface Options {
     font: string
     frame: Frame
     icon: icon | null
+    createDate: Date
 }
 
 export interface icon {
@@ -94,6 +106,7 @@ export interface Player {
     name: string
     level: number
     experience: number
+    nextLevelExperience: number
 }
 
 export interface PokemonList
@@ -120,10 +133,8 @@ export interface PlayerPokemon {
     id: number
     name: string
     sprites: Sprites 
-    seen: boolean
-    seen_count: number
-    catched: boolean
-    catched_count: number
+    seen: number
+    catched: number
     ability?: Ability,
     shiny?: boolean
 }
@@ -133,6 +144,8 @@ export interface ZonePokemon {
     name: string
     encounter_rate: number
     catch_rate: number
+    seen: number
+    catched: number
     unlocked: ZoneUnlock | null
 }
 

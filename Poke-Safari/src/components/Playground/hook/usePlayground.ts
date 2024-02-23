@@ -44,7 +44,7 @@ const usePlayground = () => {
 
     };
 
-    return{
+    return {
         RandomProbability,
         SetRandomMoveSet,
         SetRandomAbility

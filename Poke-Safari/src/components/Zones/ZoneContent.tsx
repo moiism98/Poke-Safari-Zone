@@ -5,7 +5,10 @@ import { Container, Image } from "react-bootstrap";
 import { Popover } from "antd";
 import { ArrowLeftOutlined  } from '@ant-design/icons';
 import useApp from '../App/hook/useApp';
+
 const ZoneContent = () => {
+
+
 
     const { styles, zone, pokemonZone, loaded, options, navigate, GetTypeIcon } = useZone()
 
@@ -32,13 +35,13 @@ const ZoneContent = () => {
 
                                         <div style={{ display: 'flex', flexDirection: 'column', fontFamily: options.appFont }}>
                                             <span>Pokemon: { FirstLetterToUpper(pokemon.name) }</span>
-                                            <span>Seen: { pokemon.seen_count }</span>
-                                            <span>Catched: { pokemon.catched_count }</span>
+                                            <span>Seen: { pokemon.seen }</span>
+                                            <span>Catched: { pokemon.catched }</span>
                                             <span>Types: { pokemon.types.map(type => <Image className="encounterTypes" title={ FirstLetterToUpper(type.type.name) } src={ GetTypeIcon(type.type.name) }/> )}</span>
                                         </div>
                                     }>
 
-                                        <Image style={ pokemon.unlocked?.unlocked != null ? styles.encounterLocked : !pokemon.seen ? styles.encounterNotSeen : styles.encounterSeen } src={ pokemon.unlocked != null ? unlocked : pokemon.sprites.front_default }/>
+                                        <Image style={ pokemon.unlocked?.unlocked != null ? styles.encounterLocked : pokemon.seen != 0 ? styles.encounterSeen : styles.encounterNotSeen } src={ pokemon.unlocked != null ? unlocked : pokemon.sprites.front_default }/>
                                     </Popover>
                                     
                                 ))

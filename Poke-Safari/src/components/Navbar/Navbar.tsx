@@ -12,7 +12,7 @@ import { CloseOutlined  } from '@ant-design/icons';
 
 function NavBar() {
 
-    const { options, saveFile, setSaveFile } = useContext(Context);
+    const { saveFile, options, setSaveFile } = useContext(Context);
 
     const { frame_styles } = frameStyles();
 
@@ -114,15 +114,16 @@ function NavBar() {
 
     return (
         <>
-            <Navbar className="justify-content-between" bg="dark" data-bs-theme="dark" id="gameMenu">
+            <Navbar className="justify-content-between" expand="md" bg="dark" data-bs-theme="dark" id="gameMenu">
                 <Container fluid style={{ minHeight:'75px' }}>
                     <Navbar.Brand><Link to="/"><Image src={ pokeball }></Image></Link></Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link onClick={() => navigate('/play')}>PLAY</Nav.Link>
                         <Nav.Link onClick={() => navigate('/pokedex')}>Pokédex</Nav.Link>
                         <Nav.Link onClick={() => navigate('/zones')}>Safari Zones</Nav.Link>
+                        <Nav.Link onClick={() => navigate('/player')}>Player Stats</Nav.Link>
                         <NavDropdown title="Options" id="basic-nav-dropdown">
                             <NavDropdown title="Select font" id="optionsFont">
 
@@ -222,8 +223,8 @@ function NavBar() {
                     </Navbar.Collapse>
                     {
                         saveFile != null ?
-                        <div style={{ display: 'flex', alignItems: 'center', color: 'white', margin: '0 1em 0 1em'}}>
-                            <span style={{ marginRight: '.5em' }}>Have a nice hunting time, <strong style={{color: 'red'}}>{saveFile?.player?.name}</strong> !</span>
+                        <div style={{ display: 'flex', alignItems: 'center', color: 'white', margin: '0 1em 0 1em' }}>
+                            <span style={{ marginRight: '.5em' }}>Have a nice hunting time, <strong style={{color: 'red'}}>{ saveFile?.player?.name }</strong> !</span>
                             <Popover 
                                 trigger='click' 
                                 open={ openPopover }
@@ -232,8 +233,8 @@ function NavBar() {
                                 content={ content } 
                                 className='d-flex m-1'
                             >
-                                <Image title={saveFile?.options.icon?.name} src={saveFile?.options.icon?.icon}/>
-                            </Popover>   
+                                <Image title={ saveFile?.options.icon?.name } src={ saveFile?.options.icon?.icon } />
+                            </Popover>  
                         </div> : null
                     }
                 </Container>
