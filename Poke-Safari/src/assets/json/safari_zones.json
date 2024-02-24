@@ -1,0 +1,604 @@
+{
+    "zones": [
+        {
+            "name": "cave",
+            "pokemon": [
+                {
+                    "name": "clefairy",
+                    "unlocked": null
+                },
+                {
+                    "name": "jigglypuff",
+                    "unlocked": null
+                },
+                {
+                    "name": "zubat",
+                    "unlocked": null
+                },
+                {
+                    "name": "diglett",
+                    "unlocked": null
+                },
+                {
+                    "name": "geodude",
+                    "unlocked": null
+                },
+                {
+                    "name": "onix",
+                    "unlocked": null
+                },
+                {
+                    "name": "cubone",
+                    "unlocked": null
+                },
+                {
+                    "name": "omanyte",
+                    "unlocked": null
+                },
+                {
+                    "name": "kabuto",
+                    "unlocked": null
+                },
+                {
+                    "name": "dunsparce",
+                    "unlocked": null
+                },
+                {
+                    "name": "shuckle",
+                    "unlocked": null
+                },
+                {
+                    "name": "makuhita",
+                    "unlocked": null
+                },
+                {
+                    "name": "nosepass",
+                    "unlocked": null
+                },
+                {
+                    "name": "sableye",
+                    "unlocked": null
+                },
+                {
+                    "name": "mawile",
+                    "unlocked": null
+                },
+                {
+                    "name": "aron",
+                    "unlocked": null
+                }
+            ]
+        },
+        {
+            "name": "desert",
+            "pokemon": [
+                {
+                    "name": "sandshrew",
+                    "unlocked": null
+                },
+                {
+                    "name": "larvitar",
+                    "unlocked": null
+                },
+                {
+                    "name": "trapinch",
+                    "unlocked": null
+                },
+                {
+                    "name": "cacnea",
+                    "unlocked": null
+                },
+                {
+                    "name": "baltoy",
+                    "unlocked": null
+                },
+                {
+                    "name": "lileep",
+                    "unlocked": null
+                },
+                {
+                    "name": "anorith",
+                    "unlocked": null
+                }
+            ]
+        },
+        {
+            "name": "forest",
+            "pokemon": [
+                {
+                    "name": "bulbasaur",
+                    "unlocked": null
+                },
+                {
+                    "name": "caterpie",
+                    "unlocked": null
+                },
+                {
+                    "name": "weedle",
+                    "unlocked": null
+                },
+                {
+                    "name": "paras",
+                    "unlocked": null
+                },
+                {
+                    "name": "venonat",
+                    "unlocked": null
+                },
+                {
+                    "name": "farfetchd",
+                    "unlocked": null
+                },
+                {
+                    "name": "scyther",
+                    "unlocked": {
+                        "id": 1,
+                        "unlock": "Catch 15 caterpies to unlock this wild pokemon!",
+                        "unlocked": false
+                    }
+                },
+                {
+                    "name": "pinsir",
+                    "unlocked": {
+                        "id": 1,
+                        "unlock": "Catch 15 caterpies to unlock this wild pokemon!",
+                        "unlocked": false
+                    }
+                },
+                {
+                    "name": "chikorita",
+                    "unlocked": null
+                },
+                {
+                    "name": "hoothoot",
+                    "unlocked": null
+                },
+                {
+                    "name": "ledyba",
+                    "unlocked": null
+                },
+                {
+                    "name": "spinarak",
+                    "unlocked": null
+                },
+                {
+                    "name": "pineco",
+                    "unlocked": null
+                },
+                {
+                    "name": "heracross",
+                    "unlocked": null
+                },
+                {
+                    "name": "treecko",
+                    "unlocked": null
+                },
+                {
+                    "name": "wurmple",
+                    "unlocked": null
+                },
+                {
+                    "name": "shroomish",
+                    "unlocked": null
+                },
+                {
+                    "name": "slakoth",
+                    "unlocked": null
+                },
+                {
+                    "name": "nincada",
+                    "unlocked": null
+                }
+            ]
+        },
+        {
+            "name": "lake",
+            "pokemon": [
+                {
+                    "name": "squirtle",
+                    "unlocked": null
+                },
+                {
+                    "name": "psyduck",
+                    "unlocked": null
+                },
+                {
+                    "name": "poliwag",
+                    "unlocked": null
+                },
+                {
+                    "name": "slowpoke",
+                    "unlocked": null
+                },
+                {
+                    "name": "dratini",
+                    "unlocked": null
+                },
+                {
+                    "name": "totodile",
+                    "unlocked": null
+                },
+                {
+                    "name": "marill",
+                    "unlocked": null
+                },
+                {
+                    "name": "wooper",
+                    "unlocked": null
+                },
+                {
+                    "name": "mudkip",
+                    "unlocked": null
+                },
+                {
+                    "name": "lotad",
+                    "unlocked": null
+                },
+                {
+                    "name": "surskit",
+                    "unlocked": null
+                },
+                {
+                    "name": "volbeat",
+                    "unlocked": null
+                },
+                {
+                    "name": "illumise",
+                    "unlocked": null
+                },
+                {
+                    "name": "corpish",
+                    "unlocked": null
+                },
+                {
+                    "name": "feebas",
+                    "unlocked": null
+                }
+            ]
+        },
+        {
+            "name": "plains",
+            "pokemon": [
+                {
+                    "name": "pidgey",
+                    "unlocked": null
+                },
+                {
+                    "name": "rattata",
+                    "unlocked": null
+                },
+                {
+                    "name": "spearow",
+                    "unlocked": null
+                },
+                {
+                    "name": "ekans",
+                    "unlocked": null
+                },
+                {
+                    "name": "pikachu",
+                    "unlocked": null
+                },
+                {
+                    "name": "nidoran-f",
+                    "unlocked": null
+                },
+                {
+                    "name": "nidoran-m",
+                    "unlocked": null
+                },
+                {
+                    "name": "oddish",
+                    "unlocked": null
+                },
+                {
+                    "name": "meowth",
+                    "unlocked": null
+                },
+                {
+                    "name": "mankey",
+                    "unlocked": null
+                },
+                {
+                    "name": "machop",
+                    "unlocked": null
+                },
+                {
+                    "name": "bellsprout",
+                    "unlocked": null
+                },
+                {
+                    "name": "grimer",
+                    "unlocked": null
+                },
+                {
+                    "name": "drowzee",
+                    "unlocked": null
+                },
+                {
+                    "name": "eevee",
+                    "unlocked": null
+                },
+                {
+                    "name": "snorlax",
+                    "unlocked": null
+                },
+                {
+                    "name": "sentret",
+                    "unlocked": null
+                },
+                {
+                    "name": "mareep",
+                    "unlocked": null
+                },
+                {
+                    "name": "hoppip",
+                    "unlocked": null
+                },
+                {
+                    "name": "aipom",
+                    "unlocked": null
+                },
+                {
+                    "name": "sunkern",
+                    "unlocked": null
+                },
+                {
+                    "name": "snubbull",
+                    "unlocked": null
+                },
+                {
+                    "name": "teddiursa",
+                    "unlocked": null
+                },
+                {
+                    "name": "miltank",
+                    "unlocked": null
+                },
+                {
+                    "name": "zigzagoon",
+                    "unlocked": null
+                },
+                {
+                    "name": "seedot",
+                    "unlocked": null
+                },
+                {
+                    "name": "taillow",
+                    "unlocked": null
+                },
+                {
+                    "name": "whismur",
+                    "unlocked": null
+                },
+                {
+                    "name": "roselia",
+                    "unlocked": null
+                },
+                {
+                    "name": "swablu",
+                    "unlocked": null
+                }
+            ]
+        },
+        {
+            "name": "ruins",
+            "pokemon": [
+                {
+                    "name": "abra",
+                    "unlocked": null
+                },
+                {
+                    "name": "gastly",
+                    "unlocked": null
+                },
+                {
+                    "name": "mr-mime",
+                    "unlocked": null
+                },
+                {
+                    "name": "ditto",
+                    "unlocked": null
+                },
+                {
+                    "name": "porygon",
+                    "unlocked": null
+                },
+                {
+                    "name": "aerodactyl",
+                    "unlocked": null
+                },
+                {
+                    "name": "misdreavus",
+                    "unlocked": null
+                },
+                {
+                    "name": "unown",
+                    "unlocked": null
+                },
+                {
+                    "name": "wobbuffet",
+                    "unlocked": null
+                },
+                {
+                    "name": "spoink",
+                    "unlocked": null
+                },
+                {
+                    "name": "lunatone",
+                    "unlocked": null
+                },
+                {
+                    "name": "shuppet",
+                    "unlocked": null
+                },
+                {
+                    "name": "duskull",
+                    "unlocked": null
+                },
+                {
+                    "name": "chimecho",
+                    "unlocked": null
+                },
+                {
+                    "name": "absol",
+                    "unlocked": null
+                },
+                {
+                    "name": "bagon",
+                    "unlocked": null
+                },
+                {
+                    "name": "beldum",
+                    "unlocked": null
+                }
+            ]
+        },
+        {
+            "name": "sea",
+            "pokemon": [
+                {
+                    "name": "tentacool",
+                    "unlocked": null
+                },
+                {
+                    "name": "seel",
+                    "unlocked": null
+                },
+                {
+                    "name": "shellder",
+                    "unlocked": null
+                },
+                {
+                    "name": "krabby",
+                    "unlocked": null
+                },
+                {
+                    "name": "horsea",
+                    "unlocked": null
+                },
+                {
+                    "name": "goldeen",
+                    "unlocked": null
+                },
+                {
+                    "name": "staryu",
+                    "unlocked": null
+                },
+                {
+                    "name": "magikarp",
+                    "unlocked": null
+                },
+                {
+                    "name": "lapras",
+                    "unlocked": null
+                },
+                {
+                    "name": "chinchou",
+                    "unlocked": null
+                },
+                {
+                    "name": "qwilfish",
+                    "unlocked": null
+                },
+                {
+                    "name": "corsola",
+                    "unlocked": null
+                },
+                {
+                    "name": "remoraid",
+                    "unlocked": null
+                },
+                {
+                    "name": "mantine",
+                    "unlocked": null
+                },
+                {
+                    "name": "seel",
+                    "unlocked": null
+                },
+                {
+                    "name": "wingull",
+                    "unlocked": null
+                },
+                {
+                    "name": "carvanha",
+                    "unlocked": null
+                },
+                {
+                    "name": "wailmer",
+                    "unlocked": null
+                },
+                {
+                    "name": "barboach",
+                    "unlocked": null
+                },
+                {
+                    "name": "clamperl",
+                    "unlocked": null
+                },
+                {
+                    "name": "relicanth",
+                    "unlocked": null
+                }
+            ]
+        },
+        {
+            "name": "volcano",
+            "pokemon": [
+                {
+                    "name": "charmander",
+                    "unlocked": null
+                },
+                {
+                    "name": "vulpix",
+                    "unlocked": null
+                },
+                {
+                    "name": "growlithe",
+                    "unlocked": null
+                },
+                {
+                    "name": "ponyta",
+                    "unlocked": null
+                },
+                {
+                    "name": "magmar",
+                    "unlocked": null
+                },
+                {
+                    "name": "cyndaquil",
+                    "unlocked": null
+                },
+                {
+                    "name": "slugma",
+                    "unlocked": null
+                },
+                {
+                    "name": "skarmory",
+                    "unlocked": null
+                },
+                {
+                    "name": "houndour",
+                    "unlocked": null
+                },
+                {
+                    "name": "torchic",
+                    "unlocked": null
+                },
+                {
+                    "name": "numel",
+                    "unlocked": null
+                },
+                {
+                    "name": "torkoal",
+                    "unlocked": null
+                },
+                {
+                    "name": "solrock",
+                    "unlocked": null
+                }
+            ]
+        }
+    ]
+}

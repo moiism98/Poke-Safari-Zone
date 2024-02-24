@@ -58,7 +58,7 @@ export interface SafariZone {
     name: string
     portrait: string
     pokemon: ZonePokemon[] | null
-    reward: ZoneReward[]
+    reward?: ZoneReward[]
     unlock: ZoneUnlock | null
 }
 

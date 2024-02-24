@@ -3,84 +3,24 @@ import { PokemonList, SafariZone, SaveFile, StaticZone, ZonePokemon, icon } from
 import { useContext, useEffect, useState } from 'react';
 import { Context } from 'src/context/AppContext';
 import { Image } from 'react-bootstrap';
+import safariZone from 'src/assets/json/safari_zones.json'
 import Modal from 'antd/es/modal';
 import frameStyles from 'src/utils/App/frameStyles';
 import playerIcons from 'src/utils/NewPlayer/playerIcons';
+import useApp from 'src/components/App/hook/useApp';
 
+import cave from 'src/assets/img/Zones/cave.svg';
+import desert from 'src/assets/img/Zones/desert.svg';
 import forest from 'src/assets/img/Zones/forest.svg';
+import lake from 'src/assets/img/Zones/lake.svg';
+import plains from 'src/assets/img/Zones/plains.svg';
+import ruins from 'src/assets/img/Zones/ruins.svg';
+import sea from 'src/assets/img/Zones/sea.svg';
 import volcano from 'src/assets/img/Zones/crater.svg';
-import useApp from '../App/hook/useApp';
 
 
-const zones: StaticZone[] = [
-    {
-        name: 'forest', 
-        pokemon: [
-            {
-                name: 'bulbasaur',
-                unlocked: null
-            },
-            {
-                name: 'chikorita',
-                unlocked: null
-            },
-            {
-                name: 'treecko',
-                unlocked: null
-            },
-            {
-                name: 'caterpie',
-                unlocked: null
-            },
-            {
-                name: 'spinarak',
-                unlocked: null
-            },
-            {
-                name: 'shroomish',
-                unlocked: null
-            },
-            {
-                name: 'cacnea',
-                unlocked: {
-                    id: 1,
-                    unlock: 'Catch 15 caterpies to unlock this wild pokemon!',
-                    unlocked: false
-                }
-            }
-        ]
-    },
-    {
-        name: 'volcano', 
-        pokemon: [
-            {
-                name: 'charmander',
-                unlocked: null
-            },
-            {
-                name: 'cyndaquil',
-                unlocked: null
-            },
-            {
-                name: 'torchic',
-                unlocked: null
-            },
-            {
-                name: 'ponyta',
-                unlocked: null
-            },
-            {
-                name: 'skarmory',
-                unlocked: null
-            },
-            {
-                name: 'torkoal',
-                unlocked: null
-            }
-        ]
-    }
-];
 
+const zones: StaticZone[] = safariZone.zones;
 
 
 const NewGame = () => {
@@ -144,32 +84,58 @@ const NewGame = () => {
     const safariZones: SafariZone[] = [
         {
             id: 1,
-            name: 'Forest',
-            portrait: forest,
-            pokemon: GenerateZonesPokemon('forest'),
-            reward: [
-                {
-                    id: 1,
-                    name: '',
-                    icon: '',
-                    cuantity: 10,
-                }
-            ],
+            name: 'Cave',
+            portrait: cave,
+            pokemon: GenerateZonesPokemon('cave'),
             unlock: null
         },
         {
             id: 2,
+            name: 'Desert',
+            portrait: desert,
+            pokemon: GenerateZonesPokemon('desert'),
+            unlock: null
+        },
+        {
+            id: 3,
+            name: 'Forest',
+            portrait: forest,
+            pokemon: GenerateZonesPokemon('forest'),
+            unlock: null
+        },
+        {
+            id: 4,
+            name: 'Lake',
+            portrait: lake,
+            pokemon: GenerateZonesPokemon('lake'),
+            unlock: null
+        },
+        {
+            id: 5,
+            name: 'Plains',
+            portrait: plains,
+            pokemon: GenerateZonesPokemon('plains'),
+            unlock: null
+        },
+        {
+            id: 6,
+            name: 'Ruins',
+            portrait: ruins,
+            pokemon: GenerateZonesPokemon('ruins'),
+            unlock: null
+        },
+        {
+            id: 7,
+            name: 'Sea',
+            portrait: sea,
+            pokemon: GenerateZonesPokemon('sea'),
+            unlock: null
+        },
+        {
+            id: 8,
             name: 'Volcano',
             portrait: volcano,
             pokemon: GenerateZonesPokemon('volcano'),
-            reward: [
-                {
-                    id: 1,
-                    name: '',
-                    icon: '',
-                    cuantity: 10,
-                }
-            ],
             unlock: null
         }
     ]
