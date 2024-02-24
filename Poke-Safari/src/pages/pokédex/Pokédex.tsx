@@ -8,47 +8,27 @@ import { Image } from 'react-bootstrap';
 import { useQuery } from '@apollo/client';
 import { GET_ALL_POKEMON } from 'src/query/queries';
 import { Link } from 'react-router-dom';
-import { PlayerPokemon, PokemonList } from 'src/interfaces/interfaces';
+import { APIPokemon, SeenPokemon } from 'src/interfaces/interfaces';
 import { LeftCircleFilled, RightCircleFilled } from '@ant-design/icons';
 import { Context } from 'src/context/AppContext';
-import usePokedex from 'src/components/Pokedex/hook/usePokedex';
 
 
 const limit = 32;
 
 const Pokedex = () =>{
 
-    const { myPokemons } = usePokedex();
+    const PokedexIcon = (pokemonId: number) => {
 
-    const PokedexIcon = (myPokemons: PlayerPokemon[], pokemonId: number) => {
+        const seen: SeenPokemon | undefined = saveFile?.seenPokemons.find(pokemon => pokemon.id == pokemonId)
 
-        let icon = '';
-        
-        const myPokemon: PlayerPokemon | undefined = myPokemons.find(pkmn => pkmn.id == pokemonId);
-        
-        if(myPokemon)
-        {
-            if(myPokemon.seen)
-            {
-                if(myPokemon.catched)
-                {
-                    // add a pokeball icon on bottom right corner
-                }
-                
-                icon = myPokemon.sprites.front_default;
-            }
-        }
-        else
-            icon = unknown;
-
-        return icon;
+        return seen ? seen.sprite : unknown;
     }
 
-    const { totalPokemon } = useContext(Context)
+    const { totalPokemon, saveFile } = useContext(Context)
 
     const [ offset, setOffset ] = useState<number>(0)
 
-    const [ pokedex, setPokedex ] = useState<PokemonList[]>()
+    const [ pokedex, setPokedex ] = useState<APIPokemon[]>()
 
     const { data, loading } = useQuery( GET_ALL_POKEMON, { variables: { "limit": limit, "offset": offset}} )
 
@@ -73,7 +53,7 @@ const Pokedex = () =>{
 
                         // we only show the pokemon until the limit, possibly we have more pokemon saved than the limit is, but whe only want to show until the limit.
 
-                        pokemon.id <= totalPokemon ? <Link key={pokemon.id} to={`/pokedex/${pokemon.id}`}><Image title={pokemon.name} src={ PokedexIcon(myPokemons, pokemon.id) }/></Link> : null
+                        pokemon.id <= totalPokemon ? <Link key={pokemon.id} to={`/pokedex/${pokemon.id}`}><Image title={pokemon.name} src={ PokedexIcon(pokemon.id) }/></Link> : null
                     
                     ))
             }

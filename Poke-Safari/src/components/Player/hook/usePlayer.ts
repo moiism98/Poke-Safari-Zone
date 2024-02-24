@@ -1,42 +1,32 @@
 import { message } from "antd"
-import { useCallback, useContext, useEffect, useState } from "react"
+import { useCallback, useContext, useEffect/*, useState */} from "react";
 import { Context } from "src/context/AppContext";
 
 const usePlayer = () => {
 
-    const { player, saveFile } = useContext(Context);
+    const { player } = useContext(Context);
 
     const CalculateLevelPercent = () => {
 
         return  Math.floor((player.experience * 100) / player.nextLevelExperience);
     }
 
-    const GetTimePlayed = () => {
+    /*const GetTimePlayed = () => {
 
         let timePlayed = ""
 
-        if(saveFile?.options.createDate)
+        if(saveFile && saveFile.options.saveDate && saveFile.options.createDate)
         {
             const totalTime = new Date().getTime() - new Date(saveFile?.options.createDate).getTime(); 
 
-            const hoursPlayed = Math.trunc(totalTime / (1000 * 60 * 60 ));
+            const hoursPlayed = Math.trunc(totalTime / ( 1000 * 60 * 60 ));
+            const minPlayed = Math.trunc(totalTime / ( 1000 * 60  ));
 
-            const minutesPlayed = Math.trunc(totalTime / (1000 * 60));
-
-            timePlayed = `${hoursPlayed}:${minutesPlayed < 10 ? `0${minutesPlayed}` : minutesPlayed}`;
+            timePlayed = `${hoursPlayed}:${minPlayed} h`;
         }
 
         return timePlayed;
-    }
-
-    const ShinyCount = () => {
-        
-        let count = 0;
-
-        saveFile?.myPokemons.forEach(poke => poke.shiny ? count++ : null)
-
-        return count
-    }
+    }*/
 
     const LevelUp = useCallback(() => {
 
@@ -62,14 +52,14 @@ const usePlayer = () => {
 
     }, [ LevelUp ])
 
-    const [ timePlayed, setTimePlayed ] = useState<string>(GetTimePlayed());
+    //const [ timePlayed, setTimePlayed ] = useState<string>(GetTimePlayed());
 
-    setInterval(() => setTimePlayed(GetTimePlayed()), 1000)
+    //setInterval(() => setTimePlayed(GetTimePlayed()), 1000)
+    
 
     return {
-        timePlayed,
+        //timePlayed,
         CalculateLevelPercent,
-        ShinyCount
     }
 }
 

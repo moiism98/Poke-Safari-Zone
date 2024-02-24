@@ -10,6 +10,7 @@ export interface IContext {
     allPokemons: PokemonList[] | undefined, 
     setAllPokemons: React.Dispatch<React.SetStateAction<PokemonList[] | undefined>>,
     randomPokemon: string | undefined,
+    SaveGame: (saveFileCopy: SaveFile) => void
     ReloadPokemon: () => void | undefined
 }
 
@@ -38,11 +39,17 @@ export interface SaveFile {
     options: Options,
     bag: Bag[],
     player: Player | null
+    statistics: {
+        seen: number
+        catched: number,
+        shiny: number
+    }
 }
 
 export interface SeenPokemon {
     id: number
     name: string
+    sprite: string
 }
 
 export interface SafariZone {
@@ -81,6 +88,7 @@ interface Options {
     frame: Frame
     icon: icon | null
     createDate: Date
+    saveDate?: Date
 }
 
 export interface icon {
@@ -112,7 +120,7 @@ export interface Player {
 export interface PokemonList
 {
     id: number,
-    name: string
+    name: string,
 }
 
 export interface APIPokemon 

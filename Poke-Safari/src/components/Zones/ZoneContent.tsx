@@ -18,7 +18,7 @@ const ZoneContent = () => {
         
         zone ? 
             <Container className="zoneContainer" style={ styles.container }>
-                <ArrowLeftOutlined onClick={ () => navigate('/safari-zones') } className="backArrow d-flex ms-2"/>
+                <ArrowLeftOutlined onClick={ () => navigate('/zones') } className="backArrow d-flex ms-2"/>
                 <div className="content">
                     <h1 className="zoneName">{ zone.name }</h1>
                     <div className="encounterContainer">
@@ -29,9 +29,9 @@ const ZoneContent = () => {
                                 
                                 pokemonZone.map(pokemon => (
                                     
-                                    <Popover className="popOver" style={ styles.popOver } key={ pokemon.id } trigger='hover' content={
+                                    <Popover key={ pokemon.id } className="popOver" style={ styles.popOver } trigger='hover' content={
                                         
-                                        pokemon.unlocked? <span>{ pokemon.unlocked.unlock }</span> :
+                                        pokemon.unlocked? <span style={{ fontFamily: options.appFont }}>{ pokemon.unlocked.unlock }</span> :
 
                                         <div style={{ display: 'flex', flexDirection: 'column', fontFamily: options.appFont }}>
                                             <span>Pokemon: { FirstLetterToUpper(pokemon.name) }</span>

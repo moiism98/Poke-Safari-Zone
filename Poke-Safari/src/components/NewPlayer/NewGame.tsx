@@ -198,6 +198,11 @@ const NewGame = () => {
                     experience: 0,
                     level: 1,
                     nextLevelExperience: appConsts.nextLevelExperience
+                },
+                statistics:{
+                    seen: 0,
+                    catched: 0,
+                    shiny: 0
                 }
             };
         }

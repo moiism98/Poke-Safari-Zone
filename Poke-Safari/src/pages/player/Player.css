@@ -38,5 +38,16 @@
 }
 
 .playerNumbers{
-    width: 50%;
+    width: 35%;
+    background-color: whitesmoke;
+    padding: .5em;
+}
+
+.progressFormat{
+    display: flex;
+    flex-direction: column;
+}
+
+.progressFormat span {
+    margin: .2em;
 }

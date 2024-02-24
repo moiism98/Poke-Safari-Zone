@@ -65,6 +65,16 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
         GetAllPokes();
     }
 
+    const SaveGame = useCallback((saveFileCopy: SaveFile) => {
+    
+        saveFileCopy.options.saveDate = new Date();
+
+        setSaveFile(saveFileCopy)
+
+        localStorage.setItem('saveFile', JSON.stringify(saveFile))
+
+    }, [ saveFile ])
+
     useEffect(() =>
     {
         if(data)
@@ -88,33 +98,29 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
             {
                 saveFileCopy.options.font = appFont;
     
-                setSaveFile(saveFileCopy);
-    
-                localStorage.setItem('saveFile', JSON.stringify(saveFile));
+                SaveGame(saveFileCopy)
             }
-
-
         }
-        else if(frame)
+
+        if(frame)
         {
             const saveFileCopy: SaveFile | null = saveFile;
 
-            if(saveFileCopy)
+            if(saveFile && saveFileCopy)
             {
                 saveFileCopy.options.frame = frame;
-    
-                setSaveFile(saveFileCopy);
-    
-                localStorage.setItem('saveFile', JSON.stringify(saveFile));
+
+                SaveGame(saveFileCopy)
             }
 
         }
-        else if(level)
+
+        if(level)
         {
-           console.log(`Rise to level ${ level }`)
+           //console.log(`Rise to level ${ level }`)
         }
 
-    }, [ saveFile, appFont, frame, level ])
+    }, [ saveFile, appFont, frame, level, SaveGame ])
 
     useEffect(() => {
         
@@ -139,7 +145,7 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
     }, [ saveFile ])
 
     return (
-      <Context.Provider value={{ saveFile, player, options, setSaveFile, totalPokemon, allPokemons, setAllPokemons, randomPokemon, ReloadPokemon }}>
+      <Context.Provider value={{ saveFile, player, options, setSaveFile, totalPokemon, allPokemons, setAllPokemons, randomPokemon, SaveGame, ReloadPokemon }}>
           {children}
       </Context.Provider>
   )
