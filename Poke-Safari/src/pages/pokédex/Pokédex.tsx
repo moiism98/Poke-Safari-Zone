@@ -7,10 +7,10 @@ import { useContext, useEffect, useState } from 'react';
 import { Image } from 'react-bootstrap';
 import { useQuery } from '@apollo/client';
 import { GET_ALL_POKEMON } from 'src/query/queries';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import { APIPokemon, SeenPokemon } from 'src/interfaces/interfaces';
-import { LeftCircleFilled, RightCircleFilled } from '@ant-design/icons';
 import { Context } from 'src/context/AppContext';
+import { Pagination } from 'antd';
 
 
 const limit = 32;
@@ -26,7 +26,11 @@ const Pokedex = () =>{
 
     const { totalPokemon, saveFile } = useContext(Context)
 
-    const [ offset, setOffset ] = useState<number>(0)
+    const [ offset, setOffset ] = useState<number>(0);
+
+    const [ page, setPage ] = useState<number>();
+
+    const [ pages, setPages ] = useState<number>();
 
     const [ pokedex, setPokedex ] = useState<APIPokemon[]>()
 
@@ -41,10 +45,22 @@ const Pokedex = () =>{
 
     }, [ data ])
 
+    useEffect(() => {
+        
+        if(pokedex)
+        {
+            setPages(Math.round(totalPokemon / limit))
+
+            setPage((offset + limit) / limit)
+        }
+    
+    }, [ pokedex, offset, totalPokemon ])
+
     return(
         
         <GameScreen>
             <div className='pokedexTitle'><Image src={ pokedexTitle }/></div>
+            
             <div className='container' id='pokedex'>
             {
                 loading ? <Loading/> :
@@ -53,23 +69,19 @@ const Pokedex = () =>{
 
                         // we only show the pokemon until the limit, possibly we have more pokemon saved than the limit is, but whe only want to show until the limit.
 
-                        pokemon.id <= totalPokemon ? <Link key={pokemon.id} to={`/pokedex/${pokemon.id}`}><Image title={pokemon.name} src={ PokedexIcon(pokemon.id) }/></Link> : null
-                    
+                        //pokemon.id <= totalPokemon ? <Link key={pokemon.id} to={`/pokedex/${pokemon.id}`}><Image title={pokemon.name} src={ PokedexIcon(pokemon.id) }/></Link> : null
+                        pokemon.id <= totalPokemon ? <Image key={pokemon.id} title={pokemon.name} src={ PokedexIcon(pokemon.id) }/> : null
+
                     ))
             }
             </div>
-            <div className='pagination'>
-                { 
-                    // on first pokedex's page this button its not visible. 0 not greater or higher than 32
-
-                    offset >= limit ? <LeftCircleFilled onClick={() => setOffset(offset => offset -= limit)}/> : null     
-                }
-                { 
-                    // on the last pokedex's page 'next page button' is not visible. 354 + 32 <= 386? visible; 386 + 32 <= 386? not visible
-
-                    offset + limit <= totalPokemon ? <RightCircleFilled onClick={() => setOffset(offset => offset += limit)}/> : null 
-                }
-            </div>
+            <Pagination 
+                current={ page } 
+                total={ pages ? pages * 10 : 50 } 
+                onChange={(page) => setOffset(page != 1 ? (page * limit) - limit : 0)} 
+                style={{margin: '1em'}}
+                showSizeChanger={false}
+            />
         </GameScreen>   
     )
 }

@@ -1,22 +1,21 @@
-import { useContext } from "react"
-import { Button } from "antd"
-import { Context } from "src/context/AppContext"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useContext } from "react";
+import { Button, Pagination } from "antd";
+import { Context } from "src/context/AppContext";
 import { EyeFilled, PlayCircleFilled } from '@ant-design/icons';
+import useZones from "./hook/useZones";
 
 const ZonesContent = () => {
 
-    const { saveFile, options } = useContext(Context)
+    const { options } = useContext(Context)
 
-    const navigate = useNavigate()
-
-    const { pathname } = useLocation();
+    const { zones, page, pages, zoneDisplayLimit, navigate, pathname, setOffset } = useZones();
 
     return(
-        <div id="zones">
+        <>
+            <div id="zones">
                 {
-                    saveFile ?
-                        saveFile.safariZones.map(zone => (
+                    zones ?
+                        zones.map(zone => (
                             <div key={ zone.id } id='zone' style = {
                                 { 
                                     backgroundImage: `url(${zone.portrait})`, 
@@ -29,16 +28,23 @@ const ZonesContent = () => {
                                     {
                                         pathname == '/play' ? 
                                         <Button style={{ fontFamily: options.appFont }} icon={ <PlayCircleFilled /> } onClick={ () => navigate(`${ zone.name.toLowerCase() }`)}>Select zone</Button>
-
                                         :
                                         <Button style={{ fontFamily: options.appFont }} icon={ <EyeFilled /> } onClick={ () => navigate(`${ zone.name.toLowerCase() }`)}>View zone details</Button>
                                     }
                                 </div>
                             </div>
                         ))
-                    : null
-                } 
-            </div>    
+                        : null
+                    } 
+            </div>
+            <Pagination 
+                current={ page } 
+                total={ pages ? pages * 10 : 50 } 
+                onChange={ (page) => setOffset(page != 1 ? (page * zoneDisplayLimit) - zoneDisplayLimit : 0) }
+                style={{margin: '1em'}}
+                showSizeChanger={false}
+                />
+        </>
     )
 }
 

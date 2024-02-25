@@ -14,10 +14,10 @@ function NavBar() {
 
     const { saveFile, options, setSaveFile } = useContext(Context);
 
-    const { frame_styles } = frameStyles();
-
     const navigate = useNavigate();
-
+    
+    const { frame_styles } = frameStyles();
+    
     const { icons } = playerIcons();
 
     const [openPopover, setOpenPopover] = useState<boolean>(false);

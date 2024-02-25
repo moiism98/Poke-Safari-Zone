@@ -24,12 +24,7 @@
 
   background-size: cover;
   background-position: center;
-
-  box-sizing: border-box;
-}
-
-#gameScreen *{
-  box-sizing: border-box;
+  
 }
 
 .card {
