@@ -133,7 +133,8 @@ export interface APIPokemon
     moves: Moves[],
     types: Types[]
     abilities: Ability[],
-    held_items: Held_Items[]
+    held_items?: Held_Items[]
+    held_item?: Held_Items | null
 }
 
 export interface PlayerPokemon {
@@ -184,9 +185,9 @@ export interface Ability
     }
 }
 
-interface Held_Items
+export interface Held_Items
 {
-    held_item: {
+    item: {
         name: string
     }
 }

@@ -8,7 +8,7 @@ const PlayerContent = () => {
 
     const { saveFile, options, player } = useContext(Context);
 
-    const { /*timePlayed,*/ CalculateLevelPercent } = usePlayer();
+    const { CalculateLevelPercent } = usePlayer();
 
     const format = () => {
 
@@ -40,7 +40,6 @@ const PlayerContent = () => {
                     <h3>Pokemon's seen: { saveFile?.statistics.seen }</h3>
                     <h3>Pokemon's catched: { saveFile?.statistics.catched }</h3>
                     <h3>Pokemon's shiny: { saveFile?.statistics.shiny }</h3>
-                    {/*<h3>Played time:{ timePlayed }</h3>*/}
                 </div>
             </div>
         </div>    

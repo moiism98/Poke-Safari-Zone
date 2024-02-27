@@ -123,7 +123,10 @@ function NavBar() {
                         <Nav.Link onClick={() => navigate('/play')}>PLAY</Nav.Link>
                         <Nav.Link onClick={() => navigate('/pokedex')}>Pokédex</Nav.Link>
                         <Nav.Link onClick={() => navigate('/zones')}>Safari Zones</Nav.Link>
-                        <Nav.Link onClick={() => navigate('/player')}>Player Stats</Nav.Link>
+                        <NavDropdown title="Player" id="basic-nav-dropdown">
+                            <NavDropdown.Item onClick={() => navigate('/player')}>Staticstics</NavDropdown.Item>
+                            <NavDropdown.Item onClick={() => navigate('/player/pokemon')}>Pokemon List</NavDropdown.Item>
+                        </NavDropdown>
                         <NavDropdown title="Options" id="basic-nav-dropdown">
                             <NavDropdown title="Select font" id="optionsFont">
 

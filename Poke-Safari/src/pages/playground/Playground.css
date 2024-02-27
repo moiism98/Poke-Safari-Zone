@@ -1,0 +1,94 @@
+.pokemonContainer{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.wildPokemon{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    margin: 1em;
+}
+
+.wildPokemon img{
+    height: 85%;
+}
+
+.rates{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.rates h3{
+    background-color: white;
+    padding: 0.3em;
+}
+
+.pokemonName{
+    display: flex;
+    align-items: center;
+}
+
+
+.pokemonName h2{
+    color: darkred;
+    margin-right: .3em;
+}
+
+.pokemonName svg{
+    color: #f9be19
+}
+
+.actionsContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+    margin: 1em;
+}
+
+.actions-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5em;
+    font-size: 1.5em;
+    height: 50%;
+    width: 60%;
+    background-color: white;
+    margin: 1em;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+.actions-text span{
+    height: 100%;
+    padding: .2em;
+}
+
+.actions-text strong{
+    color: darkred;
+}
+
+.actions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 40%;
+    margin: 1em;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+.action-buttons{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
