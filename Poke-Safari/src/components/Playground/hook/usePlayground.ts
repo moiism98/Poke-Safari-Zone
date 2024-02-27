@@ -68,7 +68,7 @@ const usePlayground = () => {
             
             const pokeMoves: Moves[] = [];
 
-            const maxMoves = RandomProbability(4)
+            const maxMoves = RandomIntInclusiveNumber(1, 4)
     
             while(move < maxMoves)
             {
@@ -131,7 +131,7 @@ const usePlayground = () => {
     
                 const pokemon: number = Math.floor(Math.random() * zone.pokemon.length);
                 
-                if(!zone.pokemon[pokemon].unlocked)
+                if(!zone.pokemon[pokemon].unlocked) // only spawn a pokemon if its unlocked!!!
                 {
                     if(zone.pokemon[pokemon].encounter_rate >= probability)
                     {
@@ -363,7 +363,7 @@ const usePlayground = () => {
 
     // the experience received its not fixed in one value. ( 1-2, 2-3, 4-5 ... max 5 min 1)
 
-    const RandomExpPoints = (min: number, max: number) => {
+    const RandomIntInclusiveNumber = (min: number, max: number) => {
         
         // The maximum and minimum are inclusives.
 
@@ -384,19 +384,19 @@ const usePlayground = () => {
         }
         else if(catchRate <= 102)
         {
-            experience = RandomExpPoints(4, 5);
+            experience = RandomIntInclusiveNumber(4, 5);
         }
         else if(catchRate <= 153)
         {
-            experience = RandomExpPoints(3, 4);
+            experience = RandomIntInclusiveNumber(3, 4);
         }
         else if(catchRate <= 204)
         {
-            experience = RandomExpPoints(2, 3);
+            experience = RandomIntInclusiveNumber(2, 3);
         }
         else if(catchRate < 255)
         {
-            experience = RandomExpPoints(1, 2);
+            experience = RandomIntInclusiveNumber(1, 2);
         }
 
         return experience;

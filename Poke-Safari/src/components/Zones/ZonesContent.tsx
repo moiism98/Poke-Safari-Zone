@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Button, Pagination } from "antd";
+import { Button, Pagination, Popover } from "antd";
 import { Context } from "src/context/AppContext";
 import { EyeFilled, PlayCircleFilled } from '@ant-design/icons';
 import useZones from "./hook/useZones";
@@ -26,10 +26,18 @@ const ZonesContent = () => {
                                 <div id='zone-content'>
                                     <h1>{zone.name}</h1>
                                     {
-                                        pathname == '/play' ? 
-                                        <Button style={{ fontFamily: options.appFont }} icon={ <PlayCircleFilled /> } onClick={ () => navigate(`${ zone.name.toLowerCase() }`)}>Select zone</Button>
-                                        :
-                                        <Button style={{ fontFamily: options.appFont }} icon={ <EyeFilled /> } onClick={ () => navigate(`${ zone.name.toLowerCase() }`)}>View zone details</Button>
+                                        !zone.unlocked ?
+                                            pathname == '/play' ? 
+                                            <Button style={{ fontFamily: options.appFont }} icon={ <PlayCircleFilled /> } onClick={ () => navigate(`${ zone.name.toLowerCase() }`)}>Select zone</Button>
+                                            :
+                                            <Button style={{ fontFamily: options.appFont }} icon={ <EyeFilled /> } onClick={ () => navigate(`${ zone.name.toLowerCase() }`)}>View zone details</Button>
+                                        : 
+                                        <Popover
+                                            trigger='click'
+                                            content={<span>{ zone.unlocked.unlock }</span>}
+                                        >
+                                            <Button danger>??????????</Button>
+                                        </Popover>
                                     }
                                 </div>
                             </div>

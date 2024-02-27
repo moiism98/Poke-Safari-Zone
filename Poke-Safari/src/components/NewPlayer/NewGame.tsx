@@ -81,62 +81,79 @@ const NewGame = () => {
         return pokemon;
     }
 
+    const ZoneUnlocked = (toCreateZone: string) => {
+
+        let unlocked = null;
+
+        const staticZone: StaticZone | undefined  = zones.find(zone => zone.name == toCreateZone);
+
+        if(staticZone)
+        {
+            if(staticZone.unlocked)
+            {
+                unlocked = staticZone.unlocked;
+            }
+        }
+
+        return unlocked;
+    }
+
     const safariZones: SafariZone[] = [
         {
             id: 1,
             name: 'Cave',
             portrait: cave,
             pokemon: GenerateZonesPokemon('cave'),
-            unlock: null
+            unlocked: ZoneUnlocked('cave')
         },
         {
             id: 2,
             name: 'Desert',
             portrait: desert,
             pokemon: GenerateZonesPokemon('desert'),
-            unlock: null
+            unlocked: ZoneUnlocked('desert')
         },
         {
             id: 3,
             name: 'Forest',
             portrait: forest,
             pokemon: GenerateZonesPokemon('forest'),
-            unlock: null
+            unlocked: ZoneUnlocked('forest')
         },
         {
             id: 4,
             name: 'Lake',
             portrait: lake,
             pokemon: GenerateZonesPokemon('lake'),
-            unlock: null
+            unlocked: ZoneUnlocked('lake')
         },
         {
             id: 5,
             name: 'Plains',
             portrait: plains,
             pokemon: GenerateZonesPokemon('plains'),
-            unlock: null
+            unlocked: ZoneUnlocked('plains')
         },
         {
             id: 6,
             name: 'Ruins',
             portrait: ruins,
             pokemon: GenerateZonesPokemon('ruins'),
-            unlock: null
+            unlocked: ZoneUnlocked('ruins')
         },
         {
             id: 7,
             name: 'Sea',
             portrait: sea,
             pokemon: GenerateZonesPokemon('sea'),
-            unlock: null
+            unlocked: ZoneUnlocked('sea')
         },
         {
             id: 8,
             name: 'Volcano',
             portrait: volcano,
             pokemon: GenerateZonesPokemon('volcano'),
-            unlock: null
+            unlocked: ZoneUnlocked('volcano')
         }
     ]
 

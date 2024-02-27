@@ -33,11 +33,19 @@
                 },
                 {
                     "name": "omanyte",
-                    "unlocked": null
+                    "unlocked": {
+                        "id": 1,
+                        "unlock": "Catch 5 pokemon to unlock this wild pokemon!",
+                        "unlocked": false
+                    }
                 },
                 {
                     "name": "kabuto",
-                    "unlocked": null
+                    "unlocked": {
+                        "id": 2,
+                        "unlock": "Catch 10 pokemon to unlock this wild pokemon!",
+                        "unlocked": false
+                    }
                 },
                 {
                     "name": "dunsparce",
@@ -67,7 +75,8 @@
                     "name": "aron",
                     "unlocked": null
                 }
-            ]
+            ],
+            "unlocked": null
         },
         {
             "name": "desert",
@@ -100,7 +109,8 @@
                     "name": "anorith",
                     "unlocked": null
                 }
-            ]
+            ],
+            "unlocked": null
         },
         {
             "name": "forest",
@@ -115,7 +125,11 @@
                 },
                 {
                     "name": "metapod",
-                    "unlocked": null
+                    "unlocked": {
+                        "id": 3,
+                        "unlock": "Catch 15 Caterpie to unlock this wild pokemon.",
+                        "unlocked": false
+                    }
                 },
                 {
                     "name": "weedle",
@@ -123,7 +137,11 @@
                 },
                 {
                     "name": "kakuna",
-                    "unlocked": null
+                    "unlocked": {
+                        "id": 4,
+                        "unlock": "Catch 15 Weedle to unlock this wild pokemon.",
+                        "unlocked": false
+                    }
                 },
                 {
                     "name": "paras",
@@ -140,16 +158,16 @@
                 {
                     "name": "scyther",
                     "unlocked": {
-                        "id": 1,
-                        "unlock": "Catch 15 caterpies to unlock this wild pokemon!",
+                        "id": 5,
+                        "unlock": "Catch every forest pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
                 {
                     "name": "pinsir",
                     "unlocked": {
-                        "id": 1,
-                        "unlock": "Catch 15 caterpies to unlock this wild pokemon!",
+                        "id": 6,
+                        "unlock": "Catch every forest pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
@@ -175,7 +193,11 @@
                 },
                 {
                     "name": "heracross",
-                    "unlocked": null
+                    "unlocked": {
+                        "id": 7,
+                        "unlock": "Catch every forest pokemon to unlock this wild pokemon.",
+                        "unlocked": false
+                    }
                 },
                 {
                     "name": "treecko",
@@ -197,7 +219,8 @@
                     "name": "nincada",
                     "unlocked": null
                 }
-            ]
+            ],
+            "unlocked": null
         },
         {
             "name": "lake",
@@ -220,7 +243,11 @@
                 },
                 {
                     "name": "dratini",
-                    "unlocked": null
+                    "unlocked": {
+                        "id": 8,
+                        "unlock": "Catch 5 Squirtle to unlock this wild pokemon.",
+                        "unlocked": false
+                    }
                 },
                 {
                     "name": "totodile",
@@ -262,7 +289,8 @@
                     "name": "feebas",
                     "unlocked": null
                 }
-            ]
+            ],
+            "unlocked": null
         },
         {
             "name": "plains",
@@ -329,7 +357,11 @@
                 },
                 {
                     "name": "snorlax",
-                    "unlocked": null
+                    "unlocked": {
+                        "id": 9,
+                        "unlock": "Catch every Plains pokemon to unlock this wild pokemon.",
+                        "unlocked": false
+                    }
                 },
                 {
                     "name": "sentret",
@@ -387,7 +419,8 @@
                     "name": "swablu",
                     "unlocked": null
                 }
-            ]
+            ],
+            "unlocked": null
         },
         {
             "name": "ruins",
@@ -414,7 +447,11 @@
                 },
                 {
                     "name": "aerodactyl",
-                    "unlocked": null
+                    "unlocked": {
+                        "id": 10,
+                        "unlock": "Catch 5 ghost type pokemon to unlock this wild pokemon.",
+                        "unlocked": false
+                    }
                 },
                 {
                     "name": "misdreavus",
@@ -454,13 +491,26 @@
                 },
                 {
                     "name": "bagon",
-                    "unlocked": null
+                    "unlocked": {
+                        "id": 11,
+                        "unlock": "Catch 10 dragon type pokemon to unlock this wild pokemon.",
+                        "unlocked": false
+                    }
                 },
                 {
                     "name": "beldum",
-                    "unlocked": null
+                    "unlocked": {
+                        "id": 12,
+                        "unlock": "Catch 15 psychic type pokemon to unlock this wild pokemon.",
+                        "unlocked": false
+                    }
                 }
-            ]
+            ],
+            "unlocked": {
+                "id": 1,
+                "unlock": "Get to see 30 different pokemon to unlock this zone.",
+                "unlocked": false
+            }
         },
         {
             "name": "sea",
@@ -499,7 +549,11 @@
                 },
                 {
                     "name": "lapras",
-                    "unlocked": null
+                    "unlocked": {
+                        "id": 13,
+                        "unlock": "Catch Krabby, Shellder and Qwilfish to unlock this wild pokemon.",
+                        "unlocked": false
+                    }
                 },
                 {
                     "name": "chinchou",
@@ -519,7 +573,11 @@
                 },
                 {
                     "name": "mantine",
-                    "unlocked": null
+                    "unlocked": {
+                        "id": 14,
+                        "unlock": "Catch 20 Remoraid to unlock this wild pokemon.",
+                        "unlocked": false
+                    }
                 },
                 {
                     "name": "seel",
@@ -547,9 +605,14 @@
                 },
                 {
                     "name": "relicanth",
-                    "unlocked": null
+                    "unlocked": {
+                        "id": 15,
+                        "unlock": "Catch every Sea pokemon to unlock this wild pokemon.",
+                        "unlocked": false
+                    }
                 }
-            ]
+            ],
+            "unlocked": null
         },
         {
             "name": "volcano",
@@ -606,7 +669,12 @@
                     "name": "solrock",
                     "unlocked": null
                 }
-            ]
+            ],
+            "unlocked": {
+                "id": 2,
+                "unlock": "Catch every pokemon in the desert to unlock this zone.",
+                "unlocked": false
+            }
         }
     ]
 }

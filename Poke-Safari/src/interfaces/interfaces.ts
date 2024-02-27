@@ -59,12 +59,13 @@ export interface SafariZone {
     portrait: string
     pokemon: ZonePokemon[] | null
     reward?: ZoneReward[]
-    unlock: ZoneUnlock | null
+    unlocked: ZoneUnlock | null
 }
 
 export interface StaticZone {
     name: string
     pokemon: { name: string, unlocked: ZoneUnlock | null }[]
+    unlocked: ZoneUnlock | null
 }
 
 interface ZoneReward {
