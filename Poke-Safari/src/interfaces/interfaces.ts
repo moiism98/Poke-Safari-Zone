@@ -68,6 +68,12 @@ export interface StaticZone {
     unlocked: ZoneUnlock | null
 }
 
+export interface Portraits {
+    
+    name: string
+    src: string
+}
+
 interface ZoneReward {
 
     id: number

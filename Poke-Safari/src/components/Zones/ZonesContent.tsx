@@ -3,10 +3,13 @@ import { Button, Pagination, Popover } from "antd";
 import { Context } from "src/context/AppContext";
 import { EyeFilled, PlayCircleFilled } from '@ant-design/icons';
 import useZones from "./hook/useZones";
+import useApp from "../App/hook/useApp";
 
 const ZonesContent = () => {
 
-    const { options } = useContext(Context)
+    const { options } = useContext(Context);
+
+    const { FirstLetterToUpper } = useApp();
 
     const { zones, page, pages, zoneDisplayLimit, navigate, pathname, setOffset } = useZones();
 
@@ -24,7 +27,7 @@ const ZonesContent = () => {
                                 }
                             }>
                                 <div id='zone-content'>
-                                    <h1>{zone.name}</h1>
+                                    <h1>{FirstLetterToUpper(zone.name)}</h1>
                                     {
                                         !zone.unlocked ?
                                             pathname == '/play' ? 
