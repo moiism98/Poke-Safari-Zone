@@ -3,12 +3,15 @@ import { Progress } from "antd";
 import { useContext } from "react";
 import { Context } from "src/context/AppContext";
 import usePlayer from "./hook/usePlayer";
+import useApp from "../App/hook/useApp";
 
 const PlayerContent = () => {
 
     const { saveFile, options, player } = useContext(Context);
 
     const { CalculateLevelPercent } = usePlayer();
+
+    const { appConsts } = useApp();
 
     const format = () => {
 
@@ -28,13 +31,22 @@ const PlayerContent = () => {
             </div>
             <div className="playerStats">
                 <div className="playerLevel">
-                    <Progress 
-                        style={{ fontFamily: options.appFont }} 
-                        size={ 200 } 
-                        format={ format } 
-                        type="dashboard"
-                        percent={ CalculateLevelPercent() }
-                    />
+                    {
+                        player.level < appConsts.maxLevel ?
+
+                        <Progress 
+                            style={{ fontFamily: options.appFont }} 
+                            size={ 200 } 
+                            format={ format } 
+                            type="dashboard"
+                            percent={ CalculateLevelPercent() }
+                        /> :
+
+                        <div style={{ display: 'flex', flexDirection: 'column', fontFamily: options.appFont }}>
+                            <span>MAX. LEVEL</span>
+                            <span>LVL { player.level }</span>
+                        </div>
+                    }
                 </div>
                 <div className="playerNumbers" style={{ border: options.frame?.styles.border, borderRadius:  options.frame?.styles.borderRadius}}>
                     <h3>Pokemon's seen: { saveFile?.statistics.seen }</h3>

@@ -23,7 +23,10 @@ const PlaygroundContent = () => {
                 loading ? <Loading/> : 
                 wildPokemon ? 
                 <>
-                    <div className="d-flex rates">
+                    <audio autoPlay id="playAudio">
+                        <source src={ wildPokemon.cry }/>
+                    </audio>
+                   <div className="d-flex rates">
                         <h3 style={ styles.frame }>+ { catchRate } % Catch Rate</h3>
                         <h3 style={ styles.frame }>+ { fleeRate } % Flee Rate</h3>
                     </div>

@@ -11,6 +11,7 @@ import { GET_ALL_POKEMON } from 'src/query/queries';
 import { APIPokemon, SeenPokemon } from 'src/interfaces/interfaces';
 import { Context } from 'src/context/AppContext';
 import { Pagination } from 'antd';
+import useApp from 'src/components/App/hook/useApp';
 
 
 const limit = 32;
@@ -24,7 +25,9 @@ const Pokedex = () =>{
         return seen ? seen.sprite : unknown;
     }
 
-    const { totalPokemon, saveFile } = useContext(Context)
+    const { totalPokemon, saveFile } = useContext(Context);
+
+    const { FirstLetterToUpper } = useApp()
 
     const [ offset, setOffset ] = useState<number>(0);
 
@@ -70,7 +73,7 @@ const Pokedex = () =>{
                         // we only show the pokemon until the limit, possibly we have more pokemon saved than the limit is, but whe only want to show until the limit.
 
                         //pokemon.id <= totalPokemon ? <Link key={pokemon.id} to={`/pokedex/${pokemon.id}`}><Image title={pokemon.name} src={ PokedexIcon(pokemon.id) }/></Link> : null
-                        pokemon.id <= totalPokemon ? <Image key={pokemon.id} title={pokemon.name} src={ PokedexIcon(pokemon.id) }/> : null
+                        pokemon.id <= totalPokemon ? <Image key={ pokemon.id } title={ FirstLetterToUpper(pokemon.name) } src={ PokedexIcon(pokemon.id) }/> : null
 
                     ))
             }

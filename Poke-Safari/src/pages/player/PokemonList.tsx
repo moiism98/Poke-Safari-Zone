@@ -49,7 +49,7 @@ const PokemonList = () => {
                             >
                                 <Image 
                                     key={pokemon.id} 
-                                    src={pokemon.shiny ? pokemon.sprites.front_shiny : pokemon.sprites.front_default}
+                                    src={ pokemon.shiny ? pokemon.sprites.front_shiny : pokemon.sprites.front_default }
                                     width={125}
                                     height={125}
                                     onClick={() => onNotification()}

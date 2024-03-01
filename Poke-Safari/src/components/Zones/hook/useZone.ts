@@ -2,9 +2,8 @@ import { useLazyQuery } from "@apollo/client";
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Context } from "src/context/AppContext";
-import { /*PlayerPokemon,*/ SafariZone, WildPokemon, ZonePokemon } from "src/interfaces/interfaces";
+import { SafariZone, WildPokemon, ZonePokemon } from "src/interfaces/interfaces";
 import { GET_POKEMON } from "src/query/queries";
-//import usePokedex from "src/components/Pokedex/hook/usePokedex";
 import pokeTypes from "src/utils/Index/pokeTypes";
 
 const useZone = () => {
@@ -19,8 +18,6 @@ const useZone = () => {
 
                 if(zonePoke)
                 {
-                    //const myPokemon: PlayerPokemon | undefined = myPokemons.find(pokemon => pokemon.id == zonePoke.id);
-
                     const savedZone = saveFile?.safariZones.find(zn => zn.name == zone.name)
 
                     if(savedZone)
@@ -34,7 +31,7 @@ const useZone = () => {
                                 name: zonePoke.name,
                                 encounter_rate: zonePoke.encounter_rate,
                                 catch_rate: zonePoke.catch_rate,
-                                unlocked: zonePoke.unlocked,
+                                unlock: zonePoke.unlock,
                                 abilities: data.pokemon.abilities,
                                 height: data.pokemon.height,
                                 held_items: data.pokemon.held_items,
@@ -84,9 +81,6 @@ const useZone = () => {
     const [ pokemonZone, setPokemonZone ] = useState<WildPokemon[]>([]);
 
     const [ getPokemon, { data } ] = useLazyQuery(GET_POKEMON);
-
-    //const { myPokemons } = usePokedex();
-
     
 
     useEffect(() => {
@@ -117,8 +111,8 @@ const useZone = () => {
             fontFamily: options.appFont
         },
         encounterLocked: {
-            width: '20%', 
-            height: '20%'
+            width: '15%', 
+            height: '15%'
         },
         encounterNotSeen: {
             filter: 'brightness(0%)'

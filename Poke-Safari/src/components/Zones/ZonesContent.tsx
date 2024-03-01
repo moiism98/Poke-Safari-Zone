@@ -29,7 +29,7 @@ const ZonesContent = () => {
                                 <div id='zone-content'>
                                     <h1>{FirstLetterToUpper(zone.name)}</h1>
                                     {
-                                        !zone.unlocked ?
+                                        !zone.unlock ?
                                             pathname == '/play' ? 
                                             <Button style={{ fontFamily: options.appFont }} icon={ <PlayCircleFilled /> } onClick={ () => navigate(`${ zone.name.toLowerCase() }`)}>Select zone</Button>
                                             :
@@ -37,7 +37,7 @@ const ZonesContent = () => {
                                         : 
                                         <Popover
                                             trigger='click'
-                                            content={<span>{ zone.unlocked.unlock }</span>}
+                                            content={<span style={{ fontFamily: options.appFont }}>{ zone.unlock.description }</span>}
                                         >
                                             <Button danger>??????????</Button>
                                         </Popover>

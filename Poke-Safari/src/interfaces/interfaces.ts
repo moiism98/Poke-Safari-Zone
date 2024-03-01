@@ -1,6 +1,8 @@
 export type CatchedPokemon = APIPokemon & PlayerPokemon
 export type WildPokemon = APIPokemon & PlayerPokemon & ZonePokemon
 
+//#region CONTEXT
+
 export interface IContext {
     saveFile: SaveFile | null
     setSaveFile: React.Dispatch<React.SetStateAction<SaveFile | null>>
@@ -31,178 +33,202 @@ export interface ContextPlayer {
     setNextLevelExperience: React.Dispatch<React.SetStateAction<number>>
 }
 
+//#endregion
+
+//#region SAVEFILE
+
 export interface SaveFile {
 
     seenPokemons: SeenPokemon[],
     myPokemons: CatchedPokemon[],
     safariZones: SafariZone[],
     options: Options,
-    bag: Bag[],
+    bag: Item[],
     player: Player | null
-    statistics: {
-        seen: number
-        catched: number,
-        shiny: number
+    statistics: Statistics
+}
+
+    //#region POKEMON
+
+    export interface SeenPokemon {
+        id: number
+        name: string
+        sprite: string
     }
-}
 
-export interface SeenPokemon {
-    id: number
-    name: string
-    sprite: string
-}
+    export interface APIPokemon 
+    {
+        id: number,
+        name: string,
+        height: number,
+        weight: number,
+        sprites: Sprites,
+        moves: Moves[],
+        types: Types[]
+        abilities?: Ability[],
+        held_items?: Held_Items[]
+    }
 
-export interface SafariZone {
+    export interface PlayerPokemon {
 
-    id: number
-    name: string
-    portrait: string
-    pokemon: ZonePokemon[] | null
-    reward?: ZoneReward[]
-    unlocked: ZoneUnlock | null
-}
+        id: number
+        name: string
+        seen: number
+        catched: number
+        ability?: Ability,
+        held_item?: Held_Items | null
+        shiny: boolean
+        cry?: string
+    }
 
-export interface StaticZone {
-    name: string
-    pokemon: { name: string, unlocked: ZoneUnlock | null }[]
-    unlocked: ZoneUnlock | null
-}
+    export interface ZonePokemon {
+        id: number
+        name: string
+        encounter_rate: number
+        catch_rate: number
+        seen: number
+        catched: number
+        unlock?: Unlock | null
+    }
 
-export interface Portraits {
+    export interface PokemonList
+    {
+        id: number,
+        name: string,
+    }
+
+    interface Sprites
+    {
+        front_default: string,
+        front_shiny: string
+    }
+
+    export interface Moves
+    {
+        move: {
+            name: string
+        }
+    }
+
+    interface Types
+    {
+        type: {
+            name: string
+        }
+    }
+
+    export interface Ability
+    {
+        ability: {
+            name: string
+        }
+    }
+
+    export interface Held_Items
+    {
+        item: {
+            name: string
+        }
+    }
+
+    //#endregion
+
+    //#region SAFARI ZONE
+
+    export interface SafariZone {
     
-    name: string
-    src: string
-}
+        id: number
+        name: string
+        portrait: string
+        pokemon: ZonePokemon[] | null
+        reward?: ZoneReward[]
+        unlock: Unlock | null
+    }
+    
+    export interface StaticZone {
+        name: string
+        pokemon: { name: string, unlock: Unlock | null }[]
+        unlock: Unlock | null
+    }
+    
+    export interface Portraits {
+        
+        name: string
+        src: string
+    }
+    
+    interface ZoneReward {
+    
+        id: number
+        name: string
+        icon: string
+        cuantity: number 
+    }
 
-interface ZoneReward {
+    //#endregion
 
-    id: number
-    name: string
-    icon: string
-    cuantity: number 
-}
-
-interface ZoneUnlock {
-
-    id: number
-    unlock: string
-    unlocked: boolean
-}
-
-interface Options {
-
-    font: string
-    frame: Frame
-    icon: icon | null
-    createDate: Date
-    saveDate?: Date
-}
-
-export interface icon {
-
-    id: number;
-    name: string;
-    icon: string;
-}
-
-interface Bag {
-
-    item: {
-
+    //#region OPTIONS
+    
+    interface Options {
+    
+        font: string
+        frame: Frame
+        icon: Icon | null
+    }
+    
+    export interface Icon {
+    
+        id: number;
+        name: string;
+        icon: string;
+    }
+    
+    interface Item {
+    
         id: number
         name: string
         cuantity: number
         icon: string
     }
-}
 
-export interface Player {
+    export interface Frame{
+        name: string,
+        styles: {
+            border: string,
+            borderRadius?: string
+        }
+    }
 
-    name: string
-    level: number
-    experience: number
-    nextLevelExperience: number
-}
+    //#endregion
 
-export interface PokemonList
-{
-    id: number,
-    name: string,
-}
+    //#region PLAYER
 
-export interface APIPokemon 
-{
-    id: number,
-    name: string,
-    height: number,
-    weight: number,
-    sprites: Sprites,
-    moves: Moves[],
-    types: Types[]
-    abilities: Ability[],
-    held_items?: Held_Items[]
-    held_item?: Held_Items | null
-}
+    export interface Player {
 
-export interface PlayerPokemon {
-
-    id: number
-    name: string
-    sprites: Sprites 
-    seen: number
-    catched: number
-    ability?: Ability,
-    shiny?: boolean
-}
-
-export interface ZonePokemon {
-    id: number
-    name: string
-    encounter_rate: number
-    catch_rate: number
-    seen: number
-    catched: number
-    unlocked: ZoneUnlock | null
-}
-
-interface Sprites
-{
-    front_default: string,
-    front_shiny: string
-}
-
-export interface Moves
-{
-    move: {
         name: string
+        level: number
+        experience: number
+        nextLevelExperience: number
     }
-}
 
-interface Types
-{
-    type: {
-        name: string
-    }
-}
+    //#endregion
 
-export interface Ability
-{
-    ability: {
-        name: string
+    interface Statistics {
+        seen: number
+        catched: number,
+        shiny: number
     }
-}
 
-export interface Held_Items
-{
-    item: {
-        name: string
-    }
-}
+    //#region GAME UNLOCKS
 
-export interface Frame{
-    name: string,
-    styles: {
-        border: string,
-        borderRadius?: string
+    export interface Unlock {
+        description: string
+        unlocked: boolean
     }
-}
+
+    //#endregion
+
+//#endregion
+
+
+

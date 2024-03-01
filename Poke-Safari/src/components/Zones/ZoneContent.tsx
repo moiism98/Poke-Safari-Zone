@@ -1,10 +1,10 @@
 import Loading from 'src/components/Spinners/Loading/Loading';
 import unlocked from 'src/assets/img/Pokedex/pokedex-unknown.svg';
 import useZone from "../../components/Zones/hook/useZone";
+import useApp from '../App/hook/useApp';
 import { Container, Image } from "react-bootstrap";
 import { Popover } from "antd";
 import { ArrowLeftOutlined  } from '@ant-design/icons';
-import useApp from '../App/hook/useApp';
 
 const ZoneContent = () => {
 
@@ -20,7 +20,7 @@ const ZoneContent = () => {
             <Container className="zoneContainer" style={ styles.container }>
                 <ArrowLeftOutlined onClick={ () => navigate('/zones') } className="backArrow d-flex ms-2"/>
                 <div className="content">
-                    <h1 className="zoneName">{ zone.name }</h1>
+                    <h1 className="zoneName">{ FirstLetterToUpper(zone.name) }</h1>
                     <div className="encounterContainer">
                         <h3 className="m-2">Encounters:</h3>
                         <div className="encounterContent">
@@ -31,17 +31,21 @@ const ZoneContent = () => {
                                     
                                     <Popover key={ pokemon.id } className="popOver" style={ styles.popOver } trigger='hover' content={
                                         
-                                        pokemon.unlocked? <span style={{ fontFamily: options.appFont }}>{ pokemon.unlocked.unlock }</span> :
+                                        pokemon.unlock ? <span style={{ fontFamily: options.appFont }}>{ pokemon.unlock.description }</span> :
 
-                                        <div style={{ display: 'flex', flexDirection: 'column', fontFamily: options.appFont }}>
-                                            <span>Pokemon: { FirstLetterToUpper(pokemon.name) }</span>
-                                            <span>Seen: { pokemon.seen }</span>
-                                            <span>Catched: { pokemon.catched }</span>
-                                            <span>Types: { pokemon.types.map(type => <Image key={ type.type.name } className="encounterTypes" title={ FirstLetterToUpper(type.type.name) } src={ GetTypeIcon(type.type.name) }/> )}</span>
-                                        </div>
+                                        pokemon.seen ?
+
+                                            <div style={{ display: 'flex', flexDirection: 'column', fontFamily: options.appFont }}> 
+                                                <span>Pokemon: { FirstLetterToUpper(pokemon.name) }</span>
+                                                <span>Seen: { pokemon.seen }</span>
+                                                <span>Catched: { pokemon.catched }</span>
+                                                <span>Types: { pokemon.types.map(type => <Image key={ type.type.name } className="encounterTypes" title={ FirstLetterToUpper(type.type.name) } src={ GetTypeIcon(type.type.name) }/> )}</span>
+                                            </div> :
+
+                                            <span style={{ fontFamily: options.appFont }}>?????????????</span>
                                     }>
 
-                                        <Image style={ pokemon.unlocked?.unlocked != null ? styles.encounterLocked : pokemon.seen != 0 ? styles.encounterSeen : styles.encounterNotSeen } src={ pokemon.unlocked != null ? unlocked : pokemon.sprites.front_default }/>
+                                        <Image style={ pokemon.unlock ? styles.encounterLocked : pokemon.seen != 0 ? styles.encounterSeen : styles.encounterNotSeen } src={ pokemon.unlock ? unlocked : pokemon.sprites?.front_default }/>
                                     </Popover>
                                     
                                 ))

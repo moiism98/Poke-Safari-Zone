@@ -5,510 +5,497 @@
             "pokemon": [
                 {
                     "name": "clefairy",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "jigglypuff",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "zubat",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "diglett",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "geodude",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "onix",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "cubone",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "omanyte",
-                    "unlocked": {
-                        "id": 1,
-                        "unlock": "Catch 5 pokemon to unlock this wild pokemon!",
+                    "unlock": {
+                        "description": "Catch 5 pokemon to unlock this wild pokemon!",
                         "unlocked": false
                     }
                 },
                 {
                     "name": "kabuto",
-                    "unlocked": {
-                        "id": 2,
-                        "unlock": "Catch 10 pokemon to unlock this wild pokemon!",
+                    "unlock": {
+                        "description": "Catch 10 pokemon to unlock this wild pokemon!",
                         "unlocked": false
                     }
                 },
                 {
                     "name": "dunsparce",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "shuckle",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "makuhita",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "nosepass",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "sableye",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "mawile",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "aron",
-                    "unlocked": null
+                    "unlock": null
                 }
             ],
-            "unlocked": null
+            "unlock": null
         },
         {
             "name": "desert",
             "pokemon": [
                 {
                     "name": "sandshrew",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "larvitar",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "trapinch",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "cacnea",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "baltoy",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "lileep",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "anorith",
-                    "unlocked": null
+                    "unlock": null
                 }
             ],
-            "unlocked": null
+            "unlock": null
         },
         {
             "name": "forest",
             "pokemon": [
                 {
                     "name": "bulbasaur",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "caterpie",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "metapod",
-                    "unlocked": {
-                        "id": 3,
-                        "unlock": "Catch 15 Caterpie to unlock this wild pokemon.",
+                    "unlock": {
+                        "description": "Catch 15 Caterpie to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
                 {
                     "name": "weedle",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "kakuna",
-                    "unlocked": {
-                        "id": 4,
-                        "unlock": "Catch 15 Weedle to unlock this wild pokemon.",
+                    "unlock": {
+                        "description": "Catch 15 Weedle to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
                 {
                     "name": "paras",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "venonat",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "farfetchd",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "scyther",
-                    "unlocked": {
-                        "id": 5,
-                        "unlock": "Catch every forest pokemon to unlock this wild pokemon.",
+                    "unlock": {
+                        "description": "Catch every forest pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
                 {
                     "name": "pinsir",
-                    "unlocked": {
-                        "id": 6,
-                        "unlock": "Catch every forest pokemon to unlock this wild pokemon.",
+                    "unlock": {
+                        "description": "Catch every forest pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
                 {
                     "name": "chikorita",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "hoothoot",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "ledyba",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "spinarak",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "pineco",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "heracross",
-                    "unlocked": {
-                        "id": 7,
-                        "unlock": "Catch every forest pokemon to unlock this wild pokemon.",
+                    "unlock": {
+                        "description": "Catch every forest pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
                 {
                     "name": "treecko",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "wurmple",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "shroomish",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "slakoth",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "nincada",
-                    "unlocked": null
+                    "unlock": null
                 }
             ],
-            "unlocked": null
+            "unlock": null
         },
         {
             "name": "lake",
             "pokemon": [
                 {
                     "name": "squirtle",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "psyduck",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "poliwag",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "slowpoke",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "dratini",
-                    "unlocked": {
-                        "id": 8,
-                        "unlock": "Catch 5 Squirtle to unlock this wild pokemon.",
+                    "unlock": {
+                        "description": "Catch 5 Squirtle to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
                 {
                     "name": "totodile",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "marill",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "wooper",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "mudkip",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "lotad",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "surskit",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "volbeat",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "illumise",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "corpish",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "feebas",
-                    "unlocked": null
+                    "unlock": null
                 }
             ],
-            "unlocked": null
+            "unlock": null
         },
         {
             "name": "plains",
             "pokemon": [
                 {
                     "name": "pidgey",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "rattata",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "spearow",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "ekans",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "pikachu",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "nidoran-f",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "nidoran-m",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "oddish",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "meowth",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "mankey",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "machop",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "bellsprout",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "grimer",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "drowzee",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "eevee",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "snorlax",
-                    "unlocked": {
-                        "id": 9,
-                        "unlock": "Catch every Plains pokemon to unlock this wild pokemon.",
+                    "unlock": {
+                        "description": "Catch every Plains pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
                 {
                     "name": "sentret",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "mareep",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "hoppip",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "aipom",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "sunkern",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "snubbull",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "teddiursa",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "miltank",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "zigzagoon",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "seedot",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "taillow",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "whismur",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "roselia",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "swablu",
-                    "unlocked": null
+                    "unlock": null
                 }
             ],
-            "unlocked": null
+            "unlock": null
         },
         {
             "name": "ruins",
             "pokemon": [
                 {
                     "name": "abra",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "gastly",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "mr-mime",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "ditto",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "porygon",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "aerodactyl",
-                    "unlocked": {
-                        "id": 10,
-                        "unlock": "Catch 5 ghost type pokemon to unlock this wild pokemon.",
+                    "unlock": {
+                        "description": "Catch 5 ghost type pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
                 {
                     "name": "misdreavus",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "unown",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "wobbuffet",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "spoink",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "lunatone",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "shuppet",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "duskull",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "chimecho",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "absol",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "bagon",
-                    "unlocked": {
-                        "id": 11,
-                        "unlock": "Catch 10 dragon type pokemon to unlock this wild pokemon.",
+                    "unlock": {
+                        "description": "Catch 10 dragon type pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
                 {
                     "name": "beldum",
-                    "unlocked": {
-                        "id": 12,
-                        "unlock": "Catch 15 psychic type pokemon to unlock this wild pokemon.",
+                    "unlock": {
+                        "description": "Catch 15 psychic type pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 }
             ],
-            "unlocked": {
-                "id": 1,
-                "unlock": "Get to see 30 different pokemon to unlock this zone.",
+            "unlock": {
+                "description": "Get to see 30 different pokemon to unlock this zone.",
                 "unlocked": false
             }
         },
@@ -517,162 +504,154 @@
             "pokemon": [
                 {
                     "name": "tentacool",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "seel",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "shellder",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "krabby",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "horsea",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "goldeen",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "staryu",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "magikarp",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "lapras",
-                    "unlocked": {
-                        "id": 13,
-                        "unlock": "Catch Krabby, Shellder and Qwilfish to unlock this wild pokemon.",
+                    "unlock": {
+                        "description": "Catch Krabby, Shellder and Qwilfish to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
                 {
                     "name": "chinchou",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "qwilfish",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "corsola",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "remoraid",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "mantine",
-                    "unlocked": {
-                        "id": 14,
-                        "unlock": "Catch 20 Remoraid to unlock this wild pokemon.",
+                    "unlock": {
+                        "description": "Catch 20 Remoraid to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
                 {
-                    "name": "seel",
-                    "unlocked": null
-                },
-                {
                     "name": "wingull",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "carvanha",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "wailmer",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "barboach",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "clamperl",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "relicanth",
-                    "unlocked": {
-                        "id": 15,
-                        "unlock": "Catch every Sea pokemon to unlock this wild pokemon.",
+                    "unlock": {
+                        "description": "Catch every Sea pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 }
             ],
-            "unlocked": null
+            "unlock": null
         },
         {
             "name": "volcano",
             "pokemon": [
                 {
                     "name": "charmander",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "vulpix",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "growlithe",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "ponyta",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "magmar",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "cyndaquil",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "slugma",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "skarmory",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "houndour",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "torchic",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "numel",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "torkoal",
-                    "unlocked": null
+                    "unlock": null
                 },
                 {
                     "name": "solrock",
-                    "unlocked": null
+                    "unlock": null
                 }
             ],
-            "unlocked": {
-                "id": 2,
-                "unlock": "Catch every pokemon in the desert to unlock this zone.",
+            "unlock": {
+                "description": "Catch every pokemon in the desert to unlock this zone.",
                 "unlocked": false
             }
         }

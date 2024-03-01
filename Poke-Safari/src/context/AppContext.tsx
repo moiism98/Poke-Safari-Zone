@@ -66,8 +66,6 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
     }
 
     const SaveGame = useCallback((saveFileCopy: SaveFile) => {
-    
-        saveFileCopy.options.saveDate = new Date();
 
         setSaveFile(saveFileCopy)
 

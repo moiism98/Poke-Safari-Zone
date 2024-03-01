@@ -6,14 +6,15 @@ import plains from 'src/assets/img/Zones/plains.svg';
 import ruins from 'src/assets/img/Zones/ruins.svg';
 import sea from 'src/assets/img/Zones/sea.svg';
 import volcano from 'src/assets/img/Zones/crater.svg';
-import safariZone from 'src/assets/json/safari_zones.json'
+
+import safariZone from 'src/assets/json/safari_zones.json';
+
 import frameStyles from 'src/utils/App/frameStyles';
 import useApp from 'src/components/App/hook/useApp';
 import playerIcons from 'src/utils/NewPlayer/playerIcons';
-import { PokemonList, Portraits, SafariZone, SaveFile, StaticZone, ZonePokemon, icon } from 'src/interfaces/interfaces';
+import { PokemonList, Portraits, SafariZone, SaveFile, StaticZone, ZonePokemon, Icon, Unlock } from 'src/interfaces/interfaces';
 import { useContext, useEffect, useState } from 'react';
 import { Context } from 'src/context/AppContext';
-
 
 const useNewGame = () => {
 
@@ -76,7 +77,7 @@ const useNewGame = () => {
                 name: zone.name,
                 pokemon: GenerateZonesPokemon(zone.name),
                 portrait: GetZonePortrait(zone.name),
-                unlocked: ZoneUnlocked(zone.name),
+                unlock: ZoneUnlock(zone.name),
             })
 
             zoneID++;
@@ -102,7 +103,7 @@ const useNewGame = () => {
                 {
                     const poke: PokemonList | undefined = allPokemons.find(pkmn => pkmn.name == staticZone.pokemon[zonePokemon].name)
 
-                    const unlocked = staticZone.pokemon[zonePokemon].unlocked;
+                    const unlock = staticZone.pokemon[zonePokemon].unlock;
 
                     if(poke)
                     {
@@ -115,7 +116,7 @@ const useNewGame = () => {
                                 name: poke.name,
                                 encounter_rate: data.pal_park_encounters[0].rate,
                                 catch_rate: data.capture_rate,
-                                unlocked: unlocked,
+                                unlock: unlock,
                                 catched: 0,
                                 seen: 0
                             }
@@ -144,28 +145,28 @@ const useNewGame = () => {
         return src;
     }
 
-    const ZoneUnlocked = (toCreateZone: string) => {
+    const ZoneUnlock = (toCreateZone: string) => {
 
-        let unlocked = null;
+        let unlock: Unlock | null = null;
 
         const staticZone: StaticZone | undefined  = zones.find(zone => zone.name == toCreateZone);
 
         if(staticZone)
         {
-            if(staticZone.unlocked)
+            if(staticZone.unlock)
             {
-                unlocked = staticZone.unlocked;
+                unlock = staticZone.unlock;
             }
         }
 
-        return unlocked;
+        return unlock;
     }
 
     const onFinish = (data: { playerName: string, playerIcon: string }) => {
 
         let newSaveFile: SaveFile | null = null;
 
-        const icon: icon | undefined = icons.find(icon => icon.name == data.playerIcon)
+        const icon: Icon | undefined = icons.find(icon => icon.name == data.playerIcon)
 
         if(icon)
         {
@@ -176,8 +177,7 @@ const useNewGame = () => {
                 options: {
                     font: 'pkmndp',
                     frame: frame_styles[0],
-                    icon: icon,
-                    createDate: new Date()
+                    icon: icon
                 },
                 bag: [],
                 player: {
@@ -215,11 +215,14 @@ const useNewGame = () => {
 
     }, [ openModal, setSaveFile ])
 
+    /*const method = (id: number, name: string | string[] | undefined) => {
+        message.info(`This method is for the catch unlock with id: ${id}
+        , and using these pokemon to unlock something: ${name}`);
+    }*/
+
     const zones: StaticZone[] = safariZone.zones;
 
     const safariZones = SafariZones();
-
-    
 
     return{
         openModal,

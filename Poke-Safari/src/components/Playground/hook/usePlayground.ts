@@ -60,6 +60,18 @@ const usePlayground = () => {
         return Math.floor(Math.random() * max);
     }
 
+    const IsShiny = () => {
+    
+        let shiny = false;
+
+        if(RandomProbability(100) <= appConsts.shinyProbability)
+        {
+            shiny = true;
+        }
+
+        return shiny;
+    }
+
     const SetRandomMoveSet = (moves: Moves[]) => {
 
         if(moves)
@@ -131,7 +143,7 @@ const usePlayground = () => {
     
                 const pokemon: number = Math.floor(Math.random() * zone.pokemon.length);
                 
-                if(!zone.pokemon[pokemon].unlocked) // only spawn a pokemon if its unlocked!!!
+                if(!zone.pokemon[pokemon].unlock) // only spawn a pokemon if its unlocked!!!
                 {
                     if(zone.pokemon[pokemon].encounter_rate >= probability)
                     {
@@ -160,21 +172,30 @@ const usePlayground = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }
 
-    const SpawnWildPokemon = () => {
+    const SpawnWildPokemon = async() => {
     
         if(data)
         {
             setLoading(true)
 
+            const ability = SetRandomAbility(data.pokemon.abilities);
+            
+            const held_item = SetRandomHeldItem(data.pokemon.held_items);
+            
             const moves = SetRandomMoveSet(data.pokemon.moves);
 
-            const ability = SetRandomAbility(data.pokemon.abilities);
+            const shiny: boolean = IsShiny();
 
             const zonePokemon = zone?.pokemon?.find(pokemon => pokemon.id == data.pokemon.id);
 
+            let cry: string = '';
+
+            await fetch(`https://pokeapi.co/api/v2/pokemon/${data.pokemon.id}`)
+            .then(response => response.ok ? response.json() : console.warn("Data has not been received!"))
+            .then(data => cry = data.cries.latest)
+
             if(moves && ability && zonePokemon)
             {
-                
                 // generate the wild pokemon
 
                 const wildPokemon: WildPokemon = {
@@ -182,19 +203,17 @@ const usePlayground = () => {
                     name: data.pokemon.name,
                     types: data.pokemon.types,
                     moves: moves,
-                    height: data.pokemon.height, // optional
-                    weight: data.pokemon.weight, // optional
-                    //held_items: data.pokemon.held_items,
-                    held_item: SetRandomHeldItem(data.pokemon.held_items),
-                    sprites: data.pokemon.sprites, // optional
-                    abilities: data.pokemon.abilities, // optional
+                    height: data.pokemon.height,
+                    weight: data.pokemon.weight,
+                    held_item: held_item,
+                    sprites: data.pokemon.sprites,
                     ability: ability,
                     catch_rate: zonePokemon.catch_rate,
                     encounter_rate: zonePokemon.encounter_rate,
-                    unlocked: zonePokemon.unlocked, // optional
-                    shiny: RandomProbability(100) <= appConsts.shinyProbability ? true : false,
-                    catched: 0, // optional
-                    seen: 0, // optional
+                    shiny: shiny,
+                    catched: 0,
+                    seen: 0,
+                    cry: cry
                 }
 
                 SaveSeenPokemon(wildPokemon);

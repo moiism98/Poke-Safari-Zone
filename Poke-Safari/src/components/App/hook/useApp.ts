@@ -17,7 +17,8 @@ const useApp = () => {
         maxModRateValue: 60,
         defaultRateValue: 20,
         minFleeRate: 25,
-        nextLevelExperience: 15
+        nextLevelExperience: 15,
+        maxLevel: 30
     }
 
     const gameScreen: React.CSSProperties = {

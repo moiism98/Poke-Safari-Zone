@@ -1,10 +1,13 @@
 import { message } from "antd"
 import { useCallback, useContext, useState } from "react";
 import { Context } from "src/context/AppContext";
+import unlocks from "src/utils/App/unlocks";
 
 const usePlayer = () => {
 
     const { player, saveFile, SaveGame } = useContext(Context);
+
+    const { LevelUnlock } = unlocks();
 
     const [ levelUp, setLevelUp ] = useState<boolean>(false);
 
@@ -55,12 +58,14 @@ const usePlayer = () => {
         
         if(levelUp)
         {
+            LevelUnlock();
+
             SavePlayerStats();
 
             setLevelUp(false);
         }
 
-    }, [ levelUp, SavePlayerStats ])
+    }, [ levelUp, SavePlayerStats, LevelUnlock ])
 
     const LevelUp = useCallback(() => {
 
