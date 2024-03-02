@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "src/context/AppContext";
 import { APIPokemon } from "src/interfaces/interfaces";
 import { GET_POKEMON } from "src/query/queries";
-import { Button, Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import { ReloadOutlined } from '@ant-design/icons';
 import Loading from "../Spinners/Loading/Loading";
 import gameTitle from 'src/assets/img/Index/game-title.svg';
@@ -55,11 +55,6 @@ const IndexContainer = () => {
 
                         </>
                     }
-                    <Button
-                        
-                    >
-                        Unlock
-                    </Button>
             </div>   
         </>
     )

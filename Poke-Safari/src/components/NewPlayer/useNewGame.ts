@@ -107,7 +107,7 @@ const useNewGame = () => {
 
                     if(poke)
                     {
-                        fetch(`https://pokeapi.co/api/v2/pokemon-species/${poke.id}/`)
+                        fetch(`${appConsts.pokeSpeciesPoint}/${poke.id}`)
                         .then(response => response.ok ? response.json() : console.warn("Problems have been found, it's not possible to connect!"))
                         .then(data => { 
                             pokemon.push(

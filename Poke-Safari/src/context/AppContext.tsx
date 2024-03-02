@@ -1,8 +1,10 @@
+import useContext from './hook/useContext';
 import { useQuery } from '@apollo/client';
 import { createContext, useState, useEffect, useCallback } from 'react';
 import { ContextOptions, ContextPlayer, Frame, IContext, PokemonList, SaveFile } from 'src/interfaces/interfaces';
 import { GET_ALL_POKEMON } from 'src/query/queries';
-import useContext from './hook/useContext';
+import { notification } from 'antd';
+import { Image } from 'react-bootstrap';
 
 export const Context = createContext({} as IContext);
 
@@ -63,6 +65,28 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
     const ReloadPokemon = () => {
       
         GetAllPokes();
+    }
+
+    const onPokemonUnlocked = async(id: number, pokemon: string, zone: string) => {
+        
+        let sprite: string = '';
+
+        await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+        .then(response => response.ok ? response.json() : console.warn("No data received!"))
+        .then(data => sprite = data.sprites.front_default);
+
+        notification.open({
+            message: <h5 className='unlockMessage'><strong>{ pokemon.substring(0, 1).toUpperCase() + pokemon.substring(1, pokemon.length) }</strong> has been unlocked!</h5>,
+            description: 
+            <div className='unlockNotification'>
+                <Image className='unlockIcon' src={ sprite }/>
+                <h5 className='unlockDescription'>Now { pokemon } can be catched on { zone }!</h5>
+            </div>,
+            duration: 3,
+            closeIcon: false,
+            placement: 'topRight'
+        })
+    
     }
 
     const SaveGame = useCallback((saveFileCopy: SaveFile) => {
@@ -143,7 +167,7 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
     }, [ saveFile ])
 
     return (
-      <Context.Provider value={{ saveFile, player, options, setSaveFile, totalPokemon, allPokemons, setAllPokemons, randomPokemon, SaveGame, ReloadPokemon }}>
+      <Context.Provider value={{ saveFile, player, options, setSaveFile, totalPokemon, allPokemons, setAllPokemons, randomPokemon, onPokemonUnlocked, SaveGame, ReloadPokemon }}>
           {children}
       </Context.Provider>
   )

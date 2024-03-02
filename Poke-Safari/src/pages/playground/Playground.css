@@ -31,16 +31,21 @@
 .pokemonName{
     display: flex;
     align-items: center;
+    justify-content: space-around;
 }
 
+.catchedIcon{
+    margin: .3em;
+    width: 15%;
+}
 
 .pokemonName h2{
     color: darkred;
-    margin-right: .3em;
+    margin: 0;
 }
 
 .pokemonName svg{
-    color: #f9be19
+    color: #f9be19; 
 }
 
 .actionsContainer{

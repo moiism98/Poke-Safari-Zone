@@ -1,6 +1,7 @@
 import Loading from "../Spinners/Loading/Loading";
 import usePlayground from "./hook/usePlayground";
 import useApp from "../App/hook/useApp";
+import catchedIcon from "src/assets/img/Navbar/pokeball_32x32.svg"
 import { Image } from "react-bootstrap";
 import { Button } from "antd";
 import { StarFilled } from '@ant-design/icons';
@@ -33,6 +34,7 @@ const PlaygroundContent = () => {
                     <div className="pokemonContainer">
                         <div className="wildPokemon">
                             <div className="pokemonName">
+                                { wildPokemon.catched > 0 ? <Image className="catchedIcon" src={ catchedIcon }/> : null }
                                 <h2>{ FirstLetterToUpper(wildPokemon.name) }</h2> 
                                 <span>{ wildPokemon.shiny ? <StarFilled/> : null}</span>
                             </div>

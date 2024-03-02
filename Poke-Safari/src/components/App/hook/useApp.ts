@@ -18,7 +18,9 @@ const useApp = () => {
         defaultRateValue: 20,
         minFleeRate: 25,
         nextLevelExperience: 15,
-        maxLevel: 30
+        maxLevel: 30,
+        pokemonPoint: `https://pokeapi.co/api/v2/pokemon`,
+        pokeSpeciesPoint: `https://pokeapi.co/api/v2/pokemon-species`,
     }
 
     const gameScreen: React.CSSProperties = {

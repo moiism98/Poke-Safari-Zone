@@ -6,12 +6,13 @@ export type WildPokemon = APIPokemon & PlayerPokemon & ZonePokemon
 export interface IContext {
     saveFile: SaveFile | null
     setSaveFile: React.Dispatch<React.SetStateAction<SaveFile | null>>
-    player: ContextPlayer,
-    options: ContextOptions,
-    totalPokemon: number,
-    allPokemons: PokemonList[] | undefined, 
-    setAllPokemons: React.Dispatch<React.SetStateAction<PokemonList[] | undefined>>,
-    randomPokemon: string | undefined,
+    player: ContextPlayer
+    options: ContextOptions
+    totalPokemon: number
+    allPokemons: PokemonList[] | undefined,
+    setAllPokemons: React.Dispatch<React.SetStateAction<PokemonList[] | undefined>>
+    randomPokemon: string | undefined
+    onPokemonUnlocked: (id: number, pokemon: string, zone: string) => void
     SaveGame: (saveFileCopy: SaveFile) => void
     ReloadPokemon: () => void | undefined
 }
@@ -222,8 +223,15 @@ export interface SaveFile {
     //#region GAME UNLOCKS
 
     export interface Unlock {
+        type: UnlockType | null
         description: string
         unlocked: boolean
+    }
+
+    interface UnlockType {
+        type: string
+        cuantity: number
+        pokemon: string | null
     }
 
     //#endregion

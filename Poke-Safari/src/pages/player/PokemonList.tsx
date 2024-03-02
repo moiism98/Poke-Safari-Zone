@@ -3,29 +3,13 @@ import useApp from "src/components/App/hook/useApp"
 import { useContext } from "react"
 import { Context } from "src/context/AppContext"
 import { Image } from "react-bootstrap"
-import { Popover, notification } from "antd"
+import { Popover } from "antd"
 
 const PokemonList = () => {
 
     const { saveFile } = useContext(Context);
 
-    const  {FirstLetterToUpper } = useApp();
-
-    const onNotification = () => {
-    
-        notification.open({
-            message: <h5>You have reached level {saveFile?.player?.level}</h5>,
-            description: 
-            <div style={{ display: "flex", alignItems: 'center', justifyContent: 'space-evenly'}}>
-                <Image src={ saveFile?.options?.icon?.icon }/>
-                <div>DESCRIPTION</div>
-            </div>,
-            duration: 3,
-            closeIcon: false,
-            placement: 'top'
-        })
-    
-    }
+    const  { FirstLetterToUpper } = useApp();
 
     return(
         <GameScreen>
@@ -52,7 +36,6 @@ const PokemonList = () => {
                                     src={ pokemon.shiny ? pokemon.sprites.front_shiny : pokemon.sprites.front_default }
                                     width={125}
                                     height={125}
-                                    onClick={() => onNotification()}
                                 />
                             </Popover>
                         ))

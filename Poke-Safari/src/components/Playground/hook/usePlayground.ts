@@ -7,6 +7,7 @@ import { message } from "antd";
 import { Context } from "src/context/AppContext";
 import { GET_POKEMON } from "src/query/queries";
 import { useLazyQuery } from "@apollo/client";
+import useUnlocks from "src/utils/App/unlocks";
 
 const usePlayground = () => {
 
@@ -14,9 +15,9 @@ const usePlayground = () => {
     
     const { SavePlayer, LevelUp, SaveExperience } = usePlayer();
     
-    const { appConsts } = useApp();
+    const { appConsts, gameScreen } = useApp();
 
-    const { gameScreen } = useApp();
+    const { /*PokemonUnlock,*/ CheckUnlock } = useUnlocks();
 
     const { zone } = useZone();
 
@@ -190,7 +191,7 @@ const usePlayground = () => {
 
             let cry: string = '';
 
-            await fetch(`https://pokeapi.co/api/v2/pokemon/${data.pokemon.id}`)
+            await fetch(`${appConsts.pokemonPoint}/${data.pokemon.id}`)
             .then(response => response.ok ? response.json() : console.warn("Data has not been received!"))
             .then(data => cry = data.cries.latest)
 
@@ -211,8 +212,8 @@ const usePlayground = () => {
                     catch_rate: zonePokemon.catch_rate,
                     encounter_rate: zonePokemon.encounter_rate,
                     shiny: shiny,
-                    catched: 0,
-                    seen: 0,
+                    catched: zonePokemon.catched,
+                    seen: zonePokemon.seen,
                     cry: cry
                 }
 
@@ -300,6 +301,10 @@ const usePlayground = () => {
                 }
                 
                 SaveCatchedPokemon(wildPokemon);
+
+                CheckUnlock(wildPokemon.name);
+                
+                //PokemonUnlock();
 
                 setCaught(true);
             }
