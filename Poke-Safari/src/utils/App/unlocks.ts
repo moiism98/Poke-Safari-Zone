@@ -1,7 +1,7 @@
 import { message } from "antd"
 import { useContext } from "react"
 import { Context } from "src/context/AppContext";
-import { Unlock } from "src/interfaces/interfaces";
+import {  SaveFile, Unlock, WildPokemon, ZonePokemon} from "src/interfaces/interfaces";
 
 const useUnlocks = () => {
 
@@ -9,19 +9,19 @@ const useUnlocks = () => {
     
     //#region POKEMON UNLOCKS
 
-    const CheckUnlock = (pokemon: string) => {
-
-        console.log(pokemon);
+    const CheckUnlock = (pokemon: WildPokemon) => {
 
         if(saveFile)
         {
+            const saveFileCopy = saveFile;
+
             let zone = 0;
 
-            while(zone < saveFile.safariZones.length)
+            while(zone < saveFileCopy.safariZones.length)
             {
-                const allPokemon = saveFile.safariZones[zone].pokemon;
+                const safariZone = saveFileCopy.safariZones[zone];
 
-                const zoneName = saveFile.safariZones[zone].name;
+                const allPokemon = saveFileCopy.safariZones[zone].pokemon;
 
                 if(allPokemon)
                 {
@@ -29,7 +29,7 @@ const useUnlocks = () => {
 
                     while(zonePokemon < allPokemon.length)
                     {
-                        const pokemonName = allPokemon[zonePokemon].name;
+                        const toUnlockPokemon = allPokemon[zonePokemon];
 
                         if(allPokemon[zonePokemon].unlock)
                         {
@@ -41,9 +41,9 @@ const useUnlocks = () => {
 
                                 switch(unlock.type.type)
                                 {
-                                    case 'catch': catchUnlock(cuantity, zoneName, pokemonName); break;
-                                    case 'seen':console.log(`Pokemon: ${allPokemon[zonePokemon].name}; Unlock type: ${unlock.type.type}`); break;
-                                    case 'pokemon': console.log(`Pokemon: ${allPokemon[zonePokemon].name}; Unlock type: ${unlock.type.type}`); break;
+                                    case 'catch': catchUnlock(saveFileCopy, cuantity, toUnlockPokemon, safariZone.name); break;
+                                    case 'seen': console.log(`Pokemon: ${allPokemon[zonePokemon].name}; Unlock type: ${unlock.type.type}`); break;
+                                    case 'pokemon': pokemonUnlock(saveFileCopy, unlock, cuantity, pokemon, toUnlockPokemon, safariZone.name); break;
                                 }
                             }
                         }
@@ -56,95 +56,35 @@ const useUnlocks = () => {
         }        
     }
 
-    const catchUnlock = (cuantity: number, zone: string, pokemon: string) => {
+    const catchUnlock = (saveFile: SaveFile, cuantity: number, toUnlockPokemon: ZonePokemon, zone: string) => {
 
-        if(saveFile)
+        if(saveFile.statistics.catched == cuantity)
         {
-            const saveFileCopy = saveFile;
+            toUnlockPokemon.unlock = null;
 
-            if(saveFileCopy.statistics.catched == cuantity)
-            {
-                const safariZone = saveFileCopy.safariZones.find(zn => zn.name == zone);
+            SaveGame(saveFile);
 
-                if(safariZone)
-                {
-                    const safariPokemon = safariZone.pokemon?.find(pkmn => pkmn.name == pokemon);
-
-                    if(safariPokemon && safariPokemon.unlock)
-                    {
-                        safariPokemon.unlock = null;
-
-                        SaveGame(saveFileCopy);
-
-                        onPokemonUnlocked(safariPokemon.id, safariPokemon.name, safariZone.name);
-                    }
-                }
-            }
+            onPokemonUnlocked(toUnlockPokemon.id, toUnlockPokemon.name, zone);
         }
     }
 
-    const unlockMetapod = () => {
+    const pokemonUnlock = (saveFile: SaveFile, unlock: Unlock, cuantity: number, pokemon: WildPokemon, toUnlockPokemon: ZonePokemon, zone: string) => {
+        
+        // the method only will be triggered for the pokemon catched, not 
+        // for all pokemon with the pokemon unlock type!
 
-        if(saveFile)
+        if(unlock.type?.pokemon == pokemon.name)
         {
-            const saveFileCopy = saveFile;
-
-            const forest = saveFileCopy.safariZones.find(zone => zone.name == 'forest');
-
-            if(forest)
+            if(pokemon.catched == cuantity)
             {
-                const pokemon = forest.pokemon?.find(pokemon => pokemon.name == 'caterpie');
-                
-                if(pokemon)
-                {
-                    const toUnlockId = pokemon.id + 1;
+                toUnlockPokemon.unlock = null;
 
-                    const toUnlock = forest.pokemon?.find(pokemon => pokemon.id == toUnlockId);
+                SaveGame(saveFile);
 
-                    if(toUnlock && toUnlock.unlock && pokemon.catched == 1)
-                    {
-                        toUnlock.unlock = null;
-    
-                        SaveGame(saveFileCopy);
-    
-                        onPokemonUnlocked(toUnlock.id, toUnlock.name, forest.name);
-                    }
-                }
+                onPokemonUnlocked(toUnlockPokemon.id, toUnlockPokemon.name, zone);
             }
         }
     }
-
-    const unlockKakuna = () => {
-
-        if(saveFile)
-        {
-            const saveFileCopy = saveFile;
-
-            const forest = saveFileCopy.safariZones.find(zone => zone.name == 'forest');
-
-            if(forest)
-            {
-                const pokemon = forest.pokemon?.find(pokemon => pokemon.name == 'weedle');
-
-                if(pokemon)
-                {
-                    const toUnlockId = pokemon.id + 1;
-
-                    const toUnlock = forest.pokemon?.find(pokemon => pokemon.id == toUnlockId);
-
-                    if(toUnlock && toUnlock.unlock && pokemon.catched == 1)
-                    {
-                        toUnlock.unlock = null;
-    
-                        SaveGame(saveFileCopy);
-    
-                        onPokemonUnlocked(toUnlock.id, toUnlock.name, forest.name);
-                    }
-                }
-            }
-        }
-    }
-
 
     //#endregion
 
@@ -153,14 +93,8 @@ const useUnlocks = () => {
         message.info("SHOW LEVEL UNLOCK!");
     }
 
-    const PokemonUnlock = () => {
-        unlockMetapod();
-        unlockKakuna();
-    }
-
     return {
         LevelUnlock,
-        PokemonUnlock,
         CheckUnlock
     }
 }

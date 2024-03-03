@@ -136,10 +136,10 @@
                     "unlock": {
                         "type": {
                             "type": "pokemon",
-                            "cuantity": 10,
+                            "cuantity": 5,
                             "pokemon": "caterpie"
                         },
-                        "description": "Catch 15 Caterpie to unlock this wild pokemon.",
+                        "description": "Catch 5 Caterpie to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
@@ -155,7 +155,7 @@
                             "cuantity": 10,
                             "pokemon": "weedle"
                         },
-                        "description": "Catch 15 Weedle to unlock this wild pokemon.",
+                        "description": "Catch 10 Weedle to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },

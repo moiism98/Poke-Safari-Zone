@@ -299,10 +299,12 @@ const usePlayground = () => {
                 {
                     zonePokemon.catched++;
                 }
+
+                wildPokemon.catched++;
                 
                 SaveCatchedPokemon(wildPokemon);
 
-                CheckUnlock(wildPokemon.name);
+                CheckUnlock(wildPokemon);
                 
                 //PokemonUnlock();
 
