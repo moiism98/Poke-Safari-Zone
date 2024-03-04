@@ -258,6 +258,10 @@ const usePlayground = () => {
             znPokemon.seen++;
         }
 
+        wildPokemon.seen++;
+
+        CheckUnlock(wildPokemon);
+
         // save the data at localstorage.
 
         const saveFileCopy = saveFile;

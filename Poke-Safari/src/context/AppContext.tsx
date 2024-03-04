@@ -67,7 +67,7 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
         GetAllPokes();
     }
 
-    const onPokemonUnlocked = async(id: number, pokemon: string, zone: string) => {
+    const onPokemonUnlocked = async(id: number, pokemon: string, zone: string, duration?: number) => {
         
         let sprite: string = '';
 
@@ -82,7 +82,7 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
                 <Image className='unlockIcon' src={ sprite }/>
                 <h5 className='unlockDescription'>Now { pokemon } can be catched on { zone }!</h5>
             </div>,
-            duration: 3,
+            duration: duration ? duration : 3,
             closeIcon: false,
             placement: 'topRight'
         })

@@ -152,10 +152,10 @@
                     "unlock": {
                         "type": {
                             "type": "pokemon",
-                            "cuantity": 10,
+                            "cuantity": 5,
                             "pokemon": "weedle"
                         },
-                        "description": "Catch 10 Weedle to unlock this wild pokemon.",
+                        "description": "Catch 5 Weedle to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
@@ -174,16 +174,24 @@
                 {
                     "name": "scyther",
                     "unlock": {
-                        "type": null,
-                        "description": "Catch every forest pokemon to unlock this wild pokemon.",
+                        "type": {
+                            "type": "zone",
+                            "cuantity": 0,
+                            "pokemon": "forest"
+                        },
+                        "description": "Catch every catchable forest pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
                 {
                     "name": "pinsir",
                     "unlock": {
-                        "type": null,
-                        "description": "Catch every forest pokemon to unlock this wild pokemon.",
+                        "type": {
+                            "type": "zone",
+                            "cuantity": 0,
+                            "pokemon": "forest"
+                        },
+                        "description": "Catch every catchable forest pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
@@ -210,8 +218,12 @@
                 {
                     "name": "heracross",
                     "unlock": {
-                        "type": null,
-                        "description": "Catch every forest pokemon to unlock this wild pokemon.",
+                        "type": {
+                            "type": "zone",
+                            "cuantity": 0,
+                            "pokemon": "forest"
+                        },
+                        "description": "Catch every catchable forest pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
@@ -374,8 +386,12 @@
                 {
                     "name": "snorlax",
                     "unlock": {
-                        "type": null,
-                        "description": "Catch every Plains pokemon to unlock this wild pokemon.",
+                        "type": {
+                            "type": "zone",
+                            "cuantity": 0,
+                            "pokemon": "plains"
+                        },
+                        "description": "Catch every catchable Plains pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
@@ -523,7 +539,11 @@
                 }
             ],
             "unlock": {
-                "type": null,
+                "type": {
+                    "type": "seen",
+                    "cuantity": 30,
+                    "pokemon": null
+                },
                 "description": "Get to see 30 different pokemon to unlock this zone.",
                 "unlocked": false
             }
@@ -683,7 +703,11 @@
                 }
             ],
             "unlock": {
-                "type": null,
+                "type": {
+                    "type": "zone",
+                    "cuantity": 0,
+                    "pokemon": "desert"
+                },
                 "description": "Catch every pokemon in the desert to unlock this zone.",
                 "unlocked": false
             }
