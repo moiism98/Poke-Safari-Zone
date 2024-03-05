@@ -231,7 +231,7 @@ export interface SaveFile {
     interface UnlockType {
         type: string
         cuantity: number
-        pokemon: string | null
+        pokemon: string | string[] | null
     }
 
     //#endregion

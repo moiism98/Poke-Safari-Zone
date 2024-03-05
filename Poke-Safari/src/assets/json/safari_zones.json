@@ -136,7 +136,7 @@
                     "unlock": {
                         "type": {
                             "type": "pokemon",
-                            "cuantity": 5,
+                            "cuantity": 2,
                             "pokemon": "caterpie"
                         },
                         "description": "Catch 5 Caterpie to unlock this wild pokemon.",
@@ -586,7 +586,11 @@
                 {
                     "name": "lapras",
                     "unlock": {
-                        "type": null,
+                        "type": {
+                            "type":"pokemon",
+                            "cuantity": 0,
+                            "pokemon": ["krabby", "shellder", "qwilfish"]
+                        },
                         "description": "Catch Krabby, Shellder and Qwilfish to unlock this wild pokemon.",
                         "unlocked": false
                     }
@@ -610,8 +614,12 @@
                 {
                     "name": "mantine",
                     "unlock": {
-                        "type": null,
-                        "description": "Catch 20 Remoraid to unlock this wild pokemon.",
+                        "type": {
+                            "type": "pokemon",
+                            "cuantity": 10,
+                            "pokemon": "remoraid"
+                        },
+                        "description": "Catch 10 Remoraid to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
@@ -638,7 +646,11 @@
                 {
                     "name": "relicanth",
                     "unlock": {
-                        "type": null,
+                        "type": {
+                            "type": "zone",
+                            "cuantity": 0,
+                            "pokemon": "sea"
+                        },
                         "description": "Catch every Sea pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }

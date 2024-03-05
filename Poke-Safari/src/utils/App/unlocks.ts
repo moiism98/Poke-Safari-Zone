@@ -36,18 +36,11 @@ const useUnlocks = () => {
                 {
                     // zone where the unlocks are done!
 
-                    const keyZone = saveFile.safariZones.find(zone => zone.name == safariZone.unlock?.type?.pokemon);
+                    const keyZone: SafariZone | undefined = saveFile.safariZones.find(zone => zone.name == safariZone.unlock?.type?.pokemon);
                     
                     switch(safariZone.unlock.type.type)
                     {
-                        case 'zone':
-
-                            if(keyZone)
-                            {
-                                zoneUnlock(keyZone, saveFileCopy, safariZone.unlock.type.cuantity, safariZone.name, undefined, availablePokemon, safariZone);
-                            }
-
-                        break;
+                        case 'zone': zoneUnlock(keyZone, saveFileCopy, safariZone.unlock.type.cuantity, safariZone.name, undefined, availablePokemon, safariZone); break;
                         case 'seen': seenUnlock(saveFileCopy, safariZone.unlock?.type?.cuantity, safariZone.name, undefined, safariZone); break;
                     }
                 }
@@ -80,15 +73,8 @@ const useUnlocks = () => {
                                 {
                                     case 'catch': catchUnlock(saveFileCopy, cuantity, safariZone.name, toUnlockPokemon); break;
                                     case 'seen': seenUnlock(saveFileCopy, cuantity, safariZone.name, toUnlockPokemon); break;
-                                    case 'pokemon': pokemonUnlock(saveFileCopy, unlock, cuantity, pokemon, toUnlockPokemon, safariZone.name); break;
-                                    case 'zone': 
-
-                                        if(keyZone)
-                                        {
-                                            zoneUnlock(keyZone, saveFileCopy, cuantity, safariZone.name, toUnlockPokemon, availablePokemon);
-                                        }
-
-                                    break;
+                                    case 'pokemon': pokemonUnlock(saveFileCopy, unlock, cuantity, pokemon, toUnlockPokemon, safariZone); break;
+                                    case 'zone': zoneUnlock(keyZone, saveFileCopy, cuantity, safariZone.name, toUnlockPokemon, availablePokemon); break;
                                     case 'level': break;
                                 }
                             }
@@ -143,85 +129,154 @@ const useUnlocks = () => {
         }
     }
 
-    const pokemonUnlock = (saveFile: SaveFile, unlock: Unlock, cuantity: number, pokemon: WildPokemon, toUnlockPokemon: ZonePokemon, zone: string) => {
+    const pokemonUnlock = (saveFile: SaveFile, unlock: Unlock, cuantity: number, pokemon: WildPokemon, toUnlockPokemon: ZonePokemon, zone: SafariZone) => {
         
         // the method only will be triggered for the pokemon catched, not 
         // for all pokemon with the pokemon unlock type!
 
-        if(unlock.type?.pokemon == pokemon.name)
+        let isUnlocked: boolean = false;
+
+        if(unlock.type?.pokemon)
         {
-            if(pokemon.catched == cuantity)
+            if(Array.isArray(unlock.type.pokemon))
             {
-                toUnlockPokemon.unlock = null;
+                if(zone && zone.pokemon)
+                {
+                    const keyPokemon: string[] = Array.from(unlock.type.pokemon);
+    
+                    //let cuantity: number = 0;
+    
+                    let keyPokemonCatched: number = 0;
 
-                SaveGame(saveFile);
+                    let kPokemon: number = 0;
+    
+                    while(kPokemon < keyPokemon.length)
+                    {
+                        let pokemon = 0;
+    
+                        while(pokemon < zone.pokemon.length)
+                        {
+                            
+                            if(keyPokemon[kPokemon] == zone.pokemon[pokemon].name && zone.pokemon[pokemon].catched > 0)
+                            {
+                                keyPokemonCatched++;
 
-                onPokemonUnlocked(toUnlockPokemon.id, toUnlockPokemon.name, zone);
+                                pokemon = zone.pokemon.length;
+                            }
+
+                            pokemon++;
+                        }
+    
+                        kPokemon++;
+                    }
+    
+                    /*unlock.type.pokemon.forEach(pokemon => {
+                    
+                        zone?.pokemon?.forEach(zonePokemon => {
+                            
+                            zonePokemon.name == pokemon ? zonePokemon.catched > 0 ? cuantity++ : null : null
+        
+                        })
+                    
+                    })*/
+    
+                    if(keyPokemonCatched == keyPokemon.length)
+                    {
+                        isUnlocked = true;
+                    }
+                
+                }
+            }
+            else 
+            {
+                if(unlock.type.pokemon == pokemon.name)
+                {
+                    if(pokemon.catched == cuantity)
+                    {
+                        isUnlocked = true;
+                    }
+                }
             }
         }
+
+        if(isUnlocked)
+        {
+            toUnlockPokemon.unlock = null;
+        
+            SaveGame(saveFile);
+
+            onPokemonUnlocked(toUnlockPokemon.id, toUnlockPokemon.name, zone.name);
+        }
+
     }
 
-    const zoneUnlock = (keyZone: SafariZone, saveFile: SaveFile, cuantity: number, zone: string, toUnlockPokemon?: ZonePokemon, availablePokemon?: number, toUnlockZone?: SafariZone) => {
+    const zoneUnlock = (keyZone: SafariZone | undefined, saveFile: SaveFile, cuantity: number, zone: string, toUnlockPokemon?: ZonePokemon, availablePokemon?: number, toUnlockZone?: SafariZone) => {
         
-        if(toUnlockPokemon) // if we are going to unlock a pokemon.
+        if(keyZone)
         {
-            if(cuantity != 0) // there is not unlocks with this contition at the moment!
+            let isUnlocked: boolean = false;
+    
+            if(toUnlockPokemon) // if we are going to unlock a pokemon.
             {
-                let catchedAmount = 0;
+                if(cuantity != 0) // there is not unlocks with this contition at the moment!
+                {
+                    let catchedAmount = 0;
+        
+                    keyZone.pokemon?.forEach(pokemon => pokemon.catched > 0 ? catchedAmount++ : null);
+        
+                    if(cuantity == catchedAmount)
+                    {
+                        isUnlocked = true; 
+                    }
+                }
+                else
+                {
+                    const totalPokemon = keyZone.pokemon?.length;
     
-                keyZone.pokemon?.forEach(pokemon => pokemon.catched > 0 ? catchedAmount++ : null);
+                    if(totalPokemon && availablePokemon)
+                    {
+                        let catchedAmount = 0;
+        
+                        keyZone.pokemon?.forEach(pokemon => pokemon.catched > 0 ? catchedAmount++ : null);
+        
+                        if(totalPokemon - availablePokemon == catchedAmount) // available pokemon are those one which are unlocked!
+                        {
+                            isUnlocked = true;
+                        }
+                    }
+                }
     
-                if(cuantity == catchedAmount)
+                if(isUnlocked)
                 {
                     toUnlockPokemon.unlock = null;
-    
+        
                     SaveGame(saveFile);
     
                     onPokemonUnlocked(toUnlockPokemon.id, toUnlockPokemon.name, zone, 5); 
                 }
             }
-            else
+            else if(toUnlockZone) // if we are going to unlock a zone.
             {
-                const totalPokemon = keyZone.pokemon?.length;
-
-                if(totalPokemon && availablePokemon)
+                if(cuantity != 0) // there is not unlocks with this contition at the moment!
+                {
+                    console.log(0);
+                }
+                else
                 {
                     let catchedAmount = 0;
     
-                    keyZone.pokemon?.forEach(pokemon => pokemon.catched > 0 ? catchedAmount++ : null);
+                    keyZone.pokemon?.forEach(pokemon => pokemon.catched > 0 ? catchedAmount++ : null)
     
-                    if(totalPokemon - availablePokemon == catchedAmount)
+                    if(keyZone.pokemon?.length == catchedAmount)
                     {
-                        toUnlockPokemon.unlock = null;
+                        toUnlockZone.unlock = null;
     
                         SaveGame(saveFile);
     
-                        onPokemonUnlocked(toUnlockPokemon.id, toUnlockPokemon.name, zone, 5); 
+                        message.success(`You have unlocked the ${toUnlockZone.name}!`);
+    
+                        // onZoneUnlocked(); method quite similar to onPokemonUnlocked
                     }
-                }
-            }
-        }
-        else if(toUnlockZone) // if we are going to unlock a zone.
-        {
-            if(cuantity != 0) // there is not unlocks with this contition at the moment!
-            {
-                console.log(0);
-            }
-            else
-            {
-                let catchedAmount = 0;
-
-                keyZone.pokemon?.forEach(pokemon => pokemon.catched > 0 ? catchedAmount++ : null)
-
-                if(keyZone.pokemon?.length == catchedAmount)
-                {
-                    toUnlockZone.unlock = null;
-
-                    SaveGame(saveFile);
-
-                    message.success(`You have unlocked the ${toUnlockZone.name}!`);
-
-                    // onZoneUnlocked(); method quite similar to onPokemonUnlocked
                 }
             }
         }
