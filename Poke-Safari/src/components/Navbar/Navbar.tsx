@@ -2,17 +2,20 @@ import'./NavBar.css';
 import  pokeball from 'src/assets/img/Navbar/pokeball_32x32.svg';
 import frameStyles from 'src/utils/App/frameStyles';
 import playerIcons from 'src/utils/NewPlayer/playerIcons';
+import useApp from 'src/components/App/hook/useApp';
 import { Image, Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "src/context/AppContext";
-import { Frame } from 'src/interfaces/interfaces';
-import { Modal, Popover, message } from 'antd';
+import { CatchedPokemon, Frame } from 'src/interfaces/interfaces';
+import { Modal, Popconfirm, Popover, message } from 'antd';
 import { CloseOutlined  } from '@ant-design/icons';
 
 function NavBar() {
 
-    const { saveFile, options, setSaveFile } = useContext(Context);
+    const { saveFile, options, pokemonTeam, SaveGame, setSaveFile, setPokemonTeam } = useContext(Context);
+
+    const { FirstLetterToUpper } = useApp()
 
     const navigate = useNavigate();
     
@@ -20,11 +23,15 @@ function NavBar() {
     
     const { icons } = playerIcons();
 
-    const [openPopover, setOpenPopover] = useState<boolean>(false);
+    const [ openPopover, setOpenPopover ] = useState<boolean>(false);
 
-    const [openModal, setOpenModal] = useState<boolean>(false);
+    const [ openModal, setOpenModal ] = useState<boolean>(false);
 
-    const [save, setSave] = useState<boolean>(false);
+    const [ save, setSave ] = useState<boolean>(false);
+
+    const [ openConfirm, setConfirm ] = useState<boolean>(false);
+
+    const [ releasePokemon, setReleasePokemon ] = useState<CatchedPokemon>();
 
     const title = (
         <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', padding: '.5em' }}>
@@ -92,6 +99,37 @@ function NavBar() {
 
         window.location.reload()
     }
+
+    const onConfirm = (pokemon: CatchedPokemon) =>
+    {
+        if(pokemon)
+        {
+            setPokemonTeam(pokemonTeam.filter(pkmn => pkmn.id != pokemon.id));
+
+            const saveFileCopy = saveFile;
+
+            if(saveFileCopy)
+            {
+                const updatedTeam: CatchedPokemon[] = saveFileCopy.pokemonTeam.filter(pkmn => pkmn.id != pokemon.id);
+
+                saveFileCopy.pokemonTeam = updatedTeam;
+
+                SaveGame(saveFileCopy);
+
+                setConfirm(false);
+            }
+        }
+    }
+
+    useEffect(() => {
+
+        if(!openConfirm && saveFile)
+        {
+            const saveFileCopy = saveFile;
+
+            SaveGame(saveFileCopy);
+        }
+    }, [ openConfirm, saveFile, SaveGame ])
 
     useEffect(() => {
 
@@ -223,22 +261,53 @@ function NavBar() {
                             <NavDropdown.Item onClick={() => setOpenModal(true)}>Delete Game</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
+                    <div className='pokemonTeam'>
+                        {
+                            pokemonTeam?.map(pokemon => (
+                                <>
+                                    <Image 
+                                        onClick={() => {
+
+                                            setConfirm(true)
+
+                                            setReleasePokemon(pokemon)
+                                        }} 
+                                        title={ FirstLetterToUpper(pokemon.name) } 
+                                        width={75} height={75} 
+                                        src={ pokemon.shiny ? pokemon.sprites.front_shiny : pokemon.sprites.front_default }/>    
+                                    
+                                    {
+                                        releasePokemon?.id == pokemon.id ?
+                                            <Popconfirm
+                                                placement='bottom'
+                                                title={`Do you want to release this pokémon?`}
+                                                okText={`Release ${ FirstLetterToUpper(pokemon?.name) }`}
+                                                open={ openConfirm }
+                                                onCancel={ () => setConfirm(false) }
+                                                onConfirm={ () => onConfirm(pokemon) }
+                                            /> : null
+                                    }
+
+                                </>
+                            ))
+                        }
+                    </div>
                     </Navbar.Collapse>
                     {
                         saveFile != null ?
-                        <div style={{ display: 'flex', alignItems: 'center', color: 'white', margin: '0 1em 0 1em' }}>
-                            <span style={{ marginRight: '.5em' }}>Have a nice hunting time, <strong style={{color: 'red'}}>{ saveFile?.player?.name }</strong> !</span>
-                            <Popover 
-                                trigger='click' 
-                                open={ openPopover }
-                                onOpenChange={() => setOpenPopover(true)}
-                                title={ title } 
-                                content={ content } 
-                                className='d-flex m-1'
-                            >
-                                <Image title={ saveFile?.options.icon?.name } src={ saveFile?.options.icon?.icon } />
-                            </Popover>  
-                        </div> : null
+                            <div style={{ display: 'flex', alignItems: 'center', color: 'white', margin: '0 1em 0 1em' }}>
+                                <span style={{ marginRight: '.5em' }}>Have a nice hunting time, <strong style={{color: 'red'}}>{ saveFile?.player?.name }</strong> !</span>
+                                <Popover 
+                                    trigger='click' 
+                                    open={ openPopover }
+                                    onOpenChange={() => setOpenPopover(true)}
+                                    title={ title } 
+                                    content={ content } 
+                                    className='d-flex m-1'
+                                >
+                                    <Image title={ saveFile?.options.icon?.name } src={ saveFile?.options.icon?.icon } />
+                                </Popover>  
+                            </div> : null
                     }
                 </Container>
             </Navbar>

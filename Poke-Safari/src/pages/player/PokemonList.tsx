@@ -1,15 +1,30 @@
-import GameScreen from "src/components/GameScreen/GameScreen"
-import useApp from "src/components/App/hook/useApp"
+import GameScreen from "src/components/GameScreen/GameScreen";
 import { useContext } from "react"
 import { Context } from "src/context/AppContext"
-import { Image } from "react-bootstrap"
-import { Popover } from "antd"
+import { Button, Image } from "react-bootstrap";
+import { Link } from "react-router-dom"
 
 const PokemonList = () => {
 
-    const { saveFile } = useContext(Context);
+    const { saveFile, SaveGame, setPokemonDetails } = useContext(Context);
 
-    const  { FirstLetterToUpper } = useApp();
+    /*const onConfirm = () => {
+
+        const saveFileCopy = saveFile;
+
+        if(saveFileCopy)
+        {
+            const pokemon = saveFileCopy.myPokemons.find(pokemon => pokemon == releasePokemon)
+            if(pokemon)
+            {
+                pokemon.released = true;
+    
+                SaveGame(saveFileCopy);
+            }
+        }
+        
+        setConfirm(false);
+    }*/
 
     return(
         <GameScreen>
@@ -18,31 +33,37 @@ const PokemonList = () => {
                     saveFile ?
 
                         saveFile.myPokemons.map(pokemon => (
-                            <Popover
-                                key={ pokemon.id }
-                                content={(
-                                    <div style={{display: 'flex', flexDirection: 'column'}}>
-                                        <span style={ pokemon.shiny ? {color: '#f9be19'} : {color: 'lightskyblue'} }><strong>{ FirstLetterToUpper(pokemon.name) }</strong></span>
-                                        <span>Height: <strong>{ pokemon.height } ft.</strong></span>
-                                        <span>Weight: <strong>{ pokemon.weight } kg.</strong></span>
-                                        <span>Moves: <strong>{ pokemon.moves.map(move => FirstLetterToUpper(move.move.name)).join(", ") }</strong></span>
-                                        { pokemon.held_item ? <span>Held item: <strong>{ FirstLetterToUpper(pokemon.held_item.item.name) }</strong></span> : null}
-                                        { pokemon.ability ? <span>Ability: <strong>{ FirstLetterToUpper(pokemon.ability.ability.name) }</strong></span> : null}
-                                    </div>    
-                                )}
-                            >
-                                <Image 
-                                    key={pokemon.id} 
+
+                            !pokemon.released ?
+
+                            <Link onClick={() => setPokemonDetails(pokemon) } to={`${pokemon.name}`}> 
+                                <Image  
                                     src={ pokemon.shiny ? pokemon.sprites.front_shiny : pokemon.sprites.front_default }
                                     width={125}
                                     height={125}
                                 />
-                            </Popover>
+                            </Link> : null
                         ))
 
                     : null
                 }
             </div>
+            <Button
+                onClick={() => {
+                    saveFile?.myPokemons.map(pokemon => {
+                    
+                        if(pokemon.released)
+                        {
+                            pokemon.released = false;
+                        }
+                    })
+
+                    const saveFileCopy = saveFile;
+                    
+                    if(saveFileCopy)
+                        SaveGame(saveFileCopy);
+                }}
+            >Take back pokes</Button>
         </GameScreen>    
     )
 }

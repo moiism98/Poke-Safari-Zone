@@ -10,3 +10,9 @@
 #optionsFont, #optionsFrame{
     margin-left: 1em;
 }
+
+.pokemonTeam{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}

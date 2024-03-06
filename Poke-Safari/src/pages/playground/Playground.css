@@ -13,7 +13,7 @@
     margin: 1em;
 }
 
-.wildPokemon img{
+.pokemonSprite{
     height: 85%;
 }
 
@@ -46,6 +46,12 @@
 
 .pokemonName svg{
     color: #f9be19; 
+    margin: .3em;
+}
+
+.encounterTypes{
+    height: 1.3em;
+    margin: .3em;
 }
 
 .actionsContainer{

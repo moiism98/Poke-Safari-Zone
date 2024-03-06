@@ -75,7 +75,7 @@ const useUnlocks = () => {
                                     case 'seen': seenUnlock(saveFileCopy, cuantity, safariZone.name, toUnlockPokemon); break;
                                     case 'pokemon': pokemonUnlock(saveFileCopy, unlock, cuantity, pokemon, toUnlockPokemon, safariZone); break;
                                     case 'zone': zoneUnlock(keyZone, saveFileCopy, cuantity, safariZone.name, toUnlockPokemon, availablePokemon); break;
-                                    case 'level': break;
+                                    case 'types': typeUnlock(saveFile, safariZone, cuantity, toUnlockPokemon); break;
                                 }
                             }
                         }
@@ -144,8 +144,6 @@ const useUnlocks = () => {
                 {
                     const keyPokemon: string[] = Array.from(unlock.type.pokemon);
     
-                    //let cuantity: number = 0;
-    
                     let keyPokemonCatched: number = 0;
 
                     let kPokemon: number = 0;
@@ -161,7 +159,7 @@ const useUnlocks = () => {
                             {
                                 keyPokemonCatched++;
 
-                                pokemon = zone.pokemon.length;
+                                pokemon = zone.pokemon.length; // if the code found our the pokemon, we end the loop, we dont need to check the entire array, we already found our pokemon!
                             }
 
                             pokemon++;
@@ -169,16 +167,6 @@ const useUnlocks = () => {
     
                         kPokemon++;
                     }
-    
-                    /*unlock.type.pokemon.forEach(pokemon => {
-                    
-                        zone?.pokemon?.forEach(zonePokemon => {
-                            
-                            zonePokemon.name == pokemon ? zonePokemon.catched > 0 ? cuantity++ : null : null
-        
-                        })
-                    
-                    })*/
     
                     if(keyPokemonCatched == keyPokemon.length)
                     {
@@ -280,6 +268,26 @@ const useUnlocks = () => {
                 }
             }
         }
+    }
+
+    const typeUnlock = (saveFile: SaveFile, zone: SafariZone, cuantity: number, toUnlockPokemon: ZonePokemon) => {
+        
+        let typeCatched: number = 0;
+
+        saveFile.myPokemons.map(myPokemon => {
+            myPokemon.types.map(type => type.type.name == toUnlockPokemon.unlock?.type?.pokemon 
+                ? typeCatched++ : null);
+        });
+
+        if(typeCatched == cuantity)
+        {
+            toUnlockPokemon.unlock = null;
+        
+            SaveGame(saveFile);
+
+            onPokemonUnlocked(toUnlockPokemon.id, toUnlockPokemon.name, zone.name);
+        }
+
     }
 
     //#endregion

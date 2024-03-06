@@ -13,6 +13,7 @@ import Zone from 'src/pages/zone/Zone';
 import Playground from 'src/pages/playground/Playground';
 import Player from 'src/pages/player/Player';
 import PokemonList from 'src/pages/player/PokemonList';
+import PokemonDetails from 'src/pages/pokemon/PokemonDetails';
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
               <Route path="/" Component={ Index }/>
               <Route path="/player" Component={ Player }/>
               <Route path="/player/pokemon" Component={ PokemonList }/>
+              <Route path="/player/pokemon/:name" Component={ PokemonDetails }/>
               <Route path="pokedex" Component={ Pokedex }/>
               <Route path="zones" Component={ Zones }/>
               <Route path="zones/:name" Component={ Zone }/>

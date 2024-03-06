@@ -190,7 +190,8 @@ const useNewGame = () => {
                     seen: 0,
                     catched: 0,
                     shiny: 0
-                }
+                },
+                pokemonTeam: []
             };
         }
 

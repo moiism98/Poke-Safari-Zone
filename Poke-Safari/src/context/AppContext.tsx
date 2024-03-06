@@ -1,7 +1,7 @@
 import useContext from './hook/useContext';
 import { useQuery } from '@apollo/client';
 import { createContext, useState, useEffect, useCallback } from 'react';
-import { ContextOptions, ContextPlayer, Frame, IContext, PokemonList, SaveFile } from 'src/interfaces/interfaces';
+import { CatchedPokemon, ContextOptions, ContextPlayer, Frame, IContext, PokemonList, SaveFile } from 'src/interfaces/interfaces';
 import { GET_ALL_POKEMON } from 'src/query/queries';
 import { notification } from 'antd';
 import { Image } from 'react-bootstrap';
@@ -18,15 +18,31 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
     const [ allPokemons, setAllPokemons ] = useState<PokemonList[]>();
 
+    const [ pokemonDetails, setPokemonDetails ] = useState<CatchedPokemon>();
+
+    const GetPokemonTeam = () => {
+
+        let save: CatchedPokemon[] = [];
+
+        if(saveFile)
+        {
+            save = saveFile.pokemonTeam;
+        }
+
+        return save;
+    }
+
+    const [ pokemonTeam, setPokemonTeam ] = useState<CatchedPokemon[]>(GetPokemonTeam());
+
     const [ appFont, setAppFont ] = useState<string>();
 
     const [ frame, setFrame ] = useState<Frame>();
 
     const [ level, setLevel ] = useState<number>(0);
 
-    const [ experience, setExperience ] = useState<number>(0)
+    const [ experience, setExperience ] = useState<number>(0);
 
-    const [ nextLevelExperience, setNextLevelExperience ] = useState<number>(0)
+    const [ nextLevelExperience, setNextLevelExperience ] = useState<number>(0);
 
 
     const options: ContextOptions = {
@@ -88,6 +104,7 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
         })
     
     }
+    
 
     const SaveGame = useCallback((saveFileCopy: SaveFile) => {
 
@@ -137,12 +154,19 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
         }
 
-        if(level)
+        if(pokemonTeam)
         {
-           //console.log(`Rise to level ${ level }`)
+            const saveFileCopy: SaveFile | null = saveFile;
+
+            if(saveFile && saveFileCopy)
+            {
+                saveFileCopy.pokemonTeam = pokemonTeam;
+
+                SaveGame(saveFileCopy)
+            }
         }
 
-    }, [ saveFile, appFont, frame, level, SaveGame ])
+    }, [ saveFile, appFont, frame, level, pokemonTeam, SaveGame ])
 
     useEffect(() => {
         
@@ -156,18 +180,20 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
             if(saveFile.player)
             {
-                setLevel(saveFile.player.level)
+                setLevel(saveFile.player.level);
 
-                setExperience(saveFile.player.experience)
+                setExperience(saveFile.player.experience);
 
-                setNextLevelExperience(saveFile.player.nextLevelExperience)
+                setNextLevelExperience(saveFile.player.nextLevelExperience);
+
+                setPokemonTeam(saveFile.pokemonTeam);
             }
         }
 
     }, [ saveFile ])
 
     return (
-      <Context.Provider value={{ saveFile, player, options, setSaveFile, totalPokemon, allPokemons, setAllPokemons, randomPokemon, onPokemonUnlocked, SaveGame, ReloadPokemon }}>
+      <Context.Provider value={{ saveFile, player, options, setSaveFile, totalPokemon, allPokemons, pokemonTeam, setPokemonTeam, pokemonDetails, setPokemonDetails, setAllPokemons, randomPokemon, onPokemonUnlocked, SaveGame, ReloadPokemon }}>
           {children}
       </Context.Provider>
   )

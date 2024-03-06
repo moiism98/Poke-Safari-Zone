@@ -10,6 +10,10 @@ export interface IContext {
     options: ContextOptions
     totalPokemon: number
     allPokemons: PokemonList[] | undefined,
+    pokemonTeam: CatchedPokemon[]
+    setPokemonTeam: React.Dispatch<React.SetStateAction<CatchedPokemon[]>>
+    pokemonDetails: CatchedPokemon | undefined
+    setPokemonDetails: React.Dispatch<React.SetStateAction<CatchedPokemon | undefined>>
     setAllPokemons: React.Dispatch<React.SetStateAction<PokemonList[] | undefined>>
     randomPokemon: string | undefined
     onPokemonUnlocked: (id: number, pokemon: string, zone: string, duration?: number) => void
@@ -46,7 +50,8 @@ export interface SaveFile {
     options: Options,
     bag: Item[],
     player: Player | null
-    statistics: Statistics
+    statistics: Statistics,
+    pokemonTeam: CatchedPokemon[]
 }
 
     //#region POKEMON
@@ -80,6 +85,7 @@ export interface SaveFile {
         held_item?: Held_Items | null
         shiny: boolean
         cry?: string
+        released?: boolean
     }
 
     export interface ZonePokemon {

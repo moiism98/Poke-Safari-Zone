@@ -136,7 +136,7 @@
                     "unlock": {
                         "type": {
                             "type": "pokemon",
-                            "cuantity": 2,
+                            "cuantity": 5,
                             "pokemon": "caterpie"
                         },
                         "description": "Catch 5 Caterpie to unlock this wild pokemon.",
@@ -272,8 +272,12 @@
                 {
                     "name": "dratini",
                     "unlock": {
-                        "type": null,
-                        "description": "Catch 5 Squirtle to unlock this wild pokemon.",
+                        "type": {
+                            "type":"pokemon",
+                            "cuantity": 0,
+                            "pokemon": ["squirtle", "totodile", "mudkip"]
+                        },
+                        "description": "Catch Squirtle, Totodile and Mudkip to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
@@ -480,7 +484,11 @@
                 {
                     "name": "aerodactyl",
                     "unlock": {
-                        "type": null,
+                        "type": {
+                            "type": "types",
+                            "cuantity": 5,
+                            "pokemon": "ghost"
+                        },
                         "description": "Catch 5 ghost type pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
@@ -524,16 +532,24 @@
                 {
                     "name": "bagon",
                     "unlock": {
-                        "type": null,
-                        "description": "Catch 10 dragon type pokemon to unlock this wild pokemon.",
+                        "type": {
+                            "type":"types",
+                            "cuantity": 3,
+                            "pokemon": "dragon"
+                        },
+                        "description": "Catch 3 dragon type pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 },
                 {
                     "name": "beldum",
                     "unlock": {
-                        "type": null,
-                        "description": "Catch 15 psychic type pokemon to unlock this wild pokemon.",
+                        "type": {
+                            "type": "types",
+                            "cuantity": 5,
+                            "pokemon": "psychic"
+                        },
+                        "description": "Catch 5 psychic type pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
                 }

@@ -1,7 +1,6 @@
 import './Playground.css';
 import useApp from "src/components/App/hook/useApp";
 import GameScreen from "src/components/GameScreen/GameScreen";
-
 import useZone from "src/components/Zones/hook/useZone";
 import PlaygroundContent from 'src/components/Playground/PlaygroundContent';
 

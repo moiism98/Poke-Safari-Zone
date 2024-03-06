@@ -1,13 +1,13 @@
 import usePlayer from "src/components/Player/hook/usePlayer";
 import useApp from "src/components/App/hook/useApp";
 import useZone from "src/components/Zones/hook/useZone";
+import useUnlocks from "src/utils/App/unlocks";
 import { useContext, useEffect, useState } from "react";
 import { Moves, Ability, WildPokemon, ZonePokemon, SeenPokemon, Held_Items } from "src/interfaces/interfaces";
 import { message } from "antd";
 import { Context } from "src/context/AppContext";
 import { GET_POKEMON } from "src/query/queries";
 import { useLazyQuery } from "@apollo/client";
-import useUnlocks from "src/utils/App/unlocks";
 
 const usePlayground = () => {
 
@@ -17,7 +17,7 @@ const usePlayground = () => {
     
     const { appConsts, gameScreen } = useApp();
 
-    const { /*PokemonUnlock,*/ CheckUnlock } = useUnlocks();
+    const {  CheckUnlock } = useUnlocks();
 
     const { zone } = useZone();
 

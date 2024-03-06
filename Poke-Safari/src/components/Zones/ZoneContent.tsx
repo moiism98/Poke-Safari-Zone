@@ -1,14 +1,12 @@
 import Loading from 'src/components/Spinners/Loading/Loading';
 import unlocked from 'src/assets/img/Pokedex/pokedex-unknown.svg';
-import useZone from "../../components/Zones/hook/useZone";
-import useApp from '../App/hook/useApp';
+import useZone from "src/components/Zones/hook/useZone";
+import useApp from 'src/components/App/hook/useApp';
 import { Container, Image } from "react-bootstrap";
 import { Popover } from "antd";
 import { ArrowLeftOutlined  } from '@ant-design/icons';
 
 const ZoneContent = () => {
-
-
 
     const { styles, zone, pokemonZone, loaded, options, navigate, GetTypeIcon } = useZone()
 
@@ -18,7 +16,7 @@ const ZoneContent = () => {
         
         zone ? 
             <Container className="zoneContainer" style={ styles.container }>
-                <ArrowLeftOutlined onClick={ () => navigate('/zones') } className="backArrow d-flex ms-2"/>
+                <ArrowLeftOutlined onClick={ () => navigate('..', { relative: 'path' }) } style={{ width: '3%' }} className="backArrow d-flex ms-2"/>
                 <div className="content">
                     <h1 className="zoneName">{ FirstLetterToUpper(zone.name) }</h1>
                     <div className="encounterContainer">

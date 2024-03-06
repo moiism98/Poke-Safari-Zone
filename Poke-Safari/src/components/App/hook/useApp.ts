@@ -11,7 +11,8 @@ const useApp = () => {
     const { options } = useContext(Context)
 
     const appConsts = {
-        shinyProbability: 5,
+        maxTeam: 6,
+        shinyProbability: 1,
         maxCatchRate: 255,
         rateModdifier: 5,
         maxModRateValue: 60,
