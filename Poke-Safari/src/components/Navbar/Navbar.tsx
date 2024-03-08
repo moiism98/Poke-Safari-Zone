@@ -104,13 +104,13 @@ function NavBar() {
     {
         if(pokemon)
         {
-            setPokemonTeam(pokemonTeam.filter(pkmn => pkmn.id != pokemon.id));
+            setPokemonTeam(pokemonTeam.filter(pkmn => pkmn.listId != pokemon.listId));
 
             const saveFileCopy = saveFile;
 
             if(saveFileCopy)
             {
-                const updatedTeam: CatchedPokemon[] = saveFileCopy.pokemonTeam.filter(pkmn => pkmn.id != pokemon.id);
+                const updatedTeam: CatchedPokemon[] = saveFileCopy.pokemonTeam.filter(pkmn => pkmn.listId != pokemon.listId);
 
                 saveFileCopy.pokemonTeam = updatedTeam;
 
@@ -264,7 +264,7 @@ function NavBar() {
                     <div className='pokemonTeam'>
                         {
                             pokemonTeam?.map(pokemon => (
-                                <>
+                                <div key={ pokemon.listId }>
                                     <Image 
                                         onClick={() => {
 
@@ -277,7 +277,7 @@ function NavBar() {
                                         src={ pokemon.shiny ? pokemon.sprites.front_shiny : pokemon.sprites.front_default }/>    
                                     
                                     {
-                                        releasePokemon?.id == pokemon.id ?
+                                        releasePokemon?.listId == pokemon.listId ?
                                             <Popconfirm
                                                 placement='bottom'
                                                 title={`Do you want to release this pokémon?`}
@@ -288,7 +288,7 @@ function NavBar() {
                                             /> : null
                                     }
 
-                                </>
+                                </div>
                             ))
                         }
                     </div>

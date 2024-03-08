@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Context } from "src/context/AppContext";
 import { Image } from "react-bootstrap";
 import { ArrowLeftOutlined, PlusOutlined } from '@ant-design/icons';
@@ -19,29 +19,30 @@ const PokemonDetails = () => {
 
     const navigate = useNavigate();
 
-    const isInTeam = () => {
+    const isInTeam = useCallback(() => {
         
         let isInTeam = false;
 
-        if(pokemonDetails)
+        if(pokemonDetails && pokemonTeam)
         {
-            if(pokemonTeam?.find(pokemon => pokemon.name == pokemonDetails.name))
+            if(pokemonTeam.find(pokemon => pokemon.listId == pokemonDetails.listId))
             {
                 isInTeam = true;
             }
         }
         
         return isInTeam;
-    }
+
+    }, [ pokemonDetails, pokemonTeam ])
 
     const [ inTeam, setInTeam ] = useState<boolean>(isInTeam());
 
     const addToTeam = (pokemon: CatchedPokemon) => {
         
-        const teamPokemon = pokemonTeam?.find(pkmn => pkmn.name == pokemon.name);
-
         if(pokemonTeam)
         {
+            const teamPokemon = pokemonTeam.find(pkmn => pkmn.listId == pokemon.listId);
+
             if(!teamPokemon)
             {
                 setPokemonTeam(oldTeam => [...oldTeam, pokemon]);
@@ -64,7 +65,9 @@ const PokemonDetails = () => {
             SaveGame(saveFileCopy);
         }
 
-    }, [ pokemonTeam, saveFile, SaveGame ])
+        setInTeam(isInTeam());
+
+    }, [ pokemonTeam, saveFile, SaveGame, isInTeam ])
 
     return(
         <GameScreen>
@@ -79,9 +82,10 @@ const PokemonDetails = () => {
                                     { pokemonDetails.types.map(type => <Image key={ type.type.name } width={30} height={30} style={{ margin: '0 .3em 0 0'}} title={ FirstLetterToUpper(type.type.name) } src={ GetTypeIcon(type.type.name) }/> )}
                                 </div>
                                 <Image width={200} height={200} src={ pokemonDetails.shiny ? pokemonDetails.sprites.front_shiny : pokemonDetails?.sprites.front_default }/>
-                                { !inTeam && pokemonTeam.length < appConsts.maxTeam ? 
-                                    
-                                    <Button onClick={ () => addToTeam(pokemonDetails) } shape="round" icon={ <PlusOutlined /> }>Add to the team!</Button> 
+                                { !inTeam ? 
+                                    pokemonTeam.length < appConsts.maxTeam ? 
+                                        <Button onClick={ () => addToTeam(pokemonDetails) } shape="round" icon={ <PlusOutlined /> }>Add to the team!</Button>
+                                        : <h4>The team is full already!</h4> 
                                     : <h4>{FirstLetterToUpper(pokemonDetails.name)} is already part of the team!</h4> 
                                 }
                             </div>

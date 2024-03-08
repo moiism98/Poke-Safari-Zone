@@ -1,8 +1,8 @@
 import GameScreen from "src/components/GameScreen/GameScreen";
-import { useContext } from "react"
+import { useContext } from "react";
 import { Context } from "src/context/AppContext"
 import { Button, Image } from "react-bootstrap";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const PokemonList = () => {
 
@@ -36,7 +36,7 @@ const PokemonList = () => {
 
                             !pokemon.released ?
 
-                            <Link onClick={() => setPokemonDetails(pokemon) } to={`${pokemon.name}`}> 
+                            <Link key={ pokemon.listId } onClick={() => setPokemonDetails(pokemon) } to={`${pokemon.name}`}> 
                                 <Image  
                                     src={ pokemon.shiny ? pokemon.sprites.front_shiny : pokemon.sprites.front_default }
                                     width={125}

@@ -305,12 +305,20 @@ const usePlayground = () => {
                 }
 
                 wildPokemon.catched++;
+
+                if(saveFile)
+                {
+                    /* 
+                        this id is unique for our catched pokemon, so we can difference between 2 or more same pokemons
+                        2 aron are not the same between them, so we can add them both to our team for instance... 
+                    */
+
+                    wildPokemon.listId = saveFile.myPokemons.length + 1;
+                }
                 
                 SaveCatchedPokemon(wildPokemon);
 
                 CheckUnlock(wildPokemon);
-                
-                //PokemonUnlock();
 
                 setCaught(true);
             }

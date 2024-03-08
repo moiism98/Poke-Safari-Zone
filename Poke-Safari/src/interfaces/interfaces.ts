@@ -86,6 +86,7 @@ export interface SaveFile {
         shiny: boolean
         cry?: string
         released?: boolean
+        listId?: number
     }
 
     export interface ZonePokemon {
