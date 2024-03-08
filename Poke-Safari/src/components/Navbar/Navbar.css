@@ -14,5 +14,20 @@
 .pokemonTeam{
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    width: 50%;
+}
+
+.playerIcon{
+    display: flex;
+    align-items: center;
+    color: white;
+    margin: 0, 1em, 0, 1em
+}
+
+.playerIcon span{
+    margin-right: .5em;
+}
+
+.playerIcon strong{
+    color: red
 }

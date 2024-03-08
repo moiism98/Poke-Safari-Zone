@@ -3,10 +3,13 @@ import { useContext } from "react";
 import { Context } from "src/context/AppContext"
 import { Button, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import useApp from "src/components/App/hook/useApp";
 
 const PokemonList = () => {
 
     const { saveFile, SaveGame, setPokemonDetails } = useContext(Context);
+
+    const { FirstLetterToUpper } = useApp()
 
     /*const onConfirm = () => {
 
@@ -38,6 +41,7 @@ const PokemonList = () => {
 
                             <Link key={ pokemon.listId } onClick={() => setPokemonDetails(pokemon) } to={`${pokemon.name}`}> 
                                 <Image  
+                                    title={ pokemon.nickname ? pokemon.nickname : FirstLetterToUpper(pokemon.name) }
                                     src={ pokemon.shiny ? pokemon.sprites.front_shiny : pokemon.sprites.front_default }
                                     width={125}
                                     height={125}

@@ -79,6 +79,7 @@ export interface SaveFile {
 
         id: number
         name: string
+        nickname?: string
         seen: number
         catched: number
         ability?: Ability,

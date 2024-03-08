@@ -148,7 +148,7 @@ function NavBar() {
             setSave(false)
         }
 
-    }, [save, saveFile, setSaveFile])
+    }, [ save, saveFile, setSaveFile ])
 
     return (
         <>
@@ -280,8 +280,8 @@ function NavBar() {
                                         releasePokemon?.listId == pokemon.listId ?
                                             <Popconfirm
                                                 placement='bottom'
-                                                title={`Do you want to release this pokémon?`}
-                                                okText={`Release ${ FirstLetterToUpper(pokemon?.name) }`}
+                                                title={`Do you want to remove this pokémon from the team?`}
+                                                okText={`Remove ${ FirstLetterToUpper(pokemon?.name) }`}
                                                 open={ openConfirm }
                                                 onCancel={ () => setConfirm(false) }
                                                 onConfirm={ () => onConfirm(pokemon) }
@@ -295,8 +295,8 @@ function NavBar() {
                     </Navbar.Collapse>
                     {
                         saveFile != null ?
-                            <div style={{ display: 'flex', alignItems: 'center', color: 'white', margin: '0 1em 0 1em' }}>
-                                <span style={{ marginRight: '.5em' }}>Have a nice hunting time, <strong style={{color: 'red'}}>{ saveFile?.player?.name }</strong> !</span>
+                            <div className='playerIcon'>
+                                <span>Have a nice hunting time, <strong>{ saveFile?.player?.name }</strong> !</span>
                                 <Popover 
                                     trigger='click' 
                                     open={ openPopover }

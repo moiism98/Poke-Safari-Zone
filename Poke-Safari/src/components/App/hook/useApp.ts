@@ -30,9 +30,13 @@ const useApp = () => {
         borderRadius: options.frame?.styles.borderRadius
     }
 
-    const FirstLetterToUpper = (string: string) => {
+    const FirstLetterToUpper = (string: string | undefined) => {
         
-        return string.charAt(0).toUpperCase() + string.substring(1, string.length)
+        if(string)
+        {
+            return string.charAt(0).toUpperCase() + string.substring(1, string.length)
+        }
+
     }
 
     const GetCustomDate = () => {
