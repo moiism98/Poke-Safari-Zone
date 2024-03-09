@@ -1,0 +1,70 @@
+{
+    "unlock": {
+        "type": {
+            "type": "level",
+            "cuantity": 5,
+            "pokemon": null
+        },
+        "description": "Reach level 5 to unlock the Day Care.",
+        "unlocked": false
+    },
+    "pokemon": [
+        {
+            "name": "pichu",
+            "rate": 75
+        },
+        {
+            "name": "cleffa",
+            "rate": 75
+        },
+        {
+            "name": "igglybuff",
+            "rate": 75
+        },
+        {
+            "name": "togepi",
+            "rate": 50
+        },
+        {
+            "name": "natu",
+            "rate": 75
+        },
+        {
+            "name": "tyroge",
+            "rate": 25
+        },
+        {
+            "name": "smoochum",
+            "rate": 25
+        },
+        {
+            "name": "elekid",
+            "rate": 25
+        },
+        {
+            "name": "magby",
+            "rate": 25
+        },
+        {
+            "name": "ralts",
+            "rate": 55
+        },
+        {
+            "name": "azurill",
+            "rate": 75
+        }
+        ,
+        {
+            "name": "skitty",
+            "rate": 50
+        },
+        {
+            "name": "castform",
+            "rate": 30
+        },
+        {
+            "name": "wynaut",
+            "rate": 25
+        }
+    ]
+}

@@ -161,6 +161,16 @@ function NavBar() {
                         <Nav.Link onClick={() => navigate('/play')}>PLAY</Nav.Link>
                         <Nav.Link onClick={() => navigate('/pokedex')}>Pokédex</Nav.Link>
                         <Nav.Link onClick={() => navigate('/zones')}>Safari Zones</Nav.Link>
+                        {
+                            saveFile?.dayCare.unlock ?
+
+                            <Popover content={ <span style={{ fontFamily: options.appFont }}>{ saveFile?.dayCare.unlock.description }</span> }>
+                                <Nav.Link style={{ color: 'rgba(255, 255, 255, 0.25)' }}>Day Care</Nav.Link>
+                            </Popover>
+                            
+                            : <Nav.Link onClick={() => navigate('/daycare')}>Day Care</Nav.Link>
+                        }
+                        <Nav.Link onClick={() => navigate('/shop')}>Shop</Nav.Link>
                         <NavDropdown title="Player" id="basic-nav-dropdown">
                             <NavDropdown.Item onClick={() => navigate('/player')}>Staticstics</NavDropdown.Item>
                             <NavDropdown.Item onClick={() => navigate('/player/pokemon')}>Pokemon List</NavDropdown.Item>

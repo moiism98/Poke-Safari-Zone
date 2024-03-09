@@ -1,4 +1,5 @@
 import safariZone from 'src/assets/json/safari_zones.json';
+import dayCare from "src/assets/json/daycare.json";
 import frameStyles from 'src/utils/App/frameStyles';
 import useApp from 'src/components/App/hook/useApp';
 import zonePortraits from 'src/utils/NewPlayer/portraits';
@@ -132,6 +133,10 @@ const useNewGame = () => {
                 seenPokemons: [],
                 myPokemons: [],
                 safariZones: safariZones,
+                dayCare: {
+                    unlock: dayCare.unlock,
+                    pokemon: dayCare.pokemon
+                },
                 options: {
                     font: 'pkmndp',
                     frame: frame_styles[0],
@@ -173,11 +178,6 @@ const useNewGame = () => {
         }
 
     }, [ openModal, setSaveFile ])
-
-    /*const method = (id: number, name: string | string[] | undefined) => {
-        message.info(`This method is for the catch unlock with id: ${id}
-        , and using these pokemon to unlock something: ${name}`);
-    }*/
 
     const zones: StaticZone[] = safariZone.zones;
 

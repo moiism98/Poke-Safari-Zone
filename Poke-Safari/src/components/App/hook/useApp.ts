@@ -18,7 +18,7 @@ const useApp = () => {
         maxModRateValue: 60,
         defaultRateValue: 20,
         minFleeRate: 25,
-        nextLevelExperience: 15,
+        nextLevelExperience: 5,
         maxLevel: 30,
         pokemonPoint: `https://pokeapi.co/api/v2/pokemon`,
         pokeSpeciesPoint: `https://pokeapi.co/api/v2/pokemon-species`,

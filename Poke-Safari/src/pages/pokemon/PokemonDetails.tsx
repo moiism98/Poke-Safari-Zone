@@ -146,7 +146,6 @@ const PokemonDetails = () => {
                                 <h3>Moves: { pokemonDetails.moves.map(move => FirstLetterToUpper(move.move.name)).join(", ") } </h3>
                                 { pokemonDetails.held_item ? <h3>Held item: <strong>{ FirstLetterToUpper(pokemonDetails.held_item.item.name) }</strong></h3> : null}
                                 { pokemonDetails.ability ? <h3>Ability: <strong>{ FirstLetterToUpper(pokemonDetails.ability.ability.name) }</strong></h3> : null}
-                                {/*<DeleteFilled title="Release pokémon" style={{marginTop: '.3em'}} onClick={() => { setConfirm(true); setReleasePokemon(pokemon)}} />*/}
                             </div> 
                         </div>
                      : null

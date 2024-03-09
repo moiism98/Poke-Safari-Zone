@@ -14,6 +14,8 @@ import Playground from 'src/pages/playground/Playground';
 import Player from 'src/pages/player/Player';
 import PokemonList from 'src/pages/player/PokemonList';
 import PokemonDetails from 'src/pages/pokemon/PokemonDetails';
+import DayCare from 'src/pages/daycare/DayCare';
+import Shop from 'src/pages/shop/Shop';
 
 function App() {
 
@@ -45,11 +47,13 @@ function App() {
               <Route path="/player" Component={ Player }/>
               <Route path="/player/pokemon" Component={ PokemonList }/>
               <Route path="/player/pokemon/:name" Component={ PokemonDetails }/>
-              <Route path="pokedex" Component={ Pokedex }/>
-              <Route path="zones" Component={ Zones }/>
-              <Route path="zones/:name" Component={ Zone }/>
-              <Route path="play" Component={ Zones }/>
-              <Route path="play/:zoneName" Component={ Playground }/>
+              <Route path="/pokedex" Component={ Pokedex }/>
+              <Route path="/zones" Component={ Zones }/>
+              <Route path="/zones/:name" Component={ Zone }/>
+              <Route path="/play" Component={ Zones }/>
+              <Route path="/play/:zoneName" Component={ Playground }/>
+              <Route path="/daycare" Component={ DayCare }/>
+              <Route path="/shop" Component={ Shop }/>
           </Routes>
         <Date/>
       </Router>

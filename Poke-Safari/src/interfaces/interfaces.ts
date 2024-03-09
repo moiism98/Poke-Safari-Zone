@@ -45,13 +45,14 @@ export interface ContextPlayer {
 
 export interface SaveFile {
 
-    seenPokemons: SeenPokemon[],
-    myPokemons: CatchedPokemon[],
-    safariZones: SafariZone[],
-    options: Options,
-    bag: Item[],
+    seenPokemons: SeenPokemon[]
+    myPokemons: CatchedPokemon[]
+    safariZones: SafariZone[]
+    dayCare: DayCare
+    options: Options
+    bag: Item[]
     player: Player | null
-    statistics: Statistics,
+    statistics: Statistics
     pokemonTeam: CatchedPokemon[]
 }
 
@@ -173,6 +174,20 @@ export interface SaveFile {
         name: string
         icon: string
         cuantity: number 
+    }
+
+    //#endregion
+
+    //#region DAYCARE
+
+    interface DayCare{
+        pokemon: DayCarePokemon[]
+        unlock: Unlock
+    }
+
+    export interface DayCarePokemon{
+        name: string
+        rate: number
     }
 
     //#endregion
