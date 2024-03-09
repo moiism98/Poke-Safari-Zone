@@ -5,7 +5,7 @@ import {  SafariZone, SaveFile, Unlock, WildPokemon, ZonePokemon} from "src/inte
 
 const useUnlocks = () => {
 
-    const { saveFile, SaveGame, onPokemonUnlocked } = useContext(Context);
+    const { saveFile, SaveGame, onPokemonUnlocked, onZoneUnlocked } = useContext(Context);
     
     //#region POKEMON UNLOCKS
 
@@ -122,7 +122,7 @@ const useUnlocks = () => {
             {
                 toUnlockZone.unlock = null;
 
-                console.log(`You have unlocked the ${zone}!`)
+                onZoneUnlocked(zone);
             }
             SaveGame(saveFile);
 
@@ -261,9 +261,7 @@ const useUnlocks = () => {
     
                         SaveGame(saveFile);
     
-                        message.success(`You have unlocked the ${toUnlockZone.name}!`);
-    
-                        // onZoneUnlocked(); method quite similar to onPokemonUnlocked
+                        onZoneUnlocked(zone);
                     }
                 }
             }

@@ -1,7 +1,8 @@
 import useContext from './hook/useContext';
+import zonePortraits from 'src/utils/NewPlayer/portraits';
 import { useQuery } from '@apollo/client';
 import { createContext, useState, useEffect, useCallback } from 'react';
-import { CatchedPokemon, ContextOptions, ContextPlayer, Frame, IContext, PokemonList, SaveFile } from 'src/interfaces/interfaces';
+import { CatchedPokemon, ContextOptions, ContextPlayer, Frame, IContext, PokemonList, Portraits, SaveFile } from 'src/interfaces/interfaces';
 import { GET_ALL_POKEMON } from 'src/query/queries';
 import { notification } from 'antd';
 import { Image } from 'react-bootstrap';
@@ -11,6 +12,8 @@ export const Context = createContext({} as IContext);
 export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
     const { GetSaveFile } = useContext();
+
+    const { portraits } = zonePortraits();
 
     const [ saveFile, setSaveFile ] = useState<SaveFile | null>(GetSaveFile());
 
@@ -102,7 +105,22 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
             closeIcon: false,
             placement: 'topRight'
         })
-    
+    }
+
+    const onZoneUnlocked = (zone: string) => {
+        
+        const zonePortait: Portraits | undefined = portraits.find(portrait => portrait.name == zone);
+
+        if(zonePortait)
+        {
+            notification.open({
+                message: <h5 className='unlockMessage'><strong>{ zone.substring(0, 1).toUpperCase() + zone.substring(1, zone.length) }</strong> has been unlocked!</h5>,
+                description: <div className='unlockNotification'><Image width={300} height={150} src={ zonePortait.src }/></div>,
+                duration: 3,
+                closeIcon: false,
+                placement: 'topRight'
+            })
+        }
     }
     
 
@@ -193,7 +211,7 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
     }, [ saveFile ])
 
     return (
-      <Context.Provider value={{ saveFile, player, options, setSaveFile, totalPokemon, allPokemons, pokemonTeam, setPokemonTeam, pokemonDetails, setPokemonDetails, setAllPokemons, randomPokemon, onPokemonUnlocked, SaveGame, ReloadPokemon }}>
+      <Context.Provider value={{ saveFile, player, options, setSaveFile, totalPokemon, allPokemons, pokemonTeam, setPokemonTeam, pokemonDetails, setPokemonDetails, setAllPokemons, randomPokemon, onPokemonUnlocked, onZoneUnlocked, SaveGame, ReloadPokemon }}>
           {children}
       </Context.Provider>
   )

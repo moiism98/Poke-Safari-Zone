@@ -17,6 +17,7 @@ export interface IContext {
     setAllPokemons: React.Dispatch<React.SetStateAction<PokemonList[] | undefined>>
     randomPokemon: string | undefined
     onPokemonUnlocked: (id: number, pokemon: string, zone: string, duration?: number) => void
+    onZoneUnlocked: (zone: string) => void
     SaveGame: (saveFileCopy: SaveFile) => void
     ReloadPokemon: () => void | undefined
 }
