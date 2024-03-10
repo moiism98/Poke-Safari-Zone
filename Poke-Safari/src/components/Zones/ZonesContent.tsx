@@ -54,7 +54,7 @@ const ZonesContent = () => {
                 onChange={ (page) => setOffset(page != 1 ? (page * zoneDisplayLimit) - zoneDisplayLimit : 0) }
                 style={{margin: '1em'}}
                 showSizeChanger={false}
-                />
+            />
         </>
     )
 }

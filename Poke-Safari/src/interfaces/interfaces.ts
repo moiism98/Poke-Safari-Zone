@@ -188,6 +188,7 @@ export interface SaveFile {
     export interface DayCarePokemon{
         name: string
         rate: number
+        sprite?: string
     }
 
     //#endregion

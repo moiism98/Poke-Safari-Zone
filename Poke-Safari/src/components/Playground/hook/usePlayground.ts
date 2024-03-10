@@ -17,7 +17,7 @@ const usePlayground = () => {
     
     const { appConsts, gameScreen } = useApp();
 
-    const {  CheckUnlock } = useUnlocks();
+    const { CheckUnlock } = useUnlocks();
 
     const { zone } = useZone();
 
@@ -549,7 +549,7 @@ const usePlayground = () => {
         GenerateWildPokemon,
         CatchPokemon, 
         ThrowBait,
-        ThrowRock,
+        ThrowRock
     }
 
 }

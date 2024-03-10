@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { Context } from "src/context/AppContext";
 import { Image } from "react-bootstrap";
-import { ArrowLeftOutlined, PlusOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, PlusOutlined, StarFilled } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
 import { Button, Typography, message } from "antd";
 import { CatchedPokemon } from "src/interfaces/interfaces";
@@ -115,6 +115,7 @@ const PokemonDetails = () => {
                 {
                     pokemonDetails ? 
                         <div key={ pokemonDetails.id } style={{ display: 'flex', flexWrap:'wrap', width: '100%', height: '75%', alignItems: 'center', justifyContent: 'space-around'}}>
+                            <audio autoPlay src={ pokemonDetails.cry }></audio>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems:'center', justifyContent: 'center', margin: '.5em'}}>
                                 <div style={{ display: 'flex', alignItems:'center'}}>
                                     <Typography.Title 
@@ -130,6 +131,7 @@ const PokemonDetails = () => {
                                     >
                                         { nickname ? nickname : FirstLetterToUpper(pokemonDetails.name) }
                                     </Typography.Title>
+                                    {pokemonDetails.shiny ? <StarFilled style={{ color: '#f9be19', marginRight: '.3em'}}/> : null}
                                     { pokemonDetails.types.map(type => <Image key={ type.type.name } width={30} height={30} style={{ margin: '0 .3em 0 0'}} title={ FirstLetterToUpper(type.type.name) } src={ GetTypeIcon(type.type.name) }/> )}
                                 </div>
                                 <Image width={200} height={200} src={ pokemonDetails.shiny ? pokemonDetails.sprites.front_shiny : pokemonDetails?.sprites.front_default }/>

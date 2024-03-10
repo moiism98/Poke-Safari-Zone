@@ -30,7 +30,7 @@
             "rate": 75
         },
         {
-            "name": "tyroge",
+            "name": "tyrogue",
             "rate": 25
         },
         {
@@ -64,7 +64,7 @@
         },
         {
             "name": "wynaut",
-            "rate": 25
+            "rate": 35
         }
     ]
 }

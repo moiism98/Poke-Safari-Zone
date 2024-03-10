@@ -1,11 +1,11 @@
 import GameScreen from "src/components/GameScreen/GameScreen";
 import useApp from "src/components/App/hook/useApp";
 import './PokemonList.css';
-import { useContext, useState} from "react";
+import { useCallback, useContext, useEffect, useState} from "react";
 import { Context } from "src/context/AppContext"
 import { Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { FloatButton, Modal } from "antd";
+import { FloatButton, Modal, Pagination } from "antd";
 import { DeleteFilled } from '@ant-design/icons';
 import { CatchedPokemon } from "src/interfaces/interfaces";
 
@@ -20,6 +20,18 @@ const PokemonList = () => {
     const [ release, setRelease ] = useState<boolean>(false);
 
     const [ openModal, setOpenModal ] = useState<boolean>(false);
+
+    const [ page, setPage ] = useState<number>();
+
+    const [ pages, setPages ] = useState<number>();
+
+    const [ offset, setOffset ] = useState<number>(0);
+
+    const [ pokemon, setPokemon ] = useState<CatchedPokemon[]>();
+
+    const [ totalPokemon, setTotalPokemon ] = useState<number>(0);
+
+    const limit = 28;
 
     const onRelease = (releasePokemon: CatchedPokemon | undefined) => {
 
@@ -51,70 +63,105 @@ const PokemonList = () => {
         setOpenModal(false);
     }
 
+    const PaginatePokemonList = useCallback(() => {
+        
+        const myPokemons: CatchedPokemon[] = []
+
+        if(saveFile && totalPokemon)
+        {
+            let pokemon = offset;
+
+            while(pokemon < limit + offset)
+            {
+                if(pokemon < totalPokemon)
+                    myPokemons.push(saveFile.myPokemons[pokemon]);
+                else
+                    pokemon = limit + offset;
+
+                pokemon++;
+            }
+        }
+
+        if(myPokemons)
+        {
+            setPokemon(myPokemons);
+        }
+        
+    }, [ offset, totalPokemon, saveFile ])
+
+    useEffect(() => {
+    
+        // set total pages
+
+        if(totalPokemon)
+        {
+            setPages(Math.ceil(totalPokemon / limit));
+        }
+
+        // set current page (depends on offset)
+
+        setPage(( offset + limit ) / limit);
+
+        // returns the current page's zones
+
+        PaginatePokemonList();
+
+    }, [ offset, totalPokemon, PaginatePokemonList ])
+
+    useEffect(() => {
+    
+        if(saveFile)
+        {
+            setTotalPokemon(saveFile.myPokemons.length);
+        }
+    
+    }, [ saveFile ])
 
     return(
         <>
             <GameScreen>
                 <div className="pokemonList">
                     {
-                        saveFile ?
-
-                            saveFile.myPokemons.map(pokemon => (
+                        pokemon?.map(pokemon => (
     
-                                !pokemon.released ?
+                            !pokemon.released ?
 
-                                    !release ?
+                                !release ?
 
-                                        <Link key={ pokemon.listId } onClick={() => setPokemonDetails(pokemon) } to={`${pokemon.name}`}> 
-                                            <Image  
-                                                title={ pokemon.nickname ? pokemon.nickname : FirstLetterToUpper(pokemon.name) }
-                                                src={ pokemon.shiny ? pokemon.sprites.front_shiny : pokemon.sprites.front_default }
-                                            />
-                                        </Link> 
+                                <Link key={ pokemon.listId } onClick={() => setPokemonDetails(pokemon) } to={`${pokemon.name}`}> 
+                                    <Image  
+                                        title={ pokemon.nickname ? pokemon.nickname : FirstLetterToUpper(pokemon.name) }
+                                        src={ pokemon.shiny ? pokemon.sprites.front_shiny : pokemon.sprites.front_default }
+                                    />
+                                </Link> 
 
-                                        :
-                                        <>
-                                            <Image 
-                                                className='releasePokemon'
-                                                key={ pokemon.listId }
-                                                title={ pokemon.nickname ? pokemon.nickname : FirstLetterToUpper(pokemon.name) }
-                                                src={ pokemon.shiny ? pokemon.sprites.front_shiny : pokemon.sprites.front_default }
-                                                onClick={() => {
+                                :
+                                <>  
+                                    <Image 
+                                        className='releasePokemon'
+                                        key={ pokemon.listId }
+                                        title={ pokemon.nickname ? pokemon.nickname : FirstLetterToUpper(pokemon.name) }
+                                        src={ pokemon.shiny ? pokemon.sprites.front_shiny : pokemon.sprites.front_default }
+                                        onClick={() => {
 
-                                                    setOpenModal(true);
+                                            setOpenModal(true);
 
-                                                    setReleasePokemon(pokemon);
-                                                }}
-                                            />
-                                        </>
+                                            setReleasePokemon(pokemon);
+                                        }}
+                                    />
+                                </>
                                 
-                                : null
-                            ))
-
-                        : null
-
+                            : null
+                        ))
                     }
                 </div>
-
-                {/*<Button
-                    onClick={() => {
-                        saveFile?.myPokemons.map(pokemon => {
-                        
-                            if(pokemon.released)
-                            {
-                                pokemon.released = false;
-                            }
-                        })
-
-                        const saveFileCopy = saveFile;
-                        
-                        if(saveFileCopy)
-                            SaveGame(saveFileCopy);
-                    }}
-                >
-                    Take back pokes
-                </Button>*/}
-
+                <Pagination 
+                    current={ page } 
+                    total={ pages ? pages * 10 : pages } 
+                    onChange={ (page) => setOffset(page != 1 ? (page * limit) - limit : 0) }
+                    style={{ margin: '1em' }}
+                    showSizeChanger={ false }
+                />
             </GameScreen>
 
             <FloatButton  
