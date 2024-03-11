@@ -1,12 +1,14 @@
+import "./Shop.css";
 import useApp from "src/components/App/hook/useApp";
 import GameScreen from "src/components/GameScreen/GameScreen";
 import shop from "src/assets/img/Zones/shop.svg";
 import { useContext } from "react";
 import { Context } from "src/context/AppContext";
 import { /*useEffect, */useState } from "react";
-import { InputNumber } from "antd";
+import { Button, InputNumber } from "antd";
 import { Image } from "react-bootstrap"
 import { valueType } from "antd/es/statistic/utils";
+import { Item } from "src/interfaces/interfaces";
 
 const Shop = () => {
 
@@ -18,13 +20,18 @@ const Shop = () => {
 
     const [ moneyToSpent, setMoneyToSpent ] = useState<number>(0);
 
-    const onStep = (itemPrice: number, info: { offset: valueType, type: "up" | "down" }) => {
-       
-        switch(info.type)
-        {
-            case 'up': setMoneyToSpent(oldPrice => oldPrice + itemPrice); break;
+    const [ item, setItem ] = useState<Item>();
 
-            case 'down': setMoneyToSpent(oldPrice => oldPrice - itemPrice); break;
+    const onStep = (itemPrice: number | undefined, info: { offset: valueType, type: "up" | "down" }) => {
+       
+        if(itemPrice)
+        {
+            switch(info.type)
+            {
+                case 'up': setMoneyToSpent(oldPrice => oldPrice + itemPrice); break;
+    
+                case 'down': setMoneyToSpent(oldPrice => oldPrice - itemPrice); break;
+            }
         }
     }
     
@@ -35,22 +42,35 @@ const Shop = () => {
                     <h3 style={{ color:'white' }}>$ { pokeMoney }</h3>
                     <h3 style={{ color:'white' }}>$ { moneyToSpent }</h3>
                 </div>
-                <div style={{ display: "flex", width: '100%', height:'95%' }}>
-                    <div style={{ display: "flex", flexDirection: 'row', flexWrap:'wrap' , alignItems:'center', justifyContent: 'center', width: '50%', height:'85%', overflowY:'auto' }}>
+                <div style={{ display: "flex", alignItems:'center', justifyContent: 'center', width: '100%', height:'80%' }}>
+                    <div style={{ width: '50%', overflowY:'auto' }}>
                         {
                             saveFile?.shop.items.map(item => (
                                 
-                                <div key={ item.id }>
-                                    <Image title={ FirstLetterToUpper(item.name) } width={35} height={35} src={ item.icon }/>
-                                    <InputNumber keyboard onStep={(_value, info) => onStep(item.price ? item.price : 0, info)} defaultValue={0} min={0} max={ item.price ? Math.floor(pokeMoney / item.price) : 0 } /> 
-                                </div>
-                                
+                                <Image 
+                                    key={ item.id } 
+                                    style={{ cursor: 'pointer', margin:'.3em' }} 
+                                    title={ FirstLetterToUpper(item.name) } 
+                                    width={45} height={45} 
+                                    src={ item.icon }
+                                    onClick={() => setItem(item) }
+                                />
                             ))
                         }
                     </div>
                     <div style={{ display: "flex", alignItems:'center', justifyContent: 'center', width: '50%', height:'75%'}}>
                         <h3>BAG ITEMS</h3>
                     </div>
+                </div>
+                <div style={{ display: 'flex', alignItems:'center', justifyContent:'center', width: '100%', height:'10%'}}>
+                    {
+                        item && item.price ? 
+                        <div className="purchase">
+                            <Image title={ FirstLetterToUpper(item.name) } src={ item.icon }/>
+                            <InputNumber keyboard onStep={(_value, info) => onStep( item.price, info)} defaultValue={0} min={0} max={ Math.floor(pokeMoney / item.price) } />
+                            <Button>Purchase</Button>
+                        </div> : null
+                    }
                 </div>
             </div>
         </GameScreen>    
