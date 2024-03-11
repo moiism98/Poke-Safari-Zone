@@ -51,6 +51,7 @@ export interface SaveFile {
     dayCare: DayCare
     options: Options
     bag: Item[]
+    shop: Shop
     player: Player | null
     statistics: Statistics
     pokemonTeam: CatchedPokemon[]
@@ -178,6 +179,24 @@ export interface SaveFile {
 
     //#endregion
 
+    //#region SHOP
+
+    interface Shop{
+        items: Item[]
+        unlock: Unlock
+    }
+
+    export interface Item {
+    
+        id: number
+        name: string
+        cuantity?: number
+        icon: string
+        price?: number
+    }
+
+    //#endregion
+
     //#region DAYCARE
 
     interface DayCare{
@@ -207,14 +226,6 @@ export interface SaveFile {
         id: number;
         name: string;
         icon: string;
-    }
-    
-    interface Item {
-    
-        id: number
-        name: string
-        cuantity: number
-        icon: string
     }
 
     export interface Frame{

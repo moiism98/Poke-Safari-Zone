@@ -1,36 +1,56 @@
 import useApp from "src/components/App/hook/useApp";
 import GameScreen from "src/components/GameScreen/GameScreen";
 import shop from "src/assets/img/Zones/shop.svg";
-import { Image } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { Context } from "src/context/AppContext";
+import { /*useEffect, */useState } from "react";
+import { InputNumber } from "antd";
+import { Image } from "react-bootstrap"
+import { valueType } from "antd/es/statistic/utils";
 
 const Shop = () => {
 
-    const getEggIcon = async() => {
+    const { saveFile } = useContext(Context);
+    
+    const { gameScreen, FirstLetterToUpper } = useApp();
 
-        await fetch("https://pokeapi.co/api/v2/item/483/")
-        .then(response => response.ok ? response.json() : console.warn("Data not received!"))
-        .then(data => setEggIcon(data.sprites.default));
+    const [ pokeMoney ] = useState<number>(50000);
+
+    const [ moneyToSpent, setMoneyToSpent ] = useState<number>(0);
+
+    const onStep = (itemPrice: number, info: { offset: valueType, type: "up" | "down" }) => {
+       
+        switch(info.type)
+        {
+            case 'up': setMoneyToSpent(oldPrice => oldPrice + itemPrice); break;
+
+            case 'down': setMoneyToSpent(oldPrice => oldPrice - itemPrice); break;
+        }
     }
-
-    const [ eggIcon, setEggIcon ] = useState<string>();
-
-    const [ eggCount ] = useState<number>(0);
-
-    useEffect(() => {
-        
-        getEggIcon()
-
-    }, [])
-
-    const { gameScreen } = useApp();
     
     return(
         <GameScreen styles={ Object.assign({}, gameScreen, { backgroundImage: `url(${ shop })` }) }>
-            <div style={{width: '100%', height: '100%'}}>
-                <div style={{ display: "flex", alignItems:'center', justifyContent: 'center', padding:'.3em', width: '10%', height: '5%'/*, backgroundColor: 'red'*/ }}>
-                    <Image width={40} height={40} src={ eggIcon }/>
-                    <h5 style={{ margin: 0, color: 'white' }}> x{ eggCount }</h5>
+            <div style={{ width: '100%', height: '100%' }}>
+                <div style={{ display: "flex", alignItems:'center', justifyContent: 'space-around', width: '100%', height:'5%', color:'white', margin: '1em'}}>
+                    <h3 style={{ color:'white' }}>$ { pokeMoney }</h3>
+                    <h3 style={{ color:'white' }}>$ { moneyToSpent }</h3>
+                </div>
+                <div style={{ display: "flex", width: '100%', height:'95%' }}>
+                    <div style={{ display: "flex", flexDirection: 'row', flexWrap:'wrap' , alignItems:'center', justifyContent: 'center', width: '50%', height:'85%', overflowY:'auto' }}>
+                        {
+                            saveFile?.shop.items.map(item => (
+                                
+                                <div key={ item.id }>
+                                    <Image title={ FirstLetterToUpper(item.name) } width={35} height={35} src={ item.icon }/>
+                                    <InputNumber keyboard onStep={(_value, info) => onStep(item.price ? item.price : 0, info)} defaultValue={0} min={0} max={ item.price ? Math.floor(pokeMoney / item.price) : 0 } /> 
+                                </div>
+                                
+                            ))
+                        }
+                    </div>
+                    <div style={{ display: "flex", alignItems:'center', justifyContent: 'center', width: '50%', height:'75%'}}>
+                        <h3>BAG ITEMS</h3>
+                    </div>
                 </div>
             </div>
         </GameScreen>    

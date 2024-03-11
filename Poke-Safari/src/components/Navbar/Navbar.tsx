@@ -170,7 +170,15 @@ function NavBar() {
                             
                             : <Nav.Link onClick={() => navigate('/daycare')}>Day Care</Nav.Link>
                         }
-                        <Nav.Link onClick={() => navigate('/shop')}>Shop</Nav.Link>
+                        {
+                            saveFile?.shop.unlock ?
+
+                            <Popover content={ <span style={{ fontFamily: options.appFont }}>{ saveFile?.shop.unlock.description }</span> }>
+                                <Nav.Link style={{ color: 'rgba(255, 255, 255, 0.25)' }}>Shop</Nav.Link>
+                            </Popover>
+
+                            : <Nav.Link onClick={() => navigate('/shop')}>Shop</Nav.Link>
+                        }
                         <NavDropdown title="Player" id="basic-nav-dropdown">
                             <NavDropdown.Item onClick={() => navigate('/player')}>Staticstics</NavDropdown.Item>
                             <NavDropdown.Item onClick={() => navigate('/player/pokemon')}>Pokemon List</NavDropdown.Item>

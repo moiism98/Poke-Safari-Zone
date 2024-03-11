@@ -1,10 +1,11 @@
 import safariZone from 'src/assets/json/safari_zones.json';
 import dayCare from "src/assets/json/daycare.json";
+import shop from "src/assets/json/shop_items.json";
 import frameStyles from 'src/utils/App/frameStyles';
 import useApp from 'src/components/App/hook/useApp';
 import zonePortraits from 'src/utils/NewPlayer/portraits';
 import playerIcons from 'src/utils/NewPlayer/playerIcons';
-import { PokemonList, Portraits, SafariZone, SaveFile, StaticZone, ZonePokemon, Icon, Unlock } from 'src/interfaces/interfaces';
+import { PokemonList, Portraits, SafariZone, SaveFile, StaticZone, ZonePokemon, Icon, Unlock, Item } from 'src/interfaces/interfaces';
 import { useContext, useEffect, useState } from 'react';
 import { Context } from 'src/context/AppContext';
 
@@ -46,6 +47,24 @@ const useNewGame = () => {
 
     }
 
+    const ShopItems = () => {
+
+        const items: Item[] = [];
+
+        shop.items.map(async item => {
+            await fetch(`https://pokeapi.co/api/v2/item/${item.id}/`)
+            .then(response => response.ok ? response.json() : console.warn("No data received!"))
+            .then(data => items.push({
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                icon: data.sprites.default ? data.sprites.default : '',
+            }))
+        })
+
+        return items;
+    }
+
     const GenerateZonesPokemon = ( toCreateZone: string ) => {
 
         const pokemon: ZonePokemon[] = []
@@ -58,6 +77,7 @@ const useNewGame = () => {
 
             if(staticZone)
             {
+                
                 while(zonePokemon < staticZone.pokemon.length)
                 {
                     const poke: PokemonList | undefined = allPokemons.find(pkmn => pkmn.name == staticZone.pokemon[zonePokemon].name)
@@ -125,7 +145,7 @@ const useNewGame = () => {
 
         let newSaveFile: SaveFile | null = null;
 
-        const icon: Icon | undefined = icons.find(icon => icon.name == data.playerIcon)
+        const icon: Icon | undefined = icons.find(icon => icon.name == data.playerIcon);
 
         if(icon)
         {
@@ -143,6 +163,10 @@ const useNewGame = () => {
                     icon: icon
                 },
                 bag: [],
+                shop: {
+                    unlock: shop.unlock,
+                    items: shopItems
+                },
                 player: {
                     name: data.playerName,
                     experience: 0,
@@ -182,6 +206,8 @@ const useNewGame = () => {
     const zones: StaticZone[] = safariZone.zones;
 
     const safariZones = SafariZones();
+
+    const shopItems = ShopItems();
 
     return{
         openModal,

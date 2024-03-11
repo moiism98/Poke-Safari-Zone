@@ -1,0 +1,138 @@
+{
+    "unlock": {
+        "type": {
+            "type":"level",
+            "cuantity": 3,
+            "pokemon": null
+        },
+        "description": "Reach level 3 to unlock the shop.",
+        "unlocked": false
+    },
+    "items":[
+        {
+            "id": 80,
+            "name": "sun-stone",
+            "price": 1750
+        },
+        {
+            "id": 81,
+            "name": "moon-stone",
+            "price": 1550
+        },
+        {
+            "id": 82,
+            "name": "fire-stone",
+            "price": 2100
+        },
+        {
+            "id": 83,
+            "name": "thunder-stone",
+            "price": 2500
+        },
+        {
+            "id": 84,
+            "name": "water-stone",
+            "price": 2300
+        },
+        {
+            "id": 85,
+            "name": "leaf-stone",
+            "price": 2200
+        },
+        {
+            "id": 107,
+            "name": "shiny-stone",
+            "price": 2100
+        },
+        {
+            "id": 108,
+            "name": "dusk-stone",
+            "price": 2200
+        },
+        {
+            "id": 109,
+            "name": "dawn-stone",
+            "price": 2450
+        },
+        {
+            "id": 110,
+            "name": "oval-stone",
+            "price": 2000
+        },
+        {
+            "id": 198,
+            "name": "kings-rock",
+            "price": 2950
+        },
+        {
+            "id": 203,
+            "name": "deep-sea-tooth",
+            "price": 2350
+        },
+        {
+            "id": 204,
+            "name": "deep-sea-scale",
+            "price": 2350
+        },
+        {
+            "id": 210,
+            "name": "metal-coat",
+            "price": 2700
+        },
+        {
+            "id": 212,
+            "name": "dragon-scale",
+            "price": 3150
+        },
+        {
+            "id": 229,
+            "name": "up-grade",
+            "price": 2500
+        },
+        {
+            "id": 298,
+            "name": "protector",
+            "price": 3000
+        },
+        {
+            "id": 299,
+            "name": "electrizer",
+            "price": 3000
+        },
+        {
+            "id": 300,
+            "name": "magmarizer",
+            "price": 3000
+        },
+        {
+            "id": 301,
+            "name": "dubious-disk",
+            "price": 5000
+        },
+        {
+            "id": 302,
+            "name": "reaper-cloth",
+            "price": 7500
+        },
+        {
+            "id": 303,
+            "name": "razor-claw",
+            "price": 7500
+        },
+        {
+            "id": 304,
+            "name": "razor-fang",
+            "price": 7500
+        },
+        {
+            "id": 580,
+            "name": "prism-scale",
+            "price": 2450
+        },
+        {
+            "id": 675,
+            "name": "shiny-charm",
+            "price": 20000
+        }
+    ]
+}
