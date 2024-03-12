@@ -58,6 +58,7 @@ const useNewGame = () => {
                 id: item.id,
                 name: item.name,
                 price: item.price,
+                sellPrice: item.sellPrice,
                 icon: data.sprites.default ? data.sprites.default : '',
             }))
         })

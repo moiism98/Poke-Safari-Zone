@@ -2,7 +2,7 @@ import useContext from './hook/useContext';
 import zonePortraits from 'src/utils/NewPlayer/portraits';
 import { useQuery } from '@apollo/client';
 import { createContext, useState, useEffect, useCallback } from 'react';
-import { CatchedPokemon, ContextOptions, ContextPlayer, Frame, IContext, PokemonList, Portraits, SaveFile } from 'src/interfaces/interfaces';
+import { CatchedPokemon, ContextOptions, ContextPlayer, Frame, IContext, Item, PokemonList, Portraits, SaveFile } from 'src/interfaces/interfaces';
 import { GET_ALL_POKEMON } from 'src/query/queries';
 import { notification } from 'antd';
 import { Image } from 'react-bootstrap';
@@ -36,6 +36,21 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
     }
 
     const [ pokemonTeam, setPokemonTeam ] = useState<CatchedPokemon[]>(GetPokemonTeam());
+
+    const GetBag = () => {
+        
+        let bag: Item[] = []
+
+        if(saveFile)
+        {
+            bag = saveFile.bag;
+        }
+
+        return bag;
+
+    }
+
+    const [ bag, setBag ] = useState<Item[]>(GetBag());
 
     const [ appFont, setAppFont ] = useState<string>();
 
@@ -205,13 +220,15 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
                 setNextLevelExperience(saveFile.player.nextLevelExperience);
 
                 setPokemonTeam(saveFile.pokemonTeam);
+
+                setBag(saveFile.bag);
             }
         }
 
     }, [ saveFile ])
 
     return (
-      <Context.Provider value={{ saveFile, player, options, setSaveFile, totalPokemon, allPokemons, pokemonTeam, setPokemonTeam, pokemonDetails, setPokemonDetails, setAllPokemons, randomPokemon, onPokemonUnlocked, onZoneUnlocked, SaveGame, ReloadPokemon }}>
+      <Context.Provider value={{ saveFile, player, options, bag, setBag, setSaveFile, totalPokemon, allPokemons, pokemonTeam, setPokemonTeam, pokemonDetails, setPokemonDetails, setAllPokemons, randomPokemon, onPokemonUnlocked, onZoneUnlocked, SaveGame, ReloadPokemon }}>
           {children}
       </Context.Provider>
   )

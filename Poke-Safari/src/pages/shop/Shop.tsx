@@ -1,74 +1,100 @@
 import "./Shop.css";
-import useApp from "src/components/App/hook/useApp";
 import GameScreen from "src/components/GameScreen/GameScreen";
 import shop from "src/assets/img/Zones/shop.svg";
-import { useContext } from "react";
-import { Context } from "src/context/AppContext";
-import { /*useEffect, */useState } from "react";
-import { Button, InputNumber } from "antd";
+import { Button, InputNumber, Popover } from "antd";
 import { Image } from "react-bootstrap"
-import { valueType } from "antd/es/statistic/utils";
-import { Item } from "src/interfaces/interfaces";
+import useShop from "src/components/shop/hook/useShop";
 
 const Shop = () => {
 
-    const { saveFile } = useContext(Context);
-    
-    const { gameScreen, FirstLetterToUpper } = useApp();
-
-    const [ pokeMoney ] = useState<number>(50000);
-
-    const [ moneyToSpent, setMoneyToSpent ] = useState<number>(0);
-
-    const [ item, setItem ] = useState<Item>();
-
-    const onStep = (itemPrice: number | undefined, info: { offset: valueType, type: "up" | "down" }) => {
-       
-        if(itemPrice)
-        {
-            switch(info.type)
-            {
-                case 'up': setMoneyToSpent(oldPrice => oldPrice + itemPrice); break;
-    
-                case 'down': setMoneyToSpent(oldPrice => oldPrice - itemPrice); break;
-            }
-        }
-    }
+    const { gameScreen, options, pokeMoney, moneyToSpent, saveFile, bag, item, isPurchasing, setItem, setIsPurchasing, onStep, 
+        purchaseItem, sellItem, FirstLetterToUpper } = useShop();
     
     return(
         <GameScreen styles={ Object.assign({}, gameScreen, { backgroundImage: `url(${ shop })` }) }>
-            <div style={{ width: '100%', height: '100%' }}>
-                <div style={{ display: "flex", alignItems:'center', justifyContent: 'space-around', width: '100%', height:'5%', color:'white', margin: '1em'}}>
-                    <h3 style={{ color:'white' }}>$ { pokeMoney }</h3>
-                    <h3 style={{ color:'white' }}>$ { moneyToSpent }</h3>
+            <div className="shop">
+                <div className="pokeMoney">
+                    <h3>$ { pokeMoney }</h3>
+                    <h3>Total: $ { moneyToSpent }</h3>
                 </div>
-                <div style={{ display: "flex", alignItems:'center', justifyContent: 'center', width: '100%', height:'80%' }}>
-                    <div style={{ width: '50%', overflowY:'auto' }}>
-                        {
-                            saveFile?.shop.items.map(item => (
-                                
-                                <Image 
-                                    key={ item.id } 
-                                    style={{ cursor: 'pointer', margin:'.3em' }} 
-                                    title={ FirstLetterToUpper(item.name) } 
-                                    width={45} height={45} 
-                                    src={ item.icon }
-                                    onClick={() => setItem(item) }
-                                />
-                            ))
-                        }
+                <div className="itemContainer">
+                    <h3 className="shopText">SHOP ITEMS</h3>
+                    <div className="items">
+                        <div>
+                            {
+                                saveFile?.shop.items.map(item => (
+
+                                    <Popover
+                                        trigger="hover"
+                                        key={ item.id }
+                                        content={
+                                            <div className="itemPopover" style={{ fontFamily: options.appFont }}>
+                                                <h5>{ FirstLetterToUpper(item.name) }</h5>
+                                                <h5>Price: ${ item.price ? item.price : 0 }</h5>
+                                            </div>
+                                        }
+                                    >
+                                        <Image
+                                            title={ FirstLetterToUpper(item.name) }
+                                            src={ item.icon }
+                                            onClick={() => {
+                                                    
+                                                setItem(item);
+
+                                                setIsPurchasing(true);
+                                            }}
+                                        />
+                                    </Popover>
+                                ))
+                            }
+                        </div>
                     </div>
-                    <div style={{ display: "flex", alignItems:'center', justifyContent: 'center', width: '50%', height:'75%'}}>
-                        <h3>BAG ITEMS</h3>
+                    <h3 className="shopText">BAG ITEMS</h3>
+                    <div className="items">
+                        <div>
+                            {
+                                bag.map(item => (
+                                    
+                                    <Popover
+                                        key={ item.id }
+                                        trigger="hover"
+                                        content={
+                                            <div className="itemPopover" style={{ fontFamily: options.appFont}}>
+                                                <div className="sellItemPopover">
+                                                    <h5>{ FirstLetterToUpper(item.name) }</h5>
+                                                    <h5>x{ item.cuantity }</h5>
+                                                </div>
+                                                <h5>Sell price: ${ item.sellPrice ? item.sellPrice : 0 }</h5>
+                                            </div>
+                                        }
+                                    >
+                                        <Image
+                                            title={ FirstLetterToUpper(item.name) } 
+                                            src={ item.icon }
+                                            onClick={() => {
+                                                
+                                                setItem(item);
+
+                                                setIsPurchasing(false);
+                                            }}
+                                        />
+                                    </Popover>
+                                ))
+                            }
+                        </div>
                     </div>
                 </div>
-                <div style={{ display: 'flex', alignItems:'center', justifyContent:'center', width: '100%', height:'10%'}}>
+                <div className="actionContainer">
                     {
                         item && item.price ? 
-                        <div className="purchase">
+                        <div className="action">
                             <Image title={ FirstLetterToUpper(item.name) } src={ item.icon }/>
-                            <InputNumber keyboard onStep={(_value, info) => onStep( item.price, info)} defaultValue={0} min={0} max={ Math.floor(pokeMoney / item.price) } />
-                            <Button>Purchase</Button>
+                            <InputNumber keyboard onStep={(value, info) => onStep(value, item.price, info)} defaultValue={1} min={1} max={ isPurchasing ? Math.floor(pokeMoney / item.price) : item.cuantity } />
+                            {
+                                isPurchasing ? <Button onClick={ () => purchaseItem() }>Purchase</Button>
+                                : <Button onClick={ () => sellItem() }>Sell</Button>
+                                
+                            }
                         </div> : null
                     }
                 </div>

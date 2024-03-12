@@ -16,6 +16,8 @@ export interface IContext {
     setPokemonDetails: React.Dispatch<React.SetStateAction<CatchedPokemon | undefined>>
     setAllPokemons: React.Dispatch<React.SetStateAction<PokemonList[] | undefined>>
     randomPokemon: string | undefined
+    bag: Item[]
+    setBag: React.Dispatch<React.SetStateAction<Item[]>>
     onPokemonUnlocked: (id: number, pokemon: string, zone: string, duration?: number) => void
     onZoneUnlocked: (zone: string) => void
     SaveGame: (saveFileCopy: SaveFile) => void
@@ -193,6 +195,7 @@ export interface SaveFile {
         cuantity?: number
         icon: string
         price?: number
+        sellPrice?: number
     }
 
     //#endregion

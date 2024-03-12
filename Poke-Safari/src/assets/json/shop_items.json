@@ -12,127 +12,152 @@
         {
             "id": 80,
             "name": "sun-stone",
-            "price": 1750
+            "price": 1750,
+            "sellPrice": 1050
         },
         {
             "id": 81,
             "name": "moon-stone",
-            "price": 1550
+            "price": 1550,
+            "sellPrice": 1050
         },
         {
             "id": 82,
             "name": "fire-stone",
-            "price": 2100
+            "price": 2100,
+            "sellPrice": 1050
         },
         {
             "id": 83,
             "name": "thunder-stone",
-            "price": 2500
+            "price": 2500,
+            "sellPrice": 1500
         },
         {
             "id": 84,
             "name": "water-stone",
-            "price": 2300
+            "price": 2300,
+            "sellPrice": 1050
         },
         {
             "id": 85,
             "name": "leaf-stone",
-            "price": 2200
+            "price": 2200,
+            "sellPrice": 1050
         },
         {
             "id": 107,
             "name": "shiny-stone",
-            "price": 2100
+            "price": 2100,
+            "sellPrice": 750
         },
         {
             "id": 108,
             "name": "dusk-stone",
-            "price": 2200
+            "price": 2200,
+            "sellPrice": 1050
         },
         {
             "id": 109,
             "name": "dawn-stone",
-            "price": 2450
+            "price": 2450,
+            "sellPrice": 750
         },
         {
             "id": 110,
             "name": "oval-stone",
-            "price": 2000
+            "price": 2000,
+            "sellPrice": 500
         },
         {
             "id": 198,
             "name": "kings-rock",
-            "price": 2950
+            "price": 2950,
+            "sellPrice": 2500
         },
         {
             "id": 203,
             "name": "deep-sea-tooth",
-            "price": 2350
+            "price": 2350,
+            "sellPrice": 100
         },
         {
             "id": 204,
             "name": "deep-sea-scale",
-            "price": 2350
+            "price": 2350,
+            "sellPrice": 100
         },
         {
             "id": 210,
             "name": "metal-coat",
-            "price": 2700
+            "price": 2700,
+            "sellPrice": 750
         },
         {
             "id": 212,
             "name": "dragon-scale",
-            "price": 3150
+            "price": 3150,
+            "sellPrice": 1000
         },
         {
             "id": 229,
             "name": "up-grade",
-            "price": 2500
+            "price": 2500,
+            "sellPrice": 1000
         },
         {
             "id": 298,
             "name": "protector",
-            "price": 3000
+            "price": 3000,
+            "sellPrice": 1050
         },
         {
             "id": 299,
             "name": "electrizer",
-            "price": 3000
+            "price": 3000,
+            "sellPrice": 1050
         },
         {
             "id": 300,
             "name": "magmarizer",
-            "price": 3000
+            "price": 3000,
+            "sellPrice": 1050
         },
         {
             "id": 301,
             "name": "dubious-disk",
-            "price": 5000
+            "price": 5000,
+            "sellPrice": 1050
         },
         {
             "id": 302,
             "name": "reaper-cloth",
-            "price": 7500
+            "price": 7500,
+            "sellPrice": 1050
         },
         {
             "id": 303,
             "name": "razor-claw",
-            "price": 7500
+            "price": 7500,
+            "sellPrice": 3750
         },
         {
             "id": 304,
             "name": "razor-fang",
-            "price": 7500
+            "price": 7500,
+            "sellPrice": 1050
         },
         {
             "id": 580,
             "name": "prism-scale",
-            "price": 2450
+            "price": 2450,
+            "sellPrice": 750
         },
         {
             "id": 675,
             "name": "shiny-charm",
-            "price": 20000
+            "price": 20000,
+            "sellPrice": 0
         }
     ]
 }
