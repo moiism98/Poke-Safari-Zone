@@ -53,7 +53,7 @@
     width: 100%;
 }
 
-.sellItemPopover{
+.bagItemPopover{
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -6,11 +6,9 @@ import { Item } from "src/interfaces/interfaces";
 
 const useShop = () => {
 
-    const { saveFile, options, bag, setBag, SaveGame } = useContext(Context);
+    const { saveFile, player, options, bag, setBag, SaveGame } = useContext(Context);
     
     const { gameScreen, FirstLetterToUpper } = useApp();
-
-    const [ pokeMoney, setPokeMoney ] = useState<number>(50000);
 
     const [ moneyToSpent, setMoneyToSpent ] = useState<number>(0);
 
@@ -49,51 +47,47 @@ const useShop = () => {
         
         if(purchase)
         {
-            // discount money and reset money to spent
-
-            setPokeMoney(oldMoney => oldMoney - moneyToSpent);
-
-            setMoneyToSpent(0);
-
-            // put the item in the bag
-
-            const bagCopy: Item[] = bag; 
-
-            const bagItem: Item | undefined = bagCopy.find(bagItem => bagItem.id == item?.id);
-
-            if(item)
-            {
-                if(bagItem && bagItem.cuantity)
-                {
-                    bagItem.cuantity += purchase;
-                }
-                else
-                {
-                    bagCopy.push({
-                        id: item.id,
-                        icon: item.icon,
-                        name: item.name,
-                        cuantity: purchase,
-                        price: item.price,
-                        sellPrice: item.sellPrice
-                    })
-                }
-            }
-
-            setBag(bagCopy);
-
-            // save game putting the bag state on it!
-
             const saveFileCopy = saveFile;
 
-            if(saveFileCopy)
+            if(saveFileCopy && saveFileCopy.player)
             {
-                saveFileCopy.bag = bagCopy;
-
+                // discount money and reset money to spent
+    
+                player.setMoney(oldMoney => oldMoney - moneyToSpent);
+    
+                saveFileCopy.player.money -= moneyToSpent;
+    
+                setMoneyToSpent(0);
+    
+                const bagItem: Item | undefined = saveFileCopy.bag.find(bagItem => bagItem.id == item?.id);
+    
+                if(item)
+                {
+                    if(bagItem && bagItem.cuantity)
+                    {
+                        bagItem.cuantity += purchase;
+                    }
+                    else
+                    {
+                        saveFileCopy.bag.push({
+                            id: item.id,
+                            icon: item.icon,
+                            name: item.name,
+                            cuantity: purchase,
+                            price: item.price,
+                            sellPrice: item.sellPrice
+                        })
+                    }
+                }
+    
+                setBag(saveFileCopy.bag);
+    
+                // save game putting the bag state on it!
+    
                 SaveGame(saveFileCopy);
+    
+                setItem(null);
             }
-
-            setItem(null);
         }
 
     }
@@ -102,52 +96,50 @@ const useShop = () => {
         
         if(sell)
         {
-            
-            // discount money and reset money to spent
-            
-            if(item && item.sellPrice)
+            const saveFileCopy = saveFile;
+
+            if(saveFileCopy && saveFileCopy.player)
             {
-                const sellPrice: number = item.sellPrice * sell;
-
-                console.log(`Selling x${sell} ${item?.name}! total gain: ${sellPrice}$`);
-
-                setPokeMoney(oldMoney => oldMoney + sellPrice); 
-
-                // remove the amount of item sold from bag!
-
-                let bagCopy: Item[] = bag; 
-
-                const bagItem: Item | undefined = bagCopy.find(bagItem => bagItem.id == item.id);
-
-                if(bagItem && bagItem.cuantity)
-                {
-                    bagItem.cuantity -= sell;
-
-                    if(bagItem.cuantity <= 0)
-                    {
-                        const newArray: Item[] = [];
-
-                        bagCopy.forEach(item => item.cuantity ? item.cuantity > 0 ? newArray.push(item) : null : null);
-
-                        bagCopy = newArray;
-                    }
-
-                }
-
-                // save game putting the bag state on it!
+                // discount money and reset money to spent
                 
-                setBag(bagCopy);
-
-                const saveFileCopy = saveFile;
-
-                if(saveFileCopy)
+                if(item && item.sellPrice)
                 {
-                    saveFileCopy.bag = bagCopy;
+                    const sellPrice: number = item.sellPrice * sell;
+    
+                    console.log(`Selling x${sell} ${item?.name}! total gain: ${sellPrice}$`);
+    
+                    player.setMoney(oldMoney => oldMoney + sellPrice); 
 
+                    saveFileCopy.player.money += sellPrice;
+    
+                    // remove the amount of item sold from bag!
+    
+                    const bagItem: Item | undefined = saveFileCopy.bag.find(bagItem => bagItem.id == item.id);
+    
+                    if(bagItem && bagItem.cuantity)
+                    {
+                        bagItem.cuantity -= sell;
+    
+                        if(bagItem.cuantity <= 0)
+                        {
+                            const itemIndex: number = saveFileCopy.bag.indexOf(bagItem);
+    
+                            if(itemIndex != -1)
+                            {
+                                saveFileCopy.bag.splice(itemIndex, 1);
+                            }
+                        }
+    
+                    }
+    
+                    // save game putting the bag state on it!
+                    
+                    setBag(saveFileCopy.bag);
+                    
                     SaveGame(saveFileCopy);
-                }     
-
-                setItem(null)
+    
+                    setItem(null);
+                }
             }
         }
     }
@@ -159,15 +151,16 @@ const useShop = () => {
             setPurchase(1);
 
             setSell(1);
-        } 
+        }
 
     }, [ item ])
 
     return{
         gameScreen,
         options,
-        pokeMoney,
+        player,
         moneyToSpent,
+        setMoneyToSpent,
         saveFile,
         bag,
         item,

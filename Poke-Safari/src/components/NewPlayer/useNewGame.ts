@@ -163,13 +163,23 @@ const useNewGame = () => {
                     frame: frame_styles[0],
                     icon: icon
                 },
-                bag: [],
+                bag: [
+                    {
+                        id: 483,
+                        icon: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/mystery-egg.png',
+                        name: 'mystery-egg',
+                        cuantity: 3,
+                        price: 1,
+                        sellPrice: 1
+                    }
+                ],
                 shop: {
                     unlock: shop.unlock,
                     items: shopItems
                 },
                 player: {
                     name: data.playerName,
+                    money: 5000,
                     experience: 0,
                     level: 1,
                     nextLevelExperience: appConsts.nextLevelExperience

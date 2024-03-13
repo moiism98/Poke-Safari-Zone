@@ -7,7 +7,7 @@ import { Button, Image } from "react-bootstrap";
 
 const DayCare = () => {
 
-    const { gameScreen, eggIcon, eggCount, setEggCount, hatchingEgg, setHatchingEgg, loading, pokemon, hatchedPokemon, 
+    const { gameScreen, eggIcon, eggs, setEggs, hatchingEgg, setHatchingEgg, loading, pokemon, hatchedPokemon, 
             HatchEgg, FirstLetterToUpper } = useDayCare();
 
     return(
@@ -15,7 +15,7 @@ const DayCare = () => {
             <div className="eggContainer">
                 <div className="egg">
                     <Image className="eggIcon" src={ eggIcon }/>
-                    <h5 className="eggCount"> x{ eggCount }</h5>
+                    <h5 className="eggCount"> x{ eggs }</h5>
                 </div>
                 {
                     loading ? <Loading/> :
@@ -35,9 +35,9 @@ const DayCare = () => {
 
                         <div className="hatchPokemonContainer">
                             <div className="hatchButtons">
-                                <Button onClick={() => setEggCount(oldEgg => oldEgg + 1)}>Egg Count ++</Button>
+                                <Button onClick={() => setEggs(oldEgg => oldEgg + 1)}>Egg Count ++</Button>
                                 {
-                                    eggCount > 0 ?
+                                    eggs > 0 ?
                                         <Button 
                                             disabled={ hatchingEgg ? true : false }
                                             onClick={() => {

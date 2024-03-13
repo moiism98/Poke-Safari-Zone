@@ -18,6 +18,8 @@ export interface IContext {
     randomPokemon: string | undefined
     bag: Item[]
     setBag: React.Dispatch<React.SetStateAction<Item[]>>
+    eggs: number,
+    setEggs: React.Dispatch<React.SetStateAction<number>>
     onPokemonUnlocked: (id: number, pokemon: string, zone: string, duration?: number) => void
     onZoneUnlocked: (zone: string) => void
     SaveGame: (saveFileCopy: SaveFile) => void
@@ -39,6 +41,8 @@ export interface ContextPlayer {
     setExperience: React.Dispatch<React.SetStateAction<number>>
     nextLevelExperience: number
     setNextLevelExperience: React.Dispatch<React.SetStateAction<number>>
+    money: number
+    setMoney: React.Dispatch<React.SetStateAction<number>>
 }
 
 //#endregion
@@ -246,6 +250,7 @@ export interface SaveFile {
     export interface Player {
 
         name: string
+        money: number
         level: number
         experience: number
         nextLevelExperience: number

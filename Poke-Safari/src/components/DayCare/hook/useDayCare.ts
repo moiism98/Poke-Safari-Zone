@@ -1,7 +1,7 @@
 import useApp from "src/components/App/hook/useApp";
 import usePlayer from "src/components/Player/hook/usePlayer";
 import { useContext, useEffect, useState } from "react";
-import { Ability, CatchedPokemon, DayCarePokemon, Held_Items, Moves } from "src/interfaces/interfaces";
+import { Ability, CatchedPokemon, DayCarePokemon, Held_Items, Item, Moves } from "src/interfaces/interfaces";
 import { Context } from "src/context/AppContext";
 import { useLazyQuery } from "@apollo/client";
 import { GET_POKEMON } from "src/query/queries";
@@ -9,7 +9,7 @@ import { message } from "antd";
 
 const useDayCare = () => {
 
-    const { saveFile, player, SaveGame } = useContext(Context);
+    const { saveFile, player, eggs, setEggs, SaveGame } = useContext(Context);
 
     const [ getPokemon, { data }] = useLazyQuery(GET_POKEMON);
 
@@ -24,8 +24,6 @@ const useDayCare = () => {
     const [ loading, setLoading ] = useState<boolean>(true);
 
     const [ eggIcon, setEggIcon ] = useState<string>();
-
-    const [ eggCount, setEggCount ] = useState<number>(0);
 
     const [ hatchedPokemon, setHatchedPokemon ] = useState<CatchedPokemon>();
 
@@ -229,7 +227,24 @@ const useDayCare = () => {
                     
                     setHatchingEgg(false);
 
-                    setEggCount(oldCount => oldCount - 1);
+                    setEggs(oldCount => oldCount - 1);
+
+                    const egg: Item | undefined = saveFileCopy.bag.find(item => item.name == 'mystery-egg');
+
+                    if(egg && egg.cuantity)
+                    {
+                        egg.cuantity -= 1;
+
+                        if(egg.cuantity <= 0)
+                        {
+                            const eggIndex: number = saveFileCopy.bag.indexOf(egg);
+
+                            if(eggIndex != -1)
+                            {
+                                saveFileCopy.bag.splice(eggIndex, 1);
+                            }
+                        }
+                    }
     
                     saveFileCopy.myPokemons.push(catchedPokemon);
     
@@ -323,8 +338,8 @@ const useDayCare = () => {
     return{
         gameScreen,
         eggIcon,
-        eggCount,
-        setEggCount,
+        eggs,
+        setEggs,
         hatchingEgg,
         setHatchingEgg,
         loading,

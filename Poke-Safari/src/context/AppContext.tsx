@@ -51,6 +51,8 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
     }
 
     const [ bag, setBag ] = useState<Item[]>(GetBag());
+    
+    const [ eggs, setEggs ] = useState<number>(0);
 
     const [ appFont, setAppFont ] = useState<string>();
 
@@ -61,6 +63,8 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
     const [ experience, setExperience ] = useState<number>(0);
 
     const [ nextLevelExperience, setNextLevelExperience ] = useState<number>(0);
+
+    const [ money, setMoney ] = useState<number>(0);
 
 
     const options: ContextOptions = {
@@ -76,7 +80,9 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
         experience: experience,
         setExperience: setExperience,
         nextLevelExperience: nextLevelExperience,
-        setNextLevelExperience: setNextLevelExperience
+        setNextLevelExperience: setNextLevelExperience,
+        money: money,
+        setMoney: setMoney
     }
 
     const [ randomPokemon, setRandomPokemon ] = useState<string>();
@@ -211,24 +217,34 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
             setFrame(saveFile.options.frame);
 
+            setBag(saveFile.bag);
+
+            const egg: Item | undefined = saveFile.bag.find(item => item.name == 'mystery-egg');
+
+            if(egg && egg.cuantity)
+            {
+                setEggs(egg.cuantity);
+            }
+
             if(saveFile.player)
             {
                 setLevel(saveFile.player.level);
+
+                setMoney(saveFile.player.money);
 
                 setExperience(saveFile.player.experience);
 
                 setNextLevelExperience(saveFile.player.nextLevelExperience);
 
                 setPokemonTeam(saveFile.pokemonTeam);
-
-                setBag(saveFile.bag);
+                
             }
         }
 
     }, [ saveFile ])
 
     return (
-      <Context.Provider value={{ saveFile, player, options, bag, setBag, setSaveFile, totalPokemon, allPokemons, pokemonTeam, setPokemonTeam, pokemonDetails, setPokemonDetails, setAllPokemons, randomPokemon, onPokemonUnlocked, onZoneUnlocked, SaveGame, ReloadPokemon }}>
+      <Context.Provider value={{ saveFile, player, options, bag, setBag, eggs, setEggs, setSaveFile, totalPokemon, allPokemons, pokemonTeam, setPokemonTeam, pokemonDetails, setPokemonDetails, setAllPokemons, randomPokemon, onPokemonUnlocked, onZoneUnlocked, SaveGame, ReloadPokemon }}>
           {children}
       </Context.Provider>
   )
