@@ -1,7 +1,7 @@
 import useApp from "src/components/App/hook/useApp";
 import usePlayer from "src/components/Player/hook/usePlayer";
 import { useContext, useEffect, useState } from "react";
-import { Ability, CatchedPokemon, DayCarePokemon, Held_Items, Item, Moves } from "src/interfaces/interfaces";
+import { Ability, CatchedPokemon, DayCarePokemon, Evolution, Held_Items, Item, Moves } from "src/interfaces/interfaces";
 import { Context } from "src/context/AppContext";
 import { useLazyQuery } from "@apollo/client";
 import { GET_POKEMON } from "src/query/queries";
@@ -13,7 +13,7 @@ const useDayCare = () => {
 
     const [ getPokemon, { data }] = useLazyQuery(GET_POKEMON);
 
-    const { appConsts, gameScreen, FirstLetterToUpper } = useApp();
+    const { appConsts, gameScreen, getPokemonEvolution, FirstLetterToUpper } = useApp();
 
     const { SavePlayer, SaveExperience, LevelUp } = usePlayer();
 
@@ -201,7 +201,40 @@ const useDayCare = () => {
         
                 await fetch(`${appConsts.pokemonPoint}/${data.pokemon.id}`)
                 .then(response => response.ok ? response.json() : console.warn("Data has not been received!"))
-                .then(data => cry = data.cries.latest)
+                .then(data => cry = data.cries.latest);
+
+                let evolution: Evolution[] | null = [];
+
+                await getPokemonEvolution(data.pokemon.id, data.pokemon.name).then(data => {
+                        
+                    //console.log(data);
+
+                    if(data)
+                    {
+                        data.map(evo => {
+                            
+                            evolution?.push({
+                                item: evo.item,
+                                held_item: evo.held_item,
+                                evolution: evo.evolution,
+                                method: evo.method
+                            })
+                        })
+                        /*evolution = {
+                            item: data.item,
+                            held_item: data.held_item,
+                            evolution: data.evolution,
+                            method: data.method
+                        };*/
+                    }
+                    else
+                    {
+                        evolution = null;
+                    }
+                    
+                });
+
+                console.log(evolution)
         
                 if(ability && moves)
                 {
@@ -219,6 +252,7 @@ const useDayCare = () => {
                         ability: ability,
                         shiny: shiny,
                         cry: cry,
+                        evolution: evolution,
                         catched: 1,
                         seen: 1, 
                     }

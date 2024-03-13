@@ -1,14 +1,17 @@
+import pokeTypes from "src/utils/Index/pokeTypes";
+import useApp from "src/components/App/hook/useApp";
 import { useLazyQuery } from "@apollo/client";
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Context } from "src/context/AppContext";
-import { SafariZone, WildPokemon, ZonePokemon } from "src/interfaces/interfaces";
+import { Evolution, SafariZone, WildPokemon, ZonePokemon } from "src/interfaces/interfaces";
 import { GET_POKEMON } from "src/query/queries";
-import pokeTypes from "src/utils/Index/pokeTypes";
 
 const useZone = () => {
 
-    const GenerateEncounterPokemon = () => {
+    const { getPokemonEvolution } = useApp();
+
+    const GenerateEncounterPokemon = async() => {
 
         if(data)
         {
@@ -16,8 +19,34 @@ const useZone = () => {
             {   
                 const zonePoke: ZonePokemon | undefined = zone.pokemon?.find(pkmn => pkmn.id == data.pokemon.id);
 
+                
                 if(zonePoke)
                 {
+                    let evolution: Evolution[] | null = [];
+
+                    await getPokemonEvolution(zonePoke.id, zonePoke.name).then(data => {
+
+                        if(data)
+                        {
+                            data.map(evo => {
+
+                                evolution?.push({
+                                    item: evo.item,
+                                    held_item: evo.held_item,
+                                    evolution: evo.evolution,
+                                    method: evo.method
+                                });
+                            })
+                        }
+                        else
+                        {
+                            evolution = null;
+                        }
+                        
+                    });
+
+                    console.log(evolution);
+
                     const savedZone = saveFile?.safariZones.find(zn => zn.name == zone.name)
 
                     if(savedZone)
@@ -41,7 +70,8 @@ const useZone = () => {
                                 weight: data.pokemon.weight,
                                 seen: myPokemon.seen,
                                 catched: myPokemon.catched,
-                                shiny: false
+                                shiny: false,
+                                evolution: evolution
                             };
         
                             const pokemonZoneCopy = pokemonZone?.map(pkmn => pkmn)
@@ -68,7 +98,7 @@ const useZone = () => {
     
     const { saveFile, options } = useContext(Context);
 
-    const { GetTypeIcon } = pokeTypes()
+    const { GetTypeIcon } = pokeTypes();
 
     const zoneId = pathname.split('/')[2]
 
@@ -80,8 +110,7 @@ const useZone = () => {
 
     const [ pokemonZone, setPokemonZone ] = useState<WildPokemon[]>([]);
 
-    const [ getPokemon, { data } ] = useLazyQuery(GET_POKEMON);
-    
+    const [ getPokemon, { data } ] = useLazyQuery(GET_POKEMON);    
 
     useEffect(() => {
 
@@ -90,7 +119,7 @@ const useZone = () => {
             if(position < zone.pokemon.length)
                 getPokemon({ variables: { "name": zone.pokemon[position].name } });
             else
-                setLoaded(true)
+                setLoaded(true);
         }
     
     // eslint-disable-next-line react-hooks/exhaustive-deps

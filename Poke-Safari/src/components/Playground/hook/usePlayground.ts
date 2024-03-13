@@ -3,7 +3,7 @@ import useApp from "src/components/App/hook/useApp";
 import useZone from "src/components/Zones/hook/useZone";
 import useUnlocks from "src/utils/App/unlocks";
 import { useContext, useEffect, useState } from "react";
-import { Moves, Ability, WildPokemon, ZonePokemon, SeenPokemon, Held_Items } from "src/interfaces/interfaces";
+import { Moves, Ability, WildPokemon, ZonePokemon, SeenPokemon, Held_Items, Evolution } from "src/interfaces/interfaces";
 import { message } from "antd";
 import { Context } from "src/context/AppContext";
 import { GET_POKEMON } from "src/query/queries";
@@ -15,7 +15,7 @@ const usePlayground = () => {
     
     const { SavePlayer, LevelUp, SaveExperience } = usePlayer();
     
-    const { appConsts, gameScreen } = useApp();
+    const { appConsts, gameScreen, getPokemonEvolution } = useApp();
 
     const { CheckUnlock } = useUnlocks();
 
@@ -187,16 +187,46 @@ const usePlayground = () => {
 
             const shiny: boolean = IsShiny();
 
-            const zonePokemon = zone?.pokemon?.find(pokemon => pokemon.id == data.pokemon.id);
+            const zonePokemon: ZonePokemon | undefined = zone?.pokemon?.find(pokemon => pokemon.id == data.pokemon.id);
 
             let cry: string = '';
 
             await fetch(`${appConsts.pokemonPoint}/${data.pokemon.id}`)
             .then(response => response.ok ? response.json() : console.warn("Data has not been received!"))
-            .then(data => cry = data.cries.latest)
+            .then(data => cry = data.cries.latest);
 
             if(moves && ability && zonePokemon)
             {
+
+                let evolution: Evolution[] | null = [];
+
+                await getPokemonEvolution(zonePokemon.id, zonePokemon.name).then(data => {
+
+                    if(data)
+                    {
+                        data.map(evo => {
+
+                            evolution?.push({
+                                item: evo.item,
+                                held_item: evo.held_item,
+                                evolution: evo.evolution,
+                                method: evo.method
+                            });
+                        })
+                        /*evolution = {
+                            item: data.item,
+                            held_item: data.held_item,
+                            evolution: data.evolution,
+                            method: data.method
+                        };*/
+                    }
+                    else
+                    {
+                        evolution = null;
+                    }
+                    
+                });
+
                 // generate the wild pokemon
 
                 const wildPokemon: WildPokemon = {
@@ -214,7 +244,8 @@ const usePlayground = () => {
                     shiny: shiny,
                     catched: zonePokemon.catched,
                     seen: zonePokemon.seen,
-                    cry: cry
+                    cry: cry,
+                    evolution: evolution
                 }
 
                 SaveSeenPokemon(wildPokemon);

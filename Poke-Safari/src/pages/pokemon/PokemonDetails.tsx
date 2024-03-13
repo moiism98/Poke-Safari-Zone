@@ -1,17 +1,22 @@
+import GameScreen from "src/components/GameScreen/GameScreen";
+import useApp from "src/components/App/hook/useApp";
+import useZone from "src/components/Zones/hook/useZone";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { Context } from "src/context/AppContext";
 import { Image } from "react-bootstrap";
 import { ArrowLeftOutlined, PlusOutlined, StarFilled } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
-import { Button, Typography, message } from "antd";
-import { CatchedPokemon } from "src/interfaces/interfaces";
-import GameScreen from "src/components/GameScreen/GameScreen";
-import useApp from "src/components/App/hook/useApp";
-import useZone from "src/components/Zones/hook/useZone";
+import { Button, Popover, Typography, message } from "antd";
+import { CatchedPokemon, Item } from "src/interfaces/interfaces";
+import { useLazyQuery } from "@apollo/client";
+import { GET_POKEMON } from "src/query/queries";
+import Loading from "src/components/Spinners/Loading/Loading";
 
 const PokemonDetails = () => {
 
     const { saveFile, options, pokemonDetails, pokemonTeam, setPokemonTeam, SaveGame } = useContext(Context);
+
+    const [ getPokemon, { data, loading } ] = useLazyQuery(GET_POKEMON);
     
     const  { FirstLetterToUpper, appConsts } = useApp();
 
@@ -20,6 +25,8 @@ const PokemonDetails = () => {
     const navigate = useNavigate();
 
     const [ nickname, setNickname ] = useState<string | undefined>(pokemonDetails?.nickname ? pokemonDetails.nickname : FirstLetterToUpper(pokemonDetails?.name));
+
+    const [ evolution, setEvolution] = useState<React.ReactNode>();
 
     const onChange = (nickname: string) => {
         
@@ -108,13 +115,64 @@ const PokemonDetails = () => {
 
     }, [ pokemonTeam, saveFile, SaveGame, isInTeam ])
 
+    useEffect(() => {
+
+        if(pokemonDetails) console.log(pokemonDetails)
+    
+    }, [ pokemonDetails ])
+
+    /*useEffect(() => {
+    
+        if(data)
+        {
+            console.log(pokemonDetails)
+
+            if(pokemonDetails && pokemonDetails.evolution)
+            {
+                if(pokemonDetails.evolution.item && pokemonDetails.evolution.method == 'trade')
+                {
+                    const item: Item | undefined = saveFile?.shop.items.find(item => item.name == pokemonDetails.evolution?.item);
+
+                    setEvolution(
+                        <Popover
+                            content={
+                                <>
+                                    <span>Evolve pokemon holding  {pokemonDetails.evolution.item }</span>
+                                    <Image src={ item?.icon }/>
+                                </>
+                            }
+                        >
+                            <Image 
+                                title={ FirstLetterToUpper(data.pokemon.name) } 
+                                width={125} height={125} 
+                                src={data.pokemon.sprites.front_default}
+                            /> 
+                        </Popover>    
+                    )  
+                }
+                else
+                {
+                    setEvolution(
+                        <Image 
+                            title={ FirstLetterToUpper(data.pokemon.name) } 
+                            width={125} height={125} 
+                            src={data.pokemon.sprites.front_default}
+                        /> 
+                    )
+                }
+            }
+        }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ data ])*/
+
     return(
         <GameScreen>
             <ArrowLeftOutlined onClick={ () =>  navigate("..", { relative: "path" }) } style={{ width: '3%' }} className="backArrow d-flex ms-2"/>
             <div style={{ display: 'flex', flexDirection: 'column', height: '100%', width:'100%', overflowY: 'auto'}}>
                 {
                     pokemonDetails ? 
-                        <div key={ pokemonDetails.id } style={{ display: 'flex', flexWrap:'wrap', width: '100%', height: '75%', alignItems: 'center', justifyContent: 'space-around'}}>
+                        <div key={ pokemonDetails.id } style={{ display: 'flex', flexWrap:'wrap', width: '100%', height: pokemonDetails.evolution ? '75%' : '100%', alignItems: 'center', justifyContent: 'space-around', overflowY: 'auto' }}>
                             <audio autoPlay src={ pokemonDetails.cry }></audio>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems:'center', justifyContent: 'center', margin: '.5em'}}>
                                 <div style={{ display: 'flex', alignItems:'center'}}>
@@ -131,7 +189,7 @@ const PokemonDetails = () => {
                                     >
                                         { nickname ? nickname : FirstLetterToUpper(pokemonDetails.name) }
                                     </Typography.Title>
-                                    {pokemonDetails.shiny ? <StarFilled style={{ color: '#f9be19', marginRight: '.3em'}}/> : null}
+                                    { pokemonDetails.shiny ? <StarFilled style={{ color: '#f9be19', marginRight: '.3em'}}/> : null }
                                     { pokemonDetails.types.map(type => <Image key={ type.type.name } width={30} height={30} style={{ margin: '0 .3em 0 0'}} title={ FirstLetterToUpper(type.type.name) } src={ GetTypeIcon(type.type.name) }/> )}
                                 </div>
                                 <Image width={200} height={200} src={ pokemonDetails.shiny ? pokemonDetails.sprites.front_shiny : pokemonDetails?.sprites.front_default }/>
@@ -152,7 +210,14 @@ const PokemonDetails = () => {
                         </div>
                      : null
                 }
-                <div style={{ width: '100%', height: '25%' }}></div>
+                {
+                    pokemonDetails && pokemonDetails.evolution ? loading ? <Loading/> :
+
+                    <div style={{ width: '100%', height: '25%' }}>
+                        <h3>Evolves to: </h3>
+                        { evolution }
+                    </div> : null
+                }
             </div>
         </GameScreen>
     )

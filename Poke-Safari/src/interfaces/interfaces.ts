@@ -97,6 +97,7 @@ export interface SaveFile {
         cry?: string
         released?: boolean
         listId?: number
+        evolution: Evolution[] | null
     }
 
     export interface ZonePokemon {
@@ -147,6 +148,14 @@ export interface SaveFile {
         item: {
             name: string
         }
+    }
+
+    export interface Evolution
+    {
+        item: string | null
+        held_item: string | null
+        method: string
+        evolution: string
     }
 
     //#endregion
