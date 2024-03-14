@@ -213,12 +213,6 @@ const usePlayground = () => {
                                 method: evo.method
                             });
                         })
-                        /*evolution = {
-                            item: data.item,
-                            held_item: data.held_item,
-                            evolution: data.evolution,
-                            method: data.method
-                        };*/
                     }
                     else
                     {

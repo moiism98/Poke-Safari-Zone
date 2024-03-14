@@ -1,0 +1,65 @@
+.detailsContainer{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.pokemonDetails{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    overflow-y: auto;
+}
+
+.pokemonActions{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: .5em;
+}
+
+.nickname{
+    display: flex;
+    align-items: center;
+}
+
+.shiny{
+    color:#f9be19;
+    margin-right: .3em;
+}
+
+.type{
+    width: 30px;
+    height: 30px;
+    margin: 0 .3em 0 0;
+}
+
+.stats{
+    display: flex;
+    flex-direction: column;
+    margin: .3em;
+}
+
+.pokemonIcon{
+    width: 200px;
+    height: 200px;
+}
+
+.evolutions{
+    width: 100%;
+    height: 35%;
+    margin: .5em;
+}
+
+.evolutionIcon{
+    width: 125px;
+    height: 125px;
+}
+
+.evolutionItemIcon{
+    margin: 0;
+}
