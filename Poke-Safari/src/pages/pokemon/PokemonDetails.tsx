@@ -8,7 +8,7 @@ import { Button, Typography } from "antd";
 
 const PokemonDetails = () => {
 
-   const { saveFile, options, appConsts, navigate, pokemonDetails, nickname, inTeam, 
+   const { saveFile, options, appConsts, navigate, pokemonDetails, loading, nickname, inTeam, 
     pokemonTeam, onChange, addToTeam, GetTypeIcon, FirstLetterToUpper } = usePokemonDetails();
 
     return(
@@ -18,7 +18,7 @@ const PokemonDetails = () => {
                 {
                     pokemonDetails ? 
                         <div className="pokemonDetails" style={{ height: pokemonDetails.evolution ? '75%' : '100%' }}>
-                            <audio autoPlay src={ pokemonDetails.cry }></audio>
+                            { loading ? null : <audio autoPlay src={ pokemonDetails.cry }></audio> }
                             <div className="pokemonActions">
                                 <div className="nickname">
                                     <Typography.Title 

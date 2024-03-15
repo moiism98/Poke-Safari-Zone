@@ -58,20 +58,20 @@ const usePlayer = () => {
         
         if(levelUp)
         {
-            LevelUnlock();
-
             SavePlayerStats();
 
             setLevelUp(false);
         }
 
-    }, [ levelUp, SavePlayerStats, LevelUnlock ])
+    }, [ levelUp, SavePlayerStats ])
 
     const LevelUp = useCallback(() => {
 
         if(player.experience != 0 && player.experience >= player.nextLevelExperience)
         {
-            message.info("Level up!"); // change this message
+            message.info(`LEVEL UP! You have reached level ${ player.level + 1 }!`);
+
+            LevelUnlock(player.level + 1);
 
             setTimeout(() => {
                 
@@ -85,6 +85,7 @@ const usePlayer = () => {
             
             }, 2000)
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ player ])    
 
     return {

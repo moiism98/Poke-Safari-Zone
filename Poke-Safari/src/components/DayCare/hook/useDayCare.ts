@@ -206,8 +206,6 @@ const useDayCare = () => {
                 let evolution: Evolution[] | null = [];
 
                 await getPokemonEvolution(data.pokemon.id, data.pokemon.name).then(data => {
-                        
-                    //console.log(data);
 
                     if(data)
                     {
@@ -220,12 +218,6 @@ const useDayCare = () => {
                                 method: evo.method
                             })
                         })
-                        /*evolution = {
-                            item: data.item,
-                            held_item: data.held_item,
-                            evolution: data.evolution,
-                            method: data.method
-                        };*/
                     }
                     else
                     {
@@ -233,8 +225,6 @@ const useDayCare = () => {
                     }
                     
                 });
-
-                console.log(evolution)
         
                 if(ability && moves)
                 {

@@ -14,7 +14,7 @@ const usePokemonDetails = () => {
 
     const { saveFile, options, pokemonDetails, pokemonTeam, setPokemonTeam, totalPokemon, SaveGame } = useContext(Context);
 
-    const [ getPokemon, { data, loading } ] = useLazyQuery(GET_POKEMON);
+    const [ getPokemon, { data } ] = useLazyQuery(GET_POKEMON);
     
     const  { FirstLetterToUpper, appConsts } = useApp();
 
@@ -28,11 +28,12 @@ const usePokemonDetails = () => {
 
     const [ evolutions, setEvolutions ] = useState<Evolutions[]>([]);
 
+    const [ loading, setLoading ] = useState<boolean>(true);
+
     const onChange = (nickname: string) => {
         
         if(nickname.length <= 15)
         {
-        
             if(saveFile)
             {
                 const saveFileCopy = saveFile;
@@ -122,6 +123,10 @@ const usePokemonDetails = () => {
             if(position < pokemonDetails.evolution.length)
             {
                 getPokemon({ variables: { "name": pokemonDetails.evolution[position].evolution }})
+            }
+            else
+            {
+                setLoading(false);
             }
         }
 

@@ -74,7 +74,13 @@ const Evolution = () => {
                             src={ evolution.icon }
                             style={ saveFile?.myPokemons.find(pokemon => pokemon.name == evolution.evolution) ? { filter: 'brightness(100%)' } : { filter: 'brightness(0%)' }}
                         /> 
-                    : null
+                    : 
+                        <Image 
+                            title={ evolution.catched ? FirstLetterToUpper(evolution.evolution) : undefined } 
+                            className="evolutionIcon" 
+                            src={ evolution.icon }
+                            style={ saveFile?.myPokemons.find(pokemon => pokemon.name == evolution.evolution) ? { filter: 'brightness(100%)' } : { filter: 'brightness(0%)' }}
+                        /> 
                 ))
             }
         </div> : null  

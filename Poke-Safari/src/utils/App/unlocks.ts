@@ -5,7 +5,7 @@ import {  SafariZone, SaveFile, Unlock, WildPokemon, ZonePokemon} from "src/inte
 
 const useUnlocks = () => {
 
-    const { saveFile, SaveGame, onPokemonUnlocked, onZoneUnlocked } = useContext(Context);
+    const { saveFile, SaveGame, onPokemonUnlocked, onZoneUnlocked, onLevelUnlocked } = useContext(Context);
     
     //#region POKEMON UNLOCKS
 
@@ -291,8 +291,33 @@ const useUnlocks = () => {
     //#endregion
 
 
-    const LevelUnlock = () => {
-        message.info("SHOW LEVEL UNLOCK!");
+    const LevelUnlock = (level: number) => {
+        
+        const saveFileCopy = saveFile;
+
+        if(saveFileCopy)
+        {
+            switch(level)
+            {
+                case 3: 
+                    
+                    saveFileCopy.shop.unlock = null; 
+
+                    onLevelUnlocked(200, 'Shop');
+
+                break;
+                case 5: 
+                    
+                    saveFileCopy.dayCare.unlock = null; 
+
+                    onLevelUnlocked(483, ' Day Care');
+
+                break;
+            }
+            
+            SaveGame(saveFileCopy);
+        }
+
     }
 
     return {

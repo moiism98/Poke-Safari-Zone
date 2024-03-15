@@ -38,6 +38,7 @@ const useNewGame = () => {
                 pokemon: GenerateZonesPokemon(zone.name),
                 portrait: GetZonePortrait(zone.name),
                 unlock: ZoneUnlock(zone.name),
+                rewards: ZoneRewards(zone.name)
             })
 
             zoneID++;
@@ -63,6 +64,35 @@ const useNewGame = () => {
             }))
         })
 
+        return items;
+    }
+
+    const ZoneRewards = (toCreateZone: string) => {
+        
+        const items: Item[] = [];
+
+        const zone: StaticZone | undefined = zones.find(zone => zone.name == toCreateZone);
+
+        if(zone)
+        {
+            zone.rewards?.map(async item => {
+
+                let icon = ''; 
+
+                await fetch(`https://pokeapi.co/api/v2/item/${item.id}`)
+                .then(response => response.ok ? response.json() : console.warn('No data received!'))
+                .then(data => icon = data.sprites.default)
+
+                items.push({
+                    id: item.id,
+                    name: item.name,
+                    icon: icon,
+                    sellPrice: item.sellPrice
+                });
+            })
+
+        }
+        
         return items;
     }
 

@@ -2,6 +2,33 @@
     "zones": [
         {
             "name": "cave",
+            "rewards": [
+                {
+                    "id": 90,
+                    "name":"stardust",
+                    "sellPrice": 1500
+                },
+                {
+                    "id": 91,
+                    "name":"star-piece",
+                    "sellPrice": 6000
+                },
+                {
+                    "id": 92,
+                    "name":"nugget",
+                    "sellPrice": 5000
+                },
+                {
+                    "id": 106,
+                    "name":"rare-bone",
+                    "sellPrice": 2500
+                },
+                {
+                    "id": 622,
+                    "name":"big-nugget",
+                    "sellPrice": 20000
+                }
+            ],
             "pokemon": [
                 {
                     "name": "clefairy",
@@ -88,6 +115,33 @@
         },
         {
             "name": "desert",
+            "rewards": [
+                {
+                    "id": 90,
+                    "name":"stardust",
+                    "sellPrice": 1500
+                },
+                {
+                    "id": 91,
+                    "name":"star-piece",
+                    "sellPrice": 6000
+                },
+                {
+                    "id": 92,
+                    "name":"nugget",
+                    "sellPrice": 5000
+                },
+                {
+                    "id": 106,
+                    "name":"rare-bone",
+                    "sellPrice": 2500
+                },
+                {
+                    "id": 622,
+                    "name":"big-nugget",
+                    "sellPrice": 20000
+                }
+            ],
             "pokemon": [
                 {
                     "name": "sandshrew",
@@ -122,6 +176,38 @@
         },
         {
             "name": "forest",
+            "rewards": [
+                {
+                    "id": 86,
+                    "name":"tiny-mushroom",
+                    "sellPrice": 250
+                },
+                {
+                    "id": 87,
+                    "name":"big-mushroom",
+                    "sellPrice": 2500
+                },
+                {
+                    "id": 90,
+                    "name":"stardust",
+                    "sellPrice": 1500
+                },
+                {
+                    "id": 91,
+                    "name":"star-piece",
+                    "sellPrice": 6000
+                },
+                {
+                    "id": 92,
+                    "name":"nugget",
+                    "sellPrice": 5000
+                },
+                {
+                    "id": 622,
+                    "name":"big-nugget",
+                    "sellPrice": 20000
+                }
+            ],
             "pokemon": [
                 {
                     "name": "bulbasaur",
@@ -252,6 +338,33 @@
         },
         {
             "name": "lake",
+            "rewards": [
+                {
+                    "id": 90,
+                    "name":"stardust",
+                    "sellPrice": 1500
+                },
+                {
+                    "id": 91,
+                    "name":"star-piece",
+                    "sellPrice": 6000
+                },
+                {
+                    "id": 92,
+                    "name":"nugget",
+                    "sellPrice": 5000
+                },
+                {
+                    "id": 473,
+                    "name":"slowpoke-tail",
+                    "sellPrice": 4900
+                },
+                {
+                    "id": 622,
+                    "name":"big-nugget",
+                    "sellPrice": 20000
+                }
+            ],
             "pokemon": [
                 {
                     "name": "squirtle",
@@ -326,6 +439,38 @@
         },
         {
             "name": "plains",
+            "rewards": [
+                {
+                    "id": 86,
+                    "name":"tiny-mushroom",
+                    "sellPrice": 250
+                },
+                {
+                    "id": 87,
+                    "name":"big-mushroom",
+                    "sellPrice": 2500
+                },
+                {
+                    "id": 90,
+                    "name":"stardust",
+                    "sellPrice": 1500
+                },
+                {
+                    "id": 91,
+                    "name":"star-piece",
+                    "sellPrice": 6000
+                },
+                {
+                    "id": 92,
+                    "name":"nugget",
+                    "sellPrice": 5000
+                },
+                {
+                    "id": 622,
+                    "name":"big-nugget",
+                    "sellPrice": 20000
+                }
+            ],
             "pokemon": [
                 {
                     "name": "pidgey",
@@ -460,6 +605,43 @@
         },
         {
             "name": "ruins",
+            "rewards": [
+                {
+                    "id": 90,
+                    "name":"stardust",
+                    "sellPrice": 1500
+                },
+                {
+                    "id": 91,
+                    "name":"star-piece",
+                    "sellPrice": 6000
+                },
+                {
+                    "id": 92,
+                    "name":"nugget",
+                    "sellPrice": 5000
+                },
+                {
+                    "id": 622,
+                    "name":"big-nugget",
+                    "sellPrice": 20000
+                },
+                {
+                    "id": 625,
+                    "name":"relic-copper",
+                    "sellPrice": 1000
+                },
+                {
+                    "id": 626,
+                    "name":"relic-silver",
+                    "sellPrice": 5000
+                },
+                {
+                    "id": 627,
+                    "name":"relic-gold",
+                    "sellPrice": 30000
+                }
+            ],
             "pokemon": [
                 {
                     "name": "abra",
@@ -566,6 +748,38 @@
         },
         {
             "name": "sea",
+            "rewards": [
+                {
+                    "id": 88,
+                    "name":"pearl",
+                    "sellPrice": 1000
+                },
+                {
+                    "id": 89,
+                    "name":"big-pearl",
+                    "sellPrice": 4000
+                },
+                {
+                    "id": 90,
+                    "name":"stardust",
+                    "sellPrice": 1500
+                },
+                {
+                    "id": 91,
+                    "name":"star-piece",
+                    "sellPrice": 6000
+                },
+                {
+                    "id": 92,
+                    "name":"nugget",
+                    "sellPrice": 5000
+                },
+                {
+                    "id": 622,
+                    "name":"big-nugget",
+                    "sellPrice": 20000
+                }
+            ],
             "pokemon": [
                 {
                     "name": "tentacool",
@@ -676,6 +890,28 @@
         },
         {
             "name": "volcano",
+            "rewards": [
+                {
+                    "id": 90,
+                    "name":"stardust",
+                    "sellPrice": 1500
+                },
+                {
+                    "id": 91,
+                    "name":"star-piece",
+                    "sellPrice": 6000
+                },
+                {
+                    "id": 92,
+                    "name":"nugget",
+                    "sellPrice": 5000
+                },
+                {
+                    "id": 622,
+                    "name":"big-nugget",
+                    "sellPrice": 20000
+                }
+            ],
             "pokemon": [
                 {
                     "name": "charmander",

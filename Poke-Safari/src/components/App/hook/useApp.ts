@@ -85,9 +85,10 @@ const useApp = () => {
             .then(response => response.ok ? response.json() : console.warn('No data received!'))
             .then(data => {
 
+                
+
                 if(data.chain.evolves_to.length > 0)
                 {
-
                     if(data.chain.evolves_to[0].evolves_to)
                     {
                         /*  

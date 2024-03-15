@@ -22,6 +22,7 @@ export interface IContext {
     setEggs: React.Dispatch<React.SetStateAction<number>>
     onPokemonUnlocked: (id: number, pokemon: string, zone: string, duration?: number) => void
     onZoneUnlocked: (zone: string) => void
+    onLevelUnlocked: (itemId: number, unlock: string) => void
     SaveGame: (saveFileCopy: SaveFile) => void
     ReloadPokemon: () => void | undefined
 }
@@ -168,7 +169,7 @@ export interface SaveFile {
         name: string
         portrait: string
         pokemon: ZonePokemon[] | null
-        reward?: ZoneReward[]
+        rewards?: Item[]
         unlock: Unlock | null
     }
     
@@ -176,20 +177,13 @@ export interface SaveFile {
         name: string
         pokemon: { name: string, unlock: Unlock | null }[]
         unlock: Unlock | null
+        rewards?: Item[]
     }
     
     export interface Portraits {
         
         name: string
         src: string
-    }
-    
-    interface ZoneReward {
-    
-        id: number
-        name: string
-        icon: string
-        cuantity: number 
     }
 
     //#endregion
@@ -198,7 +192,7 @@ export interface SaveFile {
 
     interface Shop{
         items: Item[]
-        unlock: Unlock
+        unlock: Unlock | null
     }
 
     export interface Item {
@@ -217,7 +211,7 @@ export interface SaveFile {
 
     interface DayCare{
         pokemon: DayCarePokemon[]
-        unlock: Unlock
+        unlock: Unlock | null
     }
 
     export interface DayCarePokemon{

@@ -45,8 +45,6 @@ const useZone = () => {
                         
                     });
 
-                    console.log(evolution);
-
                     const savedZone = saveFile?.safariZones.find(zn => zn.name == zone.name)
 
                     if(savedZone)

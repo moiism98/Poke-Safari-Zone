@@ -120,7 +120,7 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
             description: 
             <div className='unlockNotification'>
                 <Image className='unlockIcon' src={ sprite }/>
-                <h5 className='unlockDescription'>Now { pokemon } can be catched on { zone }!</h5>
+                <h5 className='unlockDescription'>Now { pokemon } will appear on { zone }!</h5>
             </div>,
             duration: duration ? duration : 3,
             closeIcon: false,
@@ -142,6 +142,22 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
                 placement: 'topRight'
             })
         }
+    }
+
+    const onLevelUnlocked = async(itemId: number, unlock: string) => {
+        
+        let icon: string = '';
+
+        await fetch(`https://pokeapi.co/api/v2/item/${itemId}`)
+        .then(response => response.ok ? response.json() : console.warn("No data received!"))
+        .then(data => icon = data.sprites.default);
+
+        notification.open({
+            message: <h5 className='unlockMessage'><Image style={{ margin: 0 }} src={ icon }/> { unlock } have been unlocked!</h5>,
+            duration: 3,
+            closeIcon: false,
+            placement: 'topRight'
+        })
     }
     
 
@@ -244,7 +260,7 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
     }, [ saveFile ])
 
     return (
-      <Context.Provider value={{ saveFile, player, options, bag, setBag, eggs, setEggs, setSaveFile, totalPokemon, allPokemons, pokemonTeam, setPokemonTeam, pokemonDetails, setPokemonDetails, setAllPokemons, randomPokemon, onPokemonUnlocked, onZoneUnlocked, SaveGame, ReloadPokemon }}>
+      <Context.Provider value={{ saveFile, player, options, bag, setBag, eggs, setEggs, setSaveFile, totalPokemon, allPokemons, pokemonTeam, setPokemonTeam, pokemonDetails, setPokemonDetails, setAllPokemons, randomPokemon, onPokemonUnlocked, onZoneUnlocked, onLevelUnlocked, SaveGame, ReloadPokemon }}>
           {children}
       </Context.Provider>
   )
