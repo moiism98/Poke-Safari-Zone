@@ -149,7 +149,10 @@ export interface SaveFile {
     export interface Held_Items
     {
         item: {
+            id: number
             name: string
+            icon: string
+            url?: string
         }
     }
 

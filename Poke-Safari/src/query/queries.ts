@@ -40,7 +40,9 @@ query pokemon($name: String!) {
     }
     held_items{
       item{
+        id
         name
+        url
       }
     }
     stats {

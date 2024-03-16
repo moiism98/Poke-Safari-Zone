@@ -12,7 +12,7 @@ const usePokemonDetails = () => {
 
     type Evolutions = Evolution & { icon: string, catched: boolean }
 
-    const { saveFile, options, pokemonDetails, pokemonTeam, setPokemonTeam, totalPokemon, SaveGame } = useContext(Context);
+    const { saveFile, options, pokemonDetails, setPokemonDetails, pokemonTeam, setPokemonTeam, totalPokemon, SaveGame } = useContext(Context);
 
     const [ getPokemon, { data } ] = useLazyQuery(GET_POKEMON);
     
@@ -195,6 +195,7 @@ const usePokemonDetails = () => {
         appConsts,
         navigate,
         pokemonDetails,
+        setPokemonDetails,
         nickname,
         inTeam,
         pokemonTeam,
@@ -204,7 +205,8 @@ const usePokemonDetails = () => {
         addToTeam,
         removeFromTeam,
         GetTypeIcon,
-        FirstLetterToUpper
+        FirstLetterToUpper,
+        SaveGame
     }
 }
 

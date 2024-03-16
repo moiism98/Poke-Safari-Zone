@@ -118,13 +118,36 @@ const usePlayground = () => {
 
     };
 
-    const SetRandomHeldItem = (held_items: Held_Items[]) => {
+    const SetRandomHeldItem = async(held_items: Held_Items[]) => {
         
-        let item = null;
+        let item: Held_Items | null = null;
+
+        let icon: string = '';
 
         if(held_items && held_items.length > 0)
         {
-            item = held_items[RandomProbability(held_items.length)];
+            const url: string | undefined = held_items[RandomProbability(held_items.length)].item.url;
+
+            
+            if(url)
+            {
+                const urlElements: string[] = url.split('/');
+
+                const itemId: number = +urlElements[urlElements.length - 2];
+
+                await fetch(url)
+                .then(response => response.ok ? response.json() : console.warn("Data not received!"))
+                .then(data => icon = data.sprites.default);
+    
+                item = {
+                    item:{
+                        id: itemId,
+                        name: held_items[RandomProbability(held_items.length)].item.name,
+                        icon: icon
+                    }
+                };
+            }
+
         }
 
         return item;
@@ -181,7 +204,9 @@ const usePlayground = () => {
 
             const ability = SetRandomAbility(data.pokemon.abilities);
             
-            const held_item = SetRandomHeldItem(data.pokemon.held_items);
+            let held_item: Held_Items | null = null;
+            
+            SetRandomHeldItem(data.pokemon.held_items).then(data => held_item = data);
             
             const moves = SetRandomMoveSet(data.pokemon.moves);
 
