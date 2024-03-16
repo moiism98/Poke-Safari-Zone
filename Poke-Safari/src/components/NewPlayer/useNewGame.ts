@@ -87,7 +87,8 @@ const useNewGame = () => {
                     id: item.id,
                     name: item.name,
                     icon: icon,
-                    sellPrice: item.sellPrice
+                    sellPrice: item.sellPrice,
+                    price: 1
                 });
             })
 
@@ -210,6 +211,7 @@ const useNewGame = () => {
                 player: {
                     name: data.playerName,
                     money: 5000,
+                    rareCandy: 0,
                     experience: 0,
                     level: 1,
                     nextLevelExperience: appConsts.nextLevelExperience

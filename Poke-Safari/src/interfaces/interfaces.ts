@@ -44,6 +44,8 @@ export interface ContextPlayer {
     setNextLevelExperience: React.Dispatch<React.SetStateAction<number>>
     money: number
     setMoney: React.Dispatch<React.SetStateAction<number>>
+    rareCandy: number
+    setRareCandy: React.Dispatch<React.SetStateAction<number>>
 }
 
 //#endregion
@@ -254,6 +256,7 @@ export interface SaveFile {
 
         name: string
         money: number
+        rareCandy: number
         level: number
         experience: number
         nextLevelExperience: number

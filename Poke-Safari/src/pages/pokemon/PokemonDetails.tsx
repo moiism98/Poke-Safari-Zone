@@ -1,15 +1,15 @@
-import Evolution from "./Evolution";
 import "./PokemonDetails.css";
+import Evolution from "./Evolution";
 import GameScreen from "src/components/GameScreen/GameScreen";
 import usePokemonDetails from "src/components/pokemon/hook/usePokemonDetails";
 import { Image } from "react-bootstrap";
-import { ArrowLeftOutlined, PlusOutlined, StarFilled } from '@ant-design/icons';
-import { Button, Typography } from "antd";
+import { ArrowLeftOutlined, PlusCircleFilled, MinusCircleFilled, StarFilled } from '@ant-design/icons';
+import { Tooltip, Typography } from "antd";
 
 const PokemonDetails = () => {
 
-   const { saveFile, options, appConsts, navigate, pokemonDetails, loading, nickname, inTeam, 
-    pokemonTeam, onChange, addToTeam, GetTypeIcon, FirstLetterToUpper } = usePokemonDetails();
+    const { saveFile, options, appConsts, navigate, pokemonDetails, loading, nickname, inTeam, 
+        pokemonTeam, onChange, addToTeam, removeFromTeam, GetTypeIcon, FirstLetterToUpper } = usePokemonDetails();
 
     return(
         <GameScreen>
@@ -38,12 +38,14 @@ const PokemonDetails = () => {
                                     { pokemonDetails.types.map(type => <Image key={ type.type.name } className="type" title={ FirstLetterToUpper(type.type.name) } src={ GetTypeIcon(type.type.name) }/> )}
                                 </div>
                                 <Image className="pokemonIcon" src={ pokemonDetails.shiny ? pokemonDetails.sprites.front_shiny : pokemonDetails?.sprites.front_default }/>
-                                { !inTeam ? 
-                                    pokemonTeam.length < appConsts.maxTeam ? 
-                                        <Button onClick={ () => addToTeam(pokemonDetails) } shape="round" icon={ <PlusOutlined /> }>Add to the team!</Button>
-                                        : <h4>The team is full already!</h4> 
-                                    : <h4>{ nickname ? nickname : FirstLetterToUpper(pokemonDetails.name) } is already part of the team!</h4> 
-                                }
+                                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems:'center', justifyContent: 'space-evenly', width: '100%', height:'100%'}}>
+                                    { 
+                                        !inTeam ? 
+                                            pokemonTeam.length < appConsts.maxTeam ? <Tooltip title='Add to the team'><PlusCircleFilled onClick={ () => addToTeam(pokemonDetails) } /></Tooltip>
+                                                : null
+                                        : <Tooltip title='Remove from team'><MinusCircleFilled onClick={ () => removeFromTeam(pokemonDetails) } /></Tooltip>
+                                    }
+                                </div>
                             </div>
                             <div className='stats'>
                                 <h3>Height: { pokemonDetails.height } ft.</h3>

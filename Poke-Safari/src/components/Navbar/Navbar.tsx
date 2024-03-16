@@ -7,13 +7,13 @@ import { Image, Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "src/context/AppContext";
-import { CatchedPokemon, Frame } from 'src/interfaces/interfaces';
-import { Modal, Popconfirm, Popover, message } from 'antd';
+import { /*CatchedPokemon,*/ Frame } from 'src/interfaces/interfaces';
+import { Modal, /*Popconfirm,*/ Popover } from 'antd';
 import { CloseOutlined  } from '@ant-design/icons';
 
 function NavBar() {
 
-    const { saveFile, options, pokemonTeam, SaveGame, setSaveFile, setPokemonTeam } = useContext(Context);
+    const { saveFile, options, pokemonTeam, /*SaveGame, */setSaveFile/*, setPokemonTeam*/, setPokemonDetails } = useContext(Context);
 
     const { FirstLetterToUpper } = useApp()
 
@@ -29,9 +29,9 @@ function NavBar() {
 
     const [ save, setSave ] = useState<boolean>(false);
 
-    const [ openConfirm, setConfirm ] = useState<boolean>(false);
+    //const [ openConfirm, setConfirm ] = useState<boolean>(false);
 
-    const [ releasePokemon, setReleasePokemon ] = useState<CatchedPokemon>();
+    //const [ releasePokemon, setReleasePokemon ] = useState<CatchedPokemon>();
 
     const title = (
         <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', padding: '.5em' }}>
@@ -95,12 +95,12 @@ function NavBar() {
 
         localStorage.removeItem('saveFile');
 
-        navigate('/')
+        navigate('/');
 
-        window.location.reload()
+        window.location.reload();
     }
 
-    const onConfirm = (pokemon: CatchedPokemon) =>
+    /*const onConfirm = (pokemon: CatchedPokemon) =>
     {
         if(pokemon)
         {
@@ -129,7 +129,7 @@ function NavBar() {
 
             SaveGame(saveFileCopy);
         }
-    }, [ openConfirm, saveFile, SaveGame ])
+    }, [ openConfirm, saveFile, SaveGame ])*/
 
     useEffect(() => {
 
@@ -275,7 +275,6 @@ function NavBar() {
 
                             </NavDropdown>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item onClick={() => { message.success('Saved successfully!') }}>Save Game</NavDropdown.Item>
                             <NavDropdown.Item onClick={() => setOpenModal(true)}>Delete Game</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
@@ -286,16 +285,21 @@ function NavBar() {
                                     <Image 
                                         onClick={() => {
 
-                                            setConfirm(true)
+                                            /*setConfirm(true)
 
-                                            setReleasePokemon(pokemon)
+                                            setReleasePokemon(pokemon)*/
+
+                                            setPokemonDetails(pokemon);
+                                            
+                                            navigate(`/player/pokemon/${pokemon.name}`);
                                         }} 
                                         title={ FirstLetterToUpper(pokemon.name) } 
-                                        width={75} height={75} 
+                                        width={75} height={75}
+                                        style={{ cursor:'pointer' }}
                                         src={ pokemon.shiny ? pokemon.sprites.front_shiny : pokemon.sprites.front_default }/>    
                                     
                                     {
-                                        releasePokemon?.listId == pokemon.listId ?
+                                        /*releasePokemon?.listId == pokemon.listId ?
                                             <Popconfirm
                                                 placement='bottom'
                                                 title={`Do you want to remove this pokémon from the team?`}
@@ -303,7 +307,7 @@ function NavBar() {
                                                 open={ openConfirm }
                                                 onCancel={ () => setConfirm(false) }
                                                 onConfirm={ () => onConfirm(pokemon) }
-                                            /> : null
+                                            /> : null*/
                                     }
 
                                 </div>

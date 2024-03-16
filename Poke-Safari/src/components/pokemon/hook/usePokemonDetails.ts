@@ -99,6 +99,31 @@ const usePokemonDetails = () => {
         }
 
     }
+
+    const removeFromTeam = (pokemon: CatchedPokemon) => {
+
+        if(pokemon)
+        {
+            setPokemonTeam(pokemonTeam.filter(pkmn => pkmn.listId != pokemon.listId));
+
+            const saveFileCopy = saveFile;
+
+            if(saveFileCopy)
+            {
+                const updatedTeam: CatchedPokemon[] = saveFileCopy.pokemonTeam.filter(pkmn => pkmn.listId != pokemon.listId);
+
+                saveFileCopy.pokemonTeam = updatedTeam;
+
+                SaveGame(saveFileCopy);
+            }
+        }
+    }
+
+    useEffect(() => {
+        
+        
+
+    },[])
     
 
     useEffect(() => {
@@ -177,6 +202,7 @@ const usePokemonDetails = () => {
         loading,
         onChange,
         addToTeam,
+        removeFromTeam,
         GetTypeIcon,
         FirstLetterToUpper
     }

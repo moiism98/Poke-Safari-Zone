@@ -66,6 +66,8 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
     const [ money, setMoney ] = useState<number>(0);
 
+    const [ rareCandy, setRareCandy ] = useState<number>(0);
+
 
     const options: ContextOptions = {
         appFont: appFont,
@@ -82,7 +84,9 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
         nextLevelExperience: nextLevelExperience,
         setNextLevelExperience: setNextLevelExperience,
         money: money,
-        setMoney: setMoney
+        setMoney: setMoney,
+        rareCandy: rareCandy,
+        setRareCandy: setRareCandy
     }
 
     const [ randomPokemon, setRandomPokemon ] = useState<string>();
@@ -247,6 +251,8 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
                 setLevel(saveFile.player.level);
 
                 setMoney(saveFile.player.money);
+
+                setRareCandy(saveFile.player.rareCandy);
 
                 setExperience(saveFile.player.experience);
 

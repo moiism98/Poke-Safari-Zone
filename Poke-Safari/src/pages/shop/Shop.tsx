@@ -56,31 +56,33 @@ const Shop = () => {
                             {
                                 bag.map(item => (
                                     
-                                    <Popover
-                                        key={ item.id }
-                                        trigger="hover"
-                                        content={
-                                            <div className="itemPopover" style={{ fontFamily: options.appFont}}>
-                                                <div className="bagItemPopover">
-                                                    <h5>{ FirstLetterToUpper(item.name) }</h5>
-                                                    <h5>x{ item.cuantity }</h5>
+                                    item.cuantity && item.cuantity > 0 ?
+                                        <Popover
+                                            key={ item.id }
+                                            trigger="hover"
+                                            content={
+                                                <div className="itemPopover" style={{ fontFamily: options.appFont}}>
+                                                    <div className="bagItemPopover">
+                                                        <h5>{ FirstLetterToUpper(item.name) }</h5>
+                                                        <h5>x{ item.cuantity }</h5>
+                                                    </div>
+                                                    <h5>Sell price: ${ item.sellPrice ? item.sellPrice : 0 }</h5>
                                                 </div>
-                                                <h5>Sell price: ${ item.sellPrice ? item.sellPrice : 0 }</h5>
-                                            </div>
-                                        }
-                                    >
-                                        <Image
-                                            title={ FirstLetterToUpper(item.name) } 
-                                            src={ item.icon }
-                                            onClick={() => {
+                                            }
+                                        >
+                                            <Image
+                                                title={ FirstLetterToUpper(item.name) } 
+                                                src={ item.icon }
+                                                onClick={() => {
 
-                                                setItem(item);
+                                                    setItem(item);
 
-                                                setIsPurchasing(false);
+                                                    setIsPurchasing(false);
 
-                                            }}
-                                        />
-                                    </Popover>
+                                                }}
+                                            />
+                                        </Popover> 
+                                    : null
                                 ))
                             }
                         </div>
@@ -93,7 +95,8 @@ const Shop = () => {
                             <Image title={ FirstLetterToUpper(item.name) } src={ item.icon }/>
                             <InputNumber keyboard onStep={(value, info) => onStep(value, item.price, info)} defaultValue={1} min={1} max={ isPurchasing ? Math.floor(player.money / item.price) : item.cuantity } />
                             {
-                                isPurchasing ? player.money >= moneyToSpent ? <Button onClick={ () => purchaseItem() }>Purchase</Button> : null
+                                isPurchasing ? 
+                                    player.money >= moneyToSpent ? <Button onClick={ () => purchaseItem() }>Purchase</Button> : null
                                 : <Button onClick={ () => sellItem() }>Sell</Button>
                                 
                             }

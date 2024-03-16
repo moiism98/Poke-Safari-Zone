@@ -59,11 +59,12 @@ const useShop = () => {
     
                 setMoneyToSpent(0);
     
-                const bagItem: Item | undefined = saveFileCopy.bag.find(bagItem => bagItem.id == item?.id);
-    
+                
                 if(item)
                 {
-                    if(bagItem && bagItem.cuantity)
+                    const bagItem: Item | undefined = saveFileCopy.bag.find(bagItem => bagItem.id == item.id);
+
+                    if(bagItem)
                     {
                         bagItem.cuantity += purchase;
                     }
@@ -120,7 +121,7 @@ const useShop = () => {
                     {
                         bagItem.cuantity -= sell;
     
-                        if(bagItem.cuantity <= 0)
+                        /*if(bagItem.cuantity <= 0)
                         {
                             const itemIndex: number = saveFileCopy.bag.indexOf(bagItem);
     
@@ -128,7 +129,7 @@ const useShop = () => {
                             {
                                 saveFileCopy.bag.splice(itemIndex, 1);
                             }
-                        }
+                        }*/
     
                     }
     

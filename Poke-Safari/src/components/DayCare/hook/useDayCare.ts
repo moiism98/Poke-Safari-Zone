@@ -259,7 +259,7 @@ const useDayCare = () => {
                     {
                         egg.cuantity -= 1;
 
-                        if(egg.cuantity <= 0)
+                        /*if(egg.cuantity <= 0)
                         {
                             const eggIndex: number = saveFileCopy.bag.indexOf(egg);
 
@@ -267,7 +267,7 @@ const useDayCare = () => {
                             {
                                 saveFileCopy.bag.splice(eggIndex, 1);
                             }
-                        }
+                        }*/
                     }
     
                     saveFileCopy.myPokemons.push(catchedPokemon);

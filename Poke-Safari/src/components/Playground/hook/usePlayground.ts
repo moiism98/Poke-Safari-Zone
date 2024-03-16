@@ -2,8 +2,8 @@ import usePlayer from "src/components/Player/hook/usePlayer";
 import useApp from "src/components/App/hook/useApp";
 import useZone from "src/components/Zones/hook/useZone";
 import useUnlocks from "src/utils/App/unlocks";
-import { useContext, useEffect, useState } from "react";
-import { Moves, Ability, WildPokemon, ZonePokemon, SeenPokemon, Held_Items, Evolution } from "src/interfaces/interfaces";
+import { ReactElement, createElement, useContext, useEffect, useState } from "react";
+import { Moves, Ability, WildPokemon, ZonePokemon, SeenPokemon, Held_Items, Evolution, Item } from "src/interfaces/interfaces";
 import { message } from "antd";
 import { Context } from "src/context/AppContext";
 import { GET_POKEMON } from "src/query/queries";
@@ -274,9 +274,9 @@ const usePlayground = () => {
 
         // get the zone's pokemon and add 1 on that pokemon's seen count.
 
-        const safariZone = saveFile?.safariZones.find(savedZone => savedZone.name == zone?.name);
+        //const safariZone = saveFile?.safariZones.find(savedZone => savedZone.name == zone?.name);
 
-        const znPokemon = safariZone?.pokemon?.find(poke => poke.id == wildPokemon.id);
+        const znPokemon = zone?.pokemon?.find(poke => poke.id == wildPokemon.id);
 
         if(znPokemon)
         {
@@ -293,7 +293,7 @@ const usePlayground = () => {
 
         if(saveFileCopy)
         {
-            SaveGame(saveFileCopy)
+            SaveGame(saveFileCopy);
         }
 
     }
@@ -318,9 +318,9 @@ const usePlayground = () => {
 
                 // verify if the pokemon has been catched before or not.
 
-                const safariZone = saveFile?.safariZones.find(savedZone => savedZone.name == zone?.name);
+                //const safariZone = saveFile?.safariZones.find(savedZone => savedZone.name == zone?.name);
 
-                const zonePokemon = safariZone?.pokemon?.find(poke => poke.id == wildPokemon.id);
+                const zonePokemon = zone?.pokemon?.find(poke => poke.id == wildPokemon.id);
 
                 // if it was, we add 1 on global app count.
 
@@ -340,6 +340,7 @@ const usePlayground = () => {
 
                     wildPokemon.listId = saveFile.myPokemons.length + 1;
                 }
+                
                 
                 SaveCatchedPokemon(wildPokemon);
 
@@ -465,6 +466,94 @@ const usePlayground = () => {
         return experience;
     }
 
+    // generates rare candy, the amount of earned candies will depend on pokemon's catch rate! 
+    // candies will allow players evolve his pokemon!
+
+    const GetRareCandy = async(catchRate: number) => {
+        
+        let rareCandyIcon: string = '';
+
+        await fetch(`https://pokeapi.co/api/v2/item/50`)
+        .then(response => response.ok ? response.json() : console.warn('No data received!'))
+        .then(data => rareCandyIcon = data.sprites.default);
+
+        let rareCandy: number = 1;
+
+        if(catchRate <= 85) rareCandy = 10;
+        else if(catchRate <= 170) rareCandy = 5;
+        else rareCandy = 3;
+
+        const saveFileCopy = saveFile;
+
+        if(saveFileCopy && saveFileCopy.player)
+        {
+            saveFileCopy.player.rareCandy += rareCandy;
+
+            SaveGame(saveFileCopy);
+
+            const icon: ReactElement = createElement('img', { style: { margin: 0 }, src: rareCandyIcon })
+                    
+            message.info({
+                icon: icon,
+                content: `You have received ${ rareCandy } rare candy!`
+            })
+        }
+    }
+
+    // generates a random zone reward, we will use them to earn money!
+
+    const GetReward = async() => {
+
+        const rewardProb: number = RandomIntInclusiveNumber(0, 1);
+
+        if(rewardProb != 0)
+        {
+            if(zone && zone.rewards)
+            {
+                const reward: Item = zone.rewards[RandomIntInclusiveNumber(0, zone.rewards.length)];
+
+                const saveFileCopy = saveFile;
+
+                if(saveFileCopy)
+                {
+                    const bagItem = saveFileCopy.bag.find(item => item.id == reward.id);
+
+                    if(bagItem)
+                    {
+                        bagItem.cuantity += 1;
+                    }
+                    else
+                    {
+                        let rewardIcon: string = ''
+
+                        await fetch(`https://pokeapi.co/api/v2/item/${reward.id}`)
+                        .then(response => response.ok ? response.json() : console.warn('No data received!'))
+                        .then(data => rewardIcon = data.sprites.default);
+
+                        saveFileCopy.bag.push({
+                            id: reward.id,
+                            name: reward.name,
+                            icon: rewardIcon,
+                            cuantity: 1,
+                            sellPrice: reward.sellPrice,
+                            price: 1
+                        })
+                    }
+
+                    SaveGame(saveFileCopy);
+
+                    const icon: ReactElement = createElement('img', { style: { margin: 0 }, src: reward.icon })
+                    
+                    message.info({
+                        icon: icon,
+                        content: `You have received ${reward.name}`
+                    })
+                }
+            
+            }
+        }
+    }
+
     // once the page its loaded we load a random pokemon.
 
     useEffect(() => {
@@ -515,6 +604,10 @@ const usePlayground = () => {
             message.success(`Gotcha! ${ wildPokemon?.name.toUpperCase() } was caught!`);
             
             message.info(`You've received ${ GainExperience(wildPokemon.catch_rate) } exp points!`);
+
+            GetRareCandy(wildPokemon.catch_rate);
+
+            GetReward();
             
             setTimeout(() => GenerateWildPokemon(), 100);
 
