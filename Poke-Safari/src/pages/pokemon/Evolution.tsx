@@ -19,7 +19,7 @@ const Evolution = () => {
                         evolution.item ? 
 
                             <Popover
-                                key={ evolution.evolution }
+                                key={ evolution.icon }
                                 content={
                                     <>
                                         <span>Evolve pokemon using </span>

@@ -204,7 +204,7 @@ export interface SaveFile {
     
         id: number
         name: string
-        cuantity?: number
+        cuantity: number
         icon: string
         price?: number
         sellPrice?: number

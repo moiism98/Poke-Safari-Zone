@@ -37,12 +37,7 @@ const PokemonDetails = () => {
             key: 3,
             label: ( 
                 <span 
-                    onClick={() => {
-
-                        if(pokemonDetails?.held_item)
-                            GetItem(); 
-                    }
-        }
+                    onClick={() => { if(pokemonDetails?.held_item) GetItem(); }}
                 >Get item
                 </span> 
             ),
@@ -216,6 +211,7 @@ const PokemonDetails = () => {
 
                             item.cuantity && item.cuantity > 0 ?
                             <Image 
+                                key={ item.id }
                                 title={ FirstLetterToUpper(item.name) } 
                                 src={item.icon}
                                 style={ item.name == selectedItem?.name ? { scale: '1.25', cursor: 'pointer' } : { cursor: 'pointer'} }

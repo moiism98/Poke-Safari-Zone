@@ -61,6 +61,7 @@ const useNewGame = () => {
                 price: item.price,
                 sellPrice: item.sellPrice,
                 icon: data.sprites.default ? data.sprites.default : '',
+                cuantity: 0
             }))
         })
 
@@ -88,7 +89,8 @@ const useNewGame = () => {
                     name: item.name,
                     icon: icon,
                     sellPrice: item.sellPrice,
-                    price: 1
+                    price: 1,
+                    cuantity: 0
                 });
             })
 
