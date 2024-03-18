@@ -5,11 +5,15 @@ import { Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FloatButton, Modal, Pagination } from "antd";
 import { DeleteFilled } from '@ant-design/icons';
+import { useContext } from 'react';
+import { Context } from 'src/context/AppContext';
 
 const PokemonList = () => {
 
     const { pokemon, release, page, pages, setOffset, limit, openModal, setOpenModal, releasePokemon, setRelease, 
             setReleasePokemon, setPokemonDetails, onRelease, FirstLetterToUpper } = usePokemonList();
+
+    const { saveFile, SaveGame } = useContext(Context);
 
     return(
         <>
@@ -22,7 +26,23 @@ const PokemonList = () => {
 
                                 !release ?
 
-                                <Link key={ pokemon.listId } onClick={() => setPokemonDetails(pokemon) } to={`${pokemon.name}`}> 
+                                <Link 
+                                    key={ pokemon.listId } 
+                                    onClick={() => { 
+
+                                        setPokemonDetails(pokemon); 
+
+                                        const saveFileCopy = saveFile;
+
+                                        if(saveFileCopy && saveFileCopy.player)
+                                        {
+                                            saveFileCopy.player.pokemonDetails = pokemon;
+
+                                            SaveGame(saveFileCopy);
+                                        }
+                                    }} 
+                                    to={`${pokemon.name}`}
+                                > 
                                     <Image  
                                         title={ pokemon.nickname ? pokemon.nickname : FirstLetterToUpper(pokemon.name) }
                                         src={ pokemon.shiny ? pokemon.sprites.front_shiny : pokemon.sprites.front_default }

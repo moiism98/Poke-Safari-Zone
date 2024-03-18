@@ -4,26 +4,69 @@ import GameScreen from "src/components/GameScreen/GameScreen";
 import usePokemonDetails from "src/components/pokemon/hook/usePokemonDetails";
 import { Image } from "react-bootstrap";
 import { ArrowLeftOutlined, StarFilled, SettingFilled } from '@ant-design/icons';
-import { Dropdown, MenuProps, Modal, Tooltip, Typography, message } from "antd";
-import { createElement, useState } from "react";
-import { CatchedPokemon, Held_Items, Item } from "src/interfaces/interfaces";
+import { Dropdown, MenuProps, Modal, Tooltip, Typography } from "antd";
+import { useEffect, useState } from "react";
 
 const PokemonDetails = () => {
 
-    const { saveFile, options, appConsts, navigate, pokemonDetails, setPokemonDetails, loading, nickname, inTeam, 
-        pokemonTeam, onChange, addToTeam, removeFromTeam, GetTypeIcon, FirstLetterToUpper, SaveGame } = usePokemonDetails();
+    const { 
+        saveFile, options, appConsts, player, totalPokemon, 
+        navigate, pokemonDetails, showEvolution, rareCandyIcon, rareCandy, 
+        loading, nickname,inTeam, pokemonTeam, openBag, setOpenBag, selectedItem, 
+        setSelectedItem, TriggerEvolution, onChange, addToTeam, removeFromTeam, GiveItem, 
+        GetItem, GetTypeIcon, FirstLetterToUpper, SaveGame
+    } = usePokemonDetails();
 
-    const [ openBag, setOpenBag ] = useState<boolean>(false);
+    type children = { key: string | number, label: JSX.Element, disabled: boolean }
 
-    const [ selectedItem, setSelectedItem ] = useState<Item | null>();
+    const [ children, setChildren ] = useState<children[]>([]);
+
+    useEffect(() => {
+    
+        if(showEvolution >= 1)
+        {
+            const children: children[] = [];
+
+            pokemonDetails?.evolution?.map(evolution => {
+                
+                evolution.id <= totalPokemon ?
+
+                    children.push({
+                        key: evolution.evolution,
+                        label: (
+                            evolution.method == 'trade' && evolution.held_item ?
+                            <span key={ evolution.id }><Image style={{ margin:0 }} src={ saveFile?.shop.items.find(item => item.name == evolution.held_item)?.icon }/> Evolves to { FirstLetterToUpper(evolution.evolution) }</span>      
+
+                        : evolution.method == 'use-item' ? 
+                            <span key={ evolution.id }><Image style={{ margin:0 }} src={ saveFile?.shop.items.find(item => item.name == evolution.item)?.icon }/> Evolves to { FirstLetterToUpper(evolution.evolution) }</span>
+                        
+                        : 
+                            <span 
+                                key={ evolution.id }
+                                onClick={ () => player.rareCandy >= rareCandy ? TriggerEvolution(evolution.evolution) : null } 
+                            >
+                                x{ rareCandy }<Image style={{ margin: 0 }} src={ rareCandyIcon }/> Evolves to { FirstLetterToUpper(evolution.evolution) }
+                            </span>   
+                        ),
+                        disabled: evolution.method == 'level-up' && rareCandy >= player.rareCandy ? true : false 
+                    })
+
+                : null
+            })
+
+            setChildren(children);
+        }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ showEvolution ])
 
     const items: MenuProps['items'] = [
         {
-            key: '1',
+            key: 1,
             label:(
                 pokemonDetails ?
                     !inTeam ? 
-                        pokemonTeam.length < appConsts.maxTeam ? <span onClick={() => addToTeam(pokemonDetails)}>Add pokemon to the team</span>
+                        pokemonTeam.length < appConsts.maxTeam ? <span onClick={ () => addToTeam(pokemonDetails) }>Add pokemon to the team</span>
                             : null
                     : <span onClick={ () => removeFromTeam(pokemonDetails) }>Remove from the team</span>
                 : null  
@@ -31,7 +74,7 @@ const PokemonDetails = () => {
         },
         {
             key: 2,
-            label:( <span onClick={() => setOpenBag(true) }>Give item</span> )
+            label:( <span onClick={ () => setOpenBag(true) }>Give item</span> )
         },
         {
             key: 3,
@@ -42,159 +85,42 @@ const PokemonDetails = () => {
                 </span> 
             ),
             disabled: pokemonDetails?.held_item ? false : true
-        }
-    ];
-
-    const GiveItem = () => {
-        
-        if(selectedItem)
+        },
+        showEvolution > 1 ? // only shows evolve pokemon button if the pokemon has any evolution form!
         {
-            if(pokemonDetails)
-            {
-                const saveFileCopy = saveFile;
-    
-                if(saveFileCopy)
-                {
-                    const pokemon: CatchedPokemon | undefined = saveFileCopy.myPokemons.find(pokemon => pokemon.listId == pokemonDetails.listId);
-
-                    const bagItem: Item | undefined = saveFileCopy.bag.find(item => item.id == selectedItem.id);
-
-                    if(pokemonDetails.held_item)
-                    {    
-                        const heldItem = pokemonDetails.held_item.item.name.split('-').map(item => (item)).join(" ");
-    
-                        const icon = createElement('img', { style: { margin: 0 }, src: pokemonDetails.held_item.item.icon});
-    
-                        message.info({
-                            icon: icon,
-                            content: `${ FirstLetterToUpper(heldItem) } was sent to the bag!`
-                        });
-
-                        const itemInBag: Item | undefined = saveFileCopy.bag.find(item => item.id == pokemonDetails.held_item?.item.id);
-                        
-                        if(itemInBag)
-                        {
-                            itemInBag.cuantity += 1;
-                        }
-                        else
-                        {
-                            const inShop: Item | undefined = saveFileCopy.shop.items.find(item => item.id == pokemonDetails.held_item?.item.id);
-
-                            const toSaveItem: Item = {
-                                id: pokemonDetails.held_item.item.id,
-                                icon: pokemonDetails.held_item.item.icon,
-                                name: pokemonDetails.held_item.item.name,
-                                cuantity: 1,
-                                price: 1,
-                                sellPrice: 200
-                            }
-
-                            if(inShop)
-                            {
-                                toSaveItem.price = inShop.price;
-
-                                toSaveItem.sellPrice = inShop.price;
-                            }
-
-                            saveFileCopy.bag.push(toSaveItem);
-                        }
-                    }
-
-                    const newHeldItem: Held_Items = {
-                        item: {
-                            id: selectedItem.id,
-                            icon: selectedItem.icon,
-                            name: selectedItem.name
-                        }
-                    };
-                
-                    setPokemonDetails({ ...pokemonDetails, held_item: newHeldItem });
-
-                    if(pokemon && bagItem)
-                    {
-                        pokemon.held_item = newHeldItem;
-                        
-                        bagItem.cuantity -= 1;
-                    }
-
-                    SaveGame(saveFileCopy);
-    
-                    setOpenBag(false);
-        
-                    setSelectedItem(null);
-                }
-            }
-
-        }
-        else
+            key: 4,
+            label: 'Select evolution',
+            children: children
+        } : showEvolution != 0 ?
         {
-            message.error("You have to select an item to equip it!");
-        }
-    }
+            key: 4,
+            label: (
+                pokemonDetails?.evolution?.map(evolution => (
 
-    const GetItem = () => {
+                    evolution.id <= totalPokemon ?
 
-        if(pokemonDetails)
-            {
-                const saveFileCopy = saveFile;
-    
-                if(saveFileCopy)
-                {
-                    if(pokemonDetails.held_item)
-                    {
-                        const heldItem = pokemonDetails.held_item.item.name.split('-').map(item => (item)).join(" ");
-    
-                        const icon = createElement('img', { style: { margin: 0 }, src: pokemonDetails.held_item.item.icon});
-    
-                        message.info({
-                            icon: icon,
-                            content: `${ FirstLetterToUpper(heldItem) } was sent to the bag!`
-                        });
+                        evolution.method == 'trade' && evolution.held_item ?
+                            <span key={ evolution.id }><Image style={{ margin:0 }} src={ saveFile?.shop.items.find(item => item.name == evolution.held_item)?.icon }/> Evolves to { FirstLetterToUpper(evolution.evolution) }</span>      
 
-                        const itemInBag: Item | undefined = saveFileCopy.bag.find(item => item.id == pokemonDetails.held_item?.item.id);
+                        : evolution.method == 'use-item' ? 
+                            <span key={ evolution.id }><Image style={{ margin:0 }} src={ saveFile?.shop.items.find(item => item.name == evolution.item)?.icon }/> Evolves to { FirstLetterToUpper(evolution.evolution) }</span>
                         
-                        if(itemInBag)
-                        {
-                            itemInBag.cuantity += 1;
-                        }
-                        else
-                        {
-                            const inShop: Item | undefined = saveFileCopy.shop.items.find(item => item.id == pokemonDetails.held_item?.item.id);
-
-                            const toSaveItem: Item = {
-                                id: pokemonDetails.held_item.item.id,
-                                icon: pokemonDetails.held_item.item.icon,
-                                name: pokemonDetails.held_item.item.name,
-                                cuantity: 1,
-                                price: 1,
-                                sellPrice: 200
-                            }
-
-                            if(inShop)
-                            {
-                                toSaveItem.price = inShop.price;
-
-                                toSaveItem.sellPrice = inShop.price;
-                            }
-
-                            saveFileCopy.bag.push(toSaveItem);
-                        }
-                    }
-                
-                    setPokemonDetails({ ...pokemonDetails, held_item: null });
-
-                    const pokemon: CatchedPokemon | undefined = saveFileCopy.myPokemons.find(pokemon => pokemon.listId == pokemonDetails.listId);
-
-                    if(pokemon)
-                    {
-                        pokemon.held_item = null;
-                    }
-
-                    SaveGame(saveFileCopy);
-                }
-            }
-    }
-    
+                        : 
+                            <span 
+                                key={ evolution.id }
+                                onClick={ () => player.rareCandy >= rareCandy ? TriggerEvolution(evolution.evolution) : null } 
+                            >
+                                x{ rareCandy }<Image style={{ margin: 0 }} src={ rareCandyIcon }/> Evolves to { FirstLetterToUpper(evolution.evolution) }
+                            </span>
+                    : null
+                ))
+            ),
+            disabled: pokemonDetails && pokemonDetails.evolution ? 
+                pokemonDetails.evolution[0].method == 'level-up' && player.rareCandy >= rareCandy ? false : true
+            : false
+        }
+        : null
+    ];    
 
     return(
         <GameScreen>
@@ -221,7 +147,27 @@ const PokemonDetails = () => {
                     }
                 </>
             </Modal>
-            <ArrowLeftOutlined onClick={ () =>  navigate("..", { relative: "path" }) } style={{ width: '3%' }} className="backArrow d-flex ms-2"/>
+            <div className="detailsHeader">
+                <div className="arrow">
+                    <ArrowLeftOutlined onClick={ () =>  { 
+                            navigate("..", { relative: "path" }) ;
+
+                            const saveFileCopy = saveFile;
+
+                            if(saveFileCopy && saveFileCopy.player)
+                            {
+                                saveFileCopy.player.pokemonDetails = undefined;
+
+                                SaveGame(saveFileCopy);
+                            }
+                        }}
+                    />
+                </div>
+                <div className="rareCandy">
+                    <Image src={ rareCandyIcon }/>
+                    <h4>x{ player.rareCandy }</h4>
+                </div>
+            </div>
             <div className="detailsContainer">
                 {
                     pokemonDetails ? 
@@ -254,14 +200,14 @@ const PokemonDetails = () => {
                                 <Image className="pokemonIcon" src={ pokemonDetails.shiny ? pokemonDetails.sprites.front_shiny : pokemonDetails?.sprites.front_default }/>
                             </div>
                             <div className='stats'>
-                                <h3>Height: { pokemonDetails.height } ft.</h3>
-                                <h3>Weight: { pokemonDetails.weight } kg.</h3>
+                                <h3>Height: { pokemonDetails.height / 10 } m.</h3>
+                                <h3>Weight: { pokemonDetails.weight / 10 } kg.</h3>
                                 <h3>Moves: { pokemonDetails.moves.map(move => FirstLetterToUpper(move.move.name)).join(", ") } </h3>
                                 { 
                                     pokemonDetails.held_item ? 
                                         <h3>Held item: &nbsp;
-                                            <strong>{ FirstLetterToUpper(pokemonDetails.held_item.item.name) }</strong>
-                                            { pokemonDetails.held_item.item.icon ? <Image title={FirstLetterToUpper(pokemonDetails.held_item.item.name)} src={pokemonDetails.held_item?.item.icon}/> : null }
+                                            <strong>{ FirstLetterToUpper(pokemonDetails.held_item.item?.name) }</strong>
+                                            { pokemonDetails.held_item.item?.icon ? <Image title={FirstLetterToUpper(pokemonDetails.held_item.item?.name)} src={pokemonDetails.held_item?.item.icon}/> : null }
                                         </h3> 
                                     : null
                                 }

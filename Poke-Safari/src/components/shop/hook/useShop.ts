@@ -119,18 +119,7 @@ const useShop = () => {
     
                     if(bagItem && bagItem.cuantity)
                     {
-                        bagItem.cuantity -= sell;
-    
-                        /*if(bagItem.cuantity <= 0)
-                        {
-                            const itemIndex: number = saveFileCopy.bag.indexOf(bagItem);
-    
-                            if(itemIndex != -1)
-                            {
-                                saveFileCopy.bag.splice(itemIndex, 1);
-                            }
-                        }*/
-    
+                        bagItem.cuantity -= sell;    
                     }
     
                     // save game putting the bag state on it!

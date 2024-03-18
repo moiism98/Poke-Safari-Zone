@@ -31,7 +31,8 @@ const useZone = () => {
                             data.map(evo => {
 
                                 evolution?.push({
-                                    item: evo.item,
+                                    id: evo.id,
+                                    item: evo.method == 'level-up' ? "rare-candy" : evo.item,
                                     held_item: evo.held_item,
                                     evolution: evo.evolution,
                                     method: evo.method

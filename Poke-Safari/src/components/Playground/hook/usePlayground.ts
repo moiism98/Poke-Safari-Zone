@@ -20,7 +20,6 @@ const usePlayground = () => {
     const { CheckUnlock } = useUnlocks();
 
     const { zone } = useZone();
-
     
     const [ getPokemon, { data }] = useLazyQuery(GET_POKEMON);
     
@@ -124,26 +123,33 @@ const usePlayground = () => {
 
         let icon: string = '';
 
+        let price: number = 0;
+
         if(held_items && held_items.length > 0)
         {
-            const url: string | undefined = held_items[RandomProbability(held_items.length)].item.url;
+            const randomItem: Held_Items | null = held_items[RandomIntInclusiveNumber(0, held_items.length)];
 
-            
-            if(url)
+            if(randomItem && randomItem.item.url)
             {
-                const urlElements: string[] = url.split('/');
+                const urlElements: string[] = randomItem.item.url.split('/');
 
                 const itemId: number = +urlElements[urlElements.length - 2];
 
-                await fetch(url)
+                await fetch(randomItem.item.url)
                 .then(response => response.ok ? response.json() : console.warn("Data not received!"))
-                .then(data => icon = data.sprites.default);
+                .then(data => {
+                    
+                    icon = data.sprites.default;
+                    
+                    price = data.cost;
+                });
     
                 item = {
                     item:{
                         id: itemId,
-                        name: held_items[RandomProbability(held_items.length)].item.name,
-                        icon: icon
+                        name: randomItem.item.name,
+                        icon: icon,
+                        price: price
                     }
                 };
             }
@@ -222,7 +228,6 @@ const usePlayground = () => {
 
             if(moves && ability && zonePokemon)
             {
-
                 let evolution: Evolution[] | null = [];
 
                 await getPokemonEvolution(zonePokemon.id, zonePokemon.name).then(data => {
@@ -232,7 +237,8 @@ const usePlayground = () => {
                         data.map(evo => {
 
                             evolution?.push({
-                                item: evo.item,
+                                id: evo.id,
+                                item: evo.method == 'level-up' ? "rare-candy" : evo.item,
                                 held_item: evo.held_item,
                                 evolution: evo.evolution,
                                 method: evo.method
@@ -513,6 +519,8 @@ const usePlayground = () => {
         if(saveFileCopy && saveFileCopy.player)
         {
             saveFileCopy.player.rareCandy += rareCandy;
+
+            player.setRareCandy(oldRareCandy => oldRareCandy + rareCandy);
 
             SaveGame(saveFileCopy);
 

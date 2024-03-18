@@ -1,3 +1,27 @@
+.detailsHeader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+}
+
+.arrow{
+    width: 3%;
+    margin-left: 5%;
+}
+.rareCandy *{
+    margin: 0;
+}
+
+.rareCandy{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 97%;
+    margin-right: 5%;
+}
+
 .detailsContainer{
     display: flex;
     flex-direction: column;

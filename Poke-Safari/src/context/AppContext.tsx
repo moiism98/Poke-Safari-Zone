@@ -236,8 +236,10 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
             setAppFont(saveFile.options.font);
 
             setFrame(saveFile.options.frame);
-
+            
             setBag(saveFile.bag);
+
+            setPokemonTeam(saveFile.pokemonTeam);
 
             const egg: Item | undefined = saveFile.bag.find(item => item.name == 'mystery-egg');
 
@@ -258,8 +260,7 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
                 setNextLevelExperience(saveFile.player.nextLevelExperience);
 
-                setPokemonTeam(saveFile.pokemonTeam);
-                
+                setPokemonDetails(saveFile.player.pokemonDetails);
             }
         }
 

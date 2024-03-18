@@ -24,6 +24,11 @@
                     "sellPrice": 2500
                 },
                 {
+                    "id": 483,
+                    "name":"mystery-egg",
+                    "sellPrice": 1
+                },
+                {
                     "id": 622,
                     "name":"big-nugget",
                     "sellPrice": 20000
@@ -137,6 +142,11 @@
                     "sellPrice": 2500
                 },
                 {
+                    "id": 483,
+                    "name":"mystery-egg",
+                    "sellPrice": 1
+                },
+                {
                     "id": 622,
                     "name":"big-nugget",
                     "sellPrice": 20000
@@ -201,6 +211,11 @@
                     "id": 92,
                     "name":"nugget",
                     "sellPrice": 5000
+                },
+                {
+                    "id": 483,
+                    "name":"mystery-egg",
+                    "sellPrice": 1
                 },
                 {
                     "id": 622,
@@ -360,6 +375,11 @@
                     "sellPrice": 4900
                 },
                 {
+                    "id": 483,
+                    "name":"mystery-egg",
+                    "sellPrice": 1
+                },
+                {
                     "id": 622,
                     "name":"big-nugget",
                     "sellPrice": 20000
@@ -464,6 +484,11 @@
                     "id": 92,
                     "name":"nugget",
                     "sellPrice": 5000
+                },
+                {
+                    "id": 483,
+                    "name":"mystery-egg",
+                    "sellPrice": 1
                 },
                 {
                     "id": 622,
@@ -622,6 +647,11 @@
                     "sellPrice": 5000
                 },
                 {
+                    "id": 483,
+                    "name":"mystery-egg",
+                    "sellPrice": 1
+                },
+                {
                     "id": 622,
                     "name":"big-nugget",
                     "sellPrice": 20000
@@ -775,6 +805,11 @@
                     "sellPrice": 5000
                 },
                 {
+                    "id": 483,
+                    "name":"mystery-egg",
+                    "sellPrice": 1
+                },
+                {
                     "id": 622,
                     "name":"big-nugget",
                     "sellPrice": 20000
@@ -905,6 +940,11 @@
                     "id": 92,
                     "name":"nugget",
                     "sellPrice": 5000
+                },
+                {
+                    "id": 483,
+                    "name":"mystery-egg",
+                    "sellPrice": 1
                 },
                 {
                     "id": 622,

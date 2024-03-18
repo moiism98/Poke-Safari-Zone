@@ -101,6 +101,7 @@ export interface SaveFile {
         released?: boolean
         listId?: number
         evolution: Evolution[] | null
+        catch_rate: number
     }
 
     export interface ZonePokemon {
@@ -152,12 +153,14 @@ export interface SaveFile {
             id: number
             name: string
             icon: string
+            price: number
             url?: string
         }
     }
 
     export interface Evolution
     {
+        id: number
         item: string | null
         held_item: string | null
         method: string
@@ -263,6 +266,7 @@ export interface SaveFile {
         level: number
         experience: number
         nextLevelExperience: number
+        pokemonDetails: CatchedPokemon | undefined
     }
 
     //#endregion

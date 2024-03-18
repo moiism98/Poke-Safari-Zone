@@ -128,13 +128,43 @@ const useDayCare = () => {
 
     }
 
-    const SetRandomHeldItem = (held_items: Held_Items[]) => {
+    const SetRandomHeldItem = async(held_items: Held_Items[]) => {
         
-        let item = null;
+        let item: Held_Items | null = null;
+
+        let icon: string = '';
+
+        let price: number = 0;
 
         if(held_items && held_items.length > 0)
         {
-            item = held_items[RandomProbability(held_items.length)];
+            const randomItem: Held_Items | null = held_items[RandomIntInclusiveNumber(0, held_items.length)];
+
+            if(randomItem && randomItem.item.url)
+            {
+                const urlElements: string[] = randomItem.item.url.split('/');
+
+                const itemId: number = +urlElements[urlElements.length - 2];
+
+                await fetch(randomItem.item.url)
+                .then(response => response.ok ? response.json() : console.warn("Data not received!"))
+                .then(data => { 
+
+                    icon = data.sprites.default;
+                    
+                    price = data.cost;
+                });
+    
+                item = {
+                    item:{
+                        id: itemId,
+                        name: randomItem.item.name,
+                        icon: icon,
+                        price: price
+                    }
+                };
+            }
+
         }
 
         return item;
@@ -171,7 +201,15 @@ const useDayCare = () => {
                 
                 const ability = SetRandomAbility(data.pokemon.abilities);
                     
-                const held_item = SetRandomHeldItem(data.pokemon.held_items);
+                let held_item: Held_Items | null = null;
+
+                SetRandomHeldItem(data.pokemon.held_items).then(data => held_item = data);
+
+                let catchRate: number = 0;
+
+                await fetch(`${appConsts.pokeSpeciesPoint}/${data.pokemon.id}`)
+                .then(response => response.ok ? response.json() : console.warn("No data received!"))
+                .then(data => catchRate = data.capture_rate);
                 
                 const moves = SetRandomMoveSet(data.pokemon.moves);
         
@@ -212,7 +250,8 @@ const useDayCare = () => {
                         data.map(evo => {
                             
                             evolution?.push({
-                                item: evo.item,
+                                id: evo.id,
+                                item: evo.method == 'level-up' ? "rare-candy" : evo.item,
                                 held_item: evo.held_item,
                                 evolution: evo.evolution,
                                 method: evo.method
@@ -243,6 +282,7 @@ const useDayCare = () => {
                         shiny: shiny,
                         cry: cry,
                         evolution: evolution,
+                        catch_rate: catchRate,
                         catched: 1,
                         seen: 1, 
                     }
