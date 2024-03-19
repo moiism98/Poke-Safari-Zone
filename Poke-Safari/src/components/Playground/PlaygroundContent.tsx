@@ -1,7 +1,7 @@
 import Loading from "src/components/Spinners/Loading/Loading";
 import usePlayground from "./hook/usePlayground";
 import useApp from "src/components/App/hook/useApp";
-import catchedIcon from "src/assets/img/Navbar/pokeball_32x32.svg"
+import caughtIcon from "src/assets/img/Navbar/pokeball_32x32.svg"
 import useZone from "src/components/Zones/hook/useZone";
 import { Image } from "react-bootstrap";
 import { Button } from "antd";
@@ -37,7 +37,7 @@ const PlaygroundContent = () => {
                     <div className="pokemonContainer">
                         <div className="wildPokemon">
                             <div className="pokemonName">
-                                { wildPokemon.catched > 0 ? <Image className="catchedIcon" src={ catchedIcon }/> : null }
+                                { wildPokemon.caught > 0 ? <Image className="caughtIcon" src={ caughtIcon }/> : null }
                                 <h2>{ FirstLetterToUpper(wildPokemon.name) }</h2> 
                                 <span>{ wildPokemon.shiny ? <StarFilled/> : null}</span>
                                 <span>{ wildPokemon.types.map(type => <Image key={ type.type.name } className="encounterTypes" title={ FirstLetterToUpper(type.type.name) } src={ GetTypeIcon(type.type.name) }/> )}</span>

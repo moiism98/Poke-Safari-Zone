@@ -2,7 +2,7 @@ import useContext from './hook/useContext';
 import zonePortraits from 'src/utils/NewPlayer/portraits';
 import { useQuery } from '@apollo/client';
 import { createContext, useState, useEffect, useCallback } from 'react';
-import { CatchedPokemon, ContextOptions, ContextPlayer, Frame, IContext, Item, PokemonList, Portraits, SaveFile } from 'src/interfaces/interfaces';
+import { caughtPokemon, ContextOptions, ContextPlayer, Frame, IContext, Item, PokemonList, Portraits, SaveFile } from 'src/interfaces/interfaces';
 import { GET_ALL_POKEMON } from 'src/query/queries';
 import { notification } from 'antd';
 import { Image } from 'react-bootstrap';
@@ -21,13 +21,13 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
 
     const [ allPokemons, setAllPokemons ] = useState<PokemonList[]>();
 
-    const [ pokemonDetails, setPokemonDetails ] = useState<CatchedPokemon>();
+    const [ pokemonDetails, setPokemonDetails ] = useState<caughtPokemon>();
 
-    const [ myPokemon, setMyPokemon ] = useState<CatchedPokemon[]>([]);
+    const [ myPokemon, setMyPokemon ] = useState<caughtPokemon[]>([]);
 
     const GetPokemonTeam = () => {
 
-        let save: CatchedPokemon[] = [];
+        let save: caughtPokemon[] = [];
 
         if(saveFile)
         {
@@ -37,7 +37,7 @@ export const AppContext = ( { children }: { children: React.ReactNode } ) => {
         return save;
     }
 
-    const [ pokemonTeam, setPokemonTeam ] = useState<CatchedPokemon[]>(GetPokemonTeam());
+    const [ pokemonTeam, setPokemonTeam ] = useState<caughtPokemon[]>(GetPokemonTeam());
 
     const GetBag = () => {
         

@@ -39,7 +39,7 @@ const Evolution = () => {
                                     >
                                         <Image
                                             className="evolutionIcon"
-                                            title={ evolution.catched ? FirstLetterToUpper(evolution.evolution) : undefined }
+                                            title={ evolution.caught ? FirstLetterToUpper(evolution.evolution) : undefined }
                                             src={ evolution.icon }
                                             style={ saveFile?.seenPokemons.find(pokemon => pokemon.name == evolution.evolution) ? { filter: 'brightness(100%)' } : { filter: 'brightness(0%)' }}
                                         /> 
@@ -65,7 +65,7 @@ const Evolution = () => {
                                         }
                                     >
                                         <Image 
-                                            title={ evolution.catched ? FirstLetterToUpper(evolution.evolution) : undefined } 
+                                            title={ evolution.caught ? FirstLetterToUpper(evolution.evolution) : undefined } 
                                             className="evolutionIcon"
                                             src={ evolution.icon }
                                             style={ saveFile?.seenPokemons.find(pokemon => pokemon.name == evolution.evolution) ? { filter: 'brightness(100%)' } : { filter: 'brightness(0%)' }}
@@ -76,7 +76,7 @@ const Evolution = () => {
                             : 
                                 <Image 
                                     key={ evolution.id }
-                                    title={ evolution.catched ? FirstLetterToUpper(evolution.evolution) : undefined } 
+                                    title={ evolution.caught ? FirstLetterToUpper(evolution.evolution) : undefined } 
                                     className="evolutionIcon" 
                                     src={ evolution.icon }
                                     style={ saveFile?.seenPokemons.find(pokemon => pokemon.name == evolution.evolution) ? { filter: 'brightness(100%)' } : { filter: 'brightness(0%)' }}

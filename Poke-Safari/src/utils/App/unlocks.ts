@@ -89,7 +89,7 @@ const useUnlocks = () => {
 
     const catchUnlock = (saveFile: SaveFile, cuantity: number, zone: string, toUnlockPokemon?: ZonePokemon, toUnlockZone?: SafariZone) => {
 
-        if(saveFile.statistics.catched == cuantity)
+        if(saveFile.statistics.caught == cuantity)
         {
             if(toUnlockPokemon)
             {
@@ -131,7 +131,7 @@ const useUnlocks = () => {
 
     const pokemonUnlock = (saveFile: SaveFile, unlock: Unlock, cuantity: number, pokemon: WildPokemon, toUnlockPokemon: ZonePokemon, zone: SafariZone) => {
         
-        // the method only will be triggered for the pokemon catched, not 
+        // the method only will be triggered for the pokemon caught, not 
         // for all pokemon with the pokemon unlock type!
 
         let isUnlocked: boolean = false;
@@ -144,7 +144,7 @@ const useUnlocks = () => {
                 {
                     const keyPokemon: string[] = Array.from(unlock.type.pokemon);
     
-                    let keyPokemonCatched: number = 0;
+                    let keyPokemonCaught: number = 0;
 
                     let kPokemon: number = 0;
     
@@ -155,9 +155,9 @@ const useUnlocks = () => {
                         while(pokemon < zone.pokemon.length)
                         {
                             
-                            if(keyPokemon[kPokemon] == zone.pokemon[pokemon].name && zone.pokemon[pokemon].catched > 0)
+                            if(keyPokemon[kPokemon] == zone.pokemon[pokemon].name && zone.pokemon[pokemon].caught > 0)
                             {
-                                keyPokemonCatched++;
+                                keyPokemonCaught++;
 
                                 pokemon = zone.pokemon.length; // if the code found our the pokemon, we end the loop, we dont need to check the entire array, we already found our pokemon!
                             }
@@ -168,7 +168,7 @@ const useUnlocks = () => {
                         kPokemon++;
                     }
     
-                    if(keyPokemonCatched == keyPokemon.length)
+                    if(keyPokemonCaught == keyPokemon.length)
                     {
                         isUnlocked = true;
                     }
@@ -179,7 +179,7 @@ const useUnlocks = () => {
             {
                 if(unlock.type.pokemon == pokemon.name)
                 {
-                    if(pokemon.catched == cuantity)
+                    if(pokemon.caught == cuantity)
                     {
                         isUnlocked = true;
                     }
@@ -208,11 +208,11 @@ const useUnlocks = () => {
             {
                 if(cuantity != 0) // there is not unlocks with this contition at the moment!
                 {
-                    let catchedAmount = 0;
+                    let caughtAmount = 0;
         
-                    keyZone.pokemon?.forEach(pokemon => pokemon.catched > 0 ? catchedAmount++ : null);
+                    keyZone.pokemon?.forEach(pokemon => pokemon.caught > 0 ? caughtAmount++ : null);
         
-                    if(cuantity == catchedAmount)
+                    if(cuantity == caughtAmount)
                     {
                         isUnlocked = true; 
                     }
@@ -223,11 +223,11 @@ const useUnlocks = () => {
     
                     if(totalPokemon && availablePokemon)
                     {
-                        let catchedAmount = 0;
+                        let caughtAmount = 0;
         
-                        keyZone.pokemon?.forEach(pokemon => pokemon.catched > 0 ? catchedAmount++ : null);
+                        keyZone.pokemon?.forEach(pokemon => pokemon.caught > 0 ? caughtAmount++ : null);
         
-                        if(totalPokemon - availablePokemon == catchedAmount) // available pokemon are those one which are unlocked!
+                        if(totalPokemon - availablePokemon == caughtAmount) // available pokemon are those one which are unlocked!
                         {
                             isUnlocked = true;
                         }
@@ -251,11 +251,11 @@ const useUnlocks = () => {
                 }
                 else
                 {
-                    let catchedAmount = 0;
+                    let caughtAmount = 0;
     
-                    keyZone.pokemon?.forEach(pokemon => pokemon.catched > 0 ? catchedAmount++ : null)
+                    keyZone.pokemon?.forEach(pokemon => pokemon.caught > 0 ? caughtAmount++ : null)
     
-                    if(keyZone.pokemon?.length == catchedAmount)
+                    if(keyZone.pokemon?.length == caughtAmount)
                     {
                         toUnlockZone.unlock = null;
     
@@ -270,14 +270,14 @@ const useUnlocks = () => {
 
     const typeUnlock = (saveFile: SaveFile, zone: SafariZone, cuantity: number, toUnlockPokemon: ZonePokemon) => {
         
-        let typeCatched: number = 0;
+        let typeCaught: number = 0;
 
         saveFile.myPokemons.map(myPokemon => {
             myPokemon.types.map(type => type.type.name == toUnlockPokemon.unlock?.type?.pokemon 
-                ? typeCatched++ : null);
+                ? typeCaught++ : null);
         });
 
-        if(typeCatched == cuantity)
+        if(typeCaught == cuantity)
         {
             toUnlockPokemon.unlock = null;
         

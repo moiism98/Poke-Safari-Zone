@@ -50,7 +50,7 @@ const PlayerContent = () => {
                 </div>
                 <div className="playerNumbers" style={{ border: options.frame?.styles.border, borderRadius:  options.frame?.styles.borderRadius}}>
                     <h3>Pokemon's seen: { saveFile?.statistics.seen }</h3>
-                    <h3>Pokemon's catched: { saveFile?.statistics.catched }</h3>
+                    <h3>Pokemon's caught: { saveFile?.statistics.caught }</h3>
                     <h3>Pokemon's shiny: { saveFile?.statistics.shiny }</h3>
                 </div>
             </div>

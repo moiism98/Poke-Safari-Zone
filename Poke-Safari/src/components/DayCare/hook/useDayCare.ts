@@ -1,7 +1,7 @@
 import useApp from "src/components/App/hook/useApp";
 import usePlayer from "src/components/Player/hook/usePlayer";
 import { useContext, useEffect, useState } from "react";
-import { Ability, CatchedPokemon, DayCarePokemon, Evolution, Held_Items, Item, Moves } from "src/interfaces/interfaces";
+import { Ability, CaughtPokemon, DayCarePokemon, Evolution, Held_Items, Item, Moves } from "src/interfaces/interfaces";
 import { Context } from "src/context/AppContext";
 import { useLazyQuery } from "@apollo/client";
 import { GET_POKEMON } from "src/query/queries";
@@ -25,7 +25,7 @@ const useDayCare = () => {
 
     const [ eggIcon, setEggIcon ] = useState<string>();
 
-    const [ hatchedPokemon, setHatchedPokemon ] = useState<CatchedPokemon>();
+    const [ hatchedPokemon, setHatchedPokemon ] = useState<CaughtPokemon>();
 
     const [ hatchingEgg, setHatchingEgg ] = useState<boolean>(false);
 
@@ -197,7 +197,7 @@ const useDayCare = () => {
     
             if(saveFileCopy)
             {
-                const pokemon: CatchedPokemon | undefined = saveFileCopy.myPokemons.find(myPokemon => myPokemon.id == data.pokemon.id);
+                const pokemon: CaughtPokemon | undefined = saveFileCopy.myPokemons.find(myPokemon => myPokemon.id == data.pokemon.id);
                 
                 const ability = SetRandomAbility(data.pokemon.abilities);
                     
@@ -229,7 +229,7 @@ const useDayCare = () => {
                         sprite: data.pokemon.sprites.front_default
                     })
 
-                    saveFileCopy.statistics.catched++;
+                    saveFileCopy.statistics.caught++;
 
                     saveFileCopy.statistics.seen++;
                 }
@@ -266,7 +266,7 @@ const useDayCare = () => {
         
                 if(ability && moves)
                 {
-                    const catchedPokemon: CatchedPokemon = {
+                    const caughtPokemon: CaughtPokemon = {
                         
                         id: data.pokemon.id,
                         listId: player.listId,
@@ -282,7 +282,7 @@ const useDayCare = () => {
                         cry: cry,
                         evolution: evolution,
                         catch_rate: catchRate,
-                        catched: 1,
+                        caught: 1,
                         seen: 1, 
                     }
 
@@ -291,7 +291,7 @@ const useDayCare = () => {
                     if(saveFileCopy.player)
                         saveFileCopy.player.listId += 1;
                     
-                    setHatchedPokemon(catchedPokemon);
+                    setHatchedPokemon(caughtPokemon);
                     
                     setHatchingEgg(false);
 
@@ -304,11 +304,11 @@ const useDayCare = () => {
                         egg.cuantity -= 1;
                     }
     
-                    saveFileCopy.myPokemons.push(catchedPokemon);
+                    saveFileCopy.myPokemons.push(caughtPokemon);
     
                     player.setExperience(oldExperience => oldExperience + 3);
         
-                    message.success(`${FirstLetterToUpper(catchedPokemon.name)} hatched from egg!`);
+                    message.success(`${FirstLetterToUpper(caughtPokemon.name)} hatched from egg!`);
     
                     message.info(`You've received 3 exp points!`);
     

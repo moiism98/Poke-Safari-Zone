@@ -1,7 +1,7 @@
 import useApp from "src/components/App/hook/useApp";
 import { ReactElement, createElement, useCallback, useContext, useEffect, useState} from "react";
 import { Context } from "src/context/AppContext";
-import { CatchedPokemon } from "src/interfaces/interfaces";
+import { CaughtPokemon } from "src/interfaces/interfaces";
 import { message } from "antd";
 import usePokemonDetails from "src/components/pokemon/hook/usePokemonDetails";
 
@@ -13,7 +13,7 @@ const usePokemonList = () => {
 
     const { rareCandyIcon } = usePokemonDetails()
 
-    const [ releasePokemon, setReleasePokemon ] = useState<CatchedPokemon>();
+    const [ releasePokemon, setReleasePokemon ] = useState<CaughtPokemon>();
 
     const [ release, setRelease ] = useState<boolean>(false);
 
@@ -29,7 +29,7 @@ const usePokemonList = () => {
 
     const limit = 28;
 
-    const onRelease = (releasePokemon: CatchedPokemon | undefined) => {
+    const onRelease = (releasePokemon: CaughtPokemon | undefined) => {
 
         const saveFileCopy = saveFile;
         
@@ -84,7 +84,7 @@ const usePokemonList = () => {
 
     const PaginatePokemonList = useCallback(() => {
         
-        const myPokemons: CatchedPokemon[] = []
+        const myPokemons: CaughtPokemon[] = []
 
         if(saveFile && totalPokemon)
         {

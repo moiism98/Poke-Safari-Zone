@@ -7,13 +7,13 @@ import { Image, Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "src/context/AppContext";
-import { /*CatchedPokemon,*/ Frame } from 'src/interfaces/interfaces';
-import { Modal, /*Popconfirm,*/ Popover } from 'antd';
+import {  Frame } from 'src/interfaces/interfaces';
+import { Modal, Popover } from 'antd';
 import { CloseOutlined  } from '@ant-design/icons';
 
 function NavBar() {
 
-    const { saveFile, options, pokemonTeam, /*SaveGame, */setSaveFile/*, setPokemonTeam*/, setPokemonDetails } = useContext(Context);
+    const { saveFile, options, pokemonTeam, setSaveFile, setPokemonDetails } = useContext(Context);
 
     const { FirstLetterToUpper } = useApp()
 

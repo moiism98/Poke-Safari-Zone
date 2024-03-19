@@ -1,4 +1,4 @@
-export type CatchedPokemon = APIPokemon & PlayerPokemon
+export type CaughtPokemon = APIPokemon & PlayerPokemon
 export type WildPokemon = APIPokemon & PlayerPokemon & ZonePokemon
 
 //#region CONTEXT
@@ -11,12 +11,12 @@ export interface IContext {
     totalPokemon: number
     allPokemons: PokemonList[] | undefined,
     setAllPokemons: React.Dispatch<React.SetStateAction<PokemonList[] | undefined>>
-    myPokemon: CatchedPokemon[]
-    setMyPokemon: React.Dispatch<React.SetStateAction<CatchedPokemon[]>>
-    pokemonTeam: CatchedPokemon[]
-    setPokemonTeam: React.Dispatch<React.SetStateAction<CatchedPokemon[]>>
-    pokemonDetails: CatchedPokemon | undefined
-    setPokemonDetails: React.Dispatch<React.SetStateAction<CatchedPokemon | undefined>>
+    myPokemon: CaughtPokemon[]
+    setMyPokemon: React.Dispatch<React.SetStateAction<CaughtPokemon[]>>
+    pokemonTeam: CaughtPokemon[]
+    setPokemonTeam: React.Dispatch<React.SetStateAction<CaughtPokemon[]>>
+    pokemonDetails: CaughtPokemon | undefined
+    setPokemonDetails: React.Dispatch<React.SetStateAction<CaughtPokemon | undefined>>
     randomPokemon: string | undefined
     bag: Item[]
     setBag: React.Dispatch<React.SetStateAction<Item[]>>
@@ -59,7 +59,7 @@ export interface ContextPlayer {
 export interface SaveFile {
 
     seenPokemons: SeenPokemon[]
-    myPokemons: CatchedPokemon[]
+    myPokemons: CaughtPokemon[]
     safariZones: SafariZone[]
     dayCare: DayCare
     options: Options
@@ -67,7 +67,7 @@ export interface SaveFile {
     shop: Shop
     player: Player | null
     statistics: Statistics
-    pokemonTeam: CatchedPokemon[]
+    pokemonTeam: CaughtPokemon[]
 }
 
     //#region POKEMON
@@ -97,7 +97,7 @@ export interface SaveFile {
         name: string
         nickname?: string
         seen: number
-        catched: number
+        caught: number
         ability?: Ability,
         held_item?: Held_Items | null
         shiny: boolean
@@ -114,7 +114,7 @@ export interface SaveFile {
         encounter_rate: number
         catch_rate: number
         seen: number
-        catched: number
+        caught: number
         unlock?: Unlock | null
     }
 
@@ -271,14 +271,14 @@ export interface SaveFile {
         level: number
         experience: number
         nextLevelExperience: number
-        pokemonDetails: CatchedPokemon | undefined
+        pokemonDetails: CaughtPokemon | undefined
     }
 
     //#endregion
 
     interface Statistics {
         seen: number
-        catched: number,
+        caught: number,
         shiny: number
     }
 

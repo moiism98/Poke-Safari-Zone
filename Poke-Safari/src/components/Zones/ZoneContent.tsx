@@ -36,7 +36,7 @@ const ZoneContent = () => {
                                             <div style={{ display: 'flex', flexDirection: 'column', fontFamily: options.appFont }}> 
                                                 <span>Pokemon: { FirstLetterToUpper(pokemon.name) }</span>
                                                 <span>Seen: { pokemon.seen }</span>
-                                                <span>Catched: { pokemon.catched }</span>
+                                                <span>Pokemon's caught: { pokemon.caught }</span>
                                                 <span>Types: { pokemon.types.map(type => <Image key={ type.type.name } className="encounterTypes" title={ FirstLetterToUpper(type.type.name) } src={ GetTypeIcon(type.type.name) }/> )}</span>
                                             </div> :
 

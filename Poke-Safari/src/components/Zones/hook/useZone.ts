@@ -68,7 +68,7 @@ const useZone = () => {
                                 types: data.pokemon.types,
                                 weight: data.pokemon.weight,
                                 seen: myPokemon.seen,
-                                catched: myPokemon.catched,
+                                caught: myPokemon.caught,
                                 shiny: false,
                                 evolution: evolution
                             };

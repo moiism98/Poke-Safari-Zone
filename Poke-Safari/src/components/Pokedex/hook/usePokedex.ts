@@ -10,7 +10,7 @@ const usePokedex = () => {
                 front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png"
             },
             seen: 0,
-            catched: 0,
+            caught: 0,
         },
         {
             id: 10,
@@ -20,7 +20,7 @@ const usePokedex = () => {
                 front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/10.png"
             },
             seen: 0,
-            catched: 0
+            caught: 0
         },
         {
             id: 19,
@@ -30,7 +30,7 @@ const usePokedex = () => {
                 front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/19.png"
             },
             seen: 0,
-            catched: 0
+            caught: 0
         },
         {
             id: 29,
@@ -40,7 +40,7 @@ const usePokedex = () => {
                 front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/29.png"
             },
             seen: 0,
-            catched: 0
+            caught: 0
         },
         {
             id: 45,
@@ -50,7 +50,7 @@ const usePokedex = () => {
                 "front_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/45.png"
             },
             seen: 0,
-            catched: 0
+            caught: 0
         },
         {
             id: 35,
@@ -60,7 +60,7 @@ const usePokedex = () => {
                 "front_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/35.png"
             },
             seen: 0,
-            catched: 0,
+            caught: 0,
         },
         {
             id: 59,
@@ -70,7 +70,7 @@ const usePokedex = () => {
                 "front_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/59.png"
             },
             seen: 0,
-            catched: 0,
+            caught: 0,
         },
         {
             id: 64,
@@ -80,7 +80,7 @@ const usePokedex = () => {
                 "front_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/64.png"
             },
             seen: 0,
-            catched: 0,
+            caught: 0,
         }
     ];
 

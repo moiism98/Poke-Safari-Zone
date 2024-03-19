@@ -130,7 +130,7 @@ const useNewGame = () => {
                                 encounter_rate: data.pal_park_encounters[0].rate,
                                 catch_rate: data.capture_rate,
                                 unlock: unlock,
-                                catched: 0,
+                                caught: 0,
                                 seen: 0
                             }
                         )})
@@ -222,7 +222,7 @@ const useNewGame = () => {
                 },
                 statistics:{
                     seen: 0,
-                    catched: 0,
+                    caught: 0,
                     shiny: 0
                 },
                 pokemonTeam: []

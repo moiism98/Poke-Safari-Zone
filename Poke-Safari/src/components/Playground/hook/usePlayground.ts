@@ -267,7 +267,7 @@ const usePlayground = () => {
                     catch_rate: zonePokemon.catch_rate,
                     encounter_rate: zonePokemon.encounter_rate,
                     shiny: shiny,
-                    catched: zonePokemon.catched,
+                    caught: zonePokemon.caught,
                     seen: zonePokemon.seen,
                     cry: cry,
                     evolution: evolution
@@ -347,7 +347,7 @@ const usePlayground = () => {
                 
                 player.setExperience(prevExperience => prevExperience + earnedExperience);
 
-                // verify if the pokemon has been catched before or not.
+                // verify if the pokemon has been caught before or not.
 
                 //const safariZone = saveFile?.safariZones.find(savedZone => savedZone.name == zone?.name);
 
@@ -357,17 +357,17 @@ const usePlayground = () => {
 
                 if(zonePokemon)
                 {
-                    zonePokemon.catched++;
+                    zonePokemon.caught++;
                 }
 
-                wildPokemon.catched++;
+                wildPokemon.caught++;
 
                 const saveFileCopy = saveFile;
 
                 if(saveFileCopy && saveFileCopy.player)
                 {
                     /* 
-                    this id is unique for our catched pokemon, so we can difference between 2 or more same pokemons
+                    this id is unique for our caught pokemon, so we can difference between 2 or more same pokemons
                     2 aron are not the same between them, so we can add them both to our team for instance... 
                     */
                    
@@ -379,7 +379,7 @@ const usePlayground = () => {
                 }
                 
                 
-                SaveCatchedPokemon(wildPokemon);
+                SavecaughtPokemon(wildPokemon);
 
                 CheckUnlock(wildPokemon);
 
@@ -396,7 +396,7 @@ const usePlayground = () => {
 
     // save pokemon and statistics at localstorage.
 
-    const SaveCatchedPokemon = (wildPokemon: WildPokemon) => {
+    const SavecaughtPokemon = (wildPokemon: WildPokemon) => {
 
         const saveFileCopy = saveFile;
                 
@@ -406,7 +406,7 @@ const usePlayground = () => {
 
             if(!saveFile.myPokemons.find(pokemon => pokemon.id == wildPokemon.id))
             {
-                saveFileCopy.statistics.catched++;
+                saveFileCopy.statistics.caught++;
             }
 
             // same with shinies pokemon.
