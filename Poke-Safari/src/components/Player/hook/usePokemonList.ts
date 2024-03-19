@@ -1,13 +1,17 @@
 import useApp from "src/components/App/hook/useApp";
-import { useCallback, useContext, useEffect, useState} from "react";
+import { ReactElement, createElement, useCallback, useContext, useEffect, useState} from "react";
 import { Context } from "src/context/AppContext";
 import { CatchedPokemon } from "src/interfaces/interfaces";
+import { message } from "antd";
+import usePokemonDetails from "src/components/pokemon/hook/usePokemonDetails";
 
 const usePokemonList = () => {
 
-    const { saveFile, pokemonTeam, setPokemonTeam , setPokemonDetails, SaveGame } = useContext(Context);
+    const { saveFile, player, setPokemonTeam, setPokemonDetails, setMyPokemon, SaveGame } = useContext(Context);
 
     const { FirstLetterToUpper } = useApp();
+
+    const { rareCandyIcon } = usePokemonDetails()
 
     const [ releasePokemon, setReleasePokemon ] = useState<CatchedPokemon>();
 
@@ -21,8 +25,6 @@ const usePokemonList = () => {
 
     const [ offset, setOffset ] = useState<number>(0);
 
-    const [ pokemon, setPokemon ] = useState<CatchedPokemon[]>();
-
     const [ totalPokemon, setTotalPokemon ] = useState<number>(0);
 
     const limit = 28;
@@ -33,22 +35,45 @@ const usePokemonList = () => {
         
         if(saveFileCopy)
         {
-            const teamPokemon = pokemonTeam.find(pokemon => pokemon.listId == releasePokemon?.listId);
-
-            if(teamPokemon) // if we found the released pokemon on the team, we remove this pokemon from the team!
-            {
-                // remake the pokemon team discarding the ALL released pokemon! (inside myPokemon discard the pokemon already realeased and the current one released)
-
-               saveFileCopy.pokemonTeam = saveFileCopy?.myPokemons.filter(pokemon => pokemon.listId != teamPokemon.listId && !pokemon.released); 
-
-               setPokemonTeam(saveFileCopy.pokemonTeam);
-            }
-
-            const pokemon = saveFileCopy.myPokemons.find(pokemon => pokemon == releasePokemon)
+            const pokemon = saveFileCopy.myPokemons.find(pokemon => pokemon.listId == releasePokemon?.listId);
 
             if(pokemon)
             {
-                pokemon.released = true;
+                // delete the pokemon from myPokemon and pokemonTeam arrays!
+
+                const listPokemonIndex = saveFileCopy.myPokemons.findIndex(myPokemon => myPokemon.listId == pokemon.listId);
+
+                saveFileCopy.myPokemons.splice(listPokemonIndex, 1);
+
+                // if we found the released pokemon on the team, we remove this pokemon from the team!
+                
+                // remake the pokemon team discarding the ALL released pokemon! (inside myPokemon discard the pokemon already realeased and the current one released)
+
+                const pokemonTeamIndex = saveFileCopy.pokemonTeam.findIndex(teamPokemon => teamPokemon.listId == pokemon.listId);
+
+                saveFileCopy.pokemonTeam.splice(pokemonTeamIndex, 1);
+
+                setPokemonTeam(saveFileCopy.pokemonTeam);
+
+                let rareCandy: number = 0;
+
+                if(pokemon.catch_rate <= 85) rareCandy = 10;
+                else if(pokemon.catch_rate <= 170) rareCandy = 5;
+                else rareCandy = 2;
+
+                if(saveFileCopy.player)
+                    saveFileCopy.player.rareCandy += rareCandy;
+
+                player.setRareCandy(oldRareCandy => oldRareCandy + rareCandy);
+
+                const icon: ReactElement = createElement('img', { style: { margin: 0 }, src: rareCandyIcon })
+                    
+                message.info({
+                    icon: icon,
+                    content: `You have received ${ rareCandy } rare candy!`
+                })
+
+                setMyPokemon(saveFileCopy.myPokemons);
     
                 SaveGame(saveFileCopy);
             }
@@ -68,7 +93,9 @@ const usePokemonList = () => {
             while(pokemon < limit + offset)
             {
                 if(pokemon < totalPokemon)
+                {
                     myPokemons.push(saveFile.myPokemons[pokemon]);
+                }
                 else
                     pokemon = limit + offset;
 
@@ -78,10 +105,10 @@ const usePokemonList = () => {
 
         if(myPokemons)
         {
-            setPokemon(myPokemons);
+            setMyPokemon(myPokemons);
         }
         
-    }, [ offset, totalPokemon, saveFile ])
+    }, [ offset, totalPokemon, saveFile, setMyPokemon ])
 
     useEffect(() => {
     
@@ -124,7 +151,6 @@ const usePokemonList = () => {
        pages,
        limit,
        setOffset,
-       pokemon,
        onRelease,
        FirstLetterToUpper, 
     }

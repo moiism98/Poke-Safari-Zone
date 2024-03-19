@@ -10,11 +10,13 @@ export interface IContext {
     options: ContextOptions
     totalPokemon: number
     allPokemons: PokemonList[] | undefined,
+    setAllPokemons: React.Dispatch<React.SetStateAction<PokemonList[] | undefined>>
+    myPokemon: CatchedPokemon[]
+    setMyPokemon: React.Dispatch<React.SetStateAction<CatchedPokemon[]>>
     pokemonTeam: CatchedPokemon[]
     setPokemonTeam: React.Dispatch<React.SetStateAction<CatchedPokemon[]>>
     pokemonDetails: CatchedPokemon | undefined
     setPokemonDetails: React.Dispatch<React.SetStateAction<CatchedPokemon | undefined>>
-    setAllPokemons: React.Dispatch<React.SetStateAction<PokemonList[] | undefined>>
     randomPokemon: string | undefined
     bag: Item[]
     setBag: React.Dispatch<React.SetStateAction<Item[]>>
@@ -46,6 +48,8 @@ export interface ContextPlayer {
     setMoney: React.Dispatch<React.SetStateAction<number>>
     rareCandy: number
     setRareCandy: React.Dispatch<React.SetStateAction<number>>
+    listId: number
+    setListId: React.Dispatch<React.SetStateAction<number>>
 }
 
 //#endregion
@@ -260,6 +264,7 @@ export interface SaveFile {
 
     export interface Player {
 
+        listId: number
         name: string
         money: number
         rareCandy: number

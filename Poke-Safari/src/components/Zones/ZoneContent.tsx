@@ -16,7 +16,7 @@ const ZoneContent = () => {
         
         zone ? 
             <Container className="zoneContainer" style={ styles.container }>
-                <ArrowLeftOutlined onClick={ () => navigate('..', { relative: 'path' }) } style={{ width: '3%' }} className="backArrow d-flex ms-2"/>
+                <ArrowLeftOutlined onClick={ () => navigate('..', { relative: 'path' }) } style={{ width: '3%', color: 'white' }} className="backArrow d-flex ms-2"/>
                 <div className="content">
                     <h1 className="zoneName">{ FirstLetterToUpper(zone.name) }</h1>
                     <div className="encounterContainer">

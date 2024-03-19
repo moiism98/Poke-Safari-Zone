@@ -85,7 +85,7 @@ const useApp = () => {
             .then(response => response.ok ? response.json() : console.warn('No data received!'))
             .then(data => {
 
-                // console.log(data);
+                //console.log(data);
 
                 let evolutionUrl: string[] = [];
 
@@ -126,10 +126,8 @@ const useApp = () => {
                             // this conditional is for the last pokemon evolution ever, again we loop the evos array
                             // because some pokemon has more then 1 evolution.
 
-                            data.chain.evolves_to[0].evolves_to.map((evo: { evolution_details: { trigger: { name: string; }; held_item: { name: string }; item: { name: string } }[]; species: { name: string; url: string };  }) =>
+                            data.chain.evolves_to[0].evolves_to.map((evo: { evolves_to: []; evolution_details: { trigger: { name: string; }; held_item: { name: string }; item: { name: string } }[]; species: { name: string; url: string };  }) =>
                                 { 
-                                    //console.log(evo);
-
                                     evolutionUrl = evo.species?.url.split('/');
 
                                     evolution?.push({ 
@@ -145,7 +143,6 @@ const useApp = () => {
                         }
                     }
                 }
-
             });
 
             // evolution is null when the pokemon is a full evolution (e.g mantine) 

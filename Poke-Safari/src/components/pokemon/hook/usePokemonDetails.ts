@@ -7,16 +7,19 @@ import { useNavigate } from "react-router-dom";
 import { createElement, useCallback, useContext, useEffect, useState } from "react";
 import { Context } from "src/context/AppContext";
 import { message } from "antd";
+import usePlayer from "src/components/Player/hook/usePlayer";
 
 const usePokemonDetails = () => {
 
     type Evolutions = Evolution & { icon: string, catched: boolean }
 
-    const { saveFile, options, player, totalPokemon, pokemonDetails, setPokemonDetails, pokemonTeam, setPokemonTeam, SaveGame } = useContext(Context);
+    const { saveFile, options, player, bag, setBag, totalPokemon, pokemonDetails, setPokemonDetails, myPokemon, setMyPokemon, pokemonTeam, setPokemonTeam, SaveGame } = useContext(Context);
 
     const [ getPokemon, { data } ] = useLazyQuery(GET_POKEMON);
     
     const  { FirstLetterToUpper, appConsts, getPokemonEvolution } = useApp();
+
+    const { SavePlayer, SaveExperience, LevelUp } = usePlayer();
 
     const { GetTypeIcon } = useZone();
 
@@ -221,6 +224,9 @@ const usePokemonDetails = () => {
                 
                     setPokemonDetails({ ...pokemonDetails, held_item: newHeldItem });
 
+                    if(saveFileCopy.player)
+                        saveFileCopy.player.pokemonDetails = { ...pokemonDetails, held_item: newHeldItem };
+
                     if(pokemon && bagItem)
                     {
                         pokemon.held_item = newHeldItem;
@@ -294,6 +300,9 @@ const usePokemonDetails = () => {
                 
                     setPokemonDetails({ ...pokemonDetails, held_item: null });
 
+                    if(saveFileCopy.player)
+                        saveFileCopy.player.pokemonDetails = { ...pokemonDetails, held_item: null };
+
                     const pokemon: CatchedPokemon | undefined = saveFileCopy.myPokemons.find(pokemon => pokemon.listId == pokemonDetails.listId);
 
                     if(pokemon)
@@ -328,7 +337,7 @@ const usePokemonDetails = () => {
 
                 const moves: Moves[] | undefined = SetRandomMoveSet(data.pokemon.moves);
 
-                const myPokemon: CatchedPokemon | undefined = saveFileCopy.myPokemons.find(pokemon => pokemon.id == data.pokemon.id);
+                const myPokemonEvolution: CatchedPokemon | undefined = saveFileCopy.myPokemons.find(pokemon => pokemon.id == data.pokemon.id);
 
                 let cry: string = '';
 
@@ -345,51 +354,68 @@ const usePokemonDetails = () => {
                 let evolution: Evolution[] | null = [];
 
                 await getPokemonEvolution(data.pokemon.id, data.pokemon.name)
-                .then(data => {
+                .then(evolutionData => {
                     
-                    if(data)
+                    if(evolutionData)
                     {
-                        data.map(evo => {
+                        evolutionData.map(evo => {
 
-                            evolution?.push({
-                                id: evo.id,
-                                item: evo.method == 'level-up' ? "rare-candy" : evo.item,
-                                held_item: evo.held_item,
-                                evolution: evo.evolution,
-                                method: evo.method
-                            });
-                        })
-                    }
-                    else
-                    {
-                        evolution = null;
-                    }
+                            // console.log(data.pokemon.name, evo.evolution);
 
+                            // if the evolution pokemon id is higher than our pokemon id the current pokemon is the last one on his evolution chain, 
+                            // so he doesn't have any evolution :)
+                            // this only happens when the pokemon evolves more than 2 times => e.g squirtle => wartortle => blastoise
+
+                            if(data.pokemon.id < evo.id) 
+                            {
+                                evolution?.push({
+                                    id: evo.id,
+                                    item: evo.method == 'level-up' ? "rare-candy" : evo.item,
+                                    held_item: evo.held_item,
+                                    evolution: evo.evolution,
+                                    method: evo.method
+                                });
+
+                                const pokemon = myPokemon.find(pokemon => pokemon.name == evo.evolution);
+
+                                setEvolutions([...evolutions, {
+                                    id: evo.id,
+                                    evolution: evo.evolution,
+                                    held_item: evo.held_item,
+                                    item: evo.item,
+                                    method: evo.method,
+                                    icon: data.pokemon.sprites.front_default,
+                                    catched: pokemon ? true : false
+                                }]);
+                            }
+                        })                        
+                    }
                 });
-                
+
+                if(evolution.length == 0) evolution = null;
+
                 if(ability && moves)
                 {
-                
                     const pokemonEvolution: CatchedPokemon = {
                         ...pokemonDetails, 
                         id: data.pokemon.id,
-                        catched: myPokemon ? myPokemon.catched + 1 : 1, 
+                        catched: myPokemonEvolution ? myPokemonEvolution.catched + 1 : 1, 
                         moves: moves,
                         cry: cry,
                         catch_rate: catch_rate,
-                        evolution: evolution ? evolution : null,
+                        evolution: evolution,
                         name: data.pokemon.name,
-                        seen: myPokemon ? myPokemon.seen + 1 : 1,
+                        seen: myPokemonEvolution ? myPokemonEvolution.seen + 1 : 1,
                         shiny: pokemonDetails.shiny ? true : false,
                         sprites: data.pokemon.sprites,
                         types: data.pokemon.types,
                         ability: ability,
                         height: data.pokemon.height, 
                         weight: data.pokemon.weight, 
-                        listId: saveFileCopy.myPokemons.length + 1
+                        listId: pokemonDetails.listId
                     };
 
-                    if(!myPokemon) // if is the first time this pokemon is evolved...
+                    if(!myPokemonEvolution) // if is the first time this pokemon is evolved...
                     {
                         saveFileCopy.statistics.seen += 1;
 
@@ -402,17 +428,53 @@ const usePokemonDetails = () => {
                         })
                     }
 
-                    const releasePokemon = saveFileCopy.myPokemons.find(pokemon => pokemon.listId == pokemonDetails.listId);
+                    const myPokemonIndex = saveFileCopy.myPokemons.findIndex(pokemon => pokemon.listId == pokemonDetails.listId);
 
-                    if(releasePokemon) releasePokemon.released = true;
+                    if(myPokemonIndex != -1)
+                    {
+                        saveFileCopy.myPokemons.splice(myPokemonIndex, 1, pokemonEvolution);
 
-                    saveFileCopy.myPokemons.push(pokemonEvolution);
+                        setMyPokemon(saveFileCopy.myPokemons);
+                    }
+
+                    const pokemonInTeam = pokemonTeam.find(pokemon => pokemon.listId == pokemonDetails.listId);
+
+                    if(pokemonInTeam)
+                    {
+                        const index = saveFileCopy.pokemonTeam.findIndex(pokemon => pokemon.listId == pokemonInTeam.listId);
+
+                        if(index != -1)
+                        {
+                            saveFileCopy.pokemonTeam.splice(index, 1, pokemonEvolution);
+
+                            setPokemonTeam(saveFileCopy.pokemonTeam);
+                        }
+                    }
+
+                    if(saveFileCopy.player)
+                    {
+                        saveFileCopy.player.pokemonDetails = pokemonEvolution;
+
+                        setPokemonDetails(pokemonEvolution);
+
+                        saveFileCopy.player.rareCandy -= rareCandy;
+                        
+                        setRareCandy(oldRareCandy => oldRareCandy - rareCandy);
+                    }
+
+                    let experience: number = 0;
+
+                    if(pokemonEvolution.catch_rate <= 85) experience = 15;
+                    else if(pokemonEvolution.catch_rate <= 170) experience = 10;
+                    else experience = 5;
+
+                    player.setExperience(oldExperience => oldExperience + experience);
+
+                    await message.info(`You've received ${ experience } exp points!`);
                     
-                    setPokemonDetails(pokemonEvolution);
-
                     SaveGame(saveFileCopy);
-
-                    setEvolving(false);
+                    
+                    window.location.reload();
                 }
             }
         }
@@ -515,29 +577,30 @@ const usePokemonDetails = () => {
         {
             if(evolving)
             {
-                EvolvePokemon();
+                setTimeout(() => EvolvePokemon(), 2000);
             }
             else
-            {
-
-                // some pokemon have evolution from advances generations that the game doesn't have to play, 
-                // we have to check it by using the pokemon id.
-    
+            {    
                 if(pokemonDetails.evolution)
                 {
                     const evolution = pokemonDetails.evolution;
+
+                    if(evolution && evolution[position])
+                    {
+                        const pokemon = myPokemon.find(pokemon => pokemon.name == evolution[position].evolution);
+
+                        setEvolutions([...evolutions, {
+                            id: data.pokemon.id,
+                            evolution: evolution[position].evolution,
+                            held_item: evolution[position].held_item,
+                            item: evolution[position].item,
+                            method: evolution[position].method,
+                            icon: data.pokemon.sprites.front_default,
+                            catched: pokemon ? true : false
+                        }]);
+        
+                    }
     
-                    const pokemon = saveFile?.myPokemons.find(pokemon => pokemon.name == evolution[position].evolution ? evolution[position].evolution : '');
-    
-                    setEvolutions([...evolutions, {
-                        id: data.pokemon.id,
-                        evolution: evolution[position].evolution,
-                        held_item: evolution[position].held_item,
-                        item: evolution[position].item,
-                        method: evolution[position].method,
-                        icon: data.pokemon.sprites.front_default,
-                        catched: pokemon ? true : false
-                    }]);
                 }
     
                 setPosition(oldPosition => oldPosition + 1)
@@ -562,11 +625,35 @@ const usePokemonDetails = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ evolutions ])
 
+    // save player's experience every time he/she catch a pokemon.
+
+    useEffect(() => {
+        
+        SaveExperience();
+        
+    }, [ SaveExperience ])
+    
+    // save the player every time he/she level up
+
+    useEffect(() => {
+        
+        SavePlayer();
+        
+    }, [ SavePlayer ])
+
+    useEffect(() => {
+    
+        LevelUp();
+
+    }, [ LevelUp ])
+
     return{
         saveFile,
         options,
         appConsts,
         player,
+        bag,
+        setBag,
         totalPokemon,
         navigate,
         pokemonDetails,

@@ -25,6 +25,7 @@
     height: 100%;
     padding: 1em;
     justify-content: space-between;
+    
 }
 
 #zone-content h1 {
@@ -35,4 +36,12 @@
     display: flex;
     align-self: flex-end;
     align-items: center;
+}
+
+.zoneName{
+    mix-blend-mode: difference;
+}
+
+.encounterContainer h3 {
+    mix-blend-mode: difference;
 }

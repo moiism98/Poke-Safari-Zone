@@ -29,10 +29,6 @@ function NavBar() {
 
     const [ save, setSave ] = useState<boolean>(false);
 
-    //const [ openConfirm, setConfirm ] = useState<boolean>(false);
-
-    //const [ releasePokemon, setReleasePokemon ] = useState<CatchedPokemon>();
-
     const title = (
         <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', padding: '.5em' }}>
             <span>Select an icon to change it!</span>
@@ -99,37 +95,6 @@ function NavBar() {
 
         window.location.reload();
     }
-
-    /*const onConfirm = (pokemon: CatchedPokemon) =>
-    {
-        if(pokemon)
-        {
-            setPokemonTeam(pokemonTeam.filter(pkmn => pkmn.listId != pokemon.listId));
-
-            const saveFileCopy = saveFile;
-
-            if(saveFileCopy)
-            {
-                const updatedTeam: CatchedPokemon[] = saveFileCopy.pokemonTeam.filter(pkmn => pkmn.listId != pokemon.listId);
-
-                saveFileCopy.pokemonTeam = updatedTeam;
-
-                SaveGame(saveFileCopy);
-
-                setConfirm(false);
-            }
-        }
-    }
-
-    useEffect(() => {
-
-        if(!openConfirm && saveFile)
-        {
-            const saveFileCopy = saveFile;
-
-            SaveGame(saveFileCopy);
-        }
-    }, [ openConfirm, saveFile, SaveGame ])*/
 
     useEffect(() => {
 
@@ -285,10 +250,6 @@ function NavBar() {
                                     <Image 
                                         onClick={() => {
 
-                                            /*setConfirm(true)
-
-                                            setReleasePokemon(pokemon)*/
-
                                             setPokemonDetails(pokemon);
                                             
                                             navigate(`/player/pokemon/${pokemon.name}`);
@@ -296,19 +257,7 @@ function NavBar() {
                                         title={ FirstLetterToUpper(pokemon.name) } 
                                         width={75} height={75}
                                         style={{ cursor:'pointer' }}
-                                        src={ pokemon.shiny ? pokemon.sprites.front_shiny : pokemon.sprites.front_default }/>    
-                                    
-                                    {
-                                        /*releasePokemon?.listId == pokemon.listId ?
-                                            <Popconfirm
-                                                placement='bottom'
-                                                title={`Do you want to remove this pokémon from the team?`}
-                                                okText={`Remove ${ FirstLetterToUpper(pokemon?.name) }`}
-                                                open={ openConfirm }
-                                                onCancel={ () => setConfirm(false) }
-                                                onConfirm={ () => onConfirm(pokemon) }
-                                            /> : null*/
-                                    }
+                                        src={ pokemon.shiny ? pokemon.sprites.front_shiny : pokemon.sprites.front_default }/>
 
                                 </div>
                             ))

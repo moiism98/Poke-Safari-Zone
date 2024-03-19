@@ -10,17 +10,17 @@ import { Context } from 'src/context/AppContext';
 
 const PokemonList = () => {
 
-    const { pokemon, release, page, pages, setOffset, limit, openModal, setOpenModal, releasePokemon, setRelease, 
+    const { release, page, pages, setOffset, limit, openModal, setOpenModal, releasePokemon, setRelease, 
             setReleasePokemon, setPokemonDetails, onRelease, FirstLetterToUpper } = usePokemonList();
 
-    const { saveFile, SaveGame } = useContext(Context);
+    const { saveFile, SaveGame, myPokemon } = useContext(Context);
 
     return(
         <>
             <GameScreen>
                 <div className="pokemonList">
                     {
-                        pokemon?.map(pokemon => (
+                        myPokemon?.map(pokemon => (
     
                             !pokemon.released ?
 
@@ -82,7 +82,7 @@ const PokemonList = () => {
                 className="releaseButton"
                 tooltip={ release ? <div>Click to exit from release pokemon mode!</div> : <div>Click to enter on release pokemon mode!</div>}
                 icon= { <DeleteFilled /> } 
-                onClick={() => setRelease(oldValue => !oldValue)}
+                onClick={ () => setRelease(oldValue => !oldValue) }
             />
 
             <Modal

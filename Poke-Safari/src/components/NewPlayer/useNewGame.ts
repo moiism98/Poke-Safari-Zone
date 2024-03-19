@@ -217,7 +217,8 @@ const useNewGame = () => {
                     experience: 0,
                     level: 1,
                     nextLevelExperience: appConsts.nextLevelExperience,
-                    pokemonDetails: undefined
+                    pokemonDetails: undefined,
+                    listId: 0
                 },
                 statistics:{
                     seen: 0,

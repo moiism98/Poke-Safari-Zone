@@ -228,10 +228,9 @@ const useDayCare = () => {
                         name: data.pokemon.name,
                         sprite: data.pokemon.sprites.front_default
                     })
-    
-                    
-    
+
                     saveFileCopy.statistics.catched++;
+
                     saveFileCopy.statistics.seen++;
                 }
         
@@ -270,7 +269,7 @@ const useDayCare = () => {
                     const catchedPokemon: CatchedPokemon = {
                         
                         id: data.pokemon.id,
-                        listId: saveFileCopy.myPokemons.length + 1,
+                        listId: player.listId,
                         name: data.pokemon.name,
                         types: data.pokemon.types,
                         moves: moves,
@@ -286,6 +285,11 @@ const useDayCare = () => {
                         catched: 1,
                         seen: 1, 
                     }
+
+                    player.setListId(id => id + 1);
+                    
+                    if(saveFileCopy.player)
+                        saveFileCopy.player.listId += 1;
                     
                     setHatchedPokemon(catchedPokemon);
                     
@@ -298,16 +302,6 @@ const useDayCare = () => {
                     if(egg && egg.cuantity)
                     {
                         egg.cuantity -= 1;
-
-                        /*if(egg.cuantity <= 0)
-                        {
-                            const eggIndex: number = saveFileCopy.bag.indexOf(egg);
-
-                            if(eggIndex != -1)
-                            {
-                                saveFileCopy.bag.splice(eggIndex, 1);
-                            }
-                        }*/
                     }
     
                     saveFileCopy.myPokemons.push(catchedPokemon);

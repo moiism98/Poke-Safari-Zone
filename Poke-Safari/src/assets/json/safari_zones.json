@@ -88,6 +88,10 @@
                     }
                 },
                 {
+                    "name": "sudowoodo",
+                    "unlock": null
+                },
+                {
                     "name": "dunsparce",
                     "unlock": null
                 },
@@ -273,30 +277,6 @@
                     "unlock": null
                 },
                 {
-                    "name": "scyther",
-                    "unlock": {
-                        "type": {
-                            "type": "zone",
-                            "cuantity": 0,
-                            "pokemon": "forest"
-                        },
-                        "description": "Catch every catchable forest pokemon to unlock this wild pokemon.",
-                        "unlocked": false
-                    }
-                },
-                {
-                    "name": "pinsir",
-                    "unlock": {
-                        "type": {
-                            "type": "zone",
-                            "cuantity": 0,
-                            "pokemon": "forest"
-                        },
-                        "description": "Catch every catchable forest pokemon to unlock this wild pokemon.",
-                        "unlocked": false
-                    }
-                },
-                {
                     "name": "chikorita",
                     "unlock": null
                 },
@@ -310,6 +290,10 @@
                 },
                 {
                     "name": "spinarak",
+                    "unlock": null
+                },
+                {
+                    "name": "murkrow",
                     "unlock": null
                 },
                 {
@@ -514,22 +498,6 @@
                     "unlock": null
                 },
                 {
-                    "name": "pikachu",
-                    "unlock": null
-                },
-                {
-                    "name": "nidoran-f",
-                    "unlock": null
-                },
-                {
-                    "name": "nidoran-m",
-                    "unlock": null
-                },
-                {
-                    "name": "oddish",
-                    "unlock": null
-                },
-                {
                     "name": "meowth",
                     "unlock": null
                 },
@@ -543,10 +511,6 @@
                 },
                 {
                     "name": "bellsprout",
-                    "unlock": null
-                },
-                {
-                    "name": "grimer",
                     "unlock": null
                 },
                 {
@@ -574,10 +538,6 @@
                     "unlock": null
                 },
                 {
-                    "name": "mareep",
-                    "unlock": null
-                },
-                {
                     "name": "hoppip",
                     "unlock": null
                 },
@@ -598,11 +558,11 @@
                     "unlock": null
                 },
                 {
-                    "name": "miltank",
+                    "name": "zigzagoon",
                     "unlock": null
                 },
                 {
-                    "name": "zigzagoon",
+                    "name": "poochyena",
                     "unlock": null
                 },
                 {
@@ -623,6 +583,238 @@
                 },
                 {
                     "name": "swablu",
+                    "unlock": null
+                }
+            ],
+            "unlock": null
+        },
+        {
+            "name": "Power-Plant",
+            "rewards":[
+                {
+                    "id": 90,
+                    "name":"stardust",
+                    "sellPrice": 1500
+                },
+                {
+                    "id": 91,
+                    "name":"star-piece",
+                    "sellPrice": 6000
+                },
+                {
+                    "id": 92,
+                    "name":"nugget",
+                    "sellPrice": 5000
+                },
+                {
+                    "id": 483,
+                    "name":"mystery-egg",
+                    "sellPrice": 1
+                },
+                {
+                    "id": 622,
+                    "name":"big-nugget",
+                    "sellPrice": 20000
+                }
+            ],
+            "pokemon": [
+                {
+                    "name": "pikachu",
+                    "unlock": null
+                },
+                {
+                    "name": "magnemite",
+                    "unlock": null
+                },
+                {
+                    "name": "grimer",
+                    "unlock": null
+                },
+                {
+                    "name": "voltorb",
+                    "unlock": null
+                },
+                {
+                    "name": "koffing",
+                    "unlock": null
+                },
+                {
+                    "name": "mareep",
+                    "unlock": null
+                },
+                {
+                    "name": "electrike",
+                    "unlock": null
+                },
+                {
+                    "name": "meditite",
+                    "unlock": null
+                },
+                {
+                    "name": "plusle",
+                    "unlock": null
+                },
+                {
+                    "name": "minun",
+                    "unlock": null
+                },
+                {
+                    "name": "gulpin",
+                    "unlock": null
+                },
+                {
+                    "name": "zangoose",
+                    "unlock": null
+                },
+                {
+                    "name": "seviper",
+                    "unlock": null
+                }
+            ],
+            "unlock":null
+        },
+        {
+            "name": "National-Park",
+            "rewards":[
+                {
+                    "id": 86,
+                    "name":"tiny-mushroom",
+                    "sellPrice": 250
+                },
+                {
+                    "id": 87,
+                    "name":"big-mushroom",
+                    "sellPrice": 2500
+                },
+                {
+                    "id": 90,
+                    "name":"stardust",
+                    "sellPrice": 1500
+                },
+                {
+                    "id": 91,
+                    "name":"star-piece",
+                    "sellPrice": 6000
+                },
+                {
+                    "id": 92,
+                    "name":"nugget",
+                    "sellPrice": 5000
+                },
+                {
+                    "id": 483,
+                    "name":"mystery-egg",
+                    "sellPrice": 1
+                },
+                {
+                    "id": 622,
+                    "name":"big-nugget",
+                    "sellPrice": 20000
+                }
+            ],
+            "pokemon": [
+                {
+                    "name": "nidoran-f",
+                    "unlock": null
+                },
+                {
+                    "name": "nidoran-m",
+                    "unlock": null
+                },
+                {
+                    "name": "oddish",
+                    "unlock": null
+                },
+                {
+                    "name": "doduo",
+                    "unlock": null
+                },
+                {
+                    "name": "exeggcute",
+                    "unlock": null
+                },
+                {
+                    "name": "lickitung",
+                    "unlock": null
+                },
+                {
+                    "name": "rhyhorn",
+                    "unlock": null
+                },
+                {
+                    "name": "chansey",
+                    "unlock": null
+                },
+                {
+                    "name": "tangela",
+                    "unlock": null
+                },
+                {
+                    "name": "kangaskhan",
+                    "unlock": null
+                },
+                {
+                    "name": "scyther",
+                    "unlock": {
+                        "type": {
+                            "type": "zone",
+                            "cuantity": 0,
+                            "pokemon": "National Park"
+                        },
+                        "description": "Catch every catchable National Park pokemon to unlock this wild pokemon.",
+                        "unlocked": false
+                    }
+                },
+                {
+                    "name": "pinsir",
+                    "unlock": {
+                        "type": {
+                            "type": "zone",
+                            "cuantity": 0,
+                            "pokemon": "National Park"
+                        },
+                        "description": "Catch every catchable National Park pokemon to unlock this wild pokemon.",
+                        "unlocked": false
+                    }
+                },
+                {
+                    "name": "tauros",
+                    "unlock": null
+                },
+                {
+                    "name": "natu",
+                    "unlock": null
+                },
+                {
+                    "name": "yanma",
+                    "unlock": null
+                },
+                {
+                    "name": "girafarig",
+                    "unlock": null
+                },
+                {
+                    "name": "phanpy",
+                    "unlock": null
+                },
+                {
+                    "name": "stantler",
+                    "unlock": null
+                },
+                {
+                    "name": "miltank",
+                    "unlock": null
+                },
+                {
+                    "name": "blissey",
+                    "unlock": null
+                },
+                {
+                    "name": "kecleon",
+                    "unlock": null
+                },
+                {
+                    "name": "tropius",
                     "unlock": null
                 }
             ],
@@ -718,7 +910,15 @@
                     "unlock": null
                 },
                 {
+                    "name": "smeargle",
+                    "unlock": null
+                },
+                {
                     "name": "spoink",
+                    "unlock": null
+                },
+                {
+                    "name": "spinda",
                     "unlock": null
                 },
                 {
@@ -821,14 +1021,6 @@
                     "unlock": null
                 },
                 {
-                    "name": "seel",
-                    "unlock": null
-                },
-                {
-                    "name": "shellder",
-                    "unlock": null
-                },
-                {
                     "name": "krabby",
                     "unlock": null
                 },
@@ -847,18 +1039,6 @@
                 {
                     "name": "magikarp",
                     "unlock": null
-                },
-                {
-                    "name": "lapras",
-                    "unlock": {
-                        "type": {
-                            "type":"pokemon",
-                            "cuantity": 0,
-                            "pokemon": ["krabby", "shellder", "qwilfish"]
-                        },
-                        "description": "Catch Krabby, Shellder and Qwilfish to unlock this wild pokemon.",
-                        "unlocked": false
-                    }
                 },
                 {
                     "name": "chinchou",
@@ -919,6 +1099,105 @@
                         "description": "Catch every Sea pokemon to unlock this wild pokemon.",
                         "unlocked": false
                     }
+                }
+            ],
+            "unlock": null
+        },
+        {
+            "name": "ice-cave",
+            "rewards": [
+                {
+                    "id": 88,
+                    "name":"pearl",
+                    "sellPrice": 1000
+                },
+                {
+                    "id": 89,
+                    "name":"big-pearl",
+                    "sellPrice": 4000
+                },
+                {
+                    "id": 90,
+                    "name":"stardust",
+                    "sellPrice": 1500
+                },
+                {
+                    "id": 91,
+                    "name":"star-piece",
+                    "sellPrice": 6000
+                },
+                {
+                    "id": 92,
+                    "name":"nugget",
+                    "sellPrice": 5000
+                },
+                {
+                    "id": 483,
+                    "name":"mystery-egg",
+                    "sellPrice": 1
+                },
+                {
+                    "id": 622,
+                    "name":"big-nugget",
+                    "sellPrice": 20000
+                }
+            ],
+            "pokemon": [
+                {
+                    "name": "seel",
+                    "unlock": null
+                },
+                {
+                    "name": "shellder",
+                    "unlock": null
+                },
+                {
+                    "name": "jynx",
+                    "unlock": null
+                },
+                {
+                    "name": "lapras",
+                    "unlock": {
+                        "type": {
+                            "type":"pokemon",
+                            "cuantity": 0,
+                            "pokemon": ["swinub", "shellder", "speal"]
+                        },
+                        "description": "Catch Swinub, Shellder and Speal to unlock this wild pokemon.",
+                        "unlocked": false
+                    }
+                },
+                {
+                    "name": "gligar",
+                    "unlock": null
+                },
+                {
+                    "name": "sneasel",
+                    "unlock": null
+                },
+                {
+                    "name": "swinub",
+                    "unlock": null
+                },
+                {
+                    "name": "deliberd",
+                    "unlock": null
+                },
+                {
+                    "name": "castform",
+                    "unlock": null
+                },
+                {
+                    "name": "snorunt",
+                    "unlock": null
+                },
+                {
+                    "name": "speal",
+                    "unlock": null
+                },
+                {
+                    "name": "luvidisc",
+                    "unlock": null
                 }
             ],
             "unlock": null
@@ -1013,6 +1292,133 @@
                     "pokemon": "desert"
                 },
                 "description": "Catch every pokemon in the desert to unlock this zone.",
+                "unlocked": false
+            }
+        },
+        {
+            "name": "Mt.Coronet",
+            "rewards": [
+                {
+                    "id": 89,
+                    "name":"big-pearl",
+                    "sellPrice": 4000
+                },
+                {
+                    "id": 91,
+                    "name":"star-piece",
+                    "sellPrice": 6000
+                },
+                {
+                    "id": 483,
+                    "name":"mystery-egg",
+                    "sellPrice": 1
+                },
+                {
+                    "id": 622,
+                    "name":"big-nugget",
+                    "sellPrice": 20000
+                },
+                {
+                    "id": 625,
+                    "name":"relic-copper",
+                    "sellPrice": 1000
+                },
+                {
+                    "id": 626,
+                    "name":"relic-silver",
+                    "sellPrice": 5000
+                },
+                {
+                    "id": 627,
+                    "name":"relic-gold",
+                    "sellPrice": 30000
+                }
+            ],
+            "pokemon":[
+                {
+                    "name": "articuno",
+                    "unlock": null
+                },
+                {
+                    "name": "zapdos",
+                    "unlock": null
+                },
+                {
+                    "name": "moltres",
+                    "unlock": null
+                },
+                {
+                    "name": "mewtwo",
+                    "unlock": null
+                },
+                {
+                    "name": "mew",
+                    "unlock": null
+                },
+                {
+                    "name": "raikou",
+                    "unlock": null
+                },
+                {
+                    "name": "entei",
+                    "unlock": null
+                },
+                {
+                    "name": "suicune",
+                    "unlock": null
+                },
+                {
+                    "name": "lugia",
+                    "unlock": null
+                },
+                {
+                    "name": "ho-oh",
+                    "unlock": null
+                },
+                {
+                    "name": "celebi",
+                    "unlock": null
+                },
+                {
+                    "name": "regirock",
+                    "unlock": null
+                },
+                {
+                    "name": "regice",
+                    "unlock": null
+                },
+                {
+                    "name": "registeel",
+                    "unlock": null
+                },
+                {
+                    "name": "latios",
+                    "unlock": null
+                },
+                {
+                    "name": "latias",
+                    "unlock": null
+                },
+                {
+                    "name": "kyogre",
+                    "unlock": null
+                },
+                {
+                    "name": "groudon",
+                    "unlock": null
+                },
+                {
+                    "name": "rayquaza",
+                    "unlock": null
+                }
+            ],
+            "unlock": {
+                "type": {
+                    "type": "level",
+                    "cuantity": 10,
+                    "pokemon": null
+                },
+                "description": "Reach level 10 to unlock the shop.",
                 "unlocked": false
             }
         }

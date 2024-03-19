@@ -362,14 +362,20 @@ const usePlayground = () => {
 
                 wildPokemon.catched++;
 
-                if(saveFile)
+                const saveFileCopy = saveFile;
+
+                if(saveFileCopy && saveFileCopy.player)
                 {
                     /* 
-                        this id is unique for our catched pokemon, so we can difference between 2 or more same pokemons
-                        2 aron are not the same between them, so we can add them both to our team for instance... 
+                    this id is unique for our catched pokemon, so we can difference between 2 or more same pokemons
+                    2 aron are not the same between them, so we can add them both to our team for instance... 
                     */
+                   
+                    wildPokemon.listId = player.listId;
 
-                    wildPokemon.listId = saveFile.myPokemons.length + 1;
+                    player.setListId(id => id + 1);
+
+                    saveFileCopy.player.listId += 1;
                 }
                 
                 

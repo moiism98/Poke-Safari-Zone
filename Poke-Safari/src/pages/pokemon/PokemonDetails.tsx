@@ -3,14 +3,16 @@ import Evolution from "./Evolution";
 import GameScreen from "src/components/GameScreen/GameScreen";
 import usePokemonDetails from "src/components/pokemon/hook/usePokemonDetails";
 import { Image } from "react-bootstrap";
-import { ArrowLeftOutlined, StarFilled, SettingFilled } from '@ant-design/icons';
+import { ArrowLeftOutlined, StarFilled, SettingFilled, SoundFilled } from '@ant-design/icons';
 import { Dropdown, MenuProps, Modal, Tooltip, Typography } from "antd";
 import { useEffect, useState } from "react";
+import Loading from "src/components/Spinners/Loading/Loading";
+import { Evolution as IEvolution } from "src/interfaces/interfaces";
 
 const PokemonDetails = () => {
 
     const { 
-        saveFile, options, appConsts, player, totalPokemon, 
+        saveFile, options, appConsts, player, totalPokemon, evolving, bag, setBag,
         navigate, pokemonDetails, showEvolution, rareCandyIcon, rareCandy, 
         loading, nickname,inTeam, pokemonTeam, openBag, setOpenBag, selectedItem, 
         setSelectedItem, TriggerEvolution, onChange, addToTeam, removeFromTeam, GiveItem, 
@@ -35,11 +37,29 @@ const PokemonDetails = () => {
                         key: evolution.evolution,
                         label: (
                             evolution.method == 'trade' && evolution.held_item ?
-                            <span key={ evolution.id }><Image style={{ margin:0 }} src={ saveFile?.shop.items.find(item => item.name == evolution.held_item)?.icon }/> Evolves to { FirstLetterToUpper(evolution.evolution) }</span>      
-
+                            <span 
+                                key={ evolution.id }
+                                onClick={ () => onHeldItem(evolution) }
+                            >
+                                Equip with 
+                                <Image 
+                                    title={ FirstLetterToUpper(evolution.held_item) } 
+                                    style={{ margin:0 }} 
+                                    src={ saveFile?.shop.items.find(item => item.name == evolution.held_item)?.icon }
+                                /> and evolve to { FirstLetterToUpper(evolution.evolution) }
+                            </span> 
                         : evolution.method == 'use-item' ? 
-                            <span key={ evolution.id }><Image style={{ margin:0 }} src={ saveFile?.shop.items.find(item => item.name == evolution.item)?.icon }/> Evolves to { FirstLetterToUpper(evolution.evolution) }</span>
-                        
+                            <span 
+                                key={ evolution.id }
+                                onClick={ () => onUseItem(evolution) }
+                            >
+                                Use 
+                                <Image 
+                                    title={ evolution.item ? FirstLetterToUpper(evolution.item) : '' } 
+                                    style={{ margin:0 }} src={ saveFile?.shop.items.find(item => item.name == evolution.item)?.icon }
+                                /> 
+                                and evolve to { FirstLetterToUpper(evolution.evolution) }
+                            </span>                        
                         : 
                             <span 
                                 key={ evolution.id }
@@ -48,7 +68,7 @@ const PokemonDetails = () => {
                                 x{ rareCandy }<Image style={{ margin: 0 }} src={ rareCandyIcon }/> Evolves to { FirstLetterToUpper(evolution.evolution) }
                             </span>   
                         ),
-                        disabled: evolution.method == 'level-up' && rareCandy >= player.rareCandy ? true : false 
+                        disabled: onDisabled(evolution)
                     })
 
                 : null
@@ -60,6 +80,78 @@ const PokemonDetails = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ showEvolution ])
 
+    const onDisabled = (evolution?: IEvolution) => {
+    
+        let disabled: boolean = true;
+
+        if(pokemonDetails)
+        {
+            let pokemonEvolution = pokemonDetails.evolution ? pokemonDetails.evolution[0] : null;
+
+            if(evolution)
+            {
+                pokemonEvolution = evolution;
+            }
+
+            if(pokemonEvolution && pokemonEvolution.method)
+            {
+                const method = pokemonEvolution.method;
+
+                if(method == 'trade' && pokemonEvolution?.held_item)
+                {
+                    if(pokemonEvolution.held_item == pokemonDetails.held_item?.item.name)
+                    {
+                        disabled = false;
+                    }
+                }
+                else if(pokemonEvolution.method == 'use-item')
+                {
+                    const item = bag.find(item => item.name == pokemonEvolution?.item);
+                        
+                    if(item && pokemonEvolution.item == item.name && item.cuantity > 0)
+                    {
+                        disabled = false;
+                    }
+                }
+                else if(method == 'level-up' || method == 'trade' && player.rareCandy >= rareCandy)
+                {
+                    disabled = false;
+                }
+            }
+        }
+
+        return disabled;
+    }
+
+    const onUseItem = (evolution: IEvolution) => {
+
+        const saveFileCopy = saveFile;
+                                    
+        if(saveFileCopy)
+        {
+            const item = saveFileCopy.bag.find(item => item.name == evolution.item);
+
+            if(item && item.cuantity > 0)
+            {                
+                item.cuantity -= 1;
+
+                setBag(saveFileCopy.bag);
+
+                SaveGame(saveFileCopy);
+
+                TriggerEvolution(evolution.evolution);
+            }
+        }
+    }
+
+    const onHeldItem = (evolution: IEvolution) => {
+
+        if(evolution.held_item == pokemonDetails?.held_item?.item.name)
+        {
+            TriggerEvolution(evolution.evolution);
+        }
+    }
+
     const items: MenuProps['items'] = [
         {
             key: 1,
@@ -67,10 +159,11 @@ const PokemonDetails = () => {
                 pokemonDetails ?
                     !inTeam ? 
                         pokemonTeam.length < appConsts.maxTeam ? <span onClick={ () => addToTeam(pokemonDetails) }>Add pokemon to the team</span>
-                            : null
+                            : <span>Team is full already!</span>
                     : <span onClick={ () => removeFromTeam(pokemonDetails) }>Remove from the team</span>
                 : null  
-            )
+            ),
+            disabled: inTeam ? false : pokemonTeam.length == appConsts.maxTeam ? true : false 
         },
         {
             key: 2,
@@ -100,10 +193,30 @@ const PokemonDetails = () => {
                     evolution.id <= totalPokemon ?
 
                         evolution.method == 'trade' && evolution.held_item ?
-                            <span key={ evolution.id }><Image style={{ margin:0 }} src={ saveFile?.shop.items.find(item => item.name == evolution.held_item)?.icon }/> Evolves to { FirstLetterToUpper(evolution.evolution) }</span>      
+                            <span 
+                                key={ evolution.id }
+                                onClick={ () => onHeldItem(evolution) }
+                            >
+                                Equip with 
+                                <Image 
+                                    title={ FirstLetterToUpper(evolution.held_item) } 
+                                    style={{ margin:0 }} 
+                                    src={ saveFile?.shop.items.find(item => item.name == evolution.held_item)?.icon }
+                                /> and evolve to { FirstLetterToUpper(evolution.evolution) }
+                            </span>      
 
                         : evolution.method == 'use-item' ? 
-                            <span key={ evolution.id }><Image style={{ margin:0 }} src={ saveFile?.shop.items.find(item => item.name == evolution.item)?.icon }/> Evolves to { FirstLetterToUpper(evolution.evolution) }</span>
+                            <span 
+                                key={ evolution.id }
+                                onClick={ () => onUseItem(evolution) }
+                            >
+                                Use 
+                                <Image 
+                                    title={ evolution.item ? FirstLetterToUpper(evolution.item) : '' } 
+                                    style={{ margin:0 }} src={ saveFile?.shop.items.find(item => item.name == evolution.item)?.icon }
+                                /> 
+                                and evolve to { FirstLetterToUpper(evolution.evolution) }
+                            </span>
                         
                         : 
                             <span 
@@ -115,9 +228,7 @@ const PokemonDetails = () => {
                     : null
                 ))
             ),
-            disabled: pokemonDetails && pokemonDetails.evolution ? 
-                pokemonDetails.evolution[0].method == 'level-up' && player.rareCandy >= rareCandy ? false : true
-            : false
+            disabled: onDisabled()
         }
         : null
     ];    
@@ -169,10 +280,11 @@ const PokemonDetails = () => {
                 </div>
             </div>
             <div className="detailsContainer">
+                { evolving ? <Loading/> : null }
                 {
                     pokemonDetails ? 
                         <div className="pokemonDetails" style={{ height: pokemonDetails.evolution ? '75%' : '100%' }}>
-                            { loading ? null : <audio autoPlay src={ pokemonDetails.cry }></audio> }
+                            <audio id="audio" src={ pokemonDetails.cry }></audio>
                             <div className="pokemonActions">
                                 <div className="nickname">
                                     <Typography.Title 
@@ -198,6 +310,13 @@ const PokemonDetails = () => {
                                     </Dropdown>
                                 </div>
                                 <Image className="pokemonIcon" src={ pokemonDetails.shiny ? pokemonDetails.sprites.front_shiny : pokemonDetails?.sprites.front_default }/>
+                                <SoundFilled onClick={() => {
+
+                                    const audio: HTMLAudioElement = document.getElementById("audio");
+
+                                    if(audio) audio.play()
+
+                                }}/>
                             </div>
                             <div className='stats'>
                                 <h3>Height: { pokemonDetails.height / 10 } m.</h3>

@@ -5,11 +5,11 @@ import { Image } from "react-bootstrap";
 
 const Evolution = () => {
 
-    const { saveFile, totalPokemon, pokemonDetails, evolutions, evolving, showEvolution, loading, FirstLetterToUpper } = usePokemonDetails();
+    const { saveFile, totalPokemon, pokemonDetails, evolutions, showEvolution, loading, FirstLetterToUpper } = usePokemonDetails();
  
     return(
         
-        pokemonDetails && pokemonDetails.evolution ? loading || evolving ? <Loading/> :
+        pokemonDetails && pokemonDetails.evolution ? loading ? <Loading/> :
 
         showEvolution != 0 ?
 
@@ -41,16 +41,16 @@ const Evolution = () => {
                                             className="evolutionIcon"
                                             title={ evolution.catched ? FirstLetterToUpper(evolution.evolution) : undefined }
                                             src={ evolution.icon }
-                                            style={ saveFile?.myPokemons.find(pokemon => pokemon.name == evolution.evolution) ? { filter: 'brightness(100%)' } : { filter: 'brightness(0%)' }}
+                                            style={ saveFile?.seenPokemons.find(pokemon => pokemon.name == evolution.evolution) ? { filter: 'brightness(100%)' } : { filter: 'brightness(0%)' }}
                                         /> 
                                     </Popover> 
 
                                 : null
 
                             : 
-                            evolution.method == 'trade' ? 
+                            evolution.held_item ? 
                                     
-                                evolution.held_item ? 
+                                evolution.method == 'trade' ? 
                                     <Popover
                                         key={ evolution.evolution }
                                         content={
@@ -68,7 +68,7 @@ const Evolution = () => {
                                             title={ evolution.catched ? FirstLetterToUpper(evolution.evolution) : undefined } 
                                             className="evolutionIcon"
                                             src={ evolution.icon }
-                                            style={ saveFile?.myPokemons.find(pokemon => pokemon.name == evolution.evolution) ? { filter: 'brightness(100%)' } : { filter: 'brightness(0%)' }}
+                                            style={ saveFile?.seenPokemons.find(pokemon => pokemon.name == evolution.evolution) ? { filter: 'brightness(100%)' } : { filter: 'brightness(0%)' }}
                                         /> 
                                     </Popover> 
                                 : null  
@@ -79,7 +79,7 @@ const Evolution = () => {
                                     title={ evolution.catched ? FirstLetterToUpper(evolution.evolution) : undefined } 
                                     className="evolutionIcon" 
                                     src={ evolution.icon }
-                                    style={ saveFile?.myPokemons.find(pokemon => pokemon.name == evolution.evolution) ? { filter: 'brightness(100%)' } : { filter: 'brightness(0%)' }}
+                                    style={ saveFile?.seenPokemons.find(pokemon => pokemon.name == evolution.evolution) ? { filter: 'brightness(100%)' } : { filter: 'brightness(0%)' }}
                                 /> 
                         : null
                     ))

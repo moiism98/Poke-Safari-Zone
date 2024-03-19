@@ -310,7 +310,15 @@ const useUnlocks = () => {
                     
                     saveFileCopy.dayCare.unlock = null; 
 
-                    onLevelUnlocked(483, ' Day Care');
+                    onLevelUnlocked(483, 'Day Care');
+
+                break;
+
+                case 10: 
+
+                    saveFileCopy.safariZones[saveFileCopy.safariZones.length - 1].unlock = null;
+
+                    onLevelUnlocked(432, 'Mt. Coronet');
 
                 break;
             }
