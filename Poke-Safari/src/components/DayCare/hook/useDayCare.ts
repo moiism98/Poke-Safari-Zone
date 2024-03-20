@@ -6,10 +6,13 @@ import { Context } from "src/context/AppContext";
 import { useLazyQuery } from "@apollo/client";
 import { GET_POKEMON } from "src/query/queries";
 import { message } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const useDayCare = () => {
 
     const { saveFile, player, eggs, setEggs, SaveGame } = useContext(Context);
+
+    const navigate = useNavigate();
 
     const [ getPokemon, { data }] = useLazyQuery(GET_POKEMON);
 
@@ -282,8 +285,8 @@ const useDayCare = () => {
                         cry: cry,
                         evolution: evolution,
                         catch_rate: catchRate,
-                        caught: 1,
-                        seen: 1, 
+                        caught: pokemon?.caught ? pokemon.caught + 1 : 1,
+                        seen: pokemon?.seen ? pokemon.seen + 1 : 1, 
                     }
 
                     player.setListId(id => id + 1);
@@ -323,6 +326,8 @@ const useDayCare = () => {
     useEffect(() => {
         
         GetEggIcon();
+
+        if(saveFile?.dayCare.unlock) navigate('/');
 
     }, [])
 
@@ -370,6 +375,8 @@ const useDayCare = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ data, hatchedPokemon ])
+
+    
 
     // save player's experience every time he/she catch a pokemon.
 

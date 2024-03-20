@@ -1,6 +1,6 @@
 import useApp from "src/components/App/hook/useApp";
 import useZone from "src/components/Zones/hook/useZone";
-import { Ability, caughtPokemon, Evolution, Held_Items, Item, Moves } from "src/interfaces/interfaces";
+import { Ability, CaughtPokemon, Evolution, Held_Items, Item, Moves } from "src/interfaces/interfaces";
 import { useLazyQuery } from "@apollo/client";
 import { GET_POKEMON } from "src/query/queries";
 import { useNavigate } from "react-router-dom";
@@ -56,9 +56,15 @@ const usePokemonDetails = () => {
 
         if(pokemonDetails)
         {
-            if(pokemonDetails.catch_rate <= 85) setRareCandy(50);
-            else if(pokemonDetails.catch_rate <= 170) setRareCandy(25);
-            else setRareCandy(15);
+            pokemonDetails.evolution?.map(evolution => {
+                
+                if(evolution.method != 'use-item' && (evolution.method != 'trade' && !evolution.held_item))
+                {
+                    if(pokemonDetails.catch_rate <= 85) setRareCandy(50);
+                    else if(pokemonDetails.catch_rate <= 170) setRareCandy(25);
+                    else setRareCandy(15);
+                }
+            })
         }
     }
 
@@ -77,7 +83,7 @@ const usePokemonDetails = () => {
             {
                 const saveFileCopy = saveFile;
     
-                const pokemon: caughtPokemon | undefined = saveFileCopy.myPokemons.find(pkmn => pkmn.listId == pokemonDetails?.listId);
+                const pokemon: CaughtPokemon | undefined = saveFileCopy.myPokemons.find(pkmn => pkmn.listId == pokemonDetails?.listId);
     
                 if(pokemon)
                 {
@@ -123,7 +129,7 @@ const usePokemonDetails = () => {
 
     const [ inTeam, setInTeam ] = useState<boolean>(isInTeam());
 
-    const addToTeam = (pokemon: caughtPokemon) => {
+    const addToTeam = (pokemon: CaughtPokemon) => {
         
         if(pokemonTeam)
         {
@@ -139,7 +145,7 @@ const usePokemonDetails = () => {
 
     }
 
-    const removeFromTeam = (pokemon: caughtPokemon) => {
+    const removeFromTeam = (pokemon: CaughtPokemon) => {
 
         if(pokemon)
         {
@@ -149,7 +155,7 @@ const usePokemonDetails = () => {
 
             if(saveFileCopy)
             {
-                const updatedTeam: caughtPokemon[] = saveFileCopy.pokemonTeam.filter(pkmn => pkmn.listId != pokemon.listId);
+                const updatedTeam: CaughtPokemon[] = saveFileCopy.pokemonTeam.filter(pkmn => pkmn.listId != pokemon.listId);
 
                 saveFileCopy.pokemonTeam = updatedTeam;
 
@@ -168,7 +174,7 @@ const usePokemonDetails = () => {
     
                 if(saveFileCopy)
                 {
-                    const pokemon: caughtPokemon | undefined = saveFileCopy.myPokemons.find(pokemon => pokemon.listId == pokemonDetails.listId);
+                    const pokemon: CaughtPokemon | undefined = saveFileCopy.myPokemons.find(pokemon => pokemon.listId == pokemonDetails.listId);
 
                     const bagItem: Item | undefined = saveFileCopy.bag.find(item => item.id == selectedItem.id);
 
@@ -303,7 +309,7 @@ const usePokemonDetails = () => {
                     if(saveFileCopy.player)
                         saveFileCopy.player.pokemonDetails = { ...pokemonDetails, held_item: null };
 
-                    const pokemon: caughtPokemon | undefined = saveFileCopy.myPokemons.find(pokemon => pokemon.listId == pokemonDetails.listId);
+                    const pokemon: CaughtPokemon | undefined = saveFileCopy.myPokemons.find(pokemon => pokemon.listId == pokemonDetails.listId);
 
                     if(pokemon)
                     {
@@ -337,7 +343,7 @@ const usePokemonDetails = () => {
 
                 const moves: Moves[] | undefined = SetRandomMoveSet(data.pokemon.moves);
 
-                const myPokemonEvolution: caughtPokemon | undefined = saveFileCopy.myPokemons.find(pokemon => pokemon.id == data.pokemon.id);
+                const myPokemonEvolution: CaughtPokemon | undefined = saveFileCopy.myPokemons.find(pokemon => pokemon.id == data.pokemon.id);
 
                 let cry: string = '';
 
@@ -359,8 +365,6 @@ const usePokemonDetails = () => {
                     if(evolutionData)
                     {
                         evolutionData.map(evo => {
-
-                            // console.log(data.pokemon.name, evo.evolution);
 
                             // if the evolution pokemon id is higher than our pokemon id the current pokemon is the last one on his evolution chain, 
                             // so he doesn't have any evolution :)
@@ -396,7 +400,7 @@ const usePokemonDetails = () => {
 
                 if(ability && moves)
                 {
-                    const pokemonEvolution: caughtPokemon = {
+                    const pokemonEvolution: CaughtPokemon = {
                         ...pokemonDetails, 
                         id: data.pokemon.id,
                         caught: myPokemonEvolution ? myPokemonEvolution.caught + 1 : 1, 
@@ -455,26 +459,17 @@ const usePokemonDetails = () => {
                     {
                         saveFileCopy.player.pokemonDetails = pokemonEvolution;
 
-                        setPokemonDetails(pokemonEvolution);
-
-                        saveFileCopy.player.rareCandy -= rareCandy;
-                        
-                        setRareCandy(oldRareCandy => oldRareCandy - rareCandy);
+                        if(rareCandy != 0)
+                        {
+                            saveFileCopy.player.rareCandy -= rareCandy;
+                            
+                            setRareCandy(oldRareCandy => oldRareCandy - rareCandy);
+                        }
                     }
-
-                    let experience: number = 0;
-
-                    if(pokemonEvolution.catch_rate <= 85) experience = 15;
-                    else if(pokemonEvolution.catch_rate <= 170) experience = 10;
-                    else experience = 5;
-
-                    player.setExperience(oldExperience => oldExperience + experience);
-
-                    await message.info(`You've received ${ experience } exp points!`);
                     
                     SaveGame(saveFileCopy);
-                    
-                    window.location.reload();
+
+                    setTimeout(() => window.location.reload(), 1500);
                 }
             }
         }
@@ -515,8 +510,6 @@ const usePokemonDetails = () => {
                     move++;
                 }
             }
-    
-            //const randomMoveSet = pokeMoves.map(move => move.move.name).join(', ');
     
             return pokeMoves;
         }

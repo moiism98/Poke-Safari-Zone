@@ -14,7 +14,7 @@ const PokemonDetails = () => {
     const { 
         saveFile, options, appConsts, player, totalPokemon, evolving, bag, setBag,
         navigate, pokemonDetails, showEvolution, rareCandyIcon, rareCandy, 
-        loading, nickname,inTeam, pokemonTeam, openBag, setOpenBag, selectedItem, 
+        nickname,inTeam, pokemonTeam, openBag, setOpenBag, selectedItem, 
         setSelectedItem, TriggerEvolution, onChange, addToTeam, removeFromTeam, GiveItem, 
         GetItem, GetTypeIcon, FirstLetterToUpper, SaveGame
     } = usePokemonDetails();
@@ -113,7 +113,7 @@ const PokemonDetails = () => {
                         disabled = false;
                     }
                 }
-                else if(method == 'level-up' || method == 'trade' && player.rareCandy >= rareCandy)
+                else if(method == 'level-up' && player.rareCandy >= rareCandy || method == 'trade' && player.rareCandy >= rareCandy)
                 {
                     disabled = false;
                 }

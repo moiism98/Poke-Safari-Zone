@@ -329,7 +329,7 @@ const usePlayground = () => {
 
     }
 
-    const CatchPokemon = () => {
+    const CatchPokemon = async() => {
         
         if(wildPokemon)
         {
@@ -341,12 +341,6 @@ const usePlayground = () => {
             
             if(totalCatchRate >= catchProbability)
             {
-                // calculate the experience earned in the combat.
-
-                const earnedExperience = GainExperience(wildPokemon.catch_rate);
-                
-                player.setExperience(prevExperience => prevExperience + earnedExperience);
-
                 // verify if the pokemon has been caught before or not.
 
                 //const safariZone = saveFile?.safariZones.find(savedZone => savedZone.name == zone?.name);
@@ -367,8 +361,8 @@ const usePlayground = () => {
                 if(saveFileCopy && saveFileCopy.player)
                 {
                     /* 
-                    this id is unique for our caught pokemon, so we can difference between 2 or more same pokemons
-                    2 aron are not the same between them, so we can add them both to our team for instance... 
+                        this id is unique for our caught pokemon, so we can difference between 2 or more same pokemons
+                        2 aron are not the same between them, so we can add them both to our team for instance... 
                     */
                    
                     wildPokemon.listId = player.listId;
@@ -378,10 +372,23 @@ const usePlayground = () => {
                     saveFileCopy.player.listId += 1;
                 }
                 
-                
                 SavecaughtPokemon(wildPokemon);
 
                 CheckUnlock(wildPokemon);
+
+                // calculate the experience earned in the combat.
+
+                const earnedExperience = GainExperience(wildPokemon.catch_rate);
+
+                message.success(`Gotcha! ${ wildPokemon?.name.toUpperCase() } was caught!`);
+                
+                message.info(`You've received ${ earnedExperience } exp points!`);
+
+                await GetRareCandy(wildPokemon.catch_rate);
+
+                await GetReward();
+                
+                player.setExperience(prevExperience => prevExperience + earnedExperience);
 
                 setCaught(true);
             }
@@ -549,7 +556,7 @@ const usePlayground = () => {
         {
             if(zone && zone.rewards)
             {
-                const reward: Item = zone.rewards[RandomIntInclusiveNumber(0, zone.rewards.length)];
+                const reward: Item = zone.rewards[RandomProbability(zone.rewards.length)];
 
                 const saveFileCopy = saveFile;
 
@@ -639,15 +646,7 @@ const usePlayground = () => {
     useEffect(() => {
     
         if(caught && wildPokemon)
-        {
-            message.success(`Gotcha! ${ wildPokemon?.name.toUpperCase() } was caught!`);
-            
-            message.info(`You've received ${ GainExperience(wildPokemon.catch_rate) } exp points!`);
-
-            GetRareCandy(wildPokemon.catch_rate);
-
-            GetReward();
-            
+        {            
             setTimeout(() => GenerateWildPokemon(), 100);
 
             setCaught(false)

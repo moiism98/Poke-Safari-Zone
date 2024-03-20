@@ -306,6 +306,7 @@ const useUnlocks = () => {
                     onLevelUnlocked(200, 'Shop');
 
                 break;
+                
                 case 5: 
                     
                     saveFileCopy.dayCare.unlock = null; 

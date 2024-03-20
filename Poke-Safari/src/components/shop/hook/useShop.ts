@@ -3,10 +3,13 @@ import { Context } from "src/context/AppContext";
 import { useState, useContext, useEffect } from "react";
 import { valueType } from "antd/es/statistic/utils";
 import { Item } from "src/interfaces/interfaces";
+import { useNavigate } from "react-router-dom";
 
 const useShop = () => {
 
     const { saveFile, player, options, bag, setBag, SaveGame } = useContext(Context);
+
+    const navigate = useNavigate();
     
     const { gameScreen, FirstLetterToUpper } = useApp();
 
@@ -144,6 +147,12 @@ const useShop = () => {
         }
 
     }, [ item ])
+
+    useEffect(() => {
+
+        if(saveFile?.shop.unlock) navigate('/');
+
+    }, [])
 
     return{
         gameScreen,

@@ -201,7 +201,7 @@ const useNewGame = () => {
                         id: 483,
                         icon: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/mystery-egg.png',
                         name: 'mystery-egg',
-                        cuantity: 3,
+                        cuantity: 0,
                         price: 1,
                         sellPrice: 1
                     }

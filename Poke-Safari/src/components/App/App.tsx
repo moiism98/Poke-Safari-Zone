@@ -16,6 +16,7 @@ import PokemonList from 'src/pages/player/PokemonList';
 import PokemonDetails from 'src/pages/pokemon/PokemonDetails';
 import DayCare from 'src/pages/daycare/DayCare';
 import Shop from 'src/pages/shop/Shop';
+import NotFound from 'src/pages/error/NotFound';
 
 function App() {
 
@@ -54,6 +55,7 @@ function App() {
               <Route path="/play/:zoneName" Component={ Playground }/>
               <Route path="/daycare" Component={ DayCare }/>
               <Route path="/shop" Component={ Shop }/>
+              <Route path='*' Component={NotFound}/>
           </Routes>
         <Date/>
       </Router>
